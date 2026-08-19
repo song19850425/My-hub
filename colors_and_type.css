@@ -1,0 +1,56 @@
+/* ===== AI智能碳汇管理平台 - CCER Platform Design Tokens ===== */
+/* 简约商务风 - 专业沉稳的碳汇管理平台 */
+
+:root {
+  /* Background / Surface */
+  --brand-background: #F8FAFC;
+  --brand-foreground: #1E293B;
+  --brand-card: #FFFFFF;
+  --brand-card-foreground: #1E293B;
+  --brand-popover: #FFFFFF;
+  --brand-popover-foreground: #1E293B;
+  --brand-muted: #F1F5F9;
+  --brand-muted-foreground: #64748B;
+
+  /* Primary - 沉稳森林绿，传达碳汇与环保 */
+  --brand-primary: #0D9488;
+  --brand-primary-foreground: #FFFFFF;
+  --brand-primary-light: #E6FFFA;
+  --brand-primary-dark: #0F766E;
+
+  /* Border & Ring */
+  --brand-border: #E2E8F0;
+  --brand-input: #E2E8F0;
+  --brand-ring: #0D9488;
+
+  /* Radius */
+  --brand-radius-sm: 4px;
+  --brand-radius-md: 8px;
+  --brand-radius-lg: 16px;
+
+  /* Chart palette */
+  --chart-1: #0D9488;
+  --chart-2: #06B6D4;
+  --chart-3: #F59E0B;
+  --chart-4: #6366F1;
+  --chart-5: #EC4899;
+
+  /* State colors */
+  --state-success: #10B981;
+  --state-warning: #F59E0B;
+  --state-error: #EF4444;
+  --state-info: #3B82F6;
+
+  /* Typography */
+  --font-sans: 'Inter', 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+/* Spacing */
+body {
+  font-family: var(--font-sans);
+  background: var(--brand-background);
+  color: var(--brand-foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

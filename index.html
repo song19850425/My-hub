@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI智能碳汇管理平台</title>
+    <meta http-equiv="refresh" content="0; url=pages/dashboard.html">
+    <style>
+        /* ===== AI智能碳汇管理平台 - CCER Platform Design Tokens ===== */
+        /* 简约商务风 - 专业沉稳的碳汇管理平台 */
+        :root {
+            /* Background / Surface */
+            --brand-background: #F8FAFC;
+            --brand-foreground: #1E293B;
+            --brand-card: #FFFFFF;
+            --brand-card-foreground: #1E293B;
+            --brand-muted: #F1F5F9;
+            --brand-muted-foreground: #64748B;
+
+            /* Primary - 沉稳森林绿，传达碳汇与环保 */
+            --brand-primary: #0D9488;
+            --brand-primary-foreground: #FFFFFF;
+            --brand-primary-light: #E6FFFA;
+            --brand-primary-dark: #0F766E;
+
+            /* Border & Ring */
+            --brand-border: #E2E8F0;
+            --brand-ring: #0D9488;
+
+            /* Radius */
+            --brand-radius-sm: 4px;
+            --brand-radius-md: 8px;
+            --brand-radius-lg: 16px;
+
+            /* State colors */
+            --state-success: #10B981;
+            --state-warning: #F59E0B;
+            --state-error: #EF4444;
+            --state-info: #3B82F6;
+
+            /* Typography */
+            --font-sans: 'Inter', 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
+        }
+
+        * { box-sizing: border-box; }
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: var(--font-sans);
+            background: var(--brand-background);
+            color: var(--brand-foreground);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .loader-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .loader-card {
+            text-align: center;
+            background: var(--brand-card);
+            border: 1px solid var(--brand-border);
+            border-radius: var(--brand-radius-lg);
+            padding: 48px 56px;
+            box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+        }
+
+        .brand-mark {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--brand-radius-md);
+            background: var(--brand-primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 24px rgba(13, 148, 136, 0.25);
+            animation: brand-pulse 2s ease-in-out infinite;
+        }
+        .brand-mark svg {
+            width: 34px;
+            height: 34px;
+            color: var(--brand-primary-foreground);
+        }
+        @keyframes brand-pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 8px 24px rgba(13, 148, 136, 0.25); }
+            50% { transform: scale(1.06); box-shadow: 0 12px 32px rgba(13, 148, 136, 0.35); }
+        }
+
+        .loader-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--brand-foreground);
+            margin: 0 0 6px 0;
+            letter-spacing: 0.5px;
+        }
+        .loader-subtitle {
+            font-size: 14px;
+            color: var(--brand-muted-foreground);
+            margin: 0 0 28px 0;
+        }
+
+        .progress-track {
+            width: 220px;
+            height: 4px;
+            background: var(--brand-border);
+            border-radius: 9999px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 40%;
+            background: var(--brand-primary);
+            border-radius: 9999px;
+            animation: load-slide 1.2s ease-in-out infinite;
+        }
+        @keyframes load-slide {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(350%); }
+        }
+
+        .loader-hint {
+            margin-top: 18px;
+            font-size: 12px;
+            color: var(--brand-muted-foreground);
+        }
+        .loader-hint a {
+            color: var(--brand-primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .loader-hint a:hover { text-decoration: underline; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .brand-mark, .progress-bar { animation: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-wrap">
+        <div class="loader-card">
+            <div class="brand-mark">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19.2 2.96c.94-.76 3.77 2.16 2.44 6.18-1.64 4.96-5.4 8.38-8.48 9.04-2.5.54-4.55-.4-5.18-1.16"/>
+                    <path d="M2 21c0-3 1.85-5.36 5.18-5.7"/>
+                </svg>
+            </div>
+            <h1 class="loader-title">碳汇管理平台</h1>
+            <p class="loader-subtitle">AI智能碳汇管理平台</p>
+            <div class="progress-track"><div class="progress-bar"></div></div>
+            <p class="loader-hint">正在加载，请稍候... 如未自动跳转，请<a href="pages/dashboard.html">点击进入</a></p>
+        </div>
+    </div>
+    <script>
+        // 重定向兜底：若 meta refresh 被禁用则通过 JS 跳转
+        window.location.replace('pages/dashboard.html');
+    </script>
+</body>
+</html>

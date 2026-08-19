@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目管理 - AI智能碳汇管理平台</title>
+    <style id="theme-vars">
+/* ===== AI智能碳汇管理平台 - CCER Platform Design Tokens ===== */
+/* 简约商务风 - 专业沉稳的碳汇管理平台 */
+
+:root {
+  /* Background / Surface */
+  --brand-background: #F8FAFC;
+  --brand-foreground: #1E293B;
+  --brand-card: #FFFFFF;
+  --brand-card-foreground: #1E293B;
+  --brand-popover: #FFFFFF;
+  --brand-popover-foreground: #1E293B;
+  --brand-muted: #F1F5F9;
+  --brand-muted-foreground: #64748B;
+
+  /* Primary - 沉稳森林绿，传达碳汇与环保 */
+  --brand-primary: #0D9488;
+  --brand-primary-foreground: #FFFFFF;
+  --brand-primary-light: #E6FFFA;
+  --brand-primary-dark: #0F766E;
+
+  /* Border & Ring */
+  --brand-border: #E2E8F0;
+  --brand-input: #E2E8F0;
+  --brand-ring: #0D9488;
+
+  /* Radius */
+  --brand-radius-sm: 4px;
+  --brand-radius-md: 8px;
+  --brand-radius-lg: 16px;
+
+  /* Chart palette */
+  --chart-1: #0D9488;
+  --chart-2: #06B6D4;
+  --chart-3: #F59E0B;
+  --chart-4: #6366F1;
+  --chart-5: #EC4899;
+
+  /* State colors */
+  --state-success: #10B981;
+  --state-warning: #F59E0B;
+  --state-error: #EF4444;
+  --state-info: #3B82F6;
+
+  /* Typography */
+  --font-sans: 'Inter', 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+/* Spacing */
+body {
+  font-family: var(--font-sans);
+  background: var(--brand-background);
+  color: var(--brand-foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--brand-background);
+    --color-foreground: var(--brand-foreground);
+    --color-card: var(--brand-card);
+    --color-card-foreground: var(--brand-card-foreground);
+    --color-popover: var(--brand-popover);
+    --color-popover-foreground: var(--brand-popover-foreground);
+    --color-primary: var(--brand-primary);
+    --color-primary-foreground: var(--brand-primary-foreground);
+    --color-muted: var(--brand-muted);
+    --color-muted-foreground: var(--brand-muted-foreground);
+    --color-border: var(--brand-border);
+    --color-input: var(--brand-input);
+    --color-ring: var(--brand-ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --radius-sm: var(--brand-radius-sm);
+    --radius-md: var(--brand-radius-md);
+    --radius-lg: var(--brand-radius-lg);
+  }
+  @layer base {
+    body { background: var(--brand-background); color: var(--brand-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--brand-background); }
+      .text-background { color: var(--brand-background); }
+      .border-background { border-color: var(--brand-background); }
+      .ring-background { --tw-ring-color: var(--brand-background); }
+      .bg-foreground { background-color: var(--brand-foreground); }
+      .text-foreground { color: var(--brand-foreground); }
+      .border-foreground { border-color: var(--brand-foreground); }
+      .ring-foreground { --tw-ring-color: var(--brand-foreground); }
+      .bg-card { background-color: var(--brand-card); }
+      .text-card { color: var(--brand-card); }
+      .border-card { border-color: var(--brand-card); }
+      .ring-card { --tw-ring-color: var(--brand-card); }
+      .bg-card-foreground { background-color: var(--brand-card-foreground); }
+      .text-card-foreground { color: var(--brand-card-foreground); }
+      .border-card-foreground { border-color: var(--brand-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--brand-card-foreground); }
+      .bg-popover { background-color: var(--brand-popover); }
+      .text-popover { color: var(--brand-popover); }
+      .border-popover { border-color: var(--brand-popover); }
+      .ring-popover { --tw-ring-color: var(--brand-popover); }
+      .bg-popover-foreground { background-color: var(--brand-popover-foreground); }
+      .text-popover-foreground { color: var(--brand-popover-foreground); }
+      .border-popover-foreground { border-color: var(--brand-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--brand-popover-foreground); }
+      .bg-primary { background-color: var(--brand-primary); }
+      .text-primary { color: var(--brand-primary); }
+      .border-primary { border-color: var(--brand-primary); }
+      .ring-primary { --tw-ring-color: var(--brand-primary); }
+      .bg-primary-foreground { background-color: var(--brand-primary-foreground); }
+      .text-primary-foreground { color: var(--brand-primary-foreground); }
+      .border-primary-foreground { border-color: var(--brand-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--brand-primary-foreground); }
+      .bg-muted { background-color: var(--brand-muted); }
+      .text-muted { color: var(--brand-muted); }
+      .border-muted { border-color: var(--brand-muted); }
+      .ring-muted { --tw-ring-color: var(--brand-muted); }
+      .bg-muted-foreground { background-color: var(--brand-muted-foreground); }
+      .text-muted-foreground { color: var(--brand-muted-foreground); }
+      .border-muted-foreground { border-color: var(--brand-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--brand-muted-foreground); }
+      .bg-border { background-color: var(--brand-border); }
+      .text-border { color: var(--brand-border); }
+      .border-border { border-color: var(--brand-border); }
+      .ring-border { --tw-ring-color: var(--brand-border); }
+      .bg-input { background-color: var(--brand-input); }
+      .text-input { color: var(--brand-input); }
+      .border-input { border-color: var(--brand-input); }
+      .ring-input { --tw-ring-color: var(--brand-input); }
+      .bg-ring { background-color: var(--brand-ring); }
+      .text-ring { color: var(--brand-ring); }
+      .border-ring { border-color: var(--brand-ring); }
+      .ring-ring { --tw-ring-color: var(--brand-ring); }
+      .bg-chart-1 { background-color: var(--chart-1); }
+      .text-chart-1 { color: var(--chart-1); }
+      .border-chart-1 { border-color: var(--chart-1); }
+      .ring-chart-1 { --tw-ring-color: var(--chart-1); }
+      .bg-chart-2 { background-color: var(--chart-2); }
+      .text-chart-2 { color: var(--chart-2); }
+      .border-chart-2 { border-color: var(--chart-2); }
+      .ring-chart-2 { --tw-ring-color: var(--chart-2); }
+      .bg-chart-3 { background-color: var(--chart-3); }
+      .text-chart-3 { color: var(--chart-3); }
+      .border-chart-3 { border-color: var(--chart-3); }
+      .ring-chart-3 { --tw-ring-color: var(--chart-3); }
+      .bg-chart-4 { background-color: var(--chart-4); }
+      .text-chart-4 { color: var(--chart-4); }
+      .border-chart-4 { border-color: var(--chart-4); }
+      .ring-chart-4 { --tw-ring-color: var(--chart-4); }
+      .bg-chart-5 { background-color: var(--chart-5); }
+      .text-chart-5 { color: var(--chart-5); }
+      .border-chart-5 { border-color: var(--chart-5); }
+      .ring-chart-5 { --tw-ring-color: var(--chart-5); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="h-screen font-sans antialiased">
+    <style id="critical-layout">
+      /* App Shell: fixed sidebar + scrollable content */
+      .app-shell-root {
+        display: flex;
+        height: 100vh;
+        overflow: hidden;
+      }
+      .sidebar-fixed {
+        width: 240px;
+        min-width: 240px;
+        height: 100vh;
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+      }
+      .main-scroll-region {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        min-width: 0;
+      }
+      /* Stats cards grid */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      @media (max-width: 1200px) {
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 768px) {
+        .sidebar-fixed {
+          display: none;
+        }
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      /* Table wrapper for horizontal scroll on narrow screens */
+       .table-wrapper {
+         overflow-x: auto;
+         max-width: 100%;
+       }
+       .table-wrapper table {
+         min-width: 900px;
+         width: 100%;
+       }
+       /* Reduced motion */
+       @media (prefers-reduced-motion: reduce) {
+         *, *::before, *::after {
+           animation-duration: 0.01ms !important;
+           animation-iteration-count: 1 !important;
+           transition-duration: 0.01ms !important;
+         }
+       }
+     </style>
+    <div class="app-shell-root" data-viewport-mode="app-shell">
+      <!-- Sidebar -->
+      <aside class="sidebar-fixed" style="background:#0F172A;color:#E2E8F0;">
+        <div style="padding:20px 16px;border-bottom:1px solid rgba(226,232,240,0.1);">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <i data-lucide="leaf" style="color:var(--brand-primary);width:24px;height:24px;"></i>
+            <span style="font-size:16px;font-weight:700;color:#F1F5F9;white-space:nowrap;">AI碳汇管理平台</span>
+          </div>
+        </div>
+        <nav style="flex:1;padding:12px 8px;display:flex;flex-direction:column;gap:2px;">
+          <a href="dashboard.html" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--brand-radius-md);color:#94A3B8;text-decoration:none;transition:background 0.15s;font-size:14px;">
+            <i data-lucide="bar-chart-3" style="width:18px;height:18px;"></i>
+            <span>数据概览</span>
+          </a>
+          <a href="projects.html" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--brand-radius-md);background:var(--brand-primary);color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:500;">
+            <i data-lucide="folder-tree" style="width:18px;height:18px;"></i>
+            <span>项目管理</span>
+          </a>
+          <a href="trading.html" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--brand-radius-md);color:#94A3B8;text-decoration:none;transition:background 0.15s;font-size:14px;">
+            <i data-lucide="trending-up" style="width:18px;height:18px;"></i>
+            <span>碳交易</span>
+          </a>
+          <a href="analysis.html" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--brand-radius-md);color:#94A3B8;text-decoration:none;transition:background 0.15s;font-size:14px;">
+            <i data-lucide="brain-circuit" style="width:18px;height:18px;"></i>
+            <span>AI分析</span>
+          </a>
+          <a href="methodology.html" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--brand-radius-md);color:#94A3B8;text-decoration:none;transition:background 0.15s;font-size:14px;">
+            <i data-lucide="book-open" style="width:18px;height:18px;"></i>
+            <span>方法学中心</span>
+          </a>
+        </nav>
+        <div style="padding:12px 16px;border-top:1px solid rgba(226,232,240,0.1);">
+          <div style="display:flex;align-items:center;gap:8px;color:#94A3B8;font-size:12px;">
+            <i data-lucide="user" style="width:16px;height:16px;"></i>
+            <span>管理员</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <div class="main-scroll-region overflow-y-auto" data-scroll-region="primary">
+        <main style="padding:24px 32px;max-width:1400px;">
+
+          <!-- Top Bar -->
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;">
+            <div>
+              <h1 style="font-size:24px;font-weight:700;color:var(--brand-foreground);margin:0;">项目管理</h1>
+              <p style="font-size:13px;color:var(--brand-muted-foreground);margin:4px 0 0 0;">管理CCER碳汇项目全生命周期</p>
+            </div>
+            <button style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:var(--brand-primary);color:var(--brand-primary-foreground);border:none;border-radius:var(--brand-radius-md);font-size:14px;font-weight:500;cursor:pointer;transition:background 0.15s;"
+              onmouseover="this.style.background='var(--brand-primary-dark)'" onmouseout="this.style.background='var(--brand-primary)'">
+              <i data-lucide="plus" style="width:16px;height:16px;"></i>
+              新建项目
+            </button>
+          </div>
+
+          <!-- Stats Summary -->
+          <div id="stats-summary" class="stats-grid" style="margin-bottom:24px;">
+            <div style="background:var(--brand-card);border:1px solid var(--brand-border);border-radius:var(--brand-radius-lg);padding:20px;display:flex;align-items:flex-start;gap:14px;">
+              <div style="width:44px;height:44px;border-radius:var(--brand-radius-md);background:var(--brand-primary-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i data-lucide="file-text" style="width:20px;height:20px;color:var(--brand-primary);"></i>
+              </div>
+              <div>
+                <div style="font-size:13px;color:var(--brand-muted-foreground);">公示项目</div>
+                <div style="font-size:28px;font-weight:700;color:var(--brand-foreground);line-height:1.2;">140+</div>
+                <div style="font-size:12px;color:var(--brand-muted-foreground);margin-top:2px;">正在公示期</div>
+              </div>
+            </div>
+            <div style="background:var(--brand-card);border:1px solid var(--brand-border);border-radius:var(--brand-radius-lg);padding:20px;display:flex;align-items:flex-start;gap:14px;">
+              <div style="width:44px;height:44px;border-radius:var(--brand-radius-md);background:#ECFDF5;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i data-lucide="check-circle-2" style="width:20px;height:20px;color:var(--state-success);"></i>
+              </div>
+              <div>
+                <div style="font-size:13px;color:var(--brand-muted-foreground);">已登记</div>
+                <div style="font-size:28px;font-weight:700;color:var(--brand-foreground);line-height:1.2;">33</div>
+                <div style="font-size:12px;color:var(--brand-muted-foreground);margin-top:2px;">已成功登记备案</div>
+              </div>
+            </div>
+            <div style="background:var(--brand-card);border:1px solid var(--brand-border);border-radius:var(--brand-radius-lg);padding:20px;display:flex;align-items:flex-start;gap:14px;">
+              <div style="width:44px;height:44px;border-radius:var(--brand-radius-md);background:#EFF6FF;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i data-lucide="cloud-sun" style="width:20px;height:20px;color:var(--state-info);"></i>
+              </div>
+              <div>
+                <div style="font-size:13px;color:var(--brand-muted-foreground);">登记碳汇量</div>
+                <div style="font-size:28px;font-weight:700;color:var(--brand-foreground);line-height:1.2;">1,776<span style="font-size:14px;font-weight:500;color:var(--brand-muted-foreground);">万吨</span></div>
+                <div style="font-size:12px;color:var(--brand-muted-foreground);margin-top:2px;">累计碳汇量</div>
+              </div>
+            </div>
+            <div style="background:var(--brand-card);border:1px solid var(--brand-border);border-radius:var(--brand-radius-lg);padding:20px;display:flex;align-items:flex-start;gap:14px;">
+              <div style="width:44px;height:44px;border-radius:var(--brand-radius-md);background:#FFFBEB;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i data-lucide="trending-up" style="width:20px;height:20px;color:var(--state-warning);"></i>
+              </div>
+              <div>
+                <div style="font-size:13px;color:var(--brand-muted-foreground);">预计年减排量</div>
+                <div style="font-size:28px;font-weight:700;color:var(--brand-foreground);line-height:1.2;">456<span style="font-size:14px;font-weight:500;color:var(--brand-muted-foreground);">万吨/年</span></div>
+                <div style="font-size:12px;color:var(--brand-muted-foreground);margin-top:2px;">tCO2e/年</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filter Bar -->
+          <div style="background:var(--brand-card);border:1px solid var(--brand-border);border-radius:var(--brand-radius-lg);padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <div style="position:relative;flex:1;min-width:200px;max-width:320px;">
+              <i data-lucide="search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--brand-muted-foreground);"></i>
+              <input type="text" placeholder="搜索项目名称..." style="width:100%;padding:8px 12px 8px 36px;border:1px solid var(--brand-border);border-radius:var(--brand-radius-md);font-size:13px;color:var(--brand-foreground);background:var(--brand-card);outline:none;box-sizing:border-box;"
+                onfocus="this.style.borderColor='var(--brand-ring)';this.style.boxShadow='0 0 0 2px rgba(13,148,136,0.12)'" onblur="this.style.borderColor='var(--brand-border)';this.style.boxShadow='none'">
+            </div>
+            <select style="padding:8px 12px;border:1px solid var(--brand-border);border-radius:var(--brand-radius-md);font-size:13px;color:var(--brand-foreground);background:var(--brand-card);cursor:pointer;outline:none;min-width:120px;"
+              onfocus="this.style.borderColor='var(--brand-ring)'" onblur="this.style.borderColor='var(--brand-border)'">
+              <option value="">全部状态</option>
+              <option value="public">公示中</option>
+              <option value="registered">已登记</option>
+              <option value="filed">已备案</option>
+            </select>
+            <select style="padding:8px 12px;border:1px solid var(--brand-border);border-radius:var(--brand-radius-md);font-size:13px;color:var(--brand-foreground);background:var(--brand-card);cursor:pointer;outline:none;min-width:140px;"
+              onfocus="this.style.borderColor='var(--brand-ring)'" onblur="this.style.borderColor='var(--brand-border)'">
+              <option value="">全部方法学</option>
+              <option value="ar">AR-CM-001 造林碳汇</option>
+              <option value="fm">AR-CM-003 森林经营</option>
+              <option value="bm">AR-CM-005 竹林碳汇</option>
+              <option value="gm">AR-CM-002 草地碳汇</option>
+            </select>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <input type="date" style="padding:8px 10px;border:1px solid var(--brand-border);border-radius:var(--brand-radius-md);font-size:13px;color:var(--brand-foreground);background:var(--brand-card);outline:none;"
+                onfocus="this.style.borderColor='var(--brand-ring)'" onblur="this.style.borderColor='var(--brand-border)'">
+              <span style="color:var(--brand-muted-foreground);font-size:13px;">至</span>
+              <input type="date" style="padding:8px 10px;border:1px solid var(--brand-border);border-radius:var(--brand-radius-md);font-size:13px;color:var(--brand-foreground);background:var(--brand-card);outline:none;"
+                onfocus="this.style.borderColor='var(--brand-ring)'" onblur="this.style.borderColor='var(--brand-border)'">
+            </div>
+            <button style="padding:8px 16px;background:var(--brand-muted);color:var(--brand-foreground);border:1px solid var(--brand-border);border-radius:var(--brand-radius-md);font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:background 0.15s;"
+              onmouseover="this.style.background='var(--brand-border)'" onmouseout="this.style.background='var(--brand-muted)'">
+              <i data-lucide="rotate-ccw" style="width:14px;height:14px;"></i>
+              重置
+            </button>
+          </div>
+
+          <!-- Project Table -->
+          <div id="project-table" style="background:var(--brand-card);border:1px solid var(--brand-border);border-radius:var(--brand-radius-lg);overflow:hidden;">
+            <div style="padding:16px 20px;border-bottom:1px solid var(--brand-border);display:flex;align-items:center;justify-content:space-between;">
+              <span style="font-size:14px;font-weight:600;color:var(--brand-foreground);">项目列表</span>
+              <span style="font-size:12px;color:var(--brand-muted-foreground);">共 173 条记录</span>
+            </div>
+            <div class="table-wrapper">
+              <table style="width:100%;border-collapse:collapse;font-size:13px;">
+                <thead>
+                  <tr style="background:var(--brand-muted);">
+                    <th style="padding:10px 16px;text-align:left;font-weight:600;color:var(--brand-muted-foreground);font-size:12px;white-space:nowrap;">项目名称</th>
+                    <th style="padding:10px 16px;text-align:left;font-weight:600;color:var(--brand-muted-foreground);font-size:12px;white-space:nowrap;">项目类型</th>
+                    <th style="padding:10px 16px;text-align:left;font-weight:600;color:var(--brand-muted-foreground);font-size:12px;white-space:nowrap;">方法学</th>
+                    <th style="padding:10px 16px;text-align:left;font-weight:600;color:var(--brand-muted-foreground);font-size:12px;white-space:nowrap;">状态</th>
+                    <th style="padding:10px 16px;text-align:right;font-weight:600;color:var(--brand-muted-foreground);font-size:12px;white-space:nowrap;">碳汇量(万吨/年)</th>
+                    <th style="padding:10px 16px;text-align:left;font-weight:600;color:var(--brand-muted-foreground);font-size:12px;white-space:nowrap;">登记日期</th>
+                    <th style="padding:10px 16px;text-align:left;font-weight:600;color:var(--brand-muted-foreground);font-size:12px;white-space:nowrap;">项目业主</th>
+                    <th style="padding:10px 16px;text-align:center;font-weight:600;color:var(--brand-muted-foreground);font-size:12px;white-space:nowrap;">操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--brand-border);transition:background 0.12s;" onmouseover="this.style.background='var(--brand-muted)'" onmouseout="this.style.background='transparent'">
+                    <td style="padding:12px 16px;color:var(--brand-foreground);font-weight:500;">大兴安岭森林经营碳汇项目（一期）</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">森林经营</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">AR-CM-003</td>
+                    <td style="padding:12px 16px;"><span style="display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:500;background:#FEF3C7;color:#92400E;">公示中</span></td>
+                    <td style="padding:12px 16px;text-align:right;color:var(--brand-foreground);font-weight:500;">12.6</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">2025-11-15</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">大兴安岭林业集团</td>
+                    <td style="padding:12px 16px;text-align:center;">
+                      <button style="background:none;border:none;color:var(--brand-primary);cursor:pointer;font-size:12px;padding:4px 8px;border-radius:var(--brand-radius-sm);transition:background 0.12s;"
+                        onmouseover="this.style.background='var(--brand-primary-light)'" onmouseout="this.style.background='none'">详情</button>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--brand-border);transition:background 0.12s;" onmouseover="this.style.background='var(--brand-muted)'" onmouseout="this.style.background='transparent'">
+                    <td style="padding:12px 16px;color:var(--brand-foreground);font-weight:500;">福建武夷山竹林碳汇开发项目</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">竹林碳汇</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">AR-CM-005</td>
+                    <td style="padding:12px 16px;"><span style="display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:500;background:#D1FAE5;color:#065F46;">已登记</span></td>
+                    <td style="padding:12px 16px;text-align:right;color:var(--brand-foreground);font-weight:500;">8.3</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">2025-09-22</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">福建武夷山林业局</td>
+                    <td style="padding:12px 16px;text-align:center;">
+                      <button style="background:none;border:none;color:var(--brand-primary);cursor:pointer;font-size:12px;padding:4px 8px;border-radius:var(--brand-radius-sm);transition:background 0.12s;"
+                        onmouseover="this.style.background='var(--brand-primary-light)'" onmouseout="this.style.background='none'">详情</button>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--brand-border);transition:background 0.12s;" onmouseover="this.style.background='var(--brand-muted)'" onmouseout="this.style.background='transparent'">
+                    <td style="padding:12px 16px;color:var(--brand-foreground);font-weight:500;">四川凉山州造林碳汇项目（二期）</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">造林碳汇</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">AR-CM-001</td>
+                    <td style="padding:12px 16px;"><span style="display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:500;background:#DBEAFE;color:#1E40AF;">已备案</span></td>
+                    <td style="padding:12px 16px;text-align:right;color:var(--brand-foreground);font-weight:500;">25.1</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">2025-07-08</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">凉山州林业开发有限公司</td>
+                    <td style="padding:12px 16px;text-align:center;">
+                      <button style="background:none;border:none;color:var(--brand-primary);cursor:pointer;font-size:12px;padding:4px 8px;border-radius:var(--brand-radius-sm);transition:background 0.12s;"
+                        onmouseover="this.style.background='var(--brand-primary-light)'" onmouseout="this.style.background='none'">详情</button>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--brand-border);transition:background 0.12s;" onmouseover="this.style.background='var(--brand-muted)'" onmouseout="this.style.background='transparent'">
+                    <td style="padding:12px 16px;color:var(--brand-foreground);font-weight:500;">内蒙古呼伦贝尔草地碳汇项目</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">草地碳汇</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">AR-CM-002</td>
+                    <td style="padding:12px 16px;"><span style="display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:500;background:#FEF3C7;color:#92400E;">公示中</span></td>
+                    <td style="padding:12px 16px;text-align:right;color:var(--brand-foreground);font-weight:500;">18.9</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">2025-06-30</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">内蒙古草原生态保护中心</td>
+                    <td style="padding:12px 16px;text-align:center;">
+                      <button style="background:none;border:none;color:var(--brand-primary);cursor:pointer;font-size:12px;padding:4px 8px;border-radius:var(--brand-radius-sm);transition:background 0.12s;"
+                        onmouseover="this.style.background='var(--brand-primary-light)'" onmouseout="this.style.background='none'">详情</button>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--brand-border);transition:background 0.12s;" onmouseover="this.style.background='var(--brand-muted)'" onmouseout="this.style.background='transparent'">
+                    <td style="padding:12px 16px;color:var(--brand-foreground);font-weight:500;">云南西双版纳热带雨林碳汇项目</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">造林碳汇</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">AR-CM-001</td>
+                    <td style="padding:12px 16px;"><span style="display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:500;background:#D1FAE5;color:#065F46;">已登记</span></td>
+                    <td style="padding:12px 16px;text-align:right;color:var(--brand-foreground);font-weight:500;">15.7</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">2025-05-18</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">云南省林业科学研究院</td>
+                    <td style="padding:12px 16px;text-align:center;">
+                      <button style="background:none;border:none;color:var(--brand-primary);cursor:pointer;font-size:12px;padding:4px 8px;border-radius:var(--brand-radius-sm);transition:background 0.12s;"
+                        onmouseover="this.style.background='var(--brand-primary-light)'" onmouseout="this.style.background='none'">详情</button>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--brand-border);transition:background 0.12s;" onmouseover="this.style.background='var(--brand-muted)'" onmouseout="this.style.background='transparent'">
+                    <td style="padding:12px 16px;color:var(--brand-foreground);font-weight:500;">吉林长白山森林经营碳汇项目</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">森林经营</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">AR-CM-003</td>
+                    <td style="padding:12px 16px;"><span style="display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:500;background:#FEF3C7;color:#92400E;">公示中</span></td>
+                    <td style="padding:12px 16px;text-align:right;color:var(--brand-foreground);font-weight:500;">22.4</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">2025-04-12</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">长白山森工集团</td>
+                    <td style="padding:12px 16px;text-align:center;">
+                      <button style="background:none;border:none;color:var(--brand-primary);cursor:pointer;font-size:12px;padding:4px 8px;border-radius:var(--brand-radius-sm);transition:background 0.12s;"
+                        onmouseover="this.style.background='var(--brand-primary-light)'" onmouseout="this.style.background='none'">详情</button>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--brand-border);transition:background 0.12s;" onmouseover="this.style.background='var(--brand-muted)'" onmouseout="this.style.background='transparent'">
+                    <td style="padding:12px 16px;color:var(--brand-foreground);font-weight:500;">浙江安吉竹林碳汇综合开发项目</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">竹林碳汇</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">AR-CM-005</td>
+                    <td style="padding:12px 16px;"><span style="display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:500;background:#D1FAE5;color:#065F46;">已登记</span></td>
+                    <td style="padding:12px 16px;text-align:right;color:var(--brand-foreground);font-weight:500;">6.8</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">2025-03-25</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">安吉县林业发展中心</td>
+                    <td style="padding:12px 16px;text-align:center;">
+                      <button style="background:none;border:none;color:var(--brand-primary);cursor:pointer;font-size:12px;padding:4px 8px;border-radius:var(--brand-radius-sm);transition:background 0.12s;"
+                        onmouseover="this.style.background='var(--brand-primary-light)'" onmouseout="this.style.background='none'">详情</button>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--brand-border);transition:background 0.12s;" onmouseover="this.style.background='var(--brand-muted)'" onmouseout="this.style.background='transparent'">
+                    <td style="padding:12px 16px;color:var(--brand-foreground);font-weight:500;">青海三江源草地生态修复碳汇项目</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">草地碳汇</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">AR-CM-002</td>
+                    <td style="padding:12px 16px;"><span style="display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:500;background:#DBEAFE;color:#1E40AF;">已备案</span></td>
+                    <td style="padding:12px 16px;text-align:right;color:var(--brand-foreground);font-weight:500;">31.2</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">2025-02-14</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">青海省生态环境建设有限公司</td>
+                    <td style="padding:12px 16px;text-align:center;">
+                      <button style="background:none;border:none;color:var(--brand-primary);cursor:pointer;font-size:12px;padding:4px 8px;border-radius:var(--brand-radius-sm);transition:background 0.12s;"
+                        onmouseover="this.style.background='var(--brand-primary-light)'" onmouseout="this.style.background='none'">详情</button>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--brand-border);transition:background 0.12s;" onmouseover="this.style.background='var(--brand-muted)'" onmouseout="this.style.background='transparent'">
+                    <td style="padding:12px 16px;color:var(--brand-foreground);font-weight:500;">广西桂林漓江流域造林碳汇项目</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">造林碳汇</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">AR-CM-001</td>
+                    <td style="padding:12px 16px;"><span style="display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:500;background:#FEF3C7;color:#92400E;">公示中</span></td>
+                    <td style="padding:12px 16px;text-align:right;color:var(--brand-foreground);font-weight:500;">9.5</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">2025-01-20</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">桂林市林业投资集团</td>
+                    <td style="padding:12px 16px;text-align:center;">
+                      <button style="background:none;border:none;color:var(--brand-primary);cursor:pointer;font-size:12px;padding:4px 8px;border-radius:var(--brand-radius-sm);transition:background 0.12s;"
+                        onmouseover="this.style.background='var(--brand-primary-light)'" onmouseout="this.style.background='none'">详情</button>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--brand-border);transition:background 0.12s;" onmouseover="this.style.background='var(--brand-muted)'" onmouseout="this.style.background='transparent'">
+                    <td style="padding:12px 16px;color:var(--brand-foreground);font-weight:500;">黑龙江小兴安岭森林经营碳汇项目</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">森林经营</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">AR-CM-003</td>
+                    <td style="padding:12px 16px;"><span style="display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:500;background:#D1FAE5;color:#065F46;">已登记</span></td>
+                    <td style="padding:12px 16px;text-align:right;color:var(--brand-foreground);font-weight:500;">19.8</td>
+                    <td style="padding:12px 16px;color:var(--brand-muted-foreground);">2024-12-05</td>
+                    <td style="padding:12px 16px;color:var(--brand-foreground);">伊春林业管理局</td>
+                    <td style="padding:12px 16px;text-align:center;">
+                      <button style="background:none;border:none;color:var(--brand-primary);cursor:pointer;font-size:12px;padding:4px 8px;border-radius:var(--brand-radius-sm);transition:background 0.12s;"
+                        onmouseover="this.style.background='var(--brand-primary-light)'" onmouseout="this.style.background='none'">详情</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Pagination -->
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:20px;padding:0 4px;">
+            <span style="font-size:13px;color:var(--brand-muted-foreground);">显示第 1-10 条，共 173 条</span>
+            <div style="display:flex;align-items:center;gap:4px;">
+              <button style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:1px solid var(--brand-border);border-radius:var(--brand-radius-sm);background:var(--brand-card);color:var(--brand-muted-foreground);cursor:pointer;transition:all 0.12s;"
+                onmouseover="this.style.borderColor='var(--brand-primary)';this.style.color='var(--brand-primary)'" onmouseout="this.style.borderColor='var(--brand-border)';this.style.color='var(--brand-muted-foreground)'">
+                <i data-lucide="chevron-left" style="width:16px;height:16px;"></i>
+              </button>
+              <button style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:1px solid var(--brand-primary);border-radius:var(--brand-radius-sm);background:var(--brand-primary);color:var(--brand-primary-foreground);cursor:pointer;font-size:13px;font-weight:500;">1</button>
+              <button style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:1px solid var(--brand-border);border-radius:var(--brand-radius-sm);background:var(--brand-card);color:var(--brand-foreground);cursor:pointer;font-size:13px;transition:all 0.12s;"
+                onmouseover="this.style.borderColor='var(--brand-primary)';this.style.color='var(--brand-primary)'" onmouseout="this.style.borderColor='var(--brand-border)';this.style.color='var(--brand-foreground)'">2</button>
+              <button style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:1px solid var(--brand-border);border-radius:var(--brand-radius-sm);background:var(--brand-card);color:var(--brand-foreground);cursor:pointer;font-size:13px;transition:all 0.12s;"
+                onmouseover="this.style.borderColor='var(--brand-primary)';this.style.color='var(--brand-primary)'" onmouseout="this.style.borderColor='var(--brand-border)';this.style.color='var(--brand-foreground)'">3</button>
+              <span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;color:var(--brand-muted-foreground);font-size:13px;">...</span>
+              <button style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:1px solid var(--brand-border);border-radius:var(--brand-radius-sm);background:var(--brand-card);color:var(--brand-foreground);cursor:pointer;font-size:13px;transition:all 0.12s;"
+                onmouseover="this.style.borderColor='var(--brand-primary)';this.style.color='var(--brand-primary)'" onmouseout="this.style.borderColor='var(--brand-border)';this.style.color='var(--brand-foreground)'">18</button>
+              <button style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:1px solid var(--brand-border);border-radius:var(--brand-radius-sm);background:var(--brand-card);color:var(--brand-muted-foreground);cursor:pointer;transition:all 0.12s;"
+                onmouseover="this.style.borderColor='var(--brand-primary)';this.style.color='var(--brand-primary)'" onmouseout="this.style.borderColor='var(--brand-border)';this.style.color='var(--brand-muted-foreground)'">
+                <i data-lucide="chevron-right" style="width:16px;height:16px;"></i>
+              </button>
+            </div>
+          </div>
+
+        </main>
+      </div>
+    </div>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>方法学中心 - AI智能碳汇管理平台</title>
+    <style id="theme-vars">
+/* ===== AI智能碳汇管理平台 - CCER Platform Design Tokens ===== */
+/* 简约商务风 - 专业沉稳的碳汇管理平台 */
+
+:root {
+  /* Background / Surface */
+  --brand-background: #F8FAFC;
+  --brand-foreground: #1E293B;
+  --brand-card: #FFFFFF;
+  --brand-card-foreground: #1E293B;
+  --brand-popover: #FFFFFF;
+  --brand-popover-foreground: #1E293B;
+  --brand-muted: #F1F5F9;
+  --brand-muted-foreground: #64748B;
+
+  /* Primary - 沉稳森林绿，传达碳汇与环保 */
+  --brand-primary: #0D9488;
+  --brand-primary-foreground: #FFFFFF;
+  --brand-primary-light: #E6FFFA;
+  --brand-primary-dark: #0F766E;
+
+  /* Border & Ring */
+  --brand-border: #E2E8F0;
+  --brand-input: #E2E8F0;
+  --brand-ring: #0D9488;
+
+  /* Radius */
+  --brand-radius-sm: 4px;
+  --brand-radius-md: 8px;
+  --brand-radius-lg: 16px;
+
+  /* Chart palette */
+  --chart-1: #0D9488;
+  --chart-2: #06B6D4;
+  --chart-3: #F59E0B;
+  --chart-4: #6366F1;
+  --chart-5: #EC4899;
+
+  /* State colors */
+  --state-success: #10B981;
+  --state-warning: #F59E0B;
+  --state-error: #EF4444;
+  --state-info: #3B82F6;
+
+  /* Typography */
+  --font-sans: 'Inter', 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+/* Spacing */
+body {
+  font-family: var(--font-sans);
+  background: var(--brand-background);
+  color: var(--brand-foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--brand-background);
+    --color-foreground: var(--brand-foreground);
+    --color-card: var(--brand-card);
+    --color-card-foreground: var(--brand-card-foreground);
+    --color-popover: var(--brand-popover);
+    --color-popover-foreground: var(--brand-popover-foreground);
+    --color-primary: var(--brand-primary);
+    --color-primary-foreground: var(--brand-primary-foreground);
+    --color-muted: var(--brand-muted);
+    --color-muted-foreground: var(--brand-muted-foreground);
+    --color-border: var(--brand-border);
+    --color-input: var(--brand-input);
+    --color-ring: var(--brand-ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --radius-sm: var(--brand-radius-sm);
+    --radius-md: var(--brand-radius-md);
+    --radius-lg: var(--brand-radius-lg);
+  }
+  @layer base {
+    body { background: var(--brand-background); color: var(--brand-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--brand-background); }
+      .text-background { color: var(--brand-background); }
+      .border-background { border-color: var(--brand-background); }
+      .ring-background { --tw-ring-color: var(--brand-background); }
+      .bg-foreground { background-color: var(--brand-foreground); }
+      .text-foreground { color: var(--brand-foreground); }
+      .border-foreground { border-color: var(--brand-foreground); }
+      .ring-foreground { --tw-ring-color: var(--brand-foreground); }
+      .bg-card { background-color: var(--brand-card); }
+      .text-card { color: var(--brand-card); }
+      .border-card { border-color: var(--brand-card); }
+      .ring-card { --tw-ring-color: var(--brand-card); }
+      .bg-card-foreground { background-color: var(--brand-card-foreground); }
+      .text-card-foreground { color: var(--brand-card-foreground); }
+      .border-card-foreground { border-color: var(--brand-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--brand-card-foreground); }
+      .bg-popover { background-color: var(--brand-popover); }
+      .text-popover { color: var(--brand-popover); }
+      .border-popover { border-color: var(--brand-popover); }
+      .ring-popover { --tw-ring-color: var(--brand-popover); }
+      .bg-popover-foreground { background-color: var(--brand-popover-foreground); }
+      .text-popover-foreground { color: var(--brand-popover-foreground); }
+      .border-popover-foreground { border-color: var(--brand-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--brand-popover-foreground); }
+      .bg-primary { background-color: var(--brand-primary); }
+      .text-primary { color: var(--brand-primary); }
+      .border-primary { border-color: var(--brand-primary); }
+      .ring-primary { --tw-ring-color: var(--brand-primary); }
+      .bg-primary-foreground { background-color: var(--brand-primary-foreground); }
+      .text-primary-foreground { color: var(--brand-primary-foreground); }
+      .border-primary-foreground { border-color: var(--brand-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--brand-primary-foreground); }
+      .bg-muted { background-color: var(--brand-muted); }
+      .text-muted { color: var(--brand-muted); }
+      .border-muted { border-color: var(--brand-muted); }
+      .ring-muted { --tw-ring-color: var(--brand-muted); }
+      .bg-muted-foreground { background-color: var(--brand-muted-foreground); }
+      .text-muted-foreground { color: var(--brand-muted-foreground); }
+      .border-muted-foreground { border-color: var(--brand-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--brand-muted-foreground); }
+      .bg-border { background-color: var(--brand-border); }
+      .text-border { color: var(--brand-border); }
+      .border-border { border-color: var(--brand-border); }
+      .ring-border { --tw-ring-color: var(--brand-border); }
+      .bg-input { background-color: var(--brand-input); }
+      .text-input { color: var(--brand-input); }
+      .border-input { border-color: var(--brand-input); }
+      .ring-input { --tw-ring-color: var(--brand-input); }
+      .bg-ring { background-color: var(--brand-ring); }
+      .text-ring { color: var(--brand-ring); }
+      .border-ring { border-color: var(--brand-ring); }
+      .ring-ring { --tw-ring-color: var(--brand-ring); }
+      .bg-chart-1 { background-color: var(--chart-1); }
+      .text-chart-1 { color: var(--chart-1); }
+      .border-chart-1 { border-color: var(--chart-1); }
+      .ring-chart-1 { --tw-ring-color: var(--chart-1); }
+      .bg-chart-2 { background-color: var(--chart-2); }
+      .text-chart-2 { color: var(--chart-2); }
+      .border-chart-2 { border-color: var(--chart-2); }
+      .ring-chart-2 { --tw-ring-color: var(--chart-2); }
+      .bg-chart-3 { background-color: var(--chart-3); }
+      .text-chart-3 { color: var(--chart-3); }
+      .border-chart-3 { border-color: var(--chart-3); }
+      .ring-chart-3 { --tw-ring-color: var(--chart-3); }
+      .bg-chart-4 { background-color: var(--chart-4); }
+      .text-chart-4 { color: var(--chart-4); }
+      .border-chart-4 { border-color: var(--chart-4); }
+      .ring-chart-4 { --tw-ring-color: var(--chart-4); }
+      .bg-chart-5 { background-color: var(--chart-5); }
+      .text-chart-5 { color: var(--chart-5); }
+      .border-chart-5 { border-color: var(--chart-5); }
+      .ring-chart-5 { --tw-ring-color: var(--chart-5); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="h-screen font-sans antialiased">
+    <style id="critical-layout">
+        /* App-shell root frame */
+        .app-shell-root {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .app-sidebar {
+            width: 240px;
+            min-width: 240px;
+            max-width: 240px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--brand-card);
+            border-right: 1px solid var(--brand-border);
+            flex-shrink: 0;
+        }
+        .app-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            min-width: 0;
+        }
+        .app-scroll-region {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 24px 32px;
+        }
+        .app-topbar {
+            flex-shrink: 0;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            padding: 0 32px;
+            background-color: var(--brand-card);
+            border-bottom: 1px solid var(--brand-border);
+        }
+        /* Sidebar nav items */
+        .sidebar-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            margin: 2px 8px;
+            border-radius: var(--brand-radius-md);
+            color: var(--brand-muted-foreground);
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.15s, color 0.15s;
+            text-decoration: none;
+        }
+        .sidebar-nav-item:hover {
+            background-color: var(--brand-muted);
+            color: var(--brand-foreground);
+        }
+        .sidebar-nav-item.active {
+            background-color: var(--brand-primary-light);
+            color: var(--brand-primary);
+            font-weight: 600;
+        }
+        .sidebar-nav-item svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+        /* Status badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 10px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        .status-badge.warning {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--state-warning);
+        }
+        .status-badge.success {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--state-success);
+        }
+        .status-badge svg {
+            width: 12px;
+            height: 12px;
+        }
+        /* Timeline */
+        .timeline-item {
+            position: relative;
+            padding-left: 32px;
+            padding-bottom: 28px;
+        }
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--brand-primary);
+            background-color: var(--brand-card);
+            z-index: 1;
+        }
+        .timeline-item.current .timeline-dot {
+            background-color: var(--brand-primary);
+            box-shadow: 0 0 0 4px var(--brand-primary-light);
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 18px;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--brand-border);
+        }
+        .timeline-item:last-child::before {
+            display: none;
+        }
+        .timeline-item.current::before {
+            background-color: var(--brand-primary);
+        }
+        /* Key change card */
+        .change-card {
+            background-color: var(--brand-card);
+            border: 1px solid var(--brand-border);
+            border-radius: var(--brand-radius-md);
+            padding: 20px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            transition: box-shadow 0.15s, border-color 0.15s;
+        }
+        .change-card:hover {
+            border-color: var(--brand-primary);
+            box-shadow: 0 2px 8px rgba(13, 148, 136, 0.08);
+        }
+        .change-card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--brand-radius-sm);
+            background-color: var(--brand-primary-light);
+            color: var(--brand-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .change-card-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+        /* Methodology document card */
+        .methodology-card {
+            background-color: var(--brand-card);
+            border: 1px solid var(--brand-border);
+            border-radius: var(--brand-radius-md);
+            padding: 20px;
+            transition: box-shadow 0.15s, border-color 0.15s;
+        }
+        .methodology-card:hover {
+            border-color: var(--brand-primary);
+            box-shadow: 0 2px 8px rgba(13, 148, 136, 0.08);
+        }
+        .methodology-card.highlighted {
+            border-color: var(--brand-primary);
+            border-left: 4px solid var(--brand-primary);
+            background: linear-gradient(135deg, var(--brand-primary-light) 0%, var(--brand-card) 30%);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .sidebar-nav-item,
+            .methodology-card,
+            .change-card {
+                transition: none;
+            }
+        }
+        /* Responsive: stack on narrow screens */
+        @media (max-width: 1024px) {
+            .app-sidebar {
+                display: none;
+            }
+            .app-scroll-region {
+                padding: 16px;
+            }
+            .app-topbar {
+                padding: 0 16px;
+            }
+        }
+    </style>
+    <div class="app-shell-root" data-viewport-mode="app-shell">
+        <!-- Sidebar -->
+        <aside class="app-sidebar">
+            <div style="padding:20px 16px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0;">
+                <div style="width:32px;height:32px;border-radius:var(--brand-radius-sm);background-color:var(--brand-primary);display:flex;align-items:center;justify-content:center;">
+                    <i data-lucide="leaf" style="width:18px;height:18px;color:var(--brand-primary-foreground);"></i>
+                </div>
+                <span style="font-size:16px;font-weight:700;color:var(--brand-foreground);">碳汇管理平台</span>
+            </div>
+            <nav style="flex:1;padding-top:8px;">
+                <a class="sidebar-nav-item" href="dashboard.html">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>数据概览</span>
+                </a>
+                <a class="sidebar-nav-item" href="projects.html">
+                    <i data-lucide="folder-open"></i>
+                    <span>项目管理</span>
+                </a>
+                <a class="sidebar-nav-item" href="trading.html">
+                    <i data-lucide="trending-up"></i>
+                    <span>碳交易</span>
+                </a>
+                <a class="sidebar-nav-item" href="analysis.html">
+                    <i data-lucide="brain-circuit"></i>
+                    <span>AI分析</span>
+                </a>
+                <a class="sidebar-nav-item active" href="methodology.html">
+                    <i data-lucide="book-open"></i>
+                    <span>方法学中心</span>
+                </a>
+            </nav>
+            <div style="padding:12px 16px;border-top:1px solid var(--brand-border);flex-shrink:0;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <div style="width:28px;height:28px;border-radius:50%;background-color:var(--brand-muted);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--brand-muted-foreground);">管</div>
+                    <div>
+                        <div style="font-size:13px;font-weight:500;color:var(--brand-foreground);">管理员</div>
+                        <div style="font-size:11px;color:var(--brand-muted-foreground);">admin@ccer.cn</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <div class="app-content">
+            <!-- Top Bar -->
+            <header class="app-topbar">
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <i data-lucide="book-open" style="width:22px;height:22px;color:var(--brand-primary);"></i>
+                    <h1 style="font-size:18px;font-weight:700;color:var(--brand-foreground);margin:0;">方法学中心</h1>
+                </div>
+                <div style="margin-left:auto;display:flex;align-items:center;gap:4px;font-size:13px;color:var(--brand-muted-foreground);">
+                    <span>首页</span>
+                    <span>/</span>
+                    <span style="color:var(--brand-primary);">方法学中心</span>
+                </div>
+            </header>
+
+            <!-- Scrollable Main Content -->
+            <main class="app-scroll-region overflow-y-auto" data-scroll-region="primary">
+                <!-- Methodology Cards Section -->
+                <section id="methodology-list" style="margin-bottom:32px;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+                        <div>
+                            <h2 style="font-size:16px;font-weight:700;color:var(--brand-foreground);margin:0 0 4px 0;">碳汇方法学</h2>
+                            <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0;">CCER 现行及修订中方法学</p>
+                        </div>
+                        <span style="font-size:12px;color:var(--brand-muted-foreground);">共 4 项</span>
+                    </div>
+
+                    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;">
+                        <!-- Card 1: CCER-14-001-V01 Highlighted -->
+                        <div class="methodology-card highlighted">
+                            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;">
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <i data-lucide="tree-pine" style="width:20px;height:20px;color:var(--brand-primary);"></i>
+                                    <span style="font-size:11px;font-weight:600;color:var(--brand-muted-foreground);letter-spacing:0.5px;">CCER-14-001-V01</span>
+                                </div>
+                                <span class="status-badge warning">
+                                    <i data-lucide="alert-circle"></i>
+                                    修订中
+                                </span>
+                            </div>
+                            <h3 style="font-size:15px;font-weight:700;color:var(--brand-foreground);margin:0 0 6px 0;">造林碳汇方法学</h3>
+                            <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0 0 14px 0;line-height:1.6;">适用于以增加碳汇为主要目的的造林活动，包括防护林、用材林等造林项目。修订征求意见稿已发布。</p>
+                            <div style="display:flex;align-items:center;gap:16px;font-size:12px;color:var(--brand-muted-foreground);">
+                                <span style="display:flex;align-items:center;gap:4px;"><i data-lucide="calendar" style="width:13px;height:13px;"></i>2024年发布</span>
+                                <span style="display:flex;align-items:center;gap:4px;"><i data-lucide="file-edit" style="width:13px;height:13px;"></i>2026年修订</span>
+                            </div>
+                            <a href="#" style="display:inline-flex;align-items:center;gap:4px;margin-top:14px;font-size:13px;font-weight:600;color:var(--brand-primary);text-decoration:none;">
+                                查看详情
+                                <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                            </a>
+                        </div>
+
+                        <!-- Card 2: 森林经营碳汇 -->
+                        <div class="methodology-card">
+                            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;">
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <i data-lucide="trees" style="width:20px;height:20px;color:var(--brand-primary);"></i>
+                                    <span style="font-size:11px;font-weight:600;color:var(--brand-muted-foreground);letter-spacing:0.5px;">CCER-14-002-V01</span>
+                                </div>
+                                <span class="status-badge success">
+                                    <i data-lucide="check-circle"></i>
+                                    现行有效
+                                </span>
+                            </div>
+                            <h3 style="font-size:15px;font-weight:700;color:var(--brand-foreground);margin:0 0 6px 0;">森林经营碳汇方法学</h3>
+                            <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0 0 14px 0;line-height:1.6;">适用于通过森林经营措施增加碳汇的项目活动，包括抚育间伐、补植补造等经营措施。</p>
+                            <div style="display:flex;align-items:center;gap:16px;font-size:12px;color:var(--brand-muted-foreground);">
+                                <span style="display:flex;align-items:center;gap:4px;"><i data-lucide="calendar" style="width:13px;height:13px;"></i>2024年发布</span>
+                            </div>
+                            <a href="#" style="display:inline-flex;align-items:center;gap:4px;margin-top:14px;font-size:13px;font-weight:600;color:var(--brand-primary);text-decoration:none;">
+                                查看详情
+                                <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                            </a>
+                        </div>
+
+                        <!-- Card 3: 竹林碳汇 -->
+                        <div class="methodology-card">
+                            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;">
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <i data-lucide="sprout" style="width:20px;height:20px;color:var(--brand-primary);"></i>
+                                    <span style="font-size:11px;font-weight:600;color:var(--brand-muted-foreground);letter-spacing:0.5px;">CCER-14-003-V01</span>
+                                </div>
+                                <span class="status-badge success">
+                                    <i data-lucide="check-circle"></i>
+                                    现行有效
+                                </span>
+                            </div>
+                            <h3 style="font-size:15px;font-weight:700;color:var(--brand-foreground);margin:0 0 6px 0;">竹林碳汇方法学</h3>
+                            <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0 0 14px 0;line-height:1.6;">适用于以竹类植物为主要经营对象的造林和经营项目，涵盖毛竹、丛生竹等主要竹种。</p>
+                            <div style="display:flex;align-items:center;gap:16px;font-size:12px;color:var(--brand-muted-foreground);">
+                                <span style="display:flex;align-items:center;gap:4px;"><i data-lucide="calendar" style="width:13px;height:13px;"></i>2024年发布</span>
+                            </div>
+                            <a href="#" style="display:inline-flex;align-items:center;gap:4px;margin-top:14px;font-size:13px;font-weight:600;color:var(--brand-primary);text-decoration:none;">
+                                查看详情
+                                <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                            </a>
+                        </div>
+
+                        <!-- Card 4: 草地碳汇 -->
+                        <div class="methodology-card">
+                            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;">
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <i data-lucide="leaf" style="width:20px;height:20px;color:var(--brand-primary);"></i>
+                                    <span style="font-size:11px;font-weight:600;color:var(--brand-muted-foreground);letter-spacing:0.5px;">CCER-14-004-V01</span>
+                                </div>
+                                <span class="status-badge success">
+                                    <i data-lucide="check-circle"></i>
+                                    现行有效
+                                </span>
+                            </div>
+                            <h3 style="font-size:15px;font-weight:700;color:var(--brand-foreground);margin:0 0 6px 0;">草地碳汇方法学</h3>
+                            <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0 0 14px 0;line-height:1.6;">适用于通过草地管理措施增加草地生态系统碳储量的项目，包括退化草原修复等。</p>
+                            <div style="display:flex;align-items:center;gap:16px;font-size:12px;color:var(--brand-muted-foreground);">
+                                <span style="display:flex;align-items:center;gap:4px;"><i data-lucide="calendar" style="width:13px;height:13px;"></i>2024年发布</span>
+                            </div>
+                            <a href="#" style="display:inline-flex;align-items:center;gap:4px;margin-top:14px;font-size:13px;font-weight:600;color:var(--brand-primary);text-decoration:none;">
+                                查看详情
+                                <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Revision Timeline Section -->
+                <section id="revision-timeline" style="margin-bottom:32px;">
+                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+                        <div style="width:4px;height:20px;border-radius:2px;background-color:var(--brand-primary);"></div>
+                        <div>
+                            <h2 style="font-size:16px;font-weight:700;color:var(--brand-foreground);margin:0;">CCER-14-001-V01 修订历程</h2>
+                            <p style="font-size:12px;color:var(--brand-muted-foreground);margin:0;">造林碳汇方法学修订动态</p>
+                        </div>
+                    </div>
+
+                    <div style="background-color:var(--brand-card);border:1px solid var(--brand-border);border-radius:var(--brand-radius-md);padding:24px;">
+                        <!-- 2024 -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;">
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <i data-lucide="git-commit" style="width:16px;height:16px;color:var(--brand-muted-foreground);"></i>
+                                    <span style="font-weight:600;font-size:14px;color:var(--brand-foreground);">2024年</span>
+                                </div>
+                                <span class="status-badge success">已完成</span>
+                            </div>
+                            <p style="font-size:13px;color:var(--brand-muted-foreground);margin:4px 0 0 0;line-height:1.5;">方法学正式发布实施，确立造林碳汇项目开发的基本框架和技术规范。</p>
+                        </div>
+
+                        <!-- 2025 -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;">
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <i data-lucide="git-branch" style="width:16px;height:16px;color:var(--brand-muted-foreground);"></i>
+                                    <span style="font-weight:600;font-size:14px;color:var(--brand-foreground);">2025年</span>
+                                </div>
+                                <span class="status-badge success">已完成</span>
+                            </div>
+                            <p style="font-size:13px;color:var(--brand-muted-foreground);margin:4px 0 0 0;line-height:1.5;">面向全社会公开征集修订意见，收集行业专家、项目业主及审定核查机构反馈。</p>
+                        </div>
+
+                        <!-- 2026 Current -->
+                        <div class="timeline-item current">
+                            <div class="timeline-dot"></div>
+                            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;">
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <i data-lucide="file-edit" style="width:16px;height:16px;color:var(--brand-primary);"></i>
+                                    <span style="font-weight:600;font-size:14px;color:var(--brand-primary);">2026年</span>
+                                </div>
+                                <span class="status-badge warning">进行中</span>
+                            </div>
+                            <p style="font-size:13px;color:var(--brand-muted-foreground);margin:4px 0 0 0;line-height:1.5;">修订征求意见稿正式发布，面向社会公开征求意见，包含四项核心修订要点。</p>
+                        </div>
+
+                        <!-- 2026 Q4 -->
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;">
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <i data-lucide="check-circle" style="width:16px;height:16px;color:var(--brand-muted-foreground);"></i>
+                                    <span style="font-weight:600;font-size:14px;color:var(--brand-foreground);">2026年 Q4</span>
+                                </div>
+                                <span class="status-badge" style="background-color:rgba(59,130,246,0.1);color:var(--state-info);">预计</span>
+                            </div>
+                            <p style="font-size:13px;color:var(--brand-muted-foreground);margin:4px 0 0 0;line-height:1.5;">预计完成修订并正式发布新版本方法学，为造林碳汇项目开发提供更便捷的技术路径。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Key Changes Section -->
+                <section style="margin-bottom:32px;">
+                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+                        <div style="width:4px;height:20px;border-radius:2px;background-color:var(--brand-primary);"></div>
+                        <div>
+                            <h2 style="font-size:16px;font-weight:700;color:var(--brand-foreground);margin:0;">核心修订要点</h2>
+                            <p style="font-size:12px;color:var(--brand-muted-foreground);margin:0;">CCER-14-001-V01 修订征求意见稿关键变化</p>
+                        </div>
+                    </div>
+
+                    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;">
+                        <!-- Change 1 -->
+                        <div class="change-card">
+                            <div class="change-card-icon">
+                                <i data-lucide="check-circle"></i>
+                            </div>
+                            <div>
+                                <h3 style="font-size:14px;font-weight:700;color:var(--brand-foreground);margin:0 0 4px 0;">免额外性论证</h3>
+                                <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0;line-height:1.5;">大幅降低项目开发门槛，免除繁琐的额外性论证流程，显著减少项目前期准备时间和成本投入。</p>
+                            </div>
+                        </div>
+
+                        <!-- Change 2 -->
+                        <div class="change-card">
+                            <div class="change-card-icon">
+                                <i data-lucide="map-pin"></i>
+                            </div>
+                            <div>
+                                <h3 style="font-size:14px;font-weight:700;color:var(--brand-foreground);margin:0 0 4px 0;">非林地绿化纳入</h3>
+                                <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0;line-height:1.5;">道路绿化、矿山修复造林等非林地绿化项目均可纳入开发范围，拓宽碳汇项目适用场景。</p>
+                            </div>
+                        </div>
+
+                        <!-- Change 3 -->
+                        <div class="change-card">
+                            <div class="change-card-icon">
+                                <i data-lucide="bar-chart-3"></i>
+                            </div>
+                            <div>
+                                <h3 style="font-size:14px;font-weight:700;color:var(--brand-foreground);margin:0 0 4px 0;">缺省值简化</h3>
+                                <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0;line-height:1.5;">监测参数采用缺省值体系，大幅降低现场监测成本和技术门槛，使中小型项目更易实施。</p>
+                            </div>
+                        </div>
+
+                        <!-- Change 4 -->
+                        <div class="change-card">
+                            <div class="change-card-icon">
+                                <i data-lucide="package"></i>
+                            </div>
+                            <div>
+                                <h3 style="font-size:14px;font-weight:700;color:var(--brand-foreground);margin:0 0 4px 0;">新增木竹产品碳库</h3>
+                                <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0;line-height:1.5;">将木竹产品碳库纳入碳汇计量范围，扩大碳汇核算边界，提升项目碳汇计量完整性和收益。</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
