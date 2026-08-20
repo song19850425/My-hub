@@ -353,11 +353,13 @@ body {
             border: 1px solid var(--brand-border);
             border-radius: var(--brand-radius-md);
             padding: 20px;
-            transition: box-shadow 0.15s, border-color 0.15s;
+            transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
+            cursor: pointer;
         }
         .methodology-card:hover {
             border-color: var(--brand-primary);
-            box-shadow: 0 2px 8px rgba(13, 148, 136, 0.08);
+            box-shadow: 0 4px 16px rgba(13, 148, 136, 0.12);
+            transform: translateY(-2px);
         }
         .methodology-card.highlighted {
             border-color: var(--brand-primary);
@@ -370,6 +372,7 @@ body {
             .change-card {
                 transition: none;
             }
+            .methodology-card:hover { transform: none; }
         }
         /* Responsive: stack on narrow screens */
         @media (max-width: 1024px) {
@@ -382,6 +385,149 @@ body {
             .app-topbar {
                 padding: 0 16px;
             }
+        }
+
+        /* ===== Detail Panel ===== */
+        .detail-panel {
+            display: none;
+        }
+        .detail-panel.active {
+            display: block;
+        }
+        .detail-back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: var(--brand-radius-md);
+            border: 1px solid var(--brand-border);
+            background-color: var(--brand-card);
+            color: var(--brand-muted-foreground);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.15s;
+            margin-bottom: 20px;
+        }
+        .detail-back-btn:hover {
+            border-color: var(--brand-primary);
+            color: var(--brand-primary);
+            background-color: var(--brand-primary-light);
+        }
+        .detail-back-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+        .detail-section {
+            background-color: var(--brand-card);
+            border: 1px solid var(--brand-border);
+            border-radius: var(--brand-radius-md);
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+        .detail-section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--brand-foreground);
+            margin: 0 0 16px 0;
+        }
+        .detail-section-title svg {
+            width: 18px;
+            height: 18px;
+            color: var(--brand-primary);
+        }
+        .detail-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .detail-table th,
+        .detail-table td {
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--brand-border);
+        }
+        .detail-table th {
+            background-color: var(--brand-muted);
+            color: var(--brand-muted-foreground);
+            font-weight: 600;
+            font-size: 12px;
+        }
+        .detail-table td:first-child {
+            font-weight: 600;
+            color: var(--brand-foreground);
+            white-space: nowrap;
+            width: 30%;
+        }
+        .detail-table td:last-child {
+            color: var(--brand-muted-foreground);
+            line-height: 1.6;
+        }
+        .detail-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .detail-list li {
+            position: relative;
+            padding-left: 22px;
+            padding-bottom: 10px;
+            font-size: 13px;
+            color: var(--brand-muted-foreground);
+            line-height: 1.6;
+        }
+        .detail-list li:last-child { padding-bottom: 0; }
+        .detail-list li::before {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 7px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--brand-primary);
+        }
+        .detail-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: var(--brand-radius-sm);
+            font-size: 12px;
+            font-weight: 500;
+            background-color: var(--brand-primary-light);
+            color: var(--brand-primary);
+        }
+        .detail-info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        @media (max-width: 768px) {
+            .detail-info-grid { grid-template-columns: 1fr; }
+        }
+        .detail-info-item {
+            background-color: var(--brand-muted);
+            border-radius: var(--brand-radius-md);
+            padding: 16px;
+        }
+        .detail-info-label {
+            font-size: 12px;
+            color: var(--brand-muted-foreground);
+            margin-bottom: 6px;
+        }
+        .detail-info-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--brand-primary);
+        }
+        .detail-info-unit {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--brand-muted-foreground);
         }
     </style>
     <div class="app-shell-root" data-viewport-mode="app-shell">
@@ -432,7 +578,7 @@ body {
             <header class="app-topbar">
                 <div style="display:flex;align-items:center;gap:8px;">
                     <i data-lucide="book-open" style="width:22px;height:22px;color:var(--brand-primary);"></i>
-                    <h1 style="font-size:18px;font-weight:700;color:var(--brand-foreground);margin:0;">方法学中心</h1>
+                    <h1 id="page-title" style="font-size:18px;font-weight:700;color:var(--brand-foreground);margin:0;">方法学中心</h1>
                 </div>
                 <div style="margin-left:auto;display:flex;align-items:center;gap:4px;font-size:13px;color:var(--brand-muted-foreground);">
                     <span>首页</span>
@@ -443,236 +589,733 @@ body {
 
             <!-- Scrollable Main Content -->
             <main class="app-scroll-region overflow-y-auto" data-scroll-region="primary">
-                <!-- Methodology Cards Section -->
-                <section id="methodology-list" style="margin-bottom:32px;">
-                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-                        <div>
-                            <h2 style="font-size:16px;font-weight:700;color:var(--brand-foreground);margin:0 0 4px 0;">碳汇方法学</h2>
-                            <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0;">CCER 现行及修订中方法学</p>
-                        </div>
-                        <span style="font-size:12px;color:var(--brand-muted-foreground);">共 4 项</span>
-                    </div>
 
-                    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;">
-                        <!-- Card 1: CCER-14-001-V01 Highlighted -->
-                        <div class="methodology-card highlighted">
-                            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;">
-                                <div style="display:flex;align-items:center;gap:8px;">
-                                    <i data-lucide="tree-pine" style="width:20px;height:20px;color:var(--brand-primary);"></i>
-                                    <span style="font-size:11px;font-weight:600;color:var(--brand-muted-foreground);letter-spacing:0.5px;">CCER-14-001-V01</span>
-                                </div>
-                                <span class="status-badge warning">
-                                    <i data-lucide="alert-circle"></i>
-                                    修订中
-                                </span>
+                <!-- ====== LIST VIEW (卡片列表) ====== -->
+                <div id="list-view">
+                    <!-- Methodology Cards Section -->
+                    <section id="methodology-list" style="margin-bottom:32px;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+                            <div>
+                                <h2 style="font-size:16px;font-weight:700;color:var(--brand-foreground);margin:0 0 4px 0;">碳汇方法学</h2>
+                                <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0;">CCER 现行及修订中方法学，点击查看完整内容</p>
                             </div>
-                            <h3 style="font-size:15px;font-weight:700;color:var(--brand-foreground);margin:0 0 6px 0;">造林碳汇方法学</h3>
-                            <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0 0 14px 0;line-height:1.6;">适用于以增加碳汇为主要目的的造林活动，包括防护林、用材林等造林项目。修订征求意见稿已发布。</p>
-                            <div style="display:flex;align-items:center;gap:16px;font-size:12px;color:var(--brand-muted-foreground);">
-                                <span style="display:flex;align-items:center;gap:4px;"><i data-lucide="calendar" style="width:13px;height:13px;"></i>2024年发布</span>
-                                <span style="display:flex;align-items:center;gap:4px;"><i data-lucide="file-edit" style="width:13px;height:13px;"></i>2026年修订</span>
-                            </div>
-                            <a href="#" style="display:inline-flex;align-items:center;gap:4px;margin-top:14px;font-size:13px;font-weight:600;color:var(--brand-primary);text-decoration:none;">
-                                查看详情
-                                <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
-                            </a>
+                            <span style="font-size:12px;color:var(--brand-muted-foreground);">共 4 项</span>
                         </div>
 
-                        <!-- Card 2: 森林经营碳汇 -->
-                        <div class="methodology-card">
-                            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;">
-                                <div style="display:flex;align-items:center;gap:8px;">
-                                    <i data-lucide="trees" style="width:20px;height:20px;color:var(--brand-primary);"></i>
-                                    <span style="font-size:11px;font-weight:600;color:var(--brand-muted-foreground);letter-spacing:0.5px;">CCER-14-002-V01</span>
+                        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;">
+                            <!-- Card 1: CCER-14-001-V01 Highlighted -->
+                            <div class="methodology-card highlighted" onclick="showDetail('001')">
+                                <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;">
+                                    <div style="display:flex;align-items:center;gap:8px;">
+                                        <i data-lucide="tree-pine" style="width:20px;height:20px;color:var(--brand-primary);"></i>
+                                        <span style="font-size:11px;font-weight:600;color:var(--brand-muted-foreground);letter-spacing:0.5px;">CCER-14-001-V01</span>
+                                    </div>
+                                    <span class="status-badge warning">
+                                        <i data-lucide="alert-circle"></i>
+                                        修订中
+                                    </span>
                                 </div>
-                                <span class="status-badge success">
+                                <h3 style="font-size:15px;font-weight:700;color:var(--brand-foreground);margin:0 0 6px 0;">造林碳汇方法学</h3>
+                                <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0 0 14px 0;line-height:1.6;">适用于以增加碳汇为主要目的的造林活动，包括防护林、用材林等造林项目。修订征求意见稿已发布。</p>
+                                <div style="display:flex;align-items:center;gap:16px;font-size:12px;color:var(--brand-muted-foreground);">
+                                    <span style="display:flex;align-items:center;gap:4px;"><i data-lucide="calendar" style="width:13px;height:13px;"></i>2024年发布</span>
+                                    <span style="display:flex;align-items:center;gap:4px;"><i data-lucide="file-edit" style="width:13px;height:13px;"></i>2026年修订</span>
+                                </div>
+                                <a href="javascript:void(0)" onclick="event.stopPropagation();showDetail('001')" style="display:inline-flex;align-items:center;gap:4px;margin-top:14px;font-size:13px;font-weight:600;color:var(--brand-primary);text-decoration:none;">
+                                    查看详情
+                                    <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                                </a>
+                            </div>
+
+                            <!-- Card 2: 森林经营碳汇 -->
+                            <div class="methodology-card" onclick="showDetail('002')">
+                                <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;">
+                                    <div style="display:flex;align-items:center;gap:8px;">
+                                        <i data-lucide="trees" style="width:20px;height:20px;color:var(--brand-primary);"></i>
+                                        <span style="font-size:11px;font-weight:600;color:var(--brand-muted-foreground);letter-spacing:0.5px;">CCER-14-002-V01</span>
+                                    </div>
+                                    <span class="status-badge success">
+                                        <i data-lucide="check-circle"></i>
+                                        现行有效
+                                    </span>
+                                </div>
+                                <h3 style="font-size:15px;font-weight:700;color:var(--brand-foreground);margin:0 0 6px 0;">森林经营碳汇方法学</h3>
+                                <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0 0 14px 0;line-height:1.6;">适用于通过森林经营措施增加碳汇的项目活动，包括抚育间伐、补植补造等经营措施。</p>
+                                <div style="display:flex;align-items:center;gap:16px;font-size:12px;color:var(--brand-muted-foreground);">
+                                    <span style="display:flex;align-items:center;gap:4px;"><i data-lucide="calendar" style="width:13px;height:13px;"></i>2024年发布</span>
+                                </div>
+                                <a href="javascript:void(0)" onclick="event.stopPropagation();showDetail('002')" style="display:inline-flex;align-items:center;gap:4px;margin-top:14px;font-size:13px;font-weight:600;color:var(--brand-primary);text-decoration:none;">
+                                    查看详情
+                                    <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                                </a>
+                            </div>
+
+                            <!-- Card 3: 竹林碳汇 -->
+                            <div class="methodology-card" onclick="showDetail('003')">
+                                <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;">
+                                    <div style="display:flex;align-items:center;gap:8px;">
+                                        <i data-lucide="sprout" style="width:20px;height:20px;color:var(--brand-primary);"></i>
+                                        <span style="font-size:11px;font-weight:600;color:var(--brand-muted-foreground);letter-spacing:0.5px;">CCER-14-003-V01</span>
+                                    </div>
+                                    <span class="status-badge success">
+                                        <i data-lucide="check-circle"></i>
+                                        现行有效
+                                    </span>
+                                </div>
+                                <h3 style="font-size:15px;font-weight:700;color:var(--brand-foreground);margin:0 0 6px 0;">竹林碳汇方法学</h3>
+                                <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0 0 14px 0;line-height:1.6;">适用于以竹类植物为主要经营对象的造林和经营项目，涵盖毛竹、丛生竹等主要竹种。</p>
+                                <div style="display:flex;align-items:center;gap:16px;font-size:12px;color:var(--brand-muted-foreground);">
+                                    <span style="display:flex;align-items:center;gap:4px;"><i data-lucide="calendar" style="width:13px;height:13px;"></i>2024年发布</span>
+                                </div>
+                                <a href="javascript:void(0)" onclick="event.stopPropagation();showDetail('003')" style="display:inline-flex;align-items:center;gap:4px;margin-top:14px;font-size:13px;font-weight:600;color:var(--brand-primary);text-decoration:none;">
+                                    查看详情
+                                    <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                                </a>
+                            </div>
+
+                            <!-- Card 4: 草地碳汇 -->
+                            <div class="methodology-card" onclick="showDetail('004')">
+                                <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;">
+                                    <div style="display:flex;align-items:center;gap:8px;">
+                                        <i data-lucide="leaf" style="width:20px;height:20px;color:var(--brand-primary);"></i>
+                                        <span style="font-size:11px;font-weight:600;color:var(--brand-muted-foreground);letter-spacing:0.5px;">CCER-14-004-V01</span>
+                                    </div>
+                                    <span class="status-badge success">
+                                        <i data-lucide="check-circle"></i>
+                                        现行有效
+                                    </span>
+                                </div>
+                                <h3 style="font-size:15px;font-weight:700;color:var(--brand-foreground);margin:0 0 6px 0;">草地碳汇方法学</h3>
+                                <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0 0 14px 0;line-height:1.6;">适用于通过草地管理措施增加草地生态系统碳储量的项目，包括退化草原修复等。</p>
+                                <div style="display:flex;align-items:center;gap:16px;font-size:12px;color:var(--brand-muted-foreground);">
+                                    <span style="display:flex;align-items:center;gap:4px;"><i data-lucide="calendar" style="width:13px;height:13px;"></i>2024年发布</span>
+                                </div>
+                                <a href="javascript:void(0)" onclick="event.stopPropagation();showDetail('004')" style="display:inline-flex;align-items:center;gap:4px;margin-top:14px;font-size:13px;font-weight:600;color:var(--brand-primary);text-decoration:none;">
+                                    查看详情
+                                    <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Revision Timeline Section -->
+                    <section id="revision-timeline" style="margin-bottom:32px;">
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+                            <div style="width:4px;height:20px;border-radius:2px;background-color:var(--brand-primary);"></div>
+                            <div>
+                                <h2 style="font-size:16px;font-weight:700;color:var(--brand-foreground);margin:0;">CCER-14-001-V01 修订历程</h2>
+                                <p style="font-size:12px;color:var(--brand-muted-foreground);margin:0;">造林碳汇方法学修订动态</p>
+                            </div>
+                        </div>
+
+                        <div style="background-color:var(--brand-card);border:1px solid var(--brand-border);border-radius:var(--brand-radius-md);padding:24px;">
+                            <!-- 2024 -->
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;">
+                                    <div style="display:flex;align-items:center;gap:8px;">
+                                        <i data-lucide="git-commit" style="width:16px;height:16px;color:var(--brand-muted-foreground);"></i>
+                                        <span style="font-weight:600;font-size:14px;color:var(--brand-foreground);">2024年</span>
+                                    </div>
+                                    <span class="status-badge success">已完成</span>
+                                </div>
+                                <p style="font-size:13px;color:var(--brand-muted-foreground);margin:4px 0 0 0;line-height:1.5;">方法学正式发布实施，确立造林碳汇项目开发的基本框架和技术规范。</p>
+                            </div>
+
+                            <!-- 2025 -->
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;">
+                                    <div style="display:flex;align-items:center;gap:8px;">
+                                        <i data-lucide="git-branch" style="width:16px;height:16px;color:var(--brand-muted-foreground);"></i>
+                                        <span style="font-weight:600;font-size:14px;color:var(--brand-foreground);">2025年</span>
+                                    </div>
+                                    <span class="status-badge success">已完成</span>
+                                </div>
+                                <p style="font-size:13px;color:var(--brand-muted-foreground);margin:4px 0 0 0;line-height:1.5;">面向全社会公开征集修订意见，收集行业专家、项目业主及审定核查机构反馈。</p>
+                            </div>
+
+                            <!-- 2026 Current -->
+                            <div class="timeline-item current">
+                                <div class="timeline-dot"></div>
+                                <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;">
+                                    <div style="display:flex;align-items:center;gap:8px;">
+                                        <i data-lucide="file-edit" style="width:16px;height:16px;color:var(--brand-primary);"></i>
+                                        <span style="font-weight:600;font-size:14px;color:var(--brand-primary);">2026年</span>
+                                    </div>
+                                    <span class="status-badge warning">进行中</span>
+                                </div>
+                                <p style="font-size:13px;color:var(--brand-muted-foreground);margin:4px 0 0 0;line-height:1.5;">修订征求意见稿正式发布，面向社会公开征求意见，包含四项核心修订要点。</p>
+                            </div>
+
+                            <!-- 2026 Q4 -->
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;">
+                                    <div style="display:flex;align-items:center;gap:8px;">
+                                        <i data-lucide="check-circle" style="width:16px;height:16px;color:var(--brand-muted-foreground);"></i>
+                                        <span style="font-weight:600;font-size:14px;color:var(--brand-foreground);">2026年 Q4</span>
+                                    </div>
+                                    <span class="status-badge" style="background-color:rgba(59,130,246,0.1);color:var(--state-info);">预计</span>
+                                </div>
+                                <p style="font-size:13px;color:var(--brand-muted-foreground);margin:4px 0 0 0;line-height:1.5;">预计完成修订并正式发布新版本方法学，为造林碳汇项目开发提供更便捷的技术路径。</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Key Changes Section -->
+                    <section style="margin-bottom:32px;">
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+                            <div style="width:4px;height:20px;border-radius:2px;background-color:var(--brand-primary);"></div>
+                            <div>
+                                <h2 style="font-size:16px;font-weight:700;color:var(--brand-foreground);margin:0;">核心修订要点</h2>
+                                <p style="font-size:12px;color:var(--brand-muted-foreground);margin:0;">CCER-14-001-V01 修订征求意见稿关键变化</p>
+                            </div>
+                        </div>
+
+                        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;">
+                            <!-- Change 1 -->
+                            <div class="change-card">
+                                <div class="change-card-icon">
                                     <i data-lucide="check-circle"></i>
-                                    现行有效
-                                </span>
-                            </div>
-                            <h3 style="font-size:15px;font-weight:700;color:var(--brand-foreground);margin:0 0 6px 0;">森林经营碳汇方法学</h3>
-                            <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0 0 14px 0;line-height:1.6;">适用于通过森林经营措施增加碳汇的项目活动，包括抚育间伐、补植补造等经营措施。</p>
-                            <div style="display:flex;align-items:center;gap:16px;font-size:12px;color:var(--brand-muted-foreground);">
-                                <span style="display:flex;align-items:center;gap:4px;"><i data-lucide="calendar" style="width:13px;height:13px;"></i>2024年发布</span>
-                            </div>
-                            <a href="#" style="display:inline-flex;align-items:center;gap:4px;margin-top:14px;font-size:13px;font-weight:600;color:var(--brand-primary);text-decoration:none;">
-                                查看详情
-                                <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
-                            </a>
-                        </div>
-
-                        <!-- Card 3: 竹林碳汇 -->
-                        <div class="methodology-card">
-                            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;">
-                                <div style="display:flex;align-items:center;gap:8px;">
-                                    <i data-lucide="sprout" style="width:20px;height:20px;color:var(--brand-primary);"></i>
-                                    <span style="font-size:11px;font-weight:600;color:var(--brand-muted-foreground);letter-spacing:0.5px;">CCER-14-003-V01</span>
                                 </div>
-                                <span class="status-badge success">
-                                    <i data-lucide="check-circle"></i>
-                                    现行有效
-                                </span>
-                            </div>
-                            <h3 style="font-size:15px;font-weight:700;color:var(--brand-foreground);margin:0 0 6px 0;">竹林碳汇方法学</h3>
-                            <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0 0 14px 0;line-height:1.6;">适用于以竹类植物为主要经营对象的造林和经营项目，涵盖毛竹、丛生竹等主要竹种。</p>
-                            <div style="display:flex;align-items:center;gap:16px;font-size:12px;color:var(--brand-muted-foreground);">
-                                <span style="display:flex;align-items:center;gap:4px;"><i data-lucide="calendar" style="width:13px;height:13px;"></i>2024年发布</span>
-                            </div>
-                            <a href="#" style="display:inline-flex;align-items:center;gap:4px;margin-top:14px;font-size:13px;font-weight:600;color:var(--brand-primary);text-decoration:none;">
-                                查看详情
-                                <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
-                            </a>
-                        </div>
-
-                        <!-- Card 4: 草地碳汇 -->
-                        <div class="methodology-card">
-                            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;">
-                                <div style="display:flex;align-items:center;gap:8px;">
-                                    <i data-lucide="leaf" style="width:20px;height:20px;color:var(--brand-primary);"></i>
-                                    <span style="font-size:11px;font-weight:600;color:var(--brand-muted-foreground);letter-spacing:0.5px;">CCER-14-004-V01</span>
+                                <div>
+                                    <h3 style="font-size:14px;font-weight:700;color:var(--brand-foreground);margin:0 0 4px 0;">免额外性论证</h3>
+                                    <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0;line-height:1.5;">大幅降低项目开发门槛，免除繁琐的额外性论证流程，显著减少项目前期准备时间和成本投入。</p>
                                 </div>
-                                <span class="status-badge success">
-                                    <i data-lucide="check-circle"></i>
-                                    现行有效
-                                </span>
                             </div>
-                            <h3 style="font-size:15px;font-weight:700;color:var(--brand-foreground);margin:0 0 6px 0;">草地碳汇方法学</h3>
-                            <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0 0 14px 0;line-height:1.6;">适用于通过草地管理措施增加草地生态系统碳储量的项目，包括退化草原修复等。</p>
-                            <div style="display:flex;align-items:center;gap:16px;font-size:12px;color:var(--brand-muted-foreground);">
-                                <span style="display:flex;align-items:center;gap:4px;"><i data-lucide="calendar" style="width:13px;height:13px;"></i>2024年发布</span>
-                            </div>
-                            <a href="#" style="display:inline-flex;align-items:center;gap:4px;margin-top:14px;font-size:13px;font-weight:600;color:var(--brand-primary);text-decoration:none;">
-                                查看详情
-                                <i data-lucide="chevron-right" style="width:14px;height:14px;"></i>
-                            </a>
-                        </div>
-                    </div>
-                </section>
 
-                <!-- Revision Timeline Section -->
-                <section id="revision-timeline" style="margin-bottom:32px;">
-                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-                        <div style="width:4px;height:20px;border-radius:2px;background-color:var(--brand-primary);"></div>
-                        <div>
-                            <h2 style="font-size:16px;font-weight:700;color:var(--brand-foreground);margin:0;">CCER-14-001-V01 修订历程</h2>
-                            <p style="font-size:12px;color:var(--brand-muted-foreground);margin:0;">造林碳汇方法学修订动态</p>
-                        </div>
-                    </div>
-
-                    <div style="background-color:var(--brand-card);border:1px solid var(--brand-border);border-radius:var(--brand-radius-md);padding:24px;">
-                        <!-- 2024 -->
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;">
-                                <div style="display:flex;align-items:center;gap:8px;">
-                                    <i data-lucide="git-commit" style="width:16px;height:16px;color:var(--brand-muted-foreground);"></i>
-                                    <span style="font-weight:600;font-size:14px;color:var(--brand-foreground);">2024年</span>
+                            <!-- Change 2 -->
+                            <div class="change-card">
+                                <div class="change-card-icon">
+                                    <i data-lucide="map-pin"></i>
                                 </div>
-                                <span class="status-badge success">已完成</span>
-                            </div>
-                            <p style="font-size:13px;color:var(--brand-muted-foreground);margin:4px 0 0 0;line-height:1.5;">方法学正式发布实施，确立造林碳汇项目开发的基本框架和技术规范。</p>
-                        </div>
-
-                        <!-- 2025 -->
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;">
-                                <div style="display:flex;align-items:center;gap:8px;">
-                                    <i data-lucide="git-branch" style="width:16px;height:16px;color:var(--brand-muted-foreground);"></i>
-                                    <span style="font-weight:600;font-size:14px;color:var(--brand-foreground);">2025年</span>
+                                <div>
+                                    <h3 style="font-size:14px;font-weight:700;color:var(--brand-foreground);margin:0 0 4px 0;">非林地绿化纳入</h3>
+                                    <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0;line-height:1.5;">道路绿化、矿山修复造林等非林地绿化项目均可纳入开发范围，拓宽碳汇项目适用场景。</p>
                                 </div>
-                                <span class="status-badge success">已完成</span>
                             </div>
-                            <p style="font-size:13px;color:var(--brand-muted-foreground);margin:4px 0 0 0;line-height:1.5;">面向全社会公开征集修订意见，收集行业专家、项目业主及审定核查机构反馈。</p>
-                        </div>
 
-                        <!-- 2026 Current -->
-                        <div class="timeline-item current">
-                            <div class="timeline-dot"></div>
-                            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;">
-                                <div style="display:flex;align-items:center;gap:8px;">
-                                    <i data-lucide="file-edit" style="width:16px;height:16px;color:var(--brand-primary);"></i>
-                                    <span style="font-weight:600;font-size:14px;color:var(--brand-primary);">2026年</span>
+                            <!-- Change 3 -->
+                            <div class="change-card">
+                                <div class="change-card-icon">
+                                    <i data-lucide="bar-chart-3"></i>
                                 </div>
-                                <span class="status-badge warning">进行中</span>
-                            </div>
-                            <p style="font-size:13px;color:var(--brand-muted-foreground);margin:4px 0 0 0;line-height:1.5;">修订征求意见稿正式发布，面向社会公开征求意见，包含四项核心修订要点。</p>
-                        </div>
-
-                        <!-- 2026 Q4 -->
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;">
-                                <div style="display:flex;align-items:center;gap:8px;">
-                                    <i data-lucide="check-circle" style="width:16px;height:16px;color:var(--brand-muted-foreground);"></i>
-                                    <span style="font-weight:600;font-size:14px;color:var(--brand-foreground);">2026年 Q4</span>
+                                <div>
+                                    <h3 style="font-size:14px;font-weight:700;color:var(--brand-foreground);margin:0 0 4px 0;">缺省值简化</h3>
+                                    <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0;line-height:1.5;">监测参数采用缺省值体系，大幅降低现场监测成本和技术门槛，使中小型项目更易实施。</p>
                                 </div>
-                                <span class="status-badge" style="background-color:rgba(59,130,246,0.1);color:var(--state-info);">预计</span>
                             </div>
-                            <p style="font-size:13px;color:var(--brand-muted-foreground);margin:4px 0 0 0;line-height:1.5;">预计完成修订并正式发布新版本方法学，为造林碳汇项目开发提供更便捷的技术路径。</p>
-                        </div>
-                    </div>
-                </section>
 
-                <!-- Key Changes Section -->
-                <section style="margin-bottom:32px;">
-                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-                        <div style="width:4px;height:20px;border-radius:2px;background-color:var(--brand-primary);"></div>
-                        <div>
-                            <h2 style="font-size:16px;font-weight:700;color:var(--brand-foreground);margin:0;">核心修订要点</h2>
-                            <p style="font-size:12px;color:var(--brand-muted-foreground);margin:0;">CCER-14-001-V01 修订征求意见稿关键变化</p>
+                            <!-- Change 4 -->
+                            <div class="change-card">
+                                <div class="change-card-icon">
+                                    <i data-lucide="package"></i>
+                                </div>
+                                <div>
+                                    <h3 style="font-size:14px;font-weight:700;color:var(--brand-foreground);margin:0 0 4px 0;">新增木竹产品碳库</h3>
+                                    <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0;line-height:1.5;">将木竹产品碳库纳入碳汇计量范围，扩大碳汇核算边界，提升项目碳汇计量完整性和收益。</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </section>
+                </div>
 
-                    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;">
-                        <!-- Change 1 -->
-                        <div class="change-card">
-                            <div class="change-card-icon">
-                                <i data-lucide="check-circle"></i>
-                            </div>
-                            <div>
-                                <h3 style="font-size:14px;font-weight:700;color:var(--brand-foreground);margin:0 0 4px 0;">免额外性论证</h3>
-                                <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0;line-height:1.5;">大幅降低项目开发门槛，免除繁琐的额外性论证流程，显著减少项目前期准备时间和成本投入。</p>
-                            </div>
-                        </div>
+                <!-- ====== DETAIL VIEW (详情视图) ====== -->
+                <div id="detail-view" class="detail-panel">
+                    <!-- Back button -->
+                    <button class="detail-back-btn" onclick="showList()">
+                        <i data-lucide="arrow-left"></i>
+                        返回方法学列表
+                    </button>
 
-                        <!-- Change 2 -->
-                        <div class="change-card">
-                            <div class="change-card-icon">
-                                <i data-lucide="map-pin"></i>
-                            </div>
-                            <div>
-                                <h3 style="font-size:14px;font-weight:700;color:var(--brand-foreground);margin:0 0 4px 0;">非林地绿化纳入</h3>
-                                <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0;line-height:1.5;">道路绿化、矿山修复造林等非林地绿化项目均可纳入开发范围，拓宽碳汇项目适用场景。</p>
-                            </div>
-                        </div>
+                    <!-- Detail content container -->
+                    <div id="detail-content"></div>
+                </div>
 
-                        <!-- Change 3 -->
-                        <div class="change-card">
-                            <div class="change-card-icon">
-                                <i data-lucide="bar-chart-3"></i>
-                            </div>
-                            <div>
-                                <h3 style="font-size:14px;font-weight:700;color:var(--brand-foreground);margin:0 0 4px 0;">缺省值简化</h3>
-                                <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0;line-height:1.5;">监测参数采用缺省值体系，大幅降低现场监测成本和技术门槛，使中小型项目更易实施。</p>
-                            </div>
-                        </div>
-
-                        <!-- Change 4 -->
-                        <div class="change-card">
-                            <div class="change-card-icon">
-                                <i data-lucide="package"></i>
-                            </div>
-                            <div>
-                                <h3 style="font-size:14px;font-weight:700;color:var(--brand-foreground);margin:0 0 4px 0;">新增木竹产品碳库</h3>
-                                <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0;line-height:1.5;">将木竹产品碳库纳入碳汇计量范围，扩大碳汇核算边界，提升项目碳汇计量完整性和收益。</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
             </main>
         </div>
     </div>
-    <script>lucide.createIcons();</script>
+
+    <script>
+    // ===== Methodology detail data =====
+    const methodologyData = {
+        '001': {
+            code: 'CCER-14-001-V01',
+            title: '造林碳汇方法学',
+            status: '修订中',
+            statusType: 'warning',
+            icon: 'tree-pine',
+            publishDate: '2024年',
+            revisionDate: '2026年（修订征求意见稿）',
+            department: '生态环境部',
+            docType: 'CCER 方法学',
+            version: 'V01',
+            isRevision: true,
+
+            overview: '本方法学规定了以增加碳汇为主要目的的造林活动所产生的碳汇量的核算方法。适用于2024年1月1日之后实施的造林项目，项目活动开始前土地为非林地状态（连续时间不少于5年）。修订版征求意见稿进一步降低了项目开发门槛，扩展了适用范围。',
+
+            scope: [
+                '以增加碳汇为主要目的的造林活动，包括防护林、用材林、薪炭林、经济林等',
+                '修订稿新增：道路绿化造林、矿山修复造林等非林地绿化项目可纳入开发',
+                '项目活动开始前，项目所在土地为非林地，且连续非林地状态不少于5年',
+                '造林活动符合国家或地方关于国土空间规划、生态保护红线等法律法规要求',
+                '项目边界内的土地权属清晰，无权属争议',
+                '造林活动不属于湿地、泥炭地等特殊生态系统的转化'
+            ],
+
+            baseline: '基线情景为项目活动开始前的土地利用状态延续，即土地保持非林地状态。基线碳排放包括现有植被的自然 decay 排放和土壤碳排放。修订稿允许使用区域缺省值进行基线情景设定，简化了基线论证流程。',
+
+            carbonPools: [
+                { pool: '地上生物量', method: '蓄积量-生物量扩展因子法', required: true, note: '必须计量' },
+                { pool: '地下生物量', method: '根茎比法 / 缺省值', required: true, note: '必须计量' },
+                { pool: '枯死木', method: '缺省值法', required: false, note: '可选计量（修订稿简化）' },
+                { pool: '枯落物', method: '缺省值法', required: false, note: '可选计量（修订稿简化）' },
+                { pool: '土壤有机碳', method: 'IPCC缺省值法', required: false, note: '可选计量（修订稿简化）' },
+                { pool: '木竹产品碳库', method: '产品碳储量变化法', required: false, note: '修订稿新增碳库，可选计量' }
+            ],
+
+            monitoring: [
+                '蓄积量监测：采用样地法或遥感+地面校验，监测频率不低于每5年一次',
+                '树种组成：记录主要造林树种及比例',
+                '生长指标：胸径、树高、密度等林分因子',
+                '碳含率：可使用树种缺省值，或实测获取',
+                '项目边界变化：定期核实项目边界是否发生变更',
+                '扰动事件：记录火灾、病虫害、采伐等导致碳汇变化的事件',
+                '修订稿新增：AI遥感识别+无人机巡检可作为监测手段，降低现场监测频次要求'
+            ],
+
+            eligibility: [
+                '项目活动开始时间为2024年1月1日之后',
+                '项目活动开始前项目所在土地为非林地（至少5年）',
+                '造林活动已获得必要的行政审批和许可',
+                '项目边界清晰，土地权属无争议',
+                '修订稿：免除额外性论证要求（原方法学要求进行额外性论证）',
+                '修订稿：允许使用缺省值替代部分实测参数',
+                '项目未在其他减排交易机制下进行重复登记'
+            ],
+
+            keyParams: [
+                { name: '树种含碳率', value: '0.47-0.52', unit: 't C/t dry matter', source: '树种缺省值' },
+                { name: '生物量扩展因子（BEF）', value: '1.30-1.75', unit: '无量纲', source: '按树种查表' },
+                { name: '根茎比（R）', value: '0.17-0.30', unit: '无量纲', source: '按树种查表' },
+                { name: '木材密度（WD）', value: '0.30-0.60', unit: 't/m³', source: '树种缺省值' },
+                { name: '土壤碳储量变化', value: 'IPCC缺省值', unit: 't C/ha/yr', source: '修订稿简化' },
+                { name: '木竹产品碳库', value: '半衰期法', unit: '年', source: '修订稿新增' }
+            ],
+
+            revisionHighlights: true
+        },
+
+        '002': {
+            code: 'CCER-14-002-V01',
+            title: '森林经营碳汇方法学',
+            status: '现行有效',
+            statusType: 'success',
+            icon: 'trees',
+            publishDate: '2024年',
+            revisionDate: '—',
+            department: '生态环境部',
+            docType: 'CCER 方法学',
+            version: 'V01',
+            isRevision: false,
+
+            overview: '本方法学适用于通过森林经营措施增加森林生态系统碳储量的项目活动。经营措施包括抚育间伐、补植补造、施肥浇水、林分改造等。项目活动须在已有林地上实施，通过改善林分质量提高森林生长量和碳汇能力。',
+
+            scope: [
+                '适用于乔木林地（郁闭度≥0.20）上的森林经营碳汇项目',
+                '经营措施包括：抚育间伐、补植补造、施肥浇水、林分改造、森林火灾预防',
+                '项目活动开始前，项目边界内为已成林林地',
+                '经营措施符合国家和地方森林经营规划及相关技术规程',
+                '项目边界内的森林权属清晰，具有合法的林地使用权或所有权',
+                '不包括竹林经营（适用CCER-14-003-V01）'
+            ],
+
+            baseline: '基线情景为项目活动开始前的森林经营状态延续，即维持现有经营水平和措施。基线碳汇量根据项目前林分生长率、自然枯损率等参数计算。项目碳汇量=项目碳储量变化-基线碳储量变化-泄漏排放。',
+
+            carbonPools: [
+                { pool: '地上生物量', method: '蓄积量-生物量扩展因子法', required: true, note: '必须计量' },
+                { pool: '地下生物量', method: '根茎比法 / 缺省值', required: true, note: '必须计量' },
+                { pool: '枯死木', method: '固定样地法', required: false, note: '可选计量' },
+                { pool: '枯落物', method: '收获法', required: false, note: '可选计量' },
+                { pool: '土壤有机碳', method: 'IPCC缺省值法', required: false, note: '可选计量' },
+                { pool: '木竹产品碳库', method: '不适用', required: false, note: '本方法学不涉及' }
+            ],
+
+            monitoring: [
+                '蓄积量监测：固定样地法，样地数量根据面积和变异系数确定',
+                '林分因子：胸径、树高、株数、树种组成等',
+                '抚育措施记录：间伐强度、补植数量、施肥量等',
+                '自然枯损监测：记录枯死木蓄积量变化',
+                '项目边界监测：核实边界变化',
+                '扰动监测：火灾、病虫害、非法采伐等事件',
+                '监测频率：每5年至少进行一次碳储量的测量和计算'
+            ],
+
+            eligibility: [
+                '项目活动开始前项目边界内为已成林乔木林地',
+                '项目活动具有增加碳汇的目的和效果',
+                '需进行额外性论证（投资障碍分析或普遍性分析）',
+                '经营措施符合《森林采伐更新管理办法》等相关规定',
+                '项目实施单位具有合法的林地使用权',
+                '项目未在其他减排机制下重复登记',
+                '项目活动不违反生态保护红线等法律法规'
+            ],
+
+            keyParams: [
+                { name: '树种含碳率', value: '0.47-0.52', unit: 't C/t dry matter', source: '树种缺省值' },
+                { name: '生物量扩展因子（BEF）', value: '1.30-1.75', unit: '无量纲', source: '按树种查表' },
+                { name: '根茎比（R）', value: '0.17-0.30', unit: '无量纲', source: '按树种查表' },
+                { name: '木材密度（WD）', value: '0.30-0.60', unit: 't/m³', source: '树种缺省值' },
+                { name: '自然枯损率', value: '0.5-2.0', unit: '%/年', source: '按区域查表' },
+                { name: '间伐强度', value: '10-30', unit: '%', source: '项目实测' }
+            ],
+
+            revisionHighlights: false
+        },
+
+        '003': {
+            code: 'CCER-14-003-V01',
+            title: '竹林碳汇方法学',
+            status: '现行有效',
+            statusType: 'success',
+            icon: 'sprout',
+            publishDate: '2024年',
+            revisionDate: '—',
+            department: '生态环境部',
+            docType: 'CCER 方法学',
+            version: 'V01',
+            isRevision: false,
+
+            overview: '本方法学适用于以竹类植物为主要经营对象的造林和经营项目。涵盖毛竹（散生竹）、丛生竹等主要竹种，通过竹林的新造、经营和采伐管理，实现竹林生态系统碳储量的净增加。竹林生长速度快、碳积累周期短，是优质碳汇来源。',
+
+            scope: [
+                '适用于毛竹、慈竹、雷竹等主要竹种的造林和经营项目',
+                '造林项目：项目活动前土地为非竹林用地',
+                '经营项目：项目活动前为已有竹林，通过经营措施提升碳储量',
+                '竹林面积不低于最小面积要求（建议≥1公顷）',
+                '项目边界内竹种明确，林分结构清晰',
+                '竹材采伐利用须符合可持续采伐原则'
+            ],
+
+            baseline: '基线情景根据项目类型确定：造林项目基线为项目前土地利用状态延续；经营项目基线为现有竹林经营状态延续。竹林碳汇量核算包括竹林地上的活立竹生物量碳储量变化、竹材产品碳库（如适用）。',
+
+            carbonPools: [
+                { pool: '竹秆生物量', method: '胸径-生物量方程法', required: true, note: '必须计量，核心碳库' },
+                { pool: '竹枝竹叶生物量', method: '比例估算法', required: true, note: '必须计量' },
+                { pool: '地下鞭根系统', method: '根茎比法', required: true, note: '必须计量' },
+                { pool: '土壤有机碳', method: 'IPCC缺省值法', required: false, note: '可选计量' },
+                { pool: '竹材产品碳库', method: '半衰期法', required: false, note: '可选计量' },
+                { pool: '枯落物', method: '收获法', required: false, note: '可选计量' }
+            ],
+
+            monitoring: [
+                '竹秆胸径和高度：固定样地测量，样地面积不小于400㎡',
+                '立竹密度：记录单位面积立竹株数',
+                '竹龄结构：按1-5年生竹龄分级记录',
+                '采伐量记录：竹材采伐量、竹笋采收量',
+                '竹鞭根系：定期采样测量（可选）',
+                '碳含率：可使用竹种缺省值（0.46-0.50）',
+                '监测频率：毛竹每2年（大小年）、丛生竹每3年'
+            ],
+
+            eligibility: [
+                '造林项目：项目活动开始前为非竹林用地（至少5年）',
+                '经营项目：项目活动开始前为已有竹林',
+                '竹种为毛竹、慈竹、雷竹等主要经济竹种',
+                '需进行额外性论证',
+                '竹林经营符合可持续采伐原则，采伐量不超过生长量',
+                '竹材利用应具有清晰的产业链记录',
+                '项目未在其他减排机制下重复登记'
+            ],
+
+            keyParams: [
+                { name: '竹秆含碳率', value: '0.46-0.50', unit: 't C/t dry matter', source: '竹种缺省值' },
+                { name: '竹秆密度', value: '0.60-0.80', unit: 't/m³', source: '竹种缺省值' },
+                { name: '竹枝叶比例', value: '0.15-0.25', unit: '比例', source: '按竹种查表' },
+                { name: '地下/地上比', value: '0.40-0.60', unit: '比例', source: '按竹种查表' },
+                { name: '毛竹生长率', value: '15-25', unit: 't/ha/yr', source: '区域平均值' },
+                { name: '竹材半衰期', value: '10-15', unit: '年', source: 'IPCC缺省值' }
+            ],
+
+            revisionHighlights: false
+        },
+
+        '004': {
+            code: 'CCER-14-004-V01',
+            title: '草地碳汇方法学',
+            status: '现行有效',
+            statusType: 'success',
+            icon: 'leaf',
+            publishDate: '2024年',
+            revisionDate: '—',
+            department: '生态环境部',
+            docType: 'CCER 方法学',
+            version: 'V01',
+            isRevision: false,
+
+            overview: '本方法学适用于通过草地管理措施增加草地生态系统碳储量的项目活动。管理措施包括退化草原修复、人工种草、放牧管理优化、草地施肥等。草原是我国面积最大的陆地生态系统，草地碳汇潜力巨大，主要碳库为土壤有机碳。',
+
+            scope: [
+                '适用于天然草地、人工草地上的碳汇项目',
+                '管理措施包括：退化草原修复、人工种草、放牧管理优化、草地施肥',
+                '项目活动开始前为草地状态（含退化草地）',
+                '项目区域符合国家草原保护修复规划',
+                '草地权属清晰或具有合法使用经营权',
+                '不包括湿地草地、泥炭地草地（IPCC特殊生态系统）'
+            ],
+
+            baseline: '基线情景为项目活动开始前的草地管理状态延续，即维持现有草地退化或正常经营水平。草地碳汇主要来自土壤有机碳储量增加和地上地下生物量增加。基线排放包括过度放牧导致的草地退化排放。',
+
+            carbonPools: [
+                { pool: '地上生物量', method: '收获法 / 遥感估算法', required: true, note: '必须计量' },
+                { pool: '地下生物量', method: '根茎比法', required: true, note: '必须计量，草地核心碳库' },
+                { pool: '土壤有机碳', method: '土钻采样法 / IPCC缺省值', required: true, note: '必须计量，草地主要碳库' },
+                { pool: '枯落物', method: '收获法', required: false, note: '可选计量' },
+                { pool: '木竹产品碳库', method: '不适用', required: false, note: '不涉及' },
+                { pool: '枯死木', method: '不适用', required: false, note: '不涉及' }
+            ],
+
+            monitoring: [
+                '地上生物量：收获法采样或遥感反演+地面校准',
+                '地下生物量：根茎比法，按草种类型查取系数',
+                '土壤有机碳：分层土钻采样，深度0-30cm和30-60cm',
+                '植被盖度和草群高度：样方法测量',
+                '放牧强度记录：载畜量、放牧时间',
+                '土壤容重和砾石含量：采样分析',
+                '监测频率：每3-5年进行一次全面测量',
+                '土壤采样点数量根据面积和变异系数确定'
+            ],
+
+            eligibility: [
+                '项目活动开始前项目区域为草地（含退化草地）',
+                '项目活动具有增加草地碳储量的明确目的',
+                '需进行额外性论证（障碍分析或普遍性分析）',
+                '草地管理措施符合《草原法》及相关规划要求',
+                '项目区域不在生态保护红线禁止开发区内',
+                '草地权属清晰或具有合法使用经营权',
+                '项目未在其他减排机制下重复登记'
+            ],
+
+            keyParams: [
+                { name: '草地含碳率', value: '0.45', unit: 't C/t dry matter', source: 'IPCC缺省值' },
+                { name: '根茎比（草本）', value: '3.0-5.0', unit: '比例', source: '按草种查表' },
+                { name: '土壤有机碳密度', value: '变异较大', unit: 't C/ha', source: '分层采样实测' },
+                { name: '土壤容重', value: '1.0-1.5', unit: 'g/cm³', source: '采样实测' },
+                { name: '植被盖度', value: '项目实测', unit: '%', source: '样方法测量' },
+                { name: '载畜量基准', value: '区域平均值', unit: '羊单位/ha', source: '统计年鉴' }
+            ],
+
+            revisionHighlights: false
+        }
+    };
+
+    // ===== Render detail view =====
+    function renderDetail(id) {
+        const d = methodologyData[id];
+        if (!d) return;
+
+        let html = '';
+
+        // Header info grid
+        html += `
+        <div class="detail-info-grid">
+            <div class="detail-info-item">
+                <div class="detail-info-label">方法学编号</div>
+                <div class="detail-info-value" style="font-size:15px;">${d.code}</div>
+            </div>
+            <div class="detail-info-item">
+                <div class="detail-info-label">发布日期</div>
+                <div class="detail-info-value" style="font-size:15px;">${d.publishDate}<span class="detail-info-unit"></span></div>
+            </div>
+            <div class="detail-info-item">
+                <div class="detail-info-label">版本/状态</div>
+                <div class="detail-info-value" style="font-size:15px;">${d.version} <span class="status-badge ${d.statusType}" style="margin-left:4px;">${d.status}</span></div>
+            </div>
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;">
+            <span class="detail-tag"><i data-lucide="building-2" style="width:12px;height:12px;"></i>${d.department}</span>
+            <span class="detail-tag"><i data-lucide="file-text" style="width:12px;height:12px;"></i>${d.docType}</span>
+            ${d.isRevision ? `<span class="detail-tag" style="background:rgba(245,158,11,0.1);color:var(--state-warning);"><i data-lucide="alert-circle" style="width:12px;height:12px;"></i>修订征求意见稿</span>` : ''}
+        </div>`;
+
+        // Overview
+        html += `
+        <div class="detail-section">
+            <h3 class="detail-section-title"><i data-lucide="info"></i>方法概述</h3>
+            <p style="font-size:13px;color:var(--brand-muted-foreground);line-height:1.8;margin:0;">${d.overview}</p>
+        </div>`;
+
+        // Scope
+        html += `
+        <div class="detail-section">
+            <h3 class="detail-section-title"><i data-lucide="map"></i>适用范围</h3>
+            <ul class="detail-list">
+                ${d.scope.map(s => `<li>${s}</li>`).join('')}
+            </ul>
+        </div>`;
+
+        // Baseline
+        html += `
+        <div class="detail-section">
+            <h3 class="detail-section-title"><i data-lucide="git-compare"></i>基线情景</h3>
+            <p style="font-size:13px;color:var(--brand-muted-foreground);line-height:1.8;margin:0;">${d.baseline}</p>
+        </div>`;
+
+        // Carbon Pools
+        html += `
+        <div class="detail-section">
+            <h3 class="detail-section-title"><i data-lucide="layers"></i>碳库与排放源</h3>
+            <table class="detail-table">
+                <thead>
+                    <tr>
+                        <th>碳库</th>
+                        <th>计量方法</th>
+                        <th>是否必须</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${d.carbonPools.map(p => `
+                    <tr>
+                        <td>${p.pool}</td>
+                        <td>${p.method}</td>
+                        <td>${p.required ? '<span style="color:var(--state-error);font-weight:600;">必须</span>' : '<span style="color:var(--brand-muted-foreground);">可选</span>'}</td>
+                        <td>${p.note}</td>
+                    </tr>`).join('')}
+                </tbody>
+            </table>
+        </div>`;
+
+        // Key Parameters
+        html += `
+        <div class="detail-section">
+            <h3 class="detail-section-title"><i data-lucide="calculator"></i>关键参数</h3>
+            <table class="detail-table">
+                <thead>
+                    <tr>
+                        <th>参数名称</th>
+                        <th>取值范围</th>
+                        <th>单位</th>
+                        <th>数据来源</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${d.keyParams.map(p => `
+                    <tr>
+                        <td>${p.name}</td>
+                        <td>${p.value}</td>
+                        <td>${p.unit}</td>
+                        <td>${p.source}</td>
+                    </tr>`).join('')}
+                </tbody>
+            </table>
+        </div>`;
+
+        // Monitoring
+        html += `
+        <div class="detail-section">
+            <h3 class="detail-section-title"><i data-lucide="activity"></i>监测要求</h3>
+            <ul class="detail-list">
+                ${d.monitoring.map(m => `<li>${m}</li>`).join('')}
+            </ul>
+        </div>`;
+
+        // Eligibility
+        html += `
+        <div class="detail-section">
+            <h3 class="detail-section-title"><i data-lucide="clipboard-check"></i>项目合格性条件</h3>
+            <ul class="detail-list">
+                ${d.eligibility.map(e => `<li>${e}</li>`).join('')}
+            </ul>
+        </div>`;
+
+        // Revision highlights (only for 001)
+        if (d.revisionHighlights) {
+            html += `
+        <div class="detail-section" style="border-color:var(--brand-primary);border-left:4px solid var(--brand-primary);background:linear-gradient(135deg, var(--brand-primary-light) 0%, var(--brand-card) 40%);">
+            <h3 class="detail-section-title"><i data-lucide="git-pull-request"></i>修订核心要点</h3>
+            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">
+                <div style="background:var(--brand-card);border:1px solid var(--brand-border);border-radius:var(--brand-radius-md);padding:16px;">
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                        <div style="width:28px;height:28px;border-radius:var(--brand-radius-sm);background:var(--brand-primary-light);color:var(--brand-primary);display:flex;align-items:center;justify-content:center;"><i data-lucide="check-circle" style="width:16px;height:16px;"></i></div>
+                        <h4 style="font-size:14px;font-weight:700;margin:0;">免额外性论证</h4>
+                    </div>
+                    <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0;line-height:1.6;">免除额外性论证流程，项目前期准备时间缩短50%以上，成本投入显著降低。</p>
+                </div>
+                <div style="background:var(--brand-card);border:1px solid var(--brand-border);border-radius:var(--brand-radius-md);padding:16px;">
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                        <div style="width:28px;height:28px;border-radius:var(--brand-radius-sm);background:var(--brand-primary-light);color:var(--brand-primary);display:flex;align-items:center;justify-content:center;"><i data-lucide="map-pin" style="width:16px;height:16px;"></i></div>
+                        <h4 style="font-size:14px;font-weight:700;margin:0;">非林地绿化纳入</h4>
+                    </div>
+                    <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0;line-height:1.6;">道路绿化、矿山修复造林等均可开发为碳汇项目，大幅拓宽适用范围。</p>
+                </div>
+                <div style="background:var(--brand-card);border:1px solid var(--brand-border);border-radius:var(--brand-radius-md);padding:16px;">
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                        <div style="width:28px;height:28px;border-radius:var(--brand-radius-sm);background:var(--brand-primary-light);color:var(--brand-primary);display:flex;align-items:center;justify-content:center;"><i data-lucide="bar-chart-3" style="width:16px;height:16px;"></i></div>
+                        <h4 style="font-size:14px;font-weight:700;margin:0;">缺省值简化</h4>
+                    </div>
+                    <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0;line-height:1.6;">监测参数采用缺省值体系，现场监测成本和技术门槛大幅降低。</p>
+                </div>
+                <div style="background:var(--brand-card);border:1px solid var(--brand-border);border-radius:var(--brand-radius-md);padding:16px;">
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                        <div style="width:28px;height:28px;border-radius:var(--brand-radius-sm);background:var(--brand-primary-light);color:var(--brand-primary);display:flex;align-items:center;justify-content:center;"><i data-lucide="package" style="width:16px;height:16px;"></i></div>
+                        <h4 style="font-size:14px;font-weight:700;margin:0;">新增木竹产品碳库</h4>
+                    </div>
+                    <p style="font-size:13px;color:var(--brand-muted-foreground);margin:0;line-height:1.6;">将木竹产品碳库纳入计量，扩大碳汇核算边界，提升项目收益。</p>
+                </div>
+            </div>
+        </div>`;
+        }
+
+        // Document reference
+        html += `
+        <div class="detail-section">
+            <h3 class="detail-section-title"><i data-lucide="file-text"></i>方法学文件</h3>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--brand-muted);border-radius:var(--brand-radius-md);">
+                <div style="display:flex;align-items:center;gap:10px;">
+                    <i data-lucide="file-text" style="width:20px;height:20px;color:var(--brand-primary);"></i>
+                    <div>
+                        <div style="font-size:14px;font-weight:600;color:var(--brand-foreground);">${d.title}（${d.code}）</div>
+                        <div style="font-size:12px;color:var(--brand-muted-foreground);">${d.department} · ${d.publishDate} ${d.isRevision ? '· 修订征求意见稿' : ''}</div>
+                    </div>
+                </div>
+                <span style="font-size:12px;color:var(--brand-muted-foreground);padding:4px 12px;border:1px solid var(--brand-border);border-radius:var(--brand-radius-sm);">官方发布</span>
+            </div>
+        </div>`;
+
+        document.getElementById('detail-content').innerHTML = html;
+        lucide.createIcons();
+    }
+
+    // ===== Show/hide logic =====
+    function showDetail(id) {
+        document.getElementById('list-view').style.display = 'none';
+        document.getElementById('detail-view').classList.add('active');
+        document.getElementById('page-title').textContent = methodologyData[id].title;
+        renderDetail(id);
+        // Scroll to top
+        document.querySelector('[data-scroll-region="primary"]').scrollTop = 0;
+    }
+
+    function showList() {
+        document.getElementById('detail-view').classList.remove('active');
+        document.getElementById('list-view').style.display = 'block';
+        document.getElementById('page-title').textContent = '方法学中心';
+        document.querySelector('[data-scroll-region="primary"]').scrollTop = 0;
+    }
+
+    // ===== Check URL hash for direct linking =====
+    window.addEventListener('load', function() {
+        var hash = window.location.hash;
+        if (hash && hash.startsWith('#m=')) {
+            var id = hash.substring(3);
+            if (methodologyData[id]) {
+                showDetail(id);
+            }
+        }
+        lucide.createIcons();
+    });
+    </script>
 </body>
 </html>
