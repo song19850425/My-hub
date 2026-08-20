@@ -184,12 +184,339 @@ body {
         mask-position: center;
         background-color: currentColor;
       }
+
+      /* ===== Tab Navigation ===== */
+      .tab-nav {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          padding: 0 24px;
+          background-color: var(--brand-card);
+          border-bottom: 1px solid var(--brand-border);
+          flex-shrink: 0;
+          overflow-x: auto;
+      }
+      .tab-btn {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 12px 20px;
+          font-size: 14px;
+          font-weight: 500;
+          color: var(--brand-muted-foreground);
+          background: transparent;
+          border: none;
+          border-bottom: 3px solid transparent;
+          cursor: pointer;
+          transition: color 0.2s, border-color 0.2s;
+          white-space: nowrap;
+          margin-bottom: -1px;
+      }
+      .tab-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+      .tab-btn:hover { color: var(--brand-foreground); }
+      .tab-btn.active {
+          color: var(--brand-primary);
+          border-bottom-color: var(--brand-primary);
+          font-weight: 600;
+      }
+      .tab-content { display: none; }
+      .tab-content.active { display: block; }
+
+      /* ===== Step Indicator ===== */
+      .step-indicator {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0;
+          margin-bottom: 32px;
+          flex-wrap: wrap;
+      }
+      .step-item {
+          display: flex;
+          align-items: center;
+          gap: 0;
+      }
+      .step-circle {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          border: 2px solid var(--brand-border);
+          background-color: var(--brand-card);
+          color: var(--brand-muted-foreground);
+          font-size: 14px;
+          font-weight: 600;
+          flex-shrink: 0;
+          transition: all 0.25s;
+      }
+      .step-circle.completed {
+          background-color: var(--brand-primary);
+          border-color: var(--brand-primary);
+          color: var(--brand-primary-foreground);
+      }
+      .step-circle.current {
+          border-color: var(--brand-primary);
+          color: var(--brand-primary);
+          box-shadow: 0 0 0 4px var(--brand-primary-light);
+      }
+      .step-connector {
+          width: 48px;
+          height: 2px;
+          background-color: var(--brand-border);
+          transition: background-color 0.3s;
+          min-width: 32px;
+      }
+      .step-connector.completed {
+          background-color: var(--brand-primary);
+      }
+      .step-label {
+          font-size: 12px;
+          color: var(--brand-muted-foreground);
+          margin-top: 6px;
+          text-align: center;
+          white-space: nowrap;
+      }
+      .step-label.active { color: var(--brand-primary); font-weight: 600; }
+      .step-label.done { color: var(--brand-primary); }
+
+      /* ===== Progress Bar ===== */
+      .progress-track {
+          width: 100%;
+          height: 8px;
+          background-color: var(--brand-muted);
+          border-radius: 4px;
+          overflow: hidden;
+      }
+      .progress-fill {
+          height: 100%;
+          background-color: var(--brand-primary);
+          border-radius: 4px;
+          width: 0%;
+          transition: width 0.15s ease;
+      }
+
+      /* ===== Map Preview ===== */
+      .map-preview {
+          position: relative;
+          width: 100%;
+          height: 300px;
+          border-radius: var(--brand-radius-md);
+          overflow: hidden;
+          background: linear-gradient(135deg, #1a3a2e 0%, #2d5a3d 25%, #1e4d2b 50%, #3a6b4a 75%, #2a4a35 100%);
+      }
+      .map-preview::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background-image:
+              linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+          background-size: 40px 40px;
+      }
+      .map-polygon {
+          position: absolute;
+          top: 20%;
+          left: 15%;
+          width: 60%;
+          height: 55%;
+          border: 2px solid rgba(13,148,136,0.9);
+          background: rgba(13,148,136,0.15);
+          clip-path: polygon(10% 0%, 90% 15%, 100% 70%, 75% 100%, 0% 85%);
+      }
+      .map-label {
+          position: absolute;
+          font-size: 11px;
+          color: rgba(255,255,255,0.7);
+          background: rgba(0,0,0,0.4);
+          padding: 2px 8px;
+          border-radius: 3px;
+          pointer-events: none;
+      }
+
+      /* ===== Species Bar ===== */
+      .species-bar-track {
+          width: 100%;
+          height: 24px;
+          background-color: var(--brand-muted);
+          border-radius: 4px;
+          overflow: hidden;
+      }
+      .species-bar-fill {
+          height: 100%;
+          border-radius: 4px;
+          transition: width 0.5s ease;
+      }
+
+      /* ===== Data Table ===== */
+      .data-table {
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 13px;
+      }
+      .data-table th, .data-table td {
+          padding: 10px 14px;
+          text-align: left;
+          border-bottom: 1px solid var(--brand-border);
+      }
+      .data-table th {
+          background-color: var(--brand-muted);
+          color: var(--brand-muted-foreground);
+          font-weight: 600;
+          font-size: 12px;
+      }
+      .data-table tbody tr:hover {
+          background-color: var(--brand-muted);
+      }
+      .data-table tfoot td {
+          font-weight: 700;
+          color: var(--brand-foreground);
+          background-color: var(--brand-muted);
+      }
+
+      /* ===== Form Inputs ===== */
+      .form-input {
+          width: 100%;
+          padding: 8px 12px;
+          font-size: 14px;
+          color: var(--brand-foreground);
+          background-color: var(--brand-card);
+          border: 1px solid var(--brand-input);
+          border-radius: var(--brand-radius-sm);
+          transition: border-color 0.15s, box-shadow 0.15s;
+          outline: none;
+      }
+      .form-input:focus {
+          border-color: var(--brand-primary);
+          box-shadow: 0 0 0 3px var(--brand-primary-light);
+      }
+      .form-label {
+          display: block;
+          font-size: 13px;
+          font-weight: 500;
+          color: var(--brand-foreground);
+          margin-bottom: 6px;
+      }
+
+      /* ===== Buttons ===== */
+      .btn-primary {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 20px;
+          font-size: 14px;
+          font-weight: 600;
+          color: var(--brand-primary-foreground);
+          background-color: var(--brand-primary);
+          border: none;
+          border-radius: var(--brand-radius-sm);
+          cursor: pointer;
+          transition: background-color 0.15s;
+      }
+      .btn-primary:hover { background-color: var(--brand-primary-dark); }
+      .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+      .btn-outline {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 20px;
+          font-size: 14px;
+          font-weight: 500;
+          color: var(--brand-foreground);
+          background-color: var(--brand-card);
+          border: 1px solid var(--brand-border);
+          border-radius: var(--brand-radius-sm);
+          cursor: pointer;
+          transition: all 0.15s;
+      }
+      .btn-outline:hover { border-color: var(--brand-primary); color: var(--brand-primary); }
+      .btn-outline:disabled { opacity: 0.5; cursor: not-allowed; }
+      .btn-primary svg, .btn-outline svg { width: 16px; height: 16px; }
+
+      /* ===== Detail Panel (Tab 4) ===== */
+      .detail-panel { display: none; }
+      .detail-panel.active { display: block; }
+      .detail-back-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 14px;
+          border-radius: var(--brand-radius-md);
+          border: 1px solid var(--brand-border);
+          background-color: var(--brand-card);
+          color: var(--brand-muted-foreground);
+          font-size: 13px;
+          cursor: pointer;
+          transition: all 0.15s;
+          margin-bottom: 16px;
+      }
+      .detail-back-btn:hover {
+          border-color: var(--brand-primary);
+          color: var(--brand-primary);
+          background-color: var(--brand-primary-light);
+      }
+      .detail-back-btn svg { width: 16px; height: 16px; }
+
+      /* ===== Status Badges ===== */
+      .badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          padding: 2px 10px;
+          border-radius: 9999px;
+          font-size: 12px;
+          font-weight: 500;
+      }
+      .badge-success { background-color: rgba(16,185,129,0.1); color: var(--state-success); }
+      .badge-warning { background-color: rgba(245,158,11,0.1); color: var(--state-warning); }
+      .badge-error { background-color: rgba(239,68,68,0.1); color: var(--state-error); }
+      .badge-info { background-color: rgba(59,130,246,0.1); color: var(--state-info); }
+      .badge-muted { background-color: var(--brand-muted); color: var(--brand-muted-foreground); }
+
+      /* ===== Card base ===== */
+      .rounded-lg { border-radius: var(--brand-radius-md); }
+      .rounded-md { border-radius: var(--brand-radius-sm); }
+      .rounded-full { border-radius: 9999px; }
+
+      /* ===== Modal ===== */
+      .modal-overlay {
+          position: fixed;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(0,0,0,0.4);
+          display: none;
+          align-items: center;
+          justify-content: center;
+          z-index: 50;
+      }
+      .modal-overlay.active { display: flex; }
+      .modal-box {
+          background: var(--brand-card);
+          border-radius: var(--brand-radius-lg);
+          border: 1px solid var(--brand-border);
+          padding: 24px;
+          width: 90%;
+          max-width: 520px;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+          .tab-btn, .step-circle, .step-connector, .progress-fill,
+          .species-bar-fill, .btn-primary, .btn-outline, .detail-back-btn {
+              transition: none !important;
+          }
+      }
+
+      /* Sidebar responsive - hide on small screens */
+      @media (max-width: 1023px) {
+          .app-sidebar { display: none !important; }
+      }
     </style>
 </head>
 <body class="h-screen font-sans antialiased">
     <div class="flex h-screen overflow-hidden" data-viewport-mode="app-shell">
         <!-- Sidebar -->
-        <aside class="w-60 flex-shrink-0 flex flex-col" style="background:#0F172A;color:#E2E8F0;">
+        <aside class="app-sidebar w-60 flex-shrink-0 flex flex-col" style="background:#0F172A;color:#E2E8F0;">
             <div class="flex items-center gap-3 px-5 py-5 border-b" style="border-color:rgba(255,255,255,0.08);">
                 <div class="w-8 h-8 rounded-md flex items-center justify-center flex-shrink-0" style="background:var(--brand-primary);">
                     <i data-lucide="leaf" class="w-5 h-5" style="color:var(--brand-primary-foreground);"></i>
@@ -209,7 +536,7 @@ body {
                     <i data-lucide="trending-up" class="w-4 h-4"></i>
                     <span>碳交易</span>
                 </a>
-                <a href="analysis.html" class="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm transition-colors" style="background:var(--brand-primary);color:var(--brand-primary-foreground);">
+                <a href="analysis.html" class="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors" style="background:var(--brand-primary);color:var(--brand-primary-foreground);">
                     <i data-lucide="brain" class="w-4 h-4"></i>
                     <span>AI分析</span>
                 </a>
@@ -230,12 +557,16 @@ body {
         </aside>
 
         <!-- Main Content -->
-        <div class="flex-1 flex flex-col overflow-hidden">
+        <div class="flex-1 flex flex-col overflow-hidden" data-scroll-region="primary">
             <!-- Top Bar -->
             <header class="flex items-center justify-between px-6 py-3 flex-shrink-0 border-b" style="background:var(--brand-card);border-color:var(--brand-border);">
                 <div>
                     <h1 class="text-lg font-semibold" style="color:var(--brand-foreground);">AI 碳汇监测分析</h1>
-                    <p class="text-xs" style="color:var(--brand-muted-foreground);" id="header-date"></p>
+                    <div class="flex items-center gap-1.5 text-xs" style="color:var(--brand-muted-foreground);">
+                        <span>首页</span>
+                        <span>/</span>
+                        <span style="color:var(--brand-primary);font-weight:500;">AI分析</span>
+                    </div>
                 </div>
                 <div class="flex items-center gap-3">
                     <div class="w-8 h-8 rounded-full flex items-center justify-center" style="background:var(--brand-muted);">
@@ -245,293 +576,971 @@ body {
                 </div>
             </header>
 
-            <!-- Scrollable Content -->
-            <div class="flex-1 overflow-y-auto p-6 space-y-6" data-scroll-region="primary">
-                <!-- AI Monitoring Overview -->
-                <section id="ai-monitoring" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div class="rounded-lg p-5 border transition-shadow hover:shadow-sm" style="background:var(--brand-card);border-color:var(--brand-border);">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">监测林地面积</span>
-                            <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:var(--brand-primary-light);">
-                                <i data-lucide="satellite" class="w-4 h-4" style="color:var(--brand-primary);"></i>
-                            </div>
-                        </div>
-                        <p class="text-2xl font-bold" style="color:var(--brand-foreground);">1,280<span class="text-lg font-medium" style="color:var(--brand-primary);">万亩</span></p>
-                        <p class="text-xs mt-1 flex items-center gap-1" style="color:var(--state-success);">
-                            <i data-lucide="trending-up" class="w-3 h-3"></i>
-                            <span>较上月 +3.2%</span>
-                        </p>
-                    </div>
-                    <div class="rounded-lg p-5 border transition-shadow hover:shadow-sm" style="background:var(--brand-card);border-color:var(--brand-border);">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">AI识别精度</span>
-                            <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:var(--brand-primary-light);">
-                                <i data-lucide="target" class="w-4 h-4" style="color:var(--brand-primary);"></i>
-                            </div>
-                        </div>
-                        <p class="text-2xl font-bold" style="color:var(--brand-foreground);">96.8<span class="text-lg font-medium" style="color:var(--brand-primary);">%</span></p>
-                        <p class="text-xs mt-1" style="color:var(--brand-muted-foreground);">基于 ResNet-50 遥感识别模型</p>
-                    </div>
-                    <div class="rounded-lg p-5 border transition-shadow hover:shadow-sm" style="background:var(--brand-card);border-color:var(--brand-border);">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">本月新增碳汇量</span>
-                            <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:var(--brand-primary-light);">
-                                <i data-lucide="cloud-sun" class="w-4 h-4" style="color:var(--brand-primary);"></i>
-                            </div>
-                        </div>
-                        <p class="text-2xl font-bold" style="color:var(--brand-foreground);">28,650<span class="text-base font-medium ml-1" style="color:var(--brand-muted-foreground);">吨CO2e</span></p>
-                        <p class="text-xs mt-1 flex items-center gap-1" style="color:var(--state-success);">
-                            <i data-lucide="trending-up" class="w-3 h-3"></i>
-                            <span>较上月 +5.8%</span>
-                        </p>
-                    </div>
-                </section>
+            <!-- Tab Navigation -->
+            <div class="tab-nav">
+                <button class="tab-btn active" onclick="switchTab(1)">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>AI监测看板</span>
+                </button>
+                <button class="tab-btn" onclick="switchTab(2)">
+                    <i data-lucide="workflow"></i>
+                    <span>AI监测工作台</span>
+                </button>
+                <button class="tab-btn" onclick="switchTab(3)">
+                    <i data-lucide="calculator"></i>
+                    <span>在线碳汇评估</span>
+                </button>
+                <button class="tab-btn" onclick="switchTab(4)">
+                    <i data-lucide="file-text"></i>
+                    <span>监测报告</span>
+                </button>
+            </div>
 
-                <!-- Charts Row: Carbon Sink Prediction + Satellite Analysis -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                    <!-- Carbon Sink Prediction -->
-                    <section id="carbon-prediction" class="lg:col-span-2 rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);">
+            <!-- Scrollable Content -->
+            <div class="flex-1 overflow-y-auto p-6">
+                <!-- ==================== Tab 1: AI监测看板 ==================== -->
+                <div id="tab-1" class="tab-content active space-y-6">
+                    <!-- KPI Cards -->
+                    <section id="ai-monitoring" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="rounded-lg p-5 border transition-shadow hover:shadow-sm" style="background:var(--brand-card);border-color:var(--brand-border);">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">监测林地面积</span>
+                                <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:var(--brand-primary-light);">
+                                    <i data-lucide="satellite" class="w-4 h-4" style="color:var(--brand-primary);"></i>
+                                </div>
+                            </div>
+                            <p class="text-2xl font-bold" style="color:var(--brand-foreground);">1,280<span class="text-lg font-medium" style="color:var(--brand-primary);">万亩</span></p>
+                            <p class="text-xs mt-1 flex items-center gap-1" style="color:var(--state-success);">
+                                <i data-lucide="trending-up" class="w-3 h-3"></i>
+                                <span>较上月 +3.2%</span>
+                            </p>
+                        </div>
+                        <div class="rounded-lg p-5 border transition-shadow hover:shadow-sm" style="background:var(--brand-card);border-color:var(--brand-border);">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">AI识别精度</span>
+                                <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:var(--brand-primary-light);">
+                                    <i data-lucide="target" class="w-4 h-4" style="color:var(--brand-primary);"></i>
+                                </div>
+                            </div>
+                            <p class="text-2xl font-bold" style="color:var(--brand-foreground);">96.8<span class="text-lg font-medium" style="color:var(--brand-primary);">%</span></p>
+                            <p class="text-xs mt-1" style="color:var(--brand-muted-foreground);">基于 ResNet-50 遥感识别模型</p>
+                        </div>
+                        <div class="rounded-lg p-5 border transition-shadow hover:shadow-sm" style="background:var(--brand-card);border-color:var(--brand-border);">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">本月新增碳汇量</span>
+                                <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:var(--brand-primary-light);">
+                                    <i data-lucide="cloud-sun" class="w-4 h-4" style="color:var(--brand-primary);"></i>
+                                </div>
+                            </div>
+                            <p class="text-2xl font-bold" style="color:var(--brand-foreground);">28,650<span class="text-base font-medium ml-1" style="color:var(--brand-muted-foreground);">吨CO2e</span></p>
+                            <p class="text-xs mt-1 flex items-center gap-1" style="color:var(--state-success);">
+                                <i data-lucide="trending-up" class="w-3 h-3"></i>
+                                <span>较上月 +5.8%</span>
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Charts Row: Carbon Sink Prediction + Land Type -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                        <!-- Carbon Sink Prediction -->
+                        <section id="carbon-prediction" class="lg:col-span-2 rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);">
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <h2 class="text-sm font-semibold" style="color:var(--brand-foreground);">碳汇量预测</h2>
+                                    <p class="text-xs mt-0.5" style="color:var(--brand-muted-foreground);">未来12个月 AI 预测趋势（含置信区间）</p>
+                                </div>
+                                <span class="text-xs px-2 py-1 rounded" style="background:var(--brand-primary-light);color:var(--brand-primary);">CCER-14-001-V01</span>
+                            </div>
+                            <div class="relative" style="height:300px;">
+                                <canvas id="predictionChart"></canvas>
+                            </div>
+                            <div class="flex items-center gap-6 mt-3 pt-3 border-t" style="border-color:var(--brand-border);">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-3 h-3 rounded-sm" style="background:var(--chart-1);"></span>
+                                    <span class="text-xs" style="color:var(--brand-muted-foreground);">预测碳汇量</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="w-3 h-3 rounded-sm" style="background:rgba(13,148,136,0.2);border:1px dashed var(--chart-1);"></span>
+                                    <span class="text-xs" style="color:var(--brand-muted-foreground);">90% 置信区间</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="w-3 h-3 rounded-sm" style="background:var(--brand-muted);"></span>
+                                    <span class="text-xs" style="color:var(--brand-muted-foreground);">历史数据</span>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Land Type Doughnut -->
+                        <section id="satellite-analysis" class="rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);">
+                            <div class="flex items-center justify-between mb-4">
+                                <h2 class="text-sm font-semibold" style="color:var(--brand-foreground);">林地类型分布</h2>
+                                <i data-lucide="globe" class="w-4 h-4" style="color:var(--brand-muted-foreground);"></i>
+                            </div>
+                            <div class="relative" style="height:180px;">
+                                <canvas id="landTypeChart"></canvas>
+                            </div>
+                            <div class="mt-4 space-y-2">
+                                <div class="flex items-center justify-between text-xs">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2.5 h-2.5 rounded-sm" style="background:var(--chart-1);"></span>
+                                        <span style="color:var(--brand-foreground);">乔木林</span>
+                                    </div>
+                                    <span class="font-medium" style="color:var(--brand-foreground);">45%</span>
+                                </div>
+                                <div class="flex items-center justify-between text-xs">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2.5 h-2.5 rounded-sm" style="background:var(--chart-2);"></span>
+                                        <span style="color:var(--brand-foreground);">灌木林</span>
+                                    </div>
+                                    <span class="font-medium" style="color:var(--brand-foreground);">20%</span>
+                                </div>
+                                <div class="flex items-center justify-between text-xs">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2.5 h-2.5 rounded-sm" style="background:var(--chart-3);"></span>
+                                        <span style="color:var(--brand-foreground);">竹林</span>
+                                    </div>
+                                    <span class="font-medium" style="color:var(--brand-foreground);">15%</span>
+                                </div>
+                                <div class="flex items-center justify-between text-xs">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2.5 h-2.5 rounded-sm" style="background:var(--chart-4);"></span>
+                                        <span style="color:var(--brand-foreground);">草地</span>
+                                    </div>
+                                    <span class="font-medium" style="color:var(--brand-foreground);">10%</span>
+                                </div>
+                                <div class="flex items-center justify-between text-xs">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-2.5 h-2.5 rounded-sm" style="background:var(--chart-5);"></span>
+                                        <span style="color:var(--brand-foreground);">其他</span>
+                                    </div>
+                                    <span class="font-medium" style="color:var(--brand-foreground);">10%</span>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Remote Sensing Change Detection Alerts -->
+                    <section class="rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);">
                         <div class="flex items-center justify-between mb-4">
                             <div>
-                                <h2 class="text-sm font-semibold" style="color:var(--brand-foreground);">碳汇量预测</h2>
-                                <p class="text-xs mt-0.5" style="color:var(--brand-muted-foreground);">未来12个月 AI 预测趋势（含置信区间）</p>
+                                <h2 class="text-sm font-semibold" style="color:var(--brand-foreground);">遥感变化检测预警</h2>
+                                <p class="text-xs mt-0.5" style="color:var(--brand-muted-foreground);">基于 Sentinel-2 卫星影像的近期林地变化识别</p>
                             </div>
-                            <span class="text-xs px-2 py-1 rounded" style="background:var(--brand-primary-light);color:var(--brand-primary);">CCER-14-001-V01</span>
+                            <span class="text-xs px-2 py-1 rounded" style="background:var(--brand-muted);color:var(--brand-muted-foreground);">近30天</span>
                         </div>
-                        <div class="relative" style="height:300px;">
-                            <canvas id="predictionChart"></canvas>
-                        </div>
-                        <div class="flex items-center gap-6 mt-3 pt-3 border-t" style="border-color:var(--brand-border);">
-                            <div class="flex items-center gap-2">
-                                <span class="w-3 h-3 rounded-sm" style="background:var(--chart-1);"></span>
-                                <span class="text-xs" style="color:var(--brand-muted-foreground);">预测碳汇量</span>
+                        <div class="space-y-0">
+                            <div class="flex items-center gap-4 py-3 border-b" style="border-color:var(--brand-border);">
+                                <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(239,68,68,0.1);">
+                                    <i data-lucide="alert-triangle" class="w-4 h-4" style="color:var(--state-error);"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium truncate" style="color:var(--brand-foreground);">福建三明 - 疑似非法采伐</p>
+                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">NDVI 指数异常下降 0.23 | 影响面积约 12.5 公顷</p>
+                                </div>
+                                <span class="badge badge-error flex-shrink-0">高风险</span>
                             </div>
-                            <div class="flex items-center gap-2">
-                                <span class="w-3 h-3 rounded-sm" style="background:rgba(13,148,136,0.2);border:1px dashed var(--chart-1);"></span>
-                                <span class="text-xs" style="color:var(--brand-muted-foreground);">90% 置信区间</span>
+                            <div class="flex items-center gap-4 py-3 border-b" style="border-color:var(--brand-border);">
+                                <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.1);">
+                                    <i data-lucide="flame" class="w-4 h-4" style="color:var(--state-warning);"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium truncate" style="color:var(--brand-foreground);">云南普洱 - 森林火灾迹地</p>
+                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">火烧迹地 8.3 公顷 | 植被恢复监测中</p>
+                                </div>
+                                <span class="badge badge-warning flex-shrink-0">中风险</span>
                             </div>
-                            <div class="flex items-center gap-2">
-                                <span class="w-3 h-3 rounded-sm" style="background:var(--brand-muted);"></span>
-                                <span class="text-xs" style="color:var(--brand-muted-foreground);">历史数据</span>
+                            <div class="flex items-center gap-4 py-3 border-b" style="border-color:var(--brand-border);">
+                                <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(59,130,246,0.1);">
+                                    <i data-lucide="bug" class="w-4 h-4" style="color:var(--state-info);"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium truncate" style="color:var(--brand-foreground);">四川凉山 - 松材线虫病预警</p>
+                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">冠层光谱异常 | 影响面积约 25.7 公顷</p>
+                                </div>
+                                <span class="badge badge-info flex-shrink-0">关注</span>
+                            </div>
+                            <div class="flex items-center gap-4 py-3">
+                                <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(16,185,129,0.1);">
+                                    <i data-lucide="tree-pine" class="w-4 h-4" style="color:var(--state-success);"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-medium truncate" style="color:var(--brand-foreground);">浙江安吉 - 竹林扩张</p>
+                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">新增竹林面积 15.6 公顷 | 需更新碳库计量</p>
+                                </div>
+                                <span class="badge badge-success flex-shrink-0">正常</span>
                             </div>
                         </div>
                     </section>
 
-                    <!-- Satellite Analysis Side Panel -->
-                    <section id="satellite-analysis" class="rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);">
+                    <!-- Risk Assessment -->
+                    <section id="risk-assessment" class="rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);">
                         <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-sm font-semibold" style="color:var(--brand-foreground);">林地类型分布</h2>
-                            <i data-lucide="globe" class="w-4 h-4" style="color:var(--brand-muted-foreground);"></i>
+                            <div>
+                                <h2 class="text-sm font-semibold" style="color:var(--brand-foreground);">碳汇风险评估</h2>
+                                <p class="text-xs mt-0.5" style="color:var(--brand-muted-foreground);">基于多源数据的碳汇逆转风险分析</p>
+                            </div>
                         </div>
-                        <div class="relative" style="height:180px;">
-                            <canvas id="landTypeChart"></canvas>
-                        </div>
-                        <div class="mt-4 space-y-2">
-                            <div class="flex items-center justify-between text-xs">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-2.5 h-2.5 rounded-sm" style="background:var(--chart-1);"></span>
-                                    <span style="color:var(--brand-foreground);">乔木林</span>
+                        <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                            <div class="lg:col-span-3 space-y-3">
+                                <div class="flex items-center justify-between rounded-md p-3 border" style="border-color:var(--brand-border);">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(239,68,68,0.1);">
+                                            <i data-lucide="flame" class="w-5 h-5" style="color:var(--state-error);"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium" style="color:var(--brand-foreground);">火灾风险</p>
+                                            <p class="text-xs" style="color:var(--brand-muted-foreground);">基于气象干旱指数 + 历史火点数据</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="w-2 h-2 rounded-full" style="background:var(--state-error);"></span>
+                                            <span class="text-sm font-semibold" style="color:var(--state-error);">高风险</span>
+                                        </div>
+                                        <span class="text-xs font-mono" style="color:var(--brand-muted-foreground);">指数 78/100</span>
+                                    </div>
                                 </div>
-                                <span class="font-medium" style="color:var(--brand-foreground);">45%</span>
+                                <div class="flex items-center justify-between rounded-md p-3 border" style="border-color:var(--brand-border);">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.1);">
+                                            <i data-lucide="bug" class="w-5 h-5" style="color:var(--state-warning);"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium" style="color:var(--brand-foreground);">病虫害风险</p>
+                                            <p class="text-xs" style="color:var(--brand-muted-foreground);">基于遥感冠层光谱 + 虫害发生模型</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="w-2 h-2 rounded-full" style="background:var(--state-warning);"></span>
+                                            <span class="text-sm font-semibold" style="color:var(--state-warning);">中风险</span>
+                                        </div>
+                                        <span class="text-xs font-mono" style="color:var(--brand-muted-foreground);">指数 52/100</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between rounded-md p-3 border" style="border-color:var(--brand-border);">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(239,68,68,0.1);">
+                                            <i data-lucide="axe" class="w-5 h-5" style="color:var(--state-error);"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium" style="color:var(--brand-foreground);">非法采伐风险</p>
+                                            <p class="text-xs" style="color:var(--brand-muted-foreground);">基于道路密度 + 夜间灯光 + 变化检测</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="w-2 h-2 rounded-full" style="background:var(--state-warning);"></span>
+                                            <span class="text-sm font-semibold" style="color:var(--state-warning);">中风险</span>
+                                        </div>
+                                        <span class="text-xs font-mono" style="color:var(--brand-muted-foreground);">指数 45/100</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between rounded-md p-3 border" style="border-color:var(--brand-border);">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(16,185,129,0.1);">
+                                            <i data-lucide="cloud-rain" class="w-5 h-5" style="color:var(--state-success);"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium" style="color:var(--brand-foreground);">极端气候风险</p>
+                                            <p class="text-xs" style="color:var(--brand-muted-foreground);">基于历史气象数据 + 气候模型预测</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="w-2 h-2 rounded-full" style="background:var(--state-success);"></span>
+                                            <span class="text-sm font-semibold" style="color:var(--state-success);">低风险</span>
+                                        </div>
+                                        <span class="text-xs font-mono" style="color:var(--brand-muted-foreground);">指数 28/100</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="flex items-center justify-between text-xs">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-2.5 h-2.5 rounded-sm" style="background:var(--chart-2);"></span>
-                                    <span style="color:var(--brand-foreground);">灌木林</span>
+                            <div class="rounded-md p-4 border" style="border-color:var(--brand-border);">
+                                <h3 class="text-xs font-semibold mb-3" style="color:var(--brand-foreground);">综合风险趋势</h3>
+                                <div class="relative" style="height:160px;">
+                                    <canvas id="riskTrendChart"></canvas>
                                 </div>
-                                <span class="font-medium" style="color:var(--brand-foreground);">20%</span>
-                            </div>
-                            <div class="flex items-center justify-between text-xs">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-2.5 h-2.5 rounded-sm" style="background:var(--chart-3);"></span>
-                                    <span style="color:var(--brand-foreground);">竹林</span>
+                                <div class="mt-3 pt-3 border-t" style="border-color:var(--brand-border);">
+                                    <div class="flex items-center justify-between text-xs">
+                                        <span style="color:var(--brand-muted-foreground);">当前综合风险</span>
+                                        <span class="font-semibold" style="color:var(--state-warning);">中等</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-xs mt-1">
+                                        <span style="color:var(--brand-muted-foreground);">监测项目</span>
+                                        <span class="font-medium" style="color:var(--brand-foreground);">12 个</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-xs mt-1">
+                                        <span style="color:var(--brand-muted-foreground);">高风险项目</span>
+                                        <span class="font-medium" style="color:var(--state-error);">2 个</span>
+                                    </div>
                                 </div>
-                                <span class="font-medium" style="color:var(--brand-foreground);">15%</span>
-                            </div>
-                            <div class="flex items-center justify-between text-xs">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-2.5 h-2.5 rounded-sm" style="background:var(--chart-4);"></span>
-                                    <span style="color:var(--brand-foreground);">草地</span>
-                                </div>
-                                <span class="font-medium" style="color:var(--brand-foreground);">10%</span>
-                            </div>
-                            <div class="flex items-center justify-between text-xs">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-2.5 h-2.5 rounded-sm" style="background:var(--chart-5);"></span>
-                                    <span style="color:var(--brand-foreground);">其他</span>
-                                </div>
-                                <span class="font-medium" style="color:var(--brand-foreground);">10%</span>
                             </div>
                         </div>
                     </section>
+
+                    <!-- Footer -->
+                    <footer class="text-center py-4">
+                        <p class="text-xs" style="color:var(--brand-muted-foreground);">AI智能碳汇管理平台 v1.0 | AI模型: ResNet-50 遥感识别 | 方法学: CCER-14-001-V01</p>
+                    </footer>
                 </div>
 
-                <!-- Satellite Change Detection Alerts -->
-                <section class="rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);">
-                    <div class="flex items-center justify-between mb-4">
+                <!-- ==================== Tab 2: AI监测工作台 ==================== -->
+                <div id="tab-2" class="tab-content space-y-6">
+                    <!-- Step Indicator -->
+                    <div class="rounded-lg p-6 border" style="background:var(--brand-card);border-color:var(--brand-border);">
+                        <div class="step-indicator">
+                            <div class="flex flex-col items-center">
+                                <div class="step-circle current" id="step-circle-1">1</div>
+                                <span class="step-label active" id="step-label-1">选择项目区域</span>
+                            </div>
+                            <div class="step-connector" id="step-connector-1"></div>
+                            <div class="flex flex-col items-center">
+                                <div class="step-circle" id="step-circle-2">2</div>
+                                <span class="step-label" id="step-label-2">AI遥感识别</span>
+                            </div>
+                            <div class="step-connector" id="step-connector-2"></div>
+                            <div class="flex flex-col items-center">
+                                <div class="step-circle" id="step-circle-3">3</div>
+                                <span class="step-label" id="step-label-3">生物量估测</span>
+                            </div>
+                            <div class="step-connector" id="step-connector-3"></div>
+                            <div class="flex flex-col items-center">
+                                <div class="step-circle" id="step-circle-4">4</div>
+                                <span class="step-label" id="step-label-4">碳汇量计量</span>
+                            </div>
+                            <div class="step-connector" id="step-connector-4"></div>
+                            <div class="flex flex-col items-center">
+                                <div class="step-circle" id="step-circle-5">5</div>
+                                <span class="step-label" id="step-label-5">生成监测报告</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: 选择项目区域 -->
+                    <div id="step-1" class="rounded-lg p-6 border space-y-5" style="background:var(--brand-card);border-color:var(--brand-border);">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--brand-primary-light);">
+                                <i data-lucide="map-pin" class="w-5 h-5" style="color:var(--brand-primary);"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-sm font-semibold" style="color:var(--brand-foreground);">选择项目区域</h2>
+                                <p class="text-xs" style="color:var(--brand-muted-foreground);">选择需要AI遥感监测的碳汇项目</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="form-label">项目名称</label>
+                                    <select id="workflow-project" class="form-input" onchange="updateProjectInfo()">
+                                        <option value="sanming">福建三明造林碳汇项目</option>
+                                        <option value="puer">云南普洱森林经营项目</option>
+                                        <option value="liangshan">四川凉山竹林碳汇项目</option>
+                                        <option value="neimeng">内蒙古草原修复项目</option>
+                                    </select>
+                                </div>
+                                <div class="rounded-md p-4 border space-y-3" style="border-color:var(--brand-border);background:var(--brand-muted);">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs" style="color:var(--brand-muted-foreground);">项目面积</span>
+                                        <span class="text-sm font-semibold" style="color:var(--brand-foreground);" id="project-area">856.3 公顷</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs" style="color:var(--brand-muted-foreground);">主要树种</span>
+                                        <span class="text-sm font-semibold" style="color:var(--brand-foreground);" id="project-species">杉木、马尾松</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs" style="color:var(--brand-muted-foreground);">项目类型</span>
+                                        <span class="text-sm font-semibold" style="color:var(--brand-foreground);" id="project-type">造林碳汇</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs" style="color:var(--brand-muted-foreground);">计入期</span>
+                                        <span class="text-sm font-semibold" style="color:var(--brand-foreground);">20年 (2021-2040)</span>
+                                    </div>
+                                </div>
+                                <button class="btn-primary" onclick="startRecognition()" id="start-recognition-btn">
+                                    <i data-lucide="satellite"></i>
+                                    <span>开始AI识别</span>
+                                </button>
+                            </div>
+                            <div>
+                                <div class="map-preview">
+                                    <div class="map-polygon"></div>
+                                    <span class="map-label" style="top:12px;left:12px;">卫星影像 - Sentinel-2</span>
+                                    <span class="map-label" style="bottom:12px;right:12px;">分辨率: 10m</span>
+                                    <span class="map-label" style="top:40%;left:45%;color:rgba(13,148,136,1);background:rgba(13,148,136,0.2);">项目边界</span>
+                                </div>
+                                <p class="text-xs mt-2 text-center" style="color:var(--brand-muted-foreground);">绿色多边形为项目边界，基于卫星影像叠加显示</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: AI遥感识别 -->
+                    <div id="step-2" class="rounded-lg p-6 border space-y-5" style="background:var(--brand-card);border-color:var(--brand-border);display:none;">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--brand-primary-light);">
+                                <i data-lucide="scan-search" class="w-5 h-5" style="color:var(--brand-primary);"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-sm font-semibold" style="color:var(--brand-foreground);">AI遥感识别</h2>
+                                <p class="text-xs" style="color:var(--brand-muted-foreground);">基于ResNet-50模型进行树种分类与面积识别</p>
+                            </div>
+                        </div>
+
+                        <!-- Progress Section (initially hidden) -->
+                        <div id="recognition-progress" style="display:none;">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-8 h-8 rounded-full flex items-center justify-center" style="background:var(--brand-primary-light);">
+                                    <i data-lucide="loader" class="w-4 h-4 animate-spin" style="color:var(--brand-primary);"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium" id="recognition-status" style="color:var(--brand-foreground);">正在加载卫星影像...</p>
+                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">AI模型正在处理中，请稍候</p>
+                                </div>
+                                <span class="text-lg font-bold" id="recognition-percent" style="color:var(--brand-primary);">0%</span>
+                            </div>
+                            <div class="progress-track">
+                                <div class="progress-fill" id="progress-fill"></div>
+                            </div>
+                        </div>
+
+                        <!-- Results Section (initially hidden) -->
+                        <div id="recognition-results" style="display:none;">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                                <div class="space-y-4">
+                                    <div class="grid grid-cols-3 gap-3">
+                                        <div class="rounded-md p-3 text-center border" style="border-color:var(--brand-border);">
+                                            <p class="text-xs" style="color:var(--brand-muted-foreground);">识别精度</p>
+                                            <p class="text-lg font-bold" style="color:var(--brand-primary);">96.8%</p>
+                                        </div>
+                                        <div class="rounded-md p-3 text-center border" style="border-color:var(--brand-border);">
+                                            <p class="text-xs" style="color:var(--brand-muted-foreground);">识别面积</p>
+                                            <p class="text-lg font-bold" style="color:var(--brand-primary);">856.3<span class="text-xs" style="color:var(--brand-muted-foreground);"> ha</span></p>
+                                        </div>
+                                        <div class="rounded-md p-3 text-center border" style="border-color:var(--brand-border);">
+                                            <p class="text-xs" style="color:var(--brand-muted-foreground);">影像分辨率</p>
+                                            <p class="text-lg font-bold" style="color:var(--brand-primary);">10<span class="text-xs" style="color:var(--brand-muted-foreground);"> m</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-3">
+                                        <p class="text-sm font-semibold" style="color:var(--brand-foreground);">树种组成</p>
+                                        <div>
+                                            <div class="flex items-center justify-between mb-1">
+                                                <span class="text-xs" style="color:var(--brand-foreground);">杉木</span>
+                                                <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">45%</span>
+                                            </div>
+                                            <div class="species-bar-track">
+                                                <div class="species-bar-fill" style="width:45%;background:var(--chart-1);"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center justify-between mb-1">
+                                                <span class="text-xs" style="color:var(--brand-foreground);">马尾松</span>
+                                                <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">25%</span>
+                                            </div>
+                                            <div class="species-bar-track">
+                                                <div class="species-bar-fill" style="width:25%;background:var(--chart-2);"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center justify-between mb-1">
+                                                <span class="text-xs" style="color:var(--brand-foreground);">阔叶树</span>
+                                                <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">20%</span>
+                                            </div>
+                                            <div class="species-bar-track">
+                                                <div class="species-bar-fill" style="width:20%;background:var(--chart-3);"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center justify-between mb-1">
+                                                <span class="text-xs" style="color:var(--brand-foreground);">其他</span>
+                                                <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">10%</span>
+                                            </div>
+                                            <div class="species-bar-track">
+                                                <div class="species-bar-fill" style="width:10%;background:var(--chart-4);"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn-primary" onclick="nextStep()">
+                                        <span>下一步：生物量估测</span>
+                                        <i data-lucide="arrow-right"></i>
+                                    </button>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-semibold mb-3" style="color:var(--brand-foreground);">树种分布图</p>
+                                    <div class="relative" style="height:240px;">
+                                        <canvas id="speciesChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: 生物量估测 -->
+                    <div id="step-3" class="rounded-lg p-6 border space-y-5" style="background:var(--brand-card);border-color:var(--brand-border);display:none;">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--brand-primary-light);">
+                                <i data-lucide="leaf" class="w-5 h-5" style="color:var(--brand-primary);"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-sm font-semibold" style="color:var(--brand-foreground);">生物量估测</h2>
+                                <p class="text-xs" style="color:var(--brand-muted-foreground);">基于NDVI植被指数与AI模型估测森林生物量</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                            <div class="rounded-md p-4 border text-center" style="border-color:var(--brand-border);">
+                                <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">平均NDVI</p>
+                                <p class="text-2xl font-bold" style="color:var(--brand-primary);">0.72</p>
+                            </div>
+                            <div class="rounded-md p-4 border text-center" style="border-color:var(--brand-border);">
+                                <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">NDVI范围</p>
+                                <p class="text-2xl font-bold" style="color:var(--brand-primary);">0.58<span class="text-base" style="color:var(--brand-muted-foreground);"> - </span>0.85</p>
+                            </div>
+                            <div class="rounded-md p-4 border text-center" style="border-color:var(--brand-border);">
+                                <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">总生物量</p>
+                                <p class="text-2xl font-bold" style="color:var(--brand-primary);">87,454<span class="text-sm" style="color:var(--brand-muted-foreground);"> t</span></p>
+                            </div>
+                        </div>
                         <div>
-                            <h2 class="text-sm font-semibold" style="color:var(--brand-foreground);">遥感变化检测预警</h2>
-                            <p class="text-xs mt-0.5" style="color:var(--brand-muted-foreground);">基于 Sentinel-2 卫星影像的近期林地变化识别</p>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>区域</th>
+                                        <th>面积 (ha)</th>
+                                        <th>平均生物量 (t/ha)</th>
+                                        <th>总生物量 (t)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td style="font-weight:600;color:var(--brand-foreground);">高密度区</td><td style="color:var(--brand-muted-foreground);">320</td><td style="color:var(--brand-muted-foreground);">145.6</td><td style="color:var(--brand-foreground);font-weight:600;">46,592</td></tr>
+                                    <tr><td style="font-weight:600;color:var(--brand-foreground);">中密度区</td><td style="color:var(--brand-muted-foreground);">280</td><td style="color:var(--brand-muted-foreground);">98.3</td><td style="color:var(--brand-foreground);font-weight:600;">27,524</td></tr>
+                                    <tr><td style="font-weight:600;color:var(--brand-foreground);">低密度区</td><td style="color:var(--brand-muted-foreground);">256</td><td style="color:var(--brand-muted-foreground);">52.1</td><td style="color:var(--brand-foreground);font-weight:600;">13,338</td></tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr><td>合计</td><td>856</td><td>—</td><td>87,454</td></tr>
+                                </tfoot>
+                            </table>
                         </div>
-                        <span class="text-xs px-2 py-1 rounded" style="background:var(--brand-muted);color:var(--brand-muted-foreground);">近30天</span>
-                    </div>
-                    <div class="space-y-0">
-                        <div class="flex items-center gap-4 py-3 border-b" style="border-color:var(--brand-border);">
-                            <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(239,68,68,0.1);">
-                                <i data-lucide="alert-triangle" class="w-4 h-4" style="color:var(--state-error);"></i>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                            <div>
+                                <p class="text-sm font-semibold mb-3" style="color:var(--brand-foreground);">各区域生物量分布</p>
+                                <div class="relative" style="height:240px;">
+                                    <canvas id="biomassChart"></canvas>
+                                </div>
                             </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium truncate" style="color:var(--brand-foreground);">福建三明 - 疑似非法采伐</p>
-                                <p class="text-xs" style="color:var(--brand-muted-foreground);">NDVI 指数异常下降 0.23 | 影响面积约 12.5 公顷</p>
+                            <div class="flex items-center justify-center">
+                                <button class="btn-primary" onclick="nextStep()">
+                                    <span>下一步：碳汇量计量</span>
+                                    <i data-lucide="arrow-right"></i>
+                                </button>
                             </div>
-                            <span class="text-xs px-2 py-0.5 rounded-full flex-shrink-0" style="background:rgba(239,68,68,0.1);color:var(--state-error);">高风险</span>
-                        </div>
-                        <div class="flex items-center gap-4 py-3 border-b" style="border-color:var(--brand-border);">
-                            <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.1);">
-                                <i data-lucide="flame" class="w-4 h-4" style="color:var(--state-warning);"></i>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium truncate" style="color:var(--brand-foreground);">云南普洱 - 森林火灾迹地</p>
-                                <p class="text-xs" style="color:var(--brand-muted-foreground);">火烧迹地 8.3 公顷 | 植被恢复监测中</p>
-                            </div>
-                            <span class="text-xs px-2 py-0.5 rounded-full flex-shrink-0" style="background:rgba(245,158,11,0.1);color:var(--state-warning);">中风险</span>
-                        </div>
-                        <div class="flex items-center gap-4 py-3 border-b" style="border-color:var(--brand-border);">
-                            <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(59,130,246,0.1);">
-                                <i data-lucide="bug" class="w-4 h-4" style="color:var(--state-info);"></i>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium truncate" style="color:var(--brand-foreground);">四川凉山 - 松材线虫病预警</p>
-                                <p class="text-xs" style="color:var(--brand-muted-foreground);">冠层光谱异常 | 影响面积约 25.7 公顷</p>
-                            </div>
-                            <span class="text-xs px-2 py-0.5 rounded-full flex-shrink-0" style="background:rgba(59,130,246,0.1);color:var(--state-info);">关注</span>
-                        </div>
-                        <div class="flex items-center gap-4 py-3">
-                            <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(16,185,129,0.1);">
-                                <i data-lucide="tree-pine" class="w-4 h-4" style="color:var(--state-success);"></i>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium truncate" style="color:var(--brand-foreground);">浙江安吉 - 竹林扩张</p>
-                                <p class="text-xs" style="color:var(--brand-muted-foreground);">新增竹林面积 15.6 公顷 | 需更新碳库计量</p>
-                            </div>
-                            <span class="text-xs px-2 py-0.5 rounded-full flex-shrink-0" style="background:rgba(16,185,129,0.1);color:var(--state-success);">正常</span>
                         </div>
                     </div>
-                </section>
 
-                <!-- Risk Assessment -->
-                <section id="risk-assessment" class="rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);">
-                    <div class="flex items-center justify-between mb-4">
+                    <!-- Step 4: 碳汇量计量 -->
+                    <div id="step-4" class="rounded-lg p-6 border space-y-5" style="background:var(--brand-card);border-color:var(--brand-border);display:none;">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--brand-primary-light);">
+                                <i data-lucide="calculator" class="w-5 h-5" style="color:var(--brand-primary);"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-sm font-semibold" style="color:var(--brand-foreground);">碳汇量计量</h2>
+                                <p class="text-xs" style="color:var(--brand-muted-foreground);">基于CCER方法学计算碳汇量与CO2当量</p>
+                            </div>
+                        </div>
+                        <!-- Formula Box -->
+                        <div class="rounded-md p-4 border" style="border-color:var(--brand-primary);background:var(--brand-primary-light);">
+                            <p class="text-xs mb-2" style="color:var(--brand-primary-dark);font-weight:600;">碳汇量计算公式</p>
+                            <p class="text-sm font-mono" style="color:var(--brand-foreground);">生物量 × 含碳率(0.47) × 44/12 = 碳汇量</p>
+                        </div>
+                        <!-- Results -->
+                        <div class="grid grid-cols-2 lg:grid-cols-5 gap-3">
+                            <div class="rounded-md p-4 border text-center" style="border-color:var(--brand-border);">
+                                <p class="text-xs" style="color:var(--brand-muted-foreground);">总生物量</p>
+                                <p class="text-base font-bold" style="color:var(--brand-foreground);">87,454<span class="text-xs" style="color:var(--brand-muted-foreground);"> t</span></p>
+                            </div>
+                            <div class="rounded-md p-4 border text-center" style="border-color:var(--brand-border);">
+                                <p class="text-xs" style="color:var(--brand-muted-foreground);">含碳率</p>
+                                <p class="text-base font-bold" style="color:var(--brand-foreground);">0.47</p>
+                            </div>
+                            <div class="rounded-md p-4 border text-center" style="border-color:var(--brand-border);">
+                                <p class="text-xs" style="color:var(--brand-muted-foreground);">总碳储量</p>
+                                <p class="text-base font-bold" style="color:var(--brand-primary);">41,103<span class="text-xs" style="color:var(--brand-muted-foreground);"> t C</span></p>
+                            </div>
+                            <div class="rounded-md p-4 border text-center" style="border-color:var(--brand-border);">
+                                <p class="text-xs" style="color:var(--brand-muted-foreground);">CO2当量</p>
+                                <p class="text-base font-bold" style="color:var(--brand-primary);">150,711<span class="text-xs" style="color:var(--brand-muted-foreground);"> t</span></p>
+                            </div>
+                            <div class="rounded-md p-4 border text-center" style="border-color:var(--brand-border);">
+                                <p class="text-xs" style="color:var(--brand-muted-foreground);">年均碳汇量</p>
+                                <p class="text-base font-bold" style="color:var(--brand-primary);">15,071<span class="text-xs" style="color:var(--brand-muted-foreground);"> t/年</span></p>
+                            </div>
+                        </div>
+                        <div class="rounded-md p-3" style="background:var(--brand-muted);">
+                            <p class="text-xs" style="color:var(--brand-muted-foreground);">* 计入期 20年 | 年均碳汇量 = CO2当量 / 计入期年数</p>
+                        </div>
+                        <!-- Comparison Table -->
                         <div>
-                            <h2 class="text-sm font-semibold" style="color:var(--brand-foreground);">碳汇风险评估</h2>
-                            <p class="text-xs mt-0.5" style="color:var(--brand-muted-foreground);">基于多源数据的碳汇逆转风险分析</p>
+                            <h3 class="text-sm font-semibold mb-3" style="color:var(--brand-foreground);">效率对比：传统人工调查 vs AI遥感识别</h3>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>项目</th>
+                                        <th>人工调查</th>
+                                        <th>AI遥感识别</th>
+                                        <th>节省</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td style="font-weight:600;color:var(--brand-foreground);">调查时间</td><td style="color:var(--brand-muted-foreground);">30天</td><td style="color:var(--brand-muted-foreground);">3天</td><td style="color:var(--state-success);font-weight:600;">90%</td></tr>
+                                    <tr><td style="font-weight:600;color:var(--brand-foreground);">人力成本</td><td style="color:var(--brand-muted-foreground);">15万元</td><td style="color:var(--brand-muted-foreground);">3万元</td><td style="color:var(--state-success);font-weight:600;">80%</td></tr>
+                                    <tr><td style="font-weight:600;color:var(--brand-foreground);">样地数量</td><td style="color:var(--brand-muted-foreground);">120个</td><td style="color:var(--brand-muted-foreground);">20个(校验)</td><td style="color:var(--state-success);font-weight:600;">83%</td></tr>
+                                    <tr><td style="font-weight:600;color:var(--brand-foreground);">精度</td><td style="color:var(--brand-muted-foreground);">92%</td><td style="color:var(--brand-muted-foreground);">96.8%</td><td style="color:var(--brand-primary);font-weight:600;">+4.8%</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="flex justify-center">
+                            <button class="btn-primary" onclick="nextStep()">
+                                <span>下一步：生成监测报告</span>
+                                <i data-lucide="arrow-right"></i>
+                            </button>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
-                        <!-- Risk Factors -->
-                        <div class="lg:col-span-3 space-y-3">
-                            <div class="flex items-center justify-between rounded-md p-3 border" style="border-color:var(--brand-border);">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(239,68,68,0.1);">
-                                        <i data-lucide="flame" class="w-5 h-5" style="color:var(--state-error);"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm font-medium" style="color:var(--brand-foreground);">火灾风险</p>
-                                        <p class="text-xs" style="color:var(--brand-muted-foreground);">基于气象干旱指数 + 历史火点数据</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-3">
-                                    <div class="flex items-center gap-1.5">
-                                        <span class="w-2 h-2 rounded-full" style="background:var(--state-error);"></span>
-                                        <span class="text-sm font-semibold" style="color:var(--state-error);">高风险</span>
-                                    </div>
-                                    <span class="text-xs font-mono" style="color:var(--brand-muted-foreground);">指数 78/100</span>
+
+                    <!-- Step 5: 生成监测报告 -->
+                    <div id="step-5" class="rounded-lg p-6 border space-y-5" style="background:var(--brand-card);border-color:var(--brand-border);display:none;">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--brand-primary-light);">
+                                <i data-lucide="file-text" class="w-5 h-5" style="color:var(--brand-primary);"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-sm font-semibold" style="color:var(--brand-foreground);">生成监测报告</h2>
+                                <p class="text-xs" style="color:var(--brand-muted-foreground);">AI自动生成年度监测报告预览</p>
+                            </div>
+                        </div>
+                        <!-- Report Preview -->
+                        <div class="rounded-lg border p-6" style="border-color:var(--brand-border);background:var(--brand-muted);">
+                            <div class="text-center mb-5">
+                                <h3 class="text-base font-bold" style="color:var(--brand-foreground);">CCER造林碳汇项目年度监测报告</h3>
+                                <p class="text-xs mt-1" style="color:var(--brand-muted-foreground);">报告编号：CCER-RPT-2026-AI-001</p>
+                            </div>
+                            <div class="space-y-3 mb-5" style="background:var(--brand-card);border-radius:var(--brand-radius-md);padding:16px;">
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div><span style="color:var(--brand-muted-foreground);">项目名称：</span><span style="color:var(--brand-foreground);font-weight:500;" id="report-project-name">福建三明造林碳汇项目</span></div>
+                                    <div><span style="color:var(--brand-muted-foreground);">报告期间：</span><span style="color:var(--brand-foreground);font-weight:500;">2025.06 - 2026.05</span></div>
+                                    <div><span style="color:var(--brand-muted-foreground);">监测方法：</span><span style="color:var(--brand-foreground);font-weight:500;">AI遥感识别 + 样地校验</span></div>
+                                    <div><span style="color:var(--brand-muted-foreground);">AI模型：</span><span style="color:var(--brand-foreground);font-weight:500;">ResNet-50</span></div>
                                 </div>
                             </div>
-                            <div class="flex items-center justify-between rounded-md p-3 border" style="border-color:var(--brand-border);">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.1);">
-                                        <i data-lucide="bug" class="w-5 h-5" style="color:var(--state-warning);"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-sm font-medium" style="color:var(--brand-foreground);">病虫害风险</p>
-                                        <p class="text-xs" style="color:var(--brand-muted-foreground);">基于遥感冠层光谱 + 虫害发生模型</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-3">
-                                    <div class="flex items-center gap-1.5">
-                                        <span class="w-2 h-2 rounded-full" style="background:var(--state-warning);"></span>
-                                        <span class="text-sm font-semibold" style="color:var(--state-warning);">中风险</span>
-                                    </div>
-                                    <span class="text-xs font-mono" style="color:var(--brand-muted-foreground);">指数 52/100</span>
-                                </div>
+                            <table class="data-table" style="background:var(--brand-card);">
+                                <thead>
+                                    <tr><th>监测指标</th><th>数值</th><th>单位</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td style="font-weight:600;color:var(--brand-foreground);">监测面积</td><td style="color:var(--brand-foreground);">856.3</td><td style="color:var(--brand-muted-foreground);">公顷</td></tr>
+                                    <tr><td style="font-weight:600;color:var(--brand-foreground);">AI识别精度</td><td style="color:var(--brand-foreground);">96.8</td><td style="color:var(--brand-muted-foreground);">%</td></tr>
+                                    <tr><td style="font-weight:600;color:var(--brand-foreground);">总生物量</td><td style="color:var(--brand-foreground);">87,454</td><td style="color:var(--brand-muted-foreground);">t</td></tr>
+                                    <tr><td style="font-weight:600;color:var(--brand-foreground);">总碳储量</td><td style="color:var(--brand-foreground);">41,103</td><td style="color:var(--brand-muted-foreground);">t C</td></tr>
+                                    <tr><td style="font-weight:600;color:var(--brand-foreground);">CO2当量</td><td style="color:var(--brand-foreground);">150,711</td><td style="color:var(--brand-muted-foreground);">t CO2e</td></tr>
+                                    <tr><td style="font-weight:600;color:var(--brand-foreground);">年均碳汇量</td><td style="color:var(--brand-foreground);">15,071</td><td style="color:var(--brand-muted-foreground);">t CO2e/年</td></tr>
+                                </tbody>
+                            </table>
+                            <div class="mt-4 p-4 rounded-md" style="background:var(--brand-card);">
+                                <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">本项目通过AI遥感技术结合ResNet-50深度学习模型，对福建三明造林碳汇项目区域进行了全面监测。监测期间未发现重大碳汇逆转事件，项目碳汇量稳定增长。建议继续按年度开展遥感监测，重点关注项目边界变化与病虫害风险。</p>
                             </div>
-                            <div class="flex items-center justify-between rounded-md p-3 border" style="border-color:var(--brand-border);">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(239,68,68,0.1);">
-                                        <i data-lucide="axe" class="w-5 h-5" style="color:var(--state-error);"></i>
+                        </div>
+                        <!-- Action Buttons -->
+                        <div class="flex items-center justify-center gap-4">
+                            <button class="btn-primary" onclick="exportReport()">
+                                <i data-lucide="download"></i>
+                                <span>导出报告 (PDF)</span>
+                            </button>
+                            <button class="btn-outline" onclick="resetWorkflow()">
+                                <i data-lucide="rotate-ccw"></i>
+                                <span>重新开始</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="flex items-center justify-between" id="step-nav">
+                        <button class="btn-outline" onclick="prevStep()" id="step-prev" style="visibility:hidden;">
+                            <i data-lucide="arrow-left"></i>
+                            <span>上一步</span>
+                        </button>
+                        <div class="text-xs" style="color:var(--brand-muted-foreground);">
+                            <span id="step-current">1</span> / 5
+                        </div>
+                        <button class="btn-primary" onclick="nextStep()" id="step-next">
+                            <span>下一步</span>
+                            <i data-lucide="arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ==================== Tab 3: 在线碳汇评估 ==================== -->
+                <div id="tab-3" class="tab-content">
+                    <div class="flex flex-col lg:flex-row gap-6">
+                        <!-- Input Section (left, 40%) -->
+                        <div class="lg:w-2/5 flex-shrink-0">
+                            <div class="rounded-lg p-6 border space-y-5" style="background:var(--brand-card);border-color:var(--brand-border);">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--brand-primary-light);">
+                                        <i data-lucide="sliders-horizontal" class="w-5 h-5" style="color:var(--brand-primary);"></i>
                                     </div>
                                     <div>
-                                        <p class="text-sm font-medium" style="color:var(--brand-foreground);">非法采伐风险</p>
-                                        <p class="text-xs" style="color:var(--brand-muted-foreground);">基于道路密度 + 夜间灯光 + 变化检测</p>
+                                        <h2 class="text-sm font-semibold" style="color:var(--brand-foreground);">评估参数</h2>
+                                        <p class="text-xs" style="color:var(--brand-muted-foreground);">输入项目参数进行碳汇评估</p>
                                     </div>
                                 </div>
-                                <div class="flex items-center gap-3">
-                                    <div class="flex items-center gap-1.5">
-                                        <span class="w-2 h-2 rounded-full" style="background:var(--state-warning);"></span>
-                                        <span class="text-sm font-semibold" style="color:var(--state-warning);">中风险</span>
-                                    </div>
-                                    <span class="text-xs font-mono" style="color:var(--brand-muted-foreground);">指数 45/100</span>
-                                </div>
-                            </div>
-                            <div class="flex items-center justify-between rounded-md p-3 border" style="border-color:var(--brand-border);">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(16,185,129,0.1);">
-                                        <i data-lucide="cloud-rain" class="w-5 h-5" style="color:var(--state-success);"></i>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="form-label">项目类型</label>
+                                        <select id="calc-project-type" class="form-input">
+                                            <option value="afforestation">造林碳汇</option>
+                                            <option value="forest-management">森林经营</option>
+                                            <option value="bamboo">竹林碳汇</option>
+                                            <option value="grassland">草地碳汇</option>
+                                        </select>
                                     </div>
                                     <div>
-                                        <p class="text-sm font-medium" style="color:var(--brand-foreground);">极端气候风险</p>
-                                        <p class="text-xs" style="color:var(--brand-muted-foreground);">基于历史气象数据 + 气候模型预测</p>
+                                        <label class="form-label">项目面积 (公顷)</label>
+                                        <input id="calc-area" type="number" class="form-input" value="500" min="1" max="100000">
+                                    </div>
+                                    <div>
+                                        <label class="form-label">主要树种</label>
+                                        <select id="calc-species" class="form-input">
+                                            <option value="杉木">杉木</option>
+                                            <option value="马尾松">马尾松</option>
+                                            <option value="杨树">杨树</option>
+                                            <option value="桉树">桉树</option>
+                                            <option value="毛竹">毛竹</option>
+                                            <option value="混交林">混交林</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="form-label">所在省份</label>
+                                        <select id="calc-province" class="form-input">
+                                            <option value="福建">福建</option>
+                                            <option value="云南">云南</option>
+                                            <option value="四川">四川</option>
+                                            <option value="广西">广西</option>
+                                            <option value="江西">江西</option>
+                                            <option value="浙江">浙江</option>
+                                            <option value="内蒙古">内蒙古</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="form-label">计入期</label>
+                                        <select id="calc-period" class="form-input">
+                                            <option value="20">20年</option>
+                                            <option value="30">30年</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="form-label">碳价格 (元/吨)</label>
+                                        <input id="calc-price" type="number" class="form-input" value="70" min="0">
                                     </div>
                                 </div>
-                                <div class="flex items-center gap-3">
-                                    <div class="flex items-center gap-1.5">
-                                        <span class="w-2 h-2 rounded-full" style="background:var(--state-success);"></span>
-                                        <span class="text-sm font-semibold" style="color:var(--state-success);">低风险</span>
-                                    </div>
-                                    <span class="text-xs font-mono" style="color:var(--brand-muted-foreground);">指数 28/100</span>
+                                <button class="btn-primary w-full justify-center" onclick="calculateAssessment()" style="display:flex;">
+                                    <i data-lucide="calculator"></i>
+                                    <span>开始评估</span>
+                                </button>
+                                <div class="rounded-md p-3" style="background:var(--brand-muted);">
+                                    <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">
+                                        <span style="font-weight:600;color:var(--brand-foreground);">计算说明：</span><br>
+                                        年碳汇量 = 生长速率 × 面积 × 含碳率(0.47) × CO2/C比(3.667) × 省份修正系数<br>
+                                        生长速率参考：杉木12.5、马尾松10.8、杨树15.2、桉树18.5、毛竹22.0、混交林13.0 (t/ha/yr)
+                                    </p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Risk Trend Mini Chart -->
-                        <div class="rounded-md p-4 border" style="border-color:var(--brand-border);">
-                            <h3 class="text-xs font-semibold mb-3" style="color:var(--brand-foreground);">综合风险趋势</h3>
-                            <div class="relative" style="height:160px;">
-                                <canvas id="riskTrendChart"></canvas>
+                        <!-- Results Section (right, 60%) -->
+                        <div class="flex-1 space-y-6">
+                            <!-- Placeholder before calculation -->
+                            <div id="calc-placeholder" class="rounded-lg border p-12 text-center" style="background:var(--brand-card);border-color:var(--brand-border);">
+                                <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background:var(--brand-muted);">
+                                    <i data-lucide="bar-chart-3" class="w-8 h-8" style="color:var(--brand-muted-foreground);"></i>
+                                </div>
+                                <p class="text-sm font-medium mb-1" style="color:var(--brand-foreground);">输入参数后点击"开始评估"</p>
+                                <p class="text-xs" style="color:var(--brand-muted-foreground);">系统将根据CCER方法学实时计算碳汇量与收益预测</p>
                             </div>
-                            <div class="mt-3 pt-3 border-t" style="border-color:var(--brand-border);">
-                                <div class="flex items-center justify-between text-xs">
-                                    <span style="color:var(--brand-muted-foreground);">当前综合风险</span>
-                                    <span class="font-semibold" style="color:var(--state-warning);">中等</span>
+
+                            <!-- Results (initially hidden) -->
+                            <div id="calc-results" style="display:none;" class="space-y-6">
+                                <!-- KPI Cards -->
+                                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                                    <div class="rounded-lg p-4 border" style="background:var(--brand-card);border-color:var(--brand-border);">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">预估年碳汇量</span>
+                                            <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:var(--brand-primary-light);">
+                                                <i data-lucide="leaf" class="w-4 h-4" style="color:var(--brand-primary);"></i>
+                                            </div>
+                                        </div>
+                                        <p class="text-xl font-bold" style="color:var(--brand-foreground);"><span id="calc-result-annual">0</span><span class="text-xs ml-1" style="color:var(--brand-muted-foreground);">t CO2e/年</span></p>
+                                    </div>
+                                    <div class="rounded-lg p-4 border" style="background:var(--brand-card);border-color:var(--brand-border);">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">计入期总碳汇量</span>
+                                            <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:var(--brand-primary-light);">
+                                                <i data-lucide="layers" class="w-4 h-4" style="color:var(--brand-primary);"></i>
+                                            </div>
+                                        </div>
+                                        <p class="text-xl font-bold" style="color:var(--brand-foreground);"><span id="calc-result-total">0</span><span class="text-xs ml-1" style="color:var(--brand-muted-foreground);">t CO2e</span></p>
+                                    </div>
+                                    <div class="rounded-lg p-4 border" style="background:var(--brand-card);border-color:var(--brand-border);">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">预期总收入</span>
+                                            <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:var(--brand-primary-light);">
+                                                <i data-lucide="coins" class="w-4 h-4" style="color:var(--brand-primary);"></i>
+                                            </div>
+                                        </div>
+                                        <p class="text-xl font-bold" style="color:var(--brand-foreground);"><span id="calc-result-revenue">0</span><span class="text-xs ml-1" style="color:var(--brand-muted-foreground);">元</span></p>
+                                    </div>
+                                    <div class="rounded-lg p-4 border" style="background:var(--brand-card);border-color:var(--brand-border);">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">预估开发成本</span>
+                                            <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:var(--brand-primary-light);">
+                                                <i data-lucide="wallet" class="w-4 h-4" style="color:var(--brand-primary);"></i>
+                                            </div>
+                                        </div>
+                                        <p class="text-xl font-bold" style="color:var(--brand-foreground);"><span id="calc-result-cost">0</span><span class="text-xs ml-1" style="color:var(--brand-muted-foreground);">元</span></p>
+                                    </div>
                                 </div>
-                                <div class="flex items-center justify-between text-xs mt-1">
-                                    <span style="color:var(--brand-muted-foreground);">监测项目</span>
-                                    <span class="font-medium" style="color:var(--brand-foreground);">12 个</span>
+
+                                <!-- Net Revenue Highlight -->
+                                <div class="rounded-lg p-5 border flex items-center justify-between" style="background:var(--brand-primary-light);border-color:var(--brand-primary);">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:var(--brand-primary);">
+                                            <i data-lucide="trending-up" class="w-5 h-5" style="color:var(--brand-primary-foreground);"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs font-medium" style="color:var(--brand-primary-dark);">预估净收益</p>
+                                            <p class="text-xs" style="color:var(--brand-primary-dark);">总收入 - 开发成本</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-2xl font-bold" style="color:var(--brand-primary-dark);"><span id="calc-result-net">0</span><span class="text-sm ml-1">元</span></p>
                                 </div>
-                                <div class="flex items-center justify-between text-xs mt-1">
-                                    <span style="color:var(--brand-muted-foreground);">高风险项目</span>
-                                    <span class="font-medium" style="color:var(--state-error);">2 个</span>
+
+                                <!-- Revenue Chart -->
+                                <div class="rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <h2 class="text-sm font-semibold" style="color:var(--brand-foreground);">收入预测</h2>
+                                        <span class="text-xs px-2 py-1 rounded" style="background:var(--brand-primary-light);color:var(--brand-primary);">计入期内累计</span>
+                                    </div>
+                                    <div class="relative" style="height:300px;">
+                                        <canvas id="revenueChart"></canvas>
+                                    </div>
+                                </div>
+
+                                <!-- Breakdown Table -->
+                                <div class="rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);">
+                                    <h2 class="text-sm font-semibold mb-4" style="color:var(--brand-foreground);">年度碳汇量与收益明细</h2>
+                                    <div style="overflow-x:auto;">
+                                        <table class="data-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>年度</th>
+                                                    <th>年碳汇量</th>
+                                                    <th>年收入</th>
+                                                    <th>累计碳汇量</th>
+                                                    <th>累计收入</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="breakdown-tbody"></tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
 
-                <!-- Footer -->
-                <footer class="text-center py-4">
-                    <p class="text-xs" style="color:var(--brand-muted-foreground);">AI智能碳汇管理平台 v1.0 | AI模型: ResNet-50 遥感识别 | 方法学: CCER-14-001-V01</p>
-                </footer>
+                <!-- ==================== Tab 4: 监测报告 ==================== -->
+                <div id="tab-4" class="tab-content space-y-6">
+                    <!-- Report List View -->
+                    <div id="report-list-view">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <h2 class="text-sm font-semibold" style="color:var(--brand-foreground);">监测报告管理</h2>
+                                <p class="text-xs mt-0.5" style="color:var(--brand-muted-foreground);">查看和管理AI生成的碳汇监测报告</p>
+                            </div>
+                            <button class="btn-primary" onclick="showReportModal()">
+                                <i data-lucide="file-plus"></i>
+                                <span>生成新报告</span>
+                            </button>
+                        </div>
+                        <div class="rounded-lg border overflow-hidden" style="background:var(--brand-card);border-color:var(--brand-border);">
+                            <div style="overflow-x:auto;">
+                                <table class="data-table" style="white-space:nowrap;">
+                                    <thead>
+                                        <tr>
+                                            <th>报告编号</th>
+                                            <th>项目名称</th>
+                                            <th>报告类型</th>
+                                            <th>监测期间</th>
+                                            <th>生成日期</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="report-table-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Report Detail View (initially hidden) -->
+                    <div id="report-detail-view" class="detail-panel">
+                        <button class="detail-back-btn" onclick="showReportList()">
+                            <i data-lucide="arrow-left"></i>
+                            返回报告列表
+                        </button>
+                        <div id="report-detail-content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Generate New Report -->
+    <div id="report-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="flex items-center justify-between mb-5">
+                <h3 class="text-base font-semibold" style="color:var(--brand-foreground);">生成新报告</h3>
+                <button onclick="hideReportModal()" class="w-8 h-8 rounded-md flex items-center justify-center" style="background:var(--brand-muted);color:var(--brand-muted-foreground);cursor:pointer;">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="form-label">项目名称</label>
+                    <select id="modal-project" class="form-input">
+                        <option>福建三明造林碳汇项目</option>
+                        <option>云南普洱森林经营项目</option>
+                        <option>四川凉山竹林碳汇项目</option>
+                        <option>浙江安吉竹林项目</option>
+                        <option>内蒙古草原修复项目</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label">报告类型</label>
+                    <select id="modal-type" class="form-input">
+                        <option>年度监测报告</option>
+                        <option>季度报告</option>
+                        <option>变化检测报告</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label">监测期间</label>
+                    <input id="modal-period" type="text" class="form-input" placeholder="如：2026.01-2026.06" value="2026.01-2026.06">
+                </div>
+            </div>
+            <div class="flex items-center justify-end gap-3 mt-6">
+                <button onclick="hideReportModal()" class="btn-outline">取消</button>
+                <button onclick="confirmGenerateReport()" class="btn-primary">
+                    <i data-lucide="file-plus"></i>
+                    <span>确认生成</span>
+                </button>
             </div>
         </div>
     </div>
@@ -572,227 +1581,687 @@ body {
         }
 
         /* Charts layout */
-        .grid-cols-1.lg\\:grid-cols-3 {
+        .grid-cols-1.lg\:grid-cols-3 {
             display: grid;
             grid-template-columns: 1fr;
             gap: 16px;
         }
         @media (min-width: 1024px) {
-            .grid-cols-1.lg\\:grid-cols-3 { grid-template-columns: 2fr 1fr; }
+            .grid-cols-1.lg\:grid-cols-3 { grid-template-columns: 2fr 1fr; }
         }
 
         /* Risk assessment grid */
-        #risk-assessment .grid-cols-1.lg\\:grid-cols-4 {
+        #risk-assessment .grid-cols-1.lg\:grid-cols-4 {
             display: grid;
             grid-template-columns: 1fr;
             gap: 16px;
         }
         @media (min-width: 1024px) {
-            #risk-assessment .grid-cols-1.lg\\:grid-cols-4 { grid-template-columns: 3fr 1fr; }
-        }
-
-        /* Card base */
-        .rounded-lg {
-            border-radius: var(--brand-radius-md);
-        }
-        .rounded-md {
-            border-radius: var(--brand-radius-sm);
-        }
-        .rounded-full {
-            border-radius: 9999px;
-        }
-
-        /* Sidebar responsive - hide on small screens */
-        @media (max-width: 767px) {
-            [data-viewport-mode="app-shell"] > aside {
-                display: none;
-            }
+            #risk-assessment .grid-cols-1.lg\:grid-cols-4 { grid-template-columns: 3fr 1fr; }
         }
     </style>
 
     <script>
     (function() {
-        // Set current date
+        // ===== Set current date =====
         var now = new Date();
-        var options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
-        var dateEl = document.getElementById('header-date');
-        if (dateEl) dateEl.textContent = now.toLocaleDateString('zh-CN', options);
+        var dateOptions = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
 
-        // Carbon Sink Prediction Chart
-        var predCtx = document.getElementById('predictionChart');
-        if (predCtx) {
-            var months = ['9月','10月','11月','12月','1月','2月','3月','4月','5月','6月','7月','8月'];
-            var historical = [16.2, 17.5, 16.8, 18.0, null, null, null, null, null, null, null, null];
-            var predicted = [null, null, null, null, 18.5, 19.2, 20.0, 20.8, 21.5, 22.3, 23.0, 23.8];
-            var upperBound = [null, null, null, null, 19.3, 20.2, 21.2, 22.2, 23.1, 24.1, 25.0, 26.0];
-            var lowerBound = [null, null, null, null, 17.7, 18.2, 18.8, 19.4, 19.9, 20.5, 21.0, 21.6];
+        // ===== Global state =====
+        var chartInstances = {};
+        var currentStep = 1;
+        var recognitionDone = false;
 
-            new Chart(predCtx, {
-                type: 'line',
-                data: {
-                    labels: months,
-                    datasets: [
-                        {
-                            label: '历史碳汇量',
-                            data: historical,
-                            borderColor: '#94A3B8',
-                            backgroundColor: 'transparent',
-                            borderWidth: 2,
-                            borderDash: [],
-                            pointBackgroundColor: '#94A3B8',
-                            pointRadius: 3,
-                            pointHoverRadius: 5,
-                            tension: 0.3,
-                            spanGaps: false
+        // ===== Tab Switching =====
+        window.switchTab = function(tabNum) {
+            var tabs = document.querySelectorAll('.tab-content');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            var target = document.getElementById('tab-' + tabNum);
+            if (target) target.classList.add('active');
+
+            var btns = document.querySelectorAll('.tab-btn');
+            for (var j = 0; j < btns.length; j++) {
+                btns[j].classList.remove('active');
+            }
+            if (btns[tabNum - 1]) btns[tabNum - 1].classList.add('active');
+
+            // Resize charts in the now-visible tab
+            setTimeout(function() {
+                if (tabNum === 1) {
+                    if (chartInstances.prediction) chartInstances.prediction.resize();
+                    if (chartInstances.landType) chartInstances.landType.resize();
+                    if (chartInstances.riskTrend) chartInstances.riskTrend.resize();
+                }
+                if (tabNum === 2 && chartInstances.biomass) chartInstances.biomass.resize();
+                if (tabNum === 3 && chartInstances.revenue) chartInstances.revenue.resize();
+            }, 50);
+
+            lucide.createIcons();
+        };
+
+        // ===== Tab 1 Charts =====
+        function initTab1Charts() {
+            // Carbon Sink Prediction Chart
+            var predCtx = document.getElementById('predictionChart');
+            if (predCtx) {
+                var months = ['9月','10月','11月','12月','1月','2月','3月','4月','5月','6月','7月','8月'];
+                var historical = [16.2, 17.5, 16.8, 18.0, null, null, null, null, null, null, null, null];
+                var predicted = [null, null, null, null, 18.5, 19.2, 20.0, 20.8, 21.5, 22.3, 23.0, 23.8];
+                var upperBound = [null, null, null, null, 19.3, 20.2, 21.2, 22.2, 23.1, 24.1, 25.0, 26.0];
+                var lowerBound = [null, null, null, null, 17.7, 18.2, 18.8, 19.4, 19.9, 20.5, 21.0, 21.6];
+
+                chartInstances.prediction = new Chart(predCtx, {
+                    type: 'line',
+                    data: {
+                        labels: months,
+                        datasets: [
+                            {
+                                label: '历史碳汇量',
+                                data: historical,
+                                borderColor: '#94A3B8',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2,
+                                pointBackgroundColor: '#94A3B8',
+                                pointRadius: 3,
+                                pointHoverRadius: 5,
+                                tension: 0.3,
+                                spanGaps: false
+                            },
+                            {
+                                label: '预测碳汇量',
+                                data: predicted,
+                                borderColor: '#0D9488',
+                                backgroundColor: 'transparent',
+                                borderWidth: 2.5,
+                                pointBackgroundColor: '#0D9488',
+                                pointRadius: 4,
+                                pointHoverRadius: 6,
+                                tension: 0.3,
+                                spanGaps: false
+                            },
+                            {
+                                label: '置信区间上界',
+                                data: upperBound,
+                                borderColor: 'rgba(13,148,136,0.3)',
+                                backgroundColor: 'transparent',
+                                borderWidth: 1,
+                                borderDash: [4, 4],
+                                pointRadius: 0,
+                                tension: 0.3,
+                                spanGaps: false,
+                                fill: false
+                            },
+                            {
+                                label: '置信区间下界',
+                                data: lowerBound,
+                                borderColor: 'rgba(13,148,136,0.3)',
+                                backgroundColor: 'rgba(13,148,136,0.08)',
+                                borderWidth: 1,
+                                borderDash: [4, 4],
+                                pointRadius: 0,
+                                tension: 0.3,
+                                spanGaps: false,
+                                fill: '+1'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(ctx) {
+                                        if (ctx.dataset.label === '置信区间上界' || ctx.dataset.label === '置信区间下界') return null;
+                                        return ctx.dataset.label + ': ' + ctx.parsed.y + ' 万吨CO2e';
+                                    }
+                                }
+                            }
                         },
-                        {
-                            label: '预测碳汇量',
-                            data: predicted,
-                            borderColor: '#0D9488',
-                            backgroundColor: 'transparent',
-                            borderWidth: 2.5,
-                            pointBackgroundColor: '#0D9488',
-                            pointRadius: 4,
-                            pointHoverRadius: 6,
-                            tension: 0.3,
-                            spanGaps: false
-                        },
-                        {
-                            label: '置信区间上界',
-                            data: upperBound,
-                            borderColor: 'rgba(13,148,136,0.3)',
-                            backgroundColor: 'transparent',
-                            borderWidth: 1,
-                            borderDash: [4, 4],
-                            pointRadius: 0,
-                            tension: 0.3,
-                            spanGaps: false,
-                            fill: false
-                        },
-                        {
-                            label: '置信区间下界',
-                            data: lowerBound,
-                            borderColor: 'rgba(13,148,136,0.3)',
-                            backgroundColor: 'rgba(13,148,136,0.08)',
-                            borderWidth: 1,
-                            borderDash: [4, 4],
-                            pointRadius: 0,
-                            tension: 0.3,
-                            spanGaps: false,
-                            fill: '+1'
+                        scales: {
+                            x: {
+                                grid: { display: false },
+                                ticks: { color: '#94A3B8', font: { size: 11 } }
+                            },
+                            y: {
+                                beginAtZero: false,
+                                min: 14,
+                                max: 28,
+                                grid: { color: 'rgba(226,232,240,0.6)' },
+                                ticks: { color: '#94A3B8', font: { size: 11 }, callback: function(v) { return v + ' 万吨'; } }
+                            }
                         }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: { mode: 'index', intersect: false },
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            callbacks: {
-                                label: function(ctx) {
-                                    if (ctx.dataset.label === '置信区间上界' || ctx.dataset.label === '置信区间下界') return null;
-                                    return ctx.dataset.label + ': ' + ctx.parsed.y + ' 万吨CO2e';
+                    }
+                });
+            }
+
+            // Land Type Doughnut Chart
+            var landCtx = document.getElementById('landTypeChart');
+            if (landCtx) {
+                chartInstances.landType = new Chart(landCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['乔木林', '灌木林', '竹林', '草地', '其他'],
+                        datasets: [{
+                            data: [45, 20, 15, 10, 10],
+                            backgroundColor: ['#0D9488', '#06B6D4', '#F59E0B', '#6366F1', '#EC4899'],
+                            borderColor: '#FFFFFF',
+                            borderWidth: 2,
+                            hoverBorderWidth: 3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        cutout: '65%',
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(ctx) { return ctx.label + ': ' + ctx.parsed + '%'; }
                                 }
                             }
                         }
+                    }
+                });
+            }
+
+            // Risk Trend Mini Chart
+            var riskCtx = document.getElementById('riskTrendChart');
+            if (riskCtx) {
+                var riskLabels = ['1月','2月','3月','4月','5月','6月','7月','8月'];
+                var riskData = [48, 52, 55, 60, 58, 62, 56, 54];
+                chartInstances.riskTrend = new Chart(riskCtx, {
+                    type: 'line',
+                    data: {
+                        labels: riskLabels,
+                        datasets: [{
+                            data: riskData,
+                            borderColor: '#F59E0B',
+                            backgroundColor: 'rgba(245,158,11,0.08)',
+                            borderWidth: 2,
+                            pointBackgroundColor: '#F59E0B',
+                            pointRadius: 2,
+                            pointHoverRadius: 4,
+                            tension: 0.4,
+                            fill: true
+                        }]
                     },
-                    scales: {
-                        x: {
-                            grid: { display: false },
-                            ticks: { color: '#94A3B8', font: { size: 11 } },
-                            title: { display: true, text: '2025-2026', color: '#94A3B8', font: { size: 11 } }
-                        },
-                        y: {
-                            beginAtZero: false,
-                            min: 14,
-                            max: 28,
-                            grid: { color: 'rgba(226,232,240,0.6)' },
-                            ticks: { color: '#94A3B8', font: { size: 11 }, callback: function(v) { return v + ' 万吨'; } }
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { display: false, grid: { display: false } },
+                            y: { display: false, min: 30, max: 70, grid: { display: false } }
                         }
                     }
-                }
-            });
+                });
+            }
         }
 
-        // Land Type Doughnut Chart
-        var landCtx = document.getElementById('landTypeChart');
-        if (landCtx) {
-            new Chart(landCtx, {
+        // Initialize Tab 1 charts immediately (default visible tab)
+        initTab1Charts();
+
+        // ===== Tab 2: Workflow Stepper =====
+        var projectData = {
+            sanming: { area: '856.3 公顷', species: '杉木、马尾松', type: '造林碳汇', name: '福建三明造林碳汇项目' },
+            puer: { area: '1,240.5 公顷', species: '思茅松、栎类', type: '森林经营', name: '云南普洱森林经营项目' },
+            liangshan: { area: '620.8 公顷', species: '毛竹、慈竹', type: '竹林碳汇', name: '四川凉山竹林碳汇项目' },
+            neimeng: { area: '3,500.0 公顷', species: '羊草、克氏针茅', type: '草地碳汇', name: '内蒙古草原修复项目' }
+        };
+
+        window.updateProjectInfo = function() {
+            var sel = document.getElementById('workflow-project');
+            if (!sel) return;
+            var data = projectData[sel.value] || projectData.sanming;
+            var areaEl = document.getElementById('project-area');
+            var speciesEl = document.getElementById('project-species');
+            var typeEl = document.getElementById('project-type');
+            var reportNameEl = document.getElementById('report-project-name');
+            if (areaEl) areaEl.textContent = data.area;
+            if (speciesEl) speciesEl.textContent = data.species;
+            if (typeEl) typeEl.textContent = data.type;
+            if (reportNameEl) reportNameEl.textContent = data.name;
+        };
+
+        window.goToStep = function(step) {
+            for (var i = 1; i <= 5; i++) {
+                var el = document.getElementById('step-' + i);
+                if (el) el.style.display = (i === step) ? 'block' : 'none';
+            }
+            for (var j = 1; j <= 5; j++) {
+                var circle = document.getElementById('step-circle-' + j);
+                var label = document.getElementById('step-label-' + j);
+                var connector = document.getElementById('step-connector-' + j);
+                if (circle) {
+                    circle.classList.remove('completed', 'current');
+                    if (j < step) circle.classList.add('completed');
+                    else if (j === step) circle.classList.add('current');
+                }
+                if (label) {
+                    label.classList.remove('active', 'done');
+                    if (j < step) label.classList.add('done');
+                    else if (j === step) label.classList.add('active');
+                }
+                if (connector) {
+                    if (j < step) connector.classList.add('completed');
+                    else connector.classList.remove('completed');
+                }
+            }
+            var prevBtn = document.getElementById('step-prev');
+            var nextBtn = document.getElementById('step-next');
+            var currentLabel = document.getElementById('step-current');
+            if (prevBtn) prevBtn.style.visibility = (step === 1) ? 'hidden' : 'visible';
+            if (nextBtn) nextBtn.style.visibility = (step === 5) ? 'hidden' : 'visible';
+            if (currentLabel) currentLabel.textContent = step;
+            if (step === 3 && !chartInstances.biomass) initBiomassChart();
+            currentStep = step;
+            lucide.createIcons();
+        };
+
+        window.nextStep = function() {
+            if (currentStep < 5) goToStep(currentStep + 1);
+        };
+
+        window.prevStep = function() {
+            if (currentStep > 1) goToStep(currentStep - 1);
+        };
+
+        window.startRecognition = function() {
+            if (recognitionDone) {
+                goToStep(2);
+                var resultsSection = document.getElementById('recognition-results');
+                if (resultsSection) resultsSection.style.display = 'block';
+                return;
+            }
+            var startBtn = document.getElementById('start-recognition-btn');
+            var progressSection = document.getElementById('recognition-progress');
+            if (startBtn) startBtn.style.display = 'none';
+            if (progressSection) progressSection.style.display = 'block';
+            goToStep(2);
+
+            var fill = document.getElementById('progress-fill');
+            var statusText = document.getElementById('recognition-status');
+            var percentText = document.getElementById('recognition-percent');
+            var progress = 0;
+            var statuses = [
+                { threshold: 0, text: '正在加载卫星影像...' },
+                { threshold: 25, text: 'ResNet-50模型推理中...' },
+                { threshold: 50, text: '树种分类中...' },
+                { threshold: 90, text: '识别完成' }
+            ];
+
+            var interval = setInterval(function() {
+                progress += 2;
+                if (progress > 100) progress = 100;
+                if (fill) fill.style.width = progress + '%';
+                if (percentText) percentText.textContent = Math.round(progress) + '%';
+                for (var i = statuses.length - 1; i >= 0; i--) {
+                    if (progress >= statuses[i].threshold) {
+                        if (statusText) statusText.textContent = statuses[i].text;
+                        break;
+                    }
+                }
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(function() {
+                        if (progressSection) progressSection.style.display = 'none';
+                        var resultsSection = document.getElementById('recognition-results');
+                        if (resultsSection) resultsSection.style.display = 'block';
+                        recognitionDone = true;
+                        initSpeciesChart();
+                        lucide.createIcons();
+                    }, 500);
+                }
+            }, 60);
+        };
+
+        function initSpeciesChart() {
+            var ctx = document.getElementById('speciesChart');
+            if (!ctx || chartInstances.species) return;
+            chartInstances.species = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['乔木林', '灌木林', '竹林', '草地', '其他'],
+                    labels: ['杉木', '马尾松', '阔叶树', '其他'],
                     datasets: [{
-                        data: [45, 20, 15, 10, 10],
-                        backgroundColor: [
-                            '#0D9488',
-                            '#06B6D4',
-                            '#F59E0B',
-                            '#6366F1',
-                            '#EC4899'
-                        ],
-                        borderColor: 'var(--brand-card)',
-                        borderWidth: 2,
-                        hoverBorderWidth: 3
+                        data: [45, 25, 20, 10],
+                        backgroundColor: ['#0D9488', '#06B6D4', '#F59E0B', '#6366F1'],
+                        borderColor: '#FFFFFF',
+                        borderWidth: 2
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    cutout: '65%',
+                    cutout: '60%',
                     plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            callbacks: {
-                                label: function(ctx) { return ctx.label + ': ' + ctx.parsed + '%'; }
-                            }
+                        legend: {
+                            position: 'bottom',
+                            labels: { usePointStyle: true, padding: 15, font: { size: 11 }, color: '#64748B' }
                         }
                     }
                 }
             });
         }
 
-        // Risk Trend Mini Chart
-        var riskCtx = document.getElementById('riskTrendChart');
-        if (riskCtx) {
-            var riskLabels = ['1月','2月','3月','4月','5月','6月','7月','8月'];
-            var riskData = [48, 52, 55, 60, 58, 62, 56, 54];
-            new Chart(riskCtx, {
+        function initBiomassChart() {
+            var ctx = document.getElementById('biomassChart');
+            if (!ctx) return;
+            chartInstances.biomass = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['高密度区', '中密度区', '低密度区'],
+                    datasets: [{
+                        label: '总生物量 (t)',
+                        data: [46592, 27524, 13338],
+                        backgroundColor: ['rgba(13,148,136,0.8)', 'rgba(6,182,212,0.8)', 'rgba(245,158,11,0.8)'],
+                        borderColor: ['#0D9488', '#06B6D4', '#F59E0B'],
+                        borderWidth: 1.5,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) { return '总生物量: ' + ctx.parsed.y.toLocaleString('zh-CN') + ' t'; }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { grid: { display: false }, ticks: { color: '#94A3B8', font: { size: 11 } } },
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(226,232,240,0.6)' },
+                            ticks: { color: '#94A3B8', font: { size: 11 }, callback: function(v) { return v.toLocaleString('zh-CN'); } }
+                        }
+                    }
+                }
+            });
+        }
+
+        window.exportReport = function() {
+            alert('报告生成中...');
+        };
+
+        window.resetWorkflow = function() {
+            currentStep = 1;
+            recognitionDone = false;
+            var progressSection = document.getElementById('recognition-progress');
+            var resultsSection = document.getElementById('recognition-results');
+            var startBtn = document.getElementById('start-recognition-btn');
+            if (progressSection) progressSection.style.display = 'none';
+            if (resultsSection) resultsSection.style.display = 'none';
+            if (startBtn) startBtn.style.display = 'inline-flex';
+            var fill = document.getElementById('progress-fill');
+            if (fill) fill.style.width = '0%';
+            var percentText = document.getElementById('recognition-percent');
+            if (percentText) percentText.textContent = '0%';
+            var statusText = document.getElementById('recognition-status');
+            if (statusText) statusText.textContent = '正在加载卫星影像...';
+            goToStep(1);
+        };
+
+        // ===== Tab 3: Calculator =====
+        var growthRates = {
+            '杉木': 12.5, '马尾松': 10.8, '杨树': 15.2, '桉树': 18.5, '毛竹': 22.0, '混交林': 13.0
+        };
+        var provinceFactors = {
+            '福建': 1.15, '云南': 1.08, '四川': 0.95, '广西': 1.12, '江西': 1.05, '浙江': 1.10, '内蒙古': 0.80
+        };
+
+        function formatNum(num) {
+            return parseFloat(num).toLocaleString('zh-CN');
+        }
+
+        window.calculateAssessment = function() {
+            var area = parseFloat(document.getElementById('calc-area').value) || 0;
+            var species = document.getElementById('calc-species').value;
+            var province = document.getElementById('calc-province').value;
+            var period = parseInt(document.getElementById('calc-period').value);
+            var price = parseFloat(document.getElementById('calc-price').value) || 0;
+
+            var growthRate = growthRates[species] || 12.5;
+            var provinceFactor = provinceFactors[province] || 1.0;
+            var annualBiomass = growthRate * area * provinceFactor;
+            var annualCarbon = annualBiomass * 0.47 * 3.667;
+            var totalCarbon = annualCarbon * period;
+            var revenue = totalCarbon * price;
+            var cost = area * 500;
+            var netRevenue = revenue - cost;
+
+            document.getElementById('calc-result-annual').textContent = formatNum(annualCarbon.toFixed(0));
+            document.getElementById('calc-result-total').textContent = formatNum(totalCarbon.toFixed(0));
+            document.getElementById('calc-result-revenue').textContent = formatNum(revenue.toFixed(0));
+            document.getElementById('calc-result-cost').textContent = formatNum(cost.toFixed(0));
+            document.getElementById('calc-result-net').textContent = formatNum(netRevenue.toFixed(0));
+
+            document.getElementById('calc-placeholder').style.display = 'none';
+            document.getElementById('calc-results').style.display = 'block';
+
+            drawRevenueChart(period, annualCarbon, price);
+            drawBreakdownTable(period, annualCarbon, price);
+            lucide.createIcons();
+        };
+
+        function drawRevenueChart(period, annualCarbon, price) {
+            var ctx = document.getElementById('revenueChart');
+            if (!ctx) return;
+            if (chartInstances.revenue) chartInstances.revenue.destroy();
+
+            var labels = [];
+            var data = [];
+            var cumulative = 0;
+            for (var y = 1; y <= period; y++) {
+                labels.push('第' + y + '年');
+                cumulative += annualCarbon * price;
+                data.push(cumulative);
+            }
+
+            var gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 300);
+            gradient.addColorStop(0, 'rgba(13,148,136,0.2)');
+            gradient.addColorStop(1, 'rgba(13,148,136,0.0)');
+
+            chartInstances.revenue = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: riskLabels,
+                    labels: labels,
                     datasets: [{
-                        data: riskData,
-                        borderColor: '#F59E0B',
-                        backgroundColor: 'rgba(245,158,11,0.08)',
-                        borderWidth: 2,
-                        pointBackgroundColor: '#F59E0B',
-                        pointRadius: 2,
-                        pointHoverRadius: 4,
-                        tension: 0.4,
+                        label: '累计收入 (元)',
+                        data: data,
+                        borderColor: '#0D9488',
+                        backgroundColor: gradient,
+                        borderWidth: 2.5,
+                        pointBackgroundColor: '#0D9488',
+                        pointRadius: 3,
+                        pointHoverRadius: 5,
+                        tension: 0.3,
                         fill: true
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: {
-                            display: false,
-                            grid: { display: false }
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { usePointStyle: true, padding: 20, font: { size: 12 }, color: '#64748B' }
                         },
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) { return '累计收入: ' + ctx.parsed.y.toLocaleString('zh-CN') + ' 元'; }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { grid: { display: false }, ticks: { color: '#94A3B8', font: { size: 11 } } },
                         y: {
-                            display: false,
-                            min: 30,
-                            max: 70,
-                            grid: { display: false }
+                            beginAtZero: true,
+                            grid: { color: 'rgba(226,232,240,0.6)' },
+                            ticks: {
+                                color: '#94A3B8', font: { size: 11 },
+                                callback: function(v) { return (v / 10000).toFixed(0) + '万'; }
+                            }
                         }
                     }
                 }
             });
         }
+
+        function drawBreakdownTable(period, annualCarbon, price) {
+            var tbody = document.getElementById('breakdown-tbody');
+            if (!tbody) return;
+            var html = '';
+            var step = period <= 10 ? 1 : Math.ceil(period / 10);
+            for (var y = 1; y <= period; y += step) {
+                var yearlyRevenue = annualCarbon * price;
+                var cumulativeCarbon = y * annualCarbon;
+                var cumulativeRevenue = cumulativeCarbon * price;
+                html += '<tr>';
+                html += '<td style="font-weight:600;color:var(--brand-foreground);">第' + y + '年</td>';
+                html += '<td style="color:var(--brand-muted-foreground);">' + formatNum(annualCarbon.toFixed(0)) + ' t CO2e</td>';
+                html += '<td style="color:var(--brand-muted-foreground);">' + formatNum(yearlyRevenue.toFixed(0)) + ' 元</td>';
+                html += '<td style="color:var(--brand-primary);font-weight:600;">' + formatNum(cumulativeCarbon.toFixed(0)) + ' t CO2e</td>';
+                html += '<td style="color:var(--brand-primary);font-weight:600;">' + formatNum(cumulativeRevenue.toFixed(0)) + ' 元</td>';
+                html += '</tr>';
+            }
+            if (step > 1 && period % step !== 0) {
+                var cumulativeCarbon = period * annualCarbon;
+                var cumulativeRevenue = cumulativeCarbon * price;
+                html += '<tr>';
+                html += '<td style="font-weight:600;color:var(--brand-foreground);">第' + period + '年</td>';
+                html += '<td style="color:var(--brand-muted-foreground);">' + formatNum(annualCarbon.toFixed(0)) + ' t CO2e</td>';
+                html += '<td style="color:var(--brand-muted-foreground);">' + formatNum((annualCarbon * price).toFixed(0)) + ' 元</td>';
+                html += '<td style="color:var(--brand-primary);font-weight:600;">' + formatNum(cumulativeCarbon.toFixed(0)) + ' t CO2e</td>';
+                html += '<td style="color:var(--brand-primary);font-weight:600;">' + formatNum(cumulativeRevenue.toFixed(0)) + ' 元</td>';
+                html += '</tr>';
+            }
+            tbody.innerHTML = html;
+        }
+
+        // ===== Tab 4: Report Management =====
+        var reportsData = [
+            { id: 'CCER-RPT-2026-001', name: '福建三明造林碳汇项目', type: '年度监测报告', period: '2025.06-2026.05', date: '2026-06-15', status: '已审核', area: '856.3', accuracy: '96.8%', biomass: '87,454', carbon: '41,103', co2: '150,711', annual: '15,071', summary: '本项目通过AI遥感技术结合ResNet-50深度学习模型，对福建三明造林碳汇项目区域进行了全面监测。监测期间未发现重大碳汇逆转事件，项目碳汇量稳定增长。建议继续按年度开展遥感监测，重点关注项目边界变化与病虫害风险。' },
+            { id: 'CCER-RPT-2026-002', name: '云南普洱森林经营项目', type: '年度监测报告', period: '2025.06-2026.05', date: '2026-06-15', status: '待审核', area: '1,240.5', accuracy: '95.2%', biomass: '102,330', carbon: '48,095', co2: '176,349', annual: '17,635', summary: '本项目通过AI遥感技术对云南普洱森林经营项目区域进行了全面监测。监测期间发现局部区域NDVI指数略有下降，疑似受旱季影响。建议加强旱季监测频次，关注植被恢复情况。' },
+            { id: 'CCER-RPT-2026-003', name: '四川凉山竹林碳汇项目', type: '季度报告', period: '2026.04-2026.06', date: '2026-07-10', status: '已审核', area: '620.8', accuracy: '97.3%', biomass: '38,520', carbon: '18,104', co2: '66,382', annual: '8,298', summary: '本季度监测显示四川凉山竹林碳汇项目区域竹林长势良好，新竹面积增加15.6公顷。AI识别模型检测到松材线虫病预警信号，已通知项目方进行实地核查。' },
+            { id: 'CCER-RPT-2026-004', name: '浙江安吉竹林项目', type: '变化检测报告', period: '2026.07', date: '2026-08-01', status: '生成中', area: '—', accuracy: '—', biomass: '—', carbon: '—', co2: '—', annual: '—', summary: '报告生成中，请稍候查看。' },
+            { id: 'CCER-RPT-2026-005', name: '内蒙古草原修复项目', type: '年度监测报告', period: '2025.06-2026.05', date: '2026-06-20', status: '已审核', area: '3,500.0', accuracy: '94.5%', biomass: '28,560', carbon: '13,423', co2: '49,218', annual: '4,922', summary: '本项目通过AI遥感技术对内蒙古草原修复项目区域进行了全面监测。监测期间草原植被恢复良好，覆盖度提升12.5%。建议持续关注过度放牧风险，加强草畜平衡管理。' }
+        ];
+
+        function renderReportTable() {
+            var tbody = document.getElementById('report-table-body');
+            if (!tbody) return;
+            var html = '';
+            for (var i = 0; i < reportsData.length; i++) {
+                var r = reportsData[i];
+                var badgeClass = 'badge-muted';
+                if (r.status === '已审核') badgeClass = 'badge-success';
+                else if (r.status === '待审核') badgeClass = 'badge-warning';
+                else if (r.status === '生成中') badgeClass = 'badge-info';
+
+                var actionHtml = r.status === '生成中'
+                    ? '<span style="color:var(--brand-muted-foreground);">—</span>'
+                    : '<a href="javascript:void(0)" onclick="showReportDetail(' + i + ')" style="color:var(--brand-primary);font-weight:500;cursor:pointer;text-decoration:none;">查看详情</a>';
+
+                html += '<tr>';
+                html += '<td style="font-weight:600;color:var(--brand-foreground);">' + r.id + '</td>';
+                html += '<td style="color:var(--brand-foreground);">' + r.name + '</td>';
+                html += '<td style="color:var(--brand-muted-foreground);">' + r.type + '</td>';
+                html += '<td style="color:var(--brand-muted-foreground);">' + r.period + '</td>';
+                html += '<td style="color:var(--brand-muted-foreground);">' + r.date + '</td>';
+                html += '<td><span class="badge ' + badgeClass + '">' + r.status + '</span></td>';
+                html += '<td>' + actionHtml + '</td>';
+                html += '</tr>';
+            }
+            tbody.innerHTML = html;
+        }
+
+        window.showReportDetail = function(index) {
+            var r = reportsData[index];
+            if (!r) return;
+            document.getElementById('report-list-view').style.display = 'none';
+            document.getElementById('report-detail-view').classList.add('active');
+
+            var h = '';
+            h += '<div class="rounded-lg border p-6 space-y-5" style="background:var(--brand-card);border-color:var(--brand-border);">';
+            h += '<div class="text-center mb-2">';
+            h += '<h3 class="text-base font-bold" style="color:var(--brand-foreground);">CCER ' + r.type + '</h3>';
+            h += '<p class="text-xs mt-1" style="color:var(--brand-muted-foreground);">报告编号：' + r.id + '</p>';
+            h += '</div>';
+            h += '<div class="grid grid-cols-2 gap-4 text-sm p-4 rounded-md" style="background:var(--brand-muted);">';
+            h += '<div><span style="color:var(--brand-muted-foreground);">项目名称：</span><span style="color:var(--brand-foreground);font-weight:500;">' + r.name + '</span></div>';
+            h += '<div><span style="color:var(--brand-muted-foreground);">报告类型：</span><span style="color:var(--brand-foreground);font-weight:500;">' + r.type + '</span></div>';
+            h += '<div><span style="color:var(--brand-muted-foreground);">监测期间：</span><span style="color:var(--brand-foreground);font-weight:500;">' + r.period + '</span></div>';
+            h += '<div><span style="color:var(--brand-muted-foreground);">生成日期：</span><span style="color:var(--brand-foreground);font-weight:500;">' + r.date + '</span></div>';
+            h += '<div><span style="color:var(--brand-muted-foreground);">报告状态：</span><span style="color:var(--brand-foreground);font-weight:500;">' + r.status + '</span></div>';
+            h += '<div><span style="color:var(--brand-muted-foreground);">监测方法：</span><span style="color:var(--brand-foreground);font-weight:500;">AI遥感识别 + 样地校验</span></div>';
+            h += '</div>';
+            h += '<table class="data-table">';
+            h += '<thead><tr><th>监测指标</th><th>数值</th><th>单位</th></tr></thead>';
+            h += '<tbody>';
+            h += '<tr><td style="font-weight:600;color:var(--brand-foreground);">监测面积</td><td style="color:var(--brand-foreground);">' + r.area + '</td><td style="color:var(--brand-muted-foreground);">公顷</td></tr>';
+            h += '<tr><td style="font-weight:600;color:var(--brand-foreground);">AI识别精度</td><td style="color:var(--brand-foreground);">' + r.accuracy + '</td><td style="color:var(--brand-muted-foreground);">%</td></tr>';
+            h += '<tr><td style="font-weight:600;color:var(--brand-foreground);">总生物量</td><td style="color:var(--brand-foreground);">' + r.biomass + '</td><td style="color:var(--brand-muted-foreground);">t</td></tr>';
+            h += '<tr><td style="font-weight:600;color:var(--brand-foreground);">总碳储量</td><td style="color:var(--brand-foreground);">' + r.carbon + '</td><td style="color:var(--brand-muted-foreground);">t C</td></tr>';
+            h += '<tr><td style="font-weight:600;color:var(--brand-foreground);">CO2当量</td><td style="color:var(--brand-foreground);">' + r.co2 + '</td><td style="color:var(--brand-muted-foreground);">t CO2e</td></tr>';
+            h += '<tr><td style="font-weight:600;color:var(--brand-foreground);">年均碳汇量</td><td style="color:var(--brand-foreground);">' + r.annual + '</td><td style="color:var(--brand-muted-foreground);">t CO2e/年</td></tr>';
+            h += '</tbody>';
+            h += '</table>';
+            h += '<div class="p-4 rounded-md" style="background:var(--brand-muted);">';
+            h += '<p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">' + r.summary + '</p>';
+            h += '</div>';
+            h += '</div>';
+
+            document.getElementById('report-detail-content').innerHTML = h;
+            var scrollEl = document.querySelector('[data-scroll-region="primary"] .flex-1.overflow-y-auto');
+            if (scrollEl) scrollEl.scrollTop = 0;
+            lucide.createIcons();
+        };
+
+        window.showReportList = function() {
+            document.getElementById('report-detail-view').classList.remove('active');
+            document.getElementById('report-list-view').style.display = 'block';
+            var scrollEl = document.querySelector('[data-scroll-region="primary"] .flex-1.overflow-y-auto');
+            if (scrollEl) scrollEl.scrollTop = 0;
+            lucide.createIcons();
+        };
+
+        window.showReportModal = function() {
+            var modal = document.getElementById('report-modal');
+            if (modal) modal.classList.add('active');
+        };
+
+        window.hideReportModal = function() {
+            var modal = document.getElementById('report-modal');
+            if (modal) modal.classList.remove('active');
+        };
+
+        window.confirmGenerateReport = function() {
+            var project = document.getElementById('modal-project').value;
+            var type = document.getElementById('modal-type').value;
+            var period = document.getElementById('modal-period').value;
+            var newId = 'CCER-RPT-2026-' + String(reportsData.length + 1).padStart(3, '0');
+            reportsData.unshift({
+                id: newId, name: project, type: type, period: period, date: '2026-08-20',
+                status: '生成中', area: '—', accuracy: '—', biomass: '—', carbon: '—', co2: '—', annual: '—',
+                summary: '报告生成中，请稍候查看。'
+            });
+            renderReportTable();
+            hideReportModal();
+            lucide.createIcons();
+            alert('报告 "' + newId + '" 已提交生成，请稍后在列表中查看。');
+        };
+
+        renderReportTable();
+
     })();
     </script>
 
