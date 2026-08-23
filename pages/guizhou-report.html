@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>云南省碳汇潜力分析报告 - AI智能碳汇管理平台</title>
+    <title>贵州省碳汇潜力分析报告 - AI智能碳汇管理平台</title>
     <style id="theme-vars">
 /* ===== AI智能碳汇管理平台 - CCER Platform Design Tokens ===== */
 /* 简约商务风 - 专业沉稳的碳汇管理平台 */
@@ -14,8 +14,6 @@
   --brand-foreground: #1E293B;
   --brand-card: #FFFFFF;
   --brand-card-foreground: #1E293B;
-  --brand-popover: #FFFFFF;
-  --brand-popover-foreground: #1E293B;
   --brand-muted: #F1F5F9;
   --brand-muted-foreground: #64748B;
 
@@ -71,8 +69,6 @@ body {
     --color-foreground: var(--brand-foreground);
     --color-card: var(--brand-card);
     --color-card-foreground: var(--brand-card-foreground);
-    --color-popover: var(--brand-popover);
-    --color-popover-foreground: var(--brand-popover-foreground);
     --color-primary: var(--brand-primary);
     --color-primary-foreground: var(--brand-primary-foreground);
     --color-muted: var(--brand-muted);
@@ -112,14 +108,6 @@ body {
       .text-card-foreground { color: var(--brand-card-foreground); }
       .border-card-foreground { border-color: var(--brand-card-foreground); }
       .ring-card-foreground { --tw-ring-color: var(--brand-card-foreground); }
-      .bg-popover { background-color: var(--brand-popover); }
-      .text-popover { color: var(--brand-popover); }
-      .border-popover { border-color: var(--brand-popover); }
-      .ring-popover { --tw-ring-color: var(--brand-popover); }
-      .bg-popover-foreground { background-color: var(--brand-popover-foreground); }
-      .text-popover-foreground { color: var(--brand-popover-foreground); }
-      .border-popover-foreground { border-color: var(--brand-popover-foreground); }
-      .ring-popover-foreground { --tw-ring-color: var(--brand-popover-foreground); }
       .bg-primary { background-color: var(--brand-primary); }
       .text-primary { color: var(--brand-primary); }
       .border-primary { border-color: var(--brand-primary); }
@@ -290,38 +278,6 @@ body {
         margin-right: 4px;
         margin-bottom: 4px;
       }
-      /* Roadmap step arrow */
-      .step-arrow {
-        display: flex;
-        align-items: center;
-        color: var(--brand-primary);
-        opacity: 0.5;
-      }
-      /* Province selector pills */
-      .province-pill {
-        display: inline-flex;
-        align-items: center;
-        padding: 6px 18px;
-        border-radius: 9999px;
-        font-size: 13px;
-        font-weight: 500;
-        background: var(--brand-muted);
-        color: var(--brand-muted-foreground);
-        transition: all 0.2s ease;
-        white-space: nowrap;
-        text-decoration: none;
-      }
-      .province-pill:hover {
-        background: var(--brand-primary-light);
-        color: var(--brand-primary-dark);
-      }
-      .province-pill.active {
-        background: var(--brand-primary);
-        color: var(--brand-primary-foreground);
-      }
-      .province-pill.active:hover {
-        background: var(--brand-primary-dark);
-      }
     </style>
     <style id="critical-layout">
         /* App-shell root frame */
@@ -363,7 +319,7 @@ body {
             border-radius: var(--brand-radius-sm);
         }
 
-        /* Charts side-by-side stack on small screens */
+        /* Charts side-by-side (60/40) stack on small screens */
         .chart-row {
             display: grid;
             grid-template-columns: 1fr;
@@ -487,9 +443,9 @@ body {
                         <span>/</span>
                         <a href="province-hub.html" class="hover:underline transition-colors">区域分析报告</a>
                         <span>/</span>
-                        <span style="color:var(--brand-foreground);font-weight:500;">云南省</span>
+                        <span style="color:var(--brand-foreground);font-weight:500;">贵州省</span>
                     </div>
-                    <h1 class="text-lg font-semibold" style="color:var(--brand-foreground);">云南省碳汇潜力分析报告</h1>
+                    <h1 class="text-lg font-semibold" style="color:var(--brand-foreground);">贵州省碳汇潜力分析报告</h1>
                     <p class="text-xs" style="color:var(--brand-muted-foreground);" id="header-date"></p>
                 </div>
                 <div class="flex items-center gap-3 no-print">
@@ -500,21 +456,21 @@ body {
                 </div>
             </header>
 
-                        <!-- Province Selector Bar -->
-            <div class="flex items-center gap-2 px-6 py-3 flex-shrink-0 border-b overflow-x-auto no-scrollbar" style="background:var(--brand-card);border-color:var(--brand-border);">
-                <a href="henan-report.html" class="province-pill">河南省</a>
-                <a href="yunnan-report.html" class="province-pill active">云南省</a>
-                <a href="fujian-report.html" class="province-pill">福建省</a>
-                <a href="guangxi-report.html" class="province-pill">广西</a>
-                <a href="sichuan-report.html" class="province-pill">四川省</a>
-                <a href="hunan-report.html" class="province-pill">湖南省</a>
-                <a href="guizhou-report.html" class="province-pill">贵州省</a>
-                <a href="zhejiang-report.html" class="province-pill">浙江省</a>
-                <a href="jiangxi-report.html" class="province-pill">江西省</a>
-            </div>
-
             <!-- Scrollable Content -->
             <div class="flex-1 overflow-y-auto p-6 space-y-6" data-scroll-region="primary">
+
+                <!-- Province Selector Bar -->
+                <div class="flex flex-wrap items-center gap-2 p-3 rounded-lg no-print" style="background:var(--brand-card);border:1px solid var(--brand-border);">
+                    <a href="henan-report.html" class="px-3 py-1.5 rounded-md text-sm transition-colors" style="color:var(--brand-muted-foreground);border:1px solid var(--brand-border);">河南</a>
+                    <a href="yunnan-report.html" class="px-3 py-1.5 rounded-md text-sm transition-colors" style="color:var(--brand-muted-foreground);border:1px solid var(--brand-border);">云南</a>
+                    <a href="fujian-report.html" class="px-3 py-1.5 rounded-md text-sm transition-colors" style="color:var(--brand-muted-foreground);border:1px solid var(--brand-border);">福建</a>
+                    <a href="guangxi-report.html" class="px-3 py-1.5 rounded-md text-sm transition-colors" style="color:var(--brand-muted-foreground);border:1px solid var(--brand-border);">广西</a>
+                    <a href="sichuan-report.html" class="px-3 py-1.5 rounded-md text-sm transition-colors" style="color:var(--brand-muted-foreground);border:1px solid var(--brand-border);">四川</a>
+                    <a href="hunan-report.html" class="px-3 py-1.5 rounded-md text-sm transition-colors" style="color:var(--brand-muted-foreground);border:1px solid var(--brand-border);">湖南</a>
+                    <a href="guizhou-report.html" class="px-3 py-1.5 rounded-md text-sm font-medium transition-colors" style="background:var(--brand-primary);color:var(--brand-primary-foreground);">贵州</a>
+                    <a href="zhejiang-report.html" class="px-3 py-1.5 rounded-md text-sm transition-colors" style="color:var(--brand-muted-foreground);border:1px solid var(--brand-border);">浙江</a>
+                    <a href="jiangxi-report.html" class="px-3 py-1.5 rounded-md text-sm transition-colors" style="color:var(--brand-muted-foreground);border:1px solid var(--brand-border);">江西</a>
+                </div>
 
                 <!-- Section 1: Report Header Card -->
                 <section class="report-card p-6">
@@ -522,16 +478,14 @@ body {
                         <div>
                             <div class="flex items-center gap-2 mb-2">
                                 <i data-lucide="file-text" class="w-5 h-5" style="color:var(--brand-primary);"></i>
-                                <h2 class="text-xl font-bold" style="color:var(--brand-foreground);">云南省碳汇潜力评估报告</h2>
+                                <h2 class="text-xl font-bold" style="color:var(--brand-foreground);">贵州省县区碳汇潜力评估报告</h2>
                             </div>
                             <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs" style="color:var(--brand-muted-foreground);">
                                 <span><span style="color:var(--brand-foreground);font-weight:500;">报告类型:</span> 区域碳汇潜力分析</span>
                                 <span class="text-gray-300">|</span>
-                                <span><span style="color:var(--brand-foreground);font-weight:500;">覆盖范围:</span> 8个重点林区县</span>
+                                <span><span style="color:var(--brand-foreground);font-weight:500;">覆盖范围:</span> 贵州省8个重点林区县市</span>
                                 <span class="text-gray-300">|</span>
                                 <span><span style="color:var(--brand-foreground);font-weight:500;">分析日期:</span> 2026年8月</span>
-                                <span class="text-gray-300">|</span>
-                                <span><span style="color:var(--brand-foreground);font-weight:500;">数据来源:</span> 云南省林业和草原局/临沧市自然资源局</span>
                             </div>
                         </div>
                         <button onclick="alert('报告导出功能开发中，请稍后使用。')" class="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all no-print flex-shrink-0" style="background:var(--brand-primary);color:var(--brand-primary-foreground);" onmouseenter="this.style.background='var(--brand-primary-dark)';" onmouseleave="this.style.background='var(--brand-primary)';">
@@ -540,7 +494,7 @@ body {
                         </button>
                     </div>
                     <div class="rounded-md p-4" style="background:var(--brand-muted);">
-                        <p class="text-sm leading-relaxed" style="color:var(--brand-foreground);">云南省森林覆盖率55.04%，森林面积3.75亿亩，居全国前列。云南是中国生物多样性最丰富的省份，热带和亚热带森林碳汇能力突出。本报告评估8个重点林区县的CCER碳汇开发潜力。</p>
+                        <p class="text-sm leading-relaxed" style="color:var(--brand-foreground);">贵州省森林覆盖率约62.8%，2025年出台《贵州省林业碳汇资源管理办法（试行）》。剑河县、镇宁县造林碳汇项目已在CCER全国温室气体自愿减排交易市场完成公示。黔东南州碳汇交易额突破1100万元。本报告评估8个重点林区县市的CCER碳汇开发潜力。</p>
                     </div>
                 </section>
 
@@ -548,13 +502,13 @@ body {
                 <section class="kpi-grid">
                     <div class="report-card p-5">
                         <div class="flex items-center justify-between mb-3">
-                            <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">分析县区数</span>
+                            <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">分析县市数</span>
                             <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:var(--brand-primary-light);">
                                 <i data-lucide="map" class="w-4 h-4" style="color:var(--brand-primary);"></i>
                             </div>
                         </div>
-                        <p class="text-2xl font-bold" style="color:var(--brand-foreground);">8<span class="text-base font-medium ml-1" style="color:var(--brand-muted-foreground);">个重点林区县</span></p>
-                        <p class="text-xs mt-1" style="color:var(--brand-muted-foreground);">覆盖滇西、滇南主要林区</p>
+                        <p class="text-2xl font-bold" style="color:var(--brand-foreground);">8<span class="text-base font-medium ml-1" style="color:var(--brand-muted-foreground);">个</span></p>
+                        <p class="text-xs mt-1" style="color:var(--brand-muted-foreground);">覆盖8个重点林区县市</p>
                     </div>
                     <div class="report-card p-5">
                         <div class="flex items-center justify-between mb-3">
@@ -563,8 +517,8 @@ body {
                                 <i data-lucide="trees" class="w-4 h-4" style="color:var(--brand-primary);"></i>
                             </div>
                         </div>
-                        <p class="text-2xl font-bold" style="color:var(--brand-foreground);">2,850<span class="text-base font-medium ml-1" style="color:var(--brand-muted-foreground);">万亩</span></p>
-                        <p class="text-xs mt-1" style="color:var(--brand-muted-foreground);">8县合计林业用地面积</p>
+                        <p class="text-2xl font-bold" style="color:var(--brand-foreground);">3,150<span class="text-base font-medium ml-1" style="color:var(--brand-muted-foreground);">万亩</span></p>
+                        <p class="text-xs mt-1" style="color:var(--brand-muted-foreground);">8县市合计林业用地面积</p>
                     </div>
                     <div class="report-card p-5">
                         <div class="flex items-center justify-between mb-3">
@@ -573,7 +527,7 @@ body {
                                 <i data-lucide="database" class="w-4 h-4" style="color:var(--brand-primary);"></i>
                             </div>
                         </div>
-                        <p class="text-2xl font-bold" style="color:var(--brand-foreground);">12,800<span class="text-base font-medium ml-1" style="color:var(--brand-muted-foreground);">万m³</span></p>
+                        <p class="text-2xl font-bold" style="color:var(--brand-foreground);">13,200<span class="text-base font-medium ml-1" style="color:var(--brand-muted-foreground);">万m³</span></p>
                         <p class="text-xs mt-1" style="color:var(--brand-muted-foreground);">活立木总蓄积量</p>
                     </div>
                     <div class="report-card p-5">
@@ -583,7 +537,7 @@ body {
                                 <i data-lucide="cloud-sun" class="w-4 h-4" style="color:var(--brand-primary);"></i>
                             </div>
                         </div>
-                        <p class="text-2xl font-bold" style="color:var(--brand-foreground);">520-680<span class="text-base font-medium ml-1" style="color:var(--brand-muted-foreground);">万吨CO₂e</span></p>
+                        <p class="text-2xl font-bold" style="color:var(--brand-foreground);">300-390<span class="text-base font-medium ml-1" style="color:var(--brand-muted-foreground);">万吨CO₂e</span></p>
                         <p class="text-xs mt-1" style="color:var(--brand-muted-foreground);">年碳汇潜力区间估算</p>
                     </div>
                 </section>
@@ -592,7 +546,7 @@ body {
                 <section class="chart-row">
                     <div class="report-card p-5">
                         <div class="flex items-center justify-between mb-4">
-                            <h3 class="section-header text-sm font-semibold" style="color:var(--brand-foreground);">各县区森林覆盖率对比</h3>
+                            <h3 class="section-header text-sm font-semibold" style="color:var(--brand-foreground);">各县市森林覆盖率对比</h3>
                             <span class="text-xs px-2 py-1 rounded" style="background:var(--brand-muted);color:var(--brand-muted-foreground);">降序排列</span>
                         </div>
                         <div class="relative" style="height:340px;">
@@ -601,7 +555,7 @@ body {
                     </div>
                     <div class="report-card p-5">
                         <div class="flex items-center justify-between mb-4">
-                            <h3 class="section-header text-sm font-semibold" style="color:var(--brand-foreground);">活立木蓄积量占比分布</h3>
+                            <h3 class="section-header text-sm font-semibold" style="color:var(--brand-foreground);">活立木蓄积量占比</h3>
                             <span class="text-xs px-2 py-1 rounded" style="background:var(--brand-muted);color:var(--brand-muted-foreground);">万m³</span>
                         </div>
                         <div class="relative" style="height:340px;">
@@ -613,16 +567,16 @@ body {
                 <!-- Section 4: Detailed County Ranking Table -->
                 <section class="report-card p-5">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="section-header text-sm font-semibold" style="color:var(--brand-foreground);">各县区碳汇潜力详细排名</h3>
-                        <span class="text-xs" style="color:var(--brand-muted-foreground);">碳汇价值按CCER均价70元/吨计算</span>
+                        <h3 class="section-header text-sm font-semibold" style="color:var(--brand-foreground);">各县市碳汇潜力详细排名</h3>
+                        <span class="text-xs" style="color:var(--brand-muted-foreground);">碳汇价值按70元/吨计算</span>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="data-table">
                             <thead>
                                 <tr>
                                     <th>排名</th>
-                                    <th>县区</th>
-                                    <th>所属州市</th>
+                                    <th>县市</th>
+                                    <th>所属州</th>
                                     <th>森林覆盖率</th>
                                     <th>林业用地(万亩)</th>
                                     <th>活立木蓄积(万m³)</th>
@@ -634,90 +588,90 @@ body {
                             <tbody>
                                 <tr class="row-highlight">
                                     <td><span class="font-bold" style="color:var(--brand-primary);">1</span></td>
-                                    <td class="font-medium">勐海县</td>
-                                    <td>西双版纳</td>
-                                    <td>56.18%</td>
-                                    <td>452</td>
-                                    <td>3,977</td>
+                                    <td class="font-medium">黔南州</td>
+                                    <td>黔南</td>
+                                    <td>68.17%</td>
+                                    <td>2,000</td>
+                                    <td>8,000</td>
                                     <td>120-155</td>
                                     <td>8,400-10,850</td>
                                     <td><span class="priority-badge priority-high">第一梯队</span></td>
                                 </tr>
                                 <tr>
                                     <td><span class="font-bold">2</span></td>
-                                    <td class="font-medium">盈江县</td>
-                                    <td>德宏</td>
-                                    <td>73.82%</td>
-                                    <td>485</td>
-                                    <td>3,200</td>
-                                    <td>95-125</td>
-                                    <td>6,650-8,750</td>
+                                    <td class="font-medium">剑河县</td>
+                                    <td>黔东南</td>
+                                    <td>72.42%</td>
+                                    <td>220</td>
+                                    <td>1,100</td>
+                                    <td>35-45</td>
+                                    <td>2,450-3,150</td>
                                     <td><span class="priority-badge priority-high">第一梯队</span></td>
                                 </tr>
                                 <tr>
                                     <td><span class="font-bold">3</span></td>
-                                    <td class="font-medium">耿马县</td>
-                                    <td>临沧</td>
-                                    <td>58.30%</td>
-                                    <td>380</td>
-                                    <td>2,100</td>
-                                    <td>60-80</td>
-                                    <td>4,200-5,600</td>
+                                    <td class="font-medium">雷山县</td>
+                                    <td>黔东南</td>
+                                    <td>76.20%</td>
+                                    <td>180</td>
+                                    <td>850</td>
+                                    <td>25-33</td>
+                                    <td>1,750-2,310</td>
                                     <td><span class="priority-badge priority-high">第一梯队</span></td>
                                 </tr>
                                 <tr>
                                     <td><span class="font-bold">4</span></td>
-                                    <td class="font-medium">双江县</td>
-                                    <td>临沧</td>
-                                    <td>61.07%</td>
-                                    <td>268</td>
-                                    <td>1,169</td>
-                                    <td>35-48</td>
-                                    <td>2,450-3,360</td>
+                                    <td class="font-medium">都匀市</td>
+                                    <td>黔南</td>
+                                    <td>65.30%</td>
+                                    <td>280</td>
+                                    <td>1,200</td>
+                                    <td>35-45</td>
+                                    <td>2,450-3,150</td>
                                     <td><span class="priority-badge priority-warning">第二梯队</span></td>
                                 </tr>
                                 <tr>
                                     <td><span class="font-bold">5</span></td>
-                                    <td class="font-medium">姚安县</td>
-                                    <td>楚雄</td>
-                                    <td>67.56%</td>
-                                    <td>194</td>
-                                    <td>380</td>
-                                    <td>12-18</td>
-                                    <td>840-1,260</td>
+                                    <td class="font-medium">台江县</td>
+                                    <td>黔东南</td>
+                                    <td>70.10%</td>
+                                    <td>150</td>
+                                    <td>700</td>
+                                    <td>20-28</td>
+                                    <td>1,400-1,960</td>
                                     <td><span class="priority-badge priority-warning">第二梯队</span></td>
                                 </tr>
                                 <tr>
                                     <td><span class="font-bold">6</span></td>
-                                    <td class="font-medium">凤庆县</td>
-                                    <td>临沧</td>
-                                    <td>50.50%</td>
-                                    <td>310</td>
-                                    <td>850</td>
-                                    <td>25-35</td>
-                                    <td>1,750-2,450</td>
+                                    <td class="font-medium">丹寨县</td>
+                                    <td>黔东南</td>
+                                    <td>72.50%</td>
+                                    <td>130</td>
+                                    <td>600</td>
+                                    <td>18-25</td>
+                                    <td>1,260-1,750</td>
                                     <td><span class="priority-badge priority-warning">第二梯队</span></td>
                                 </tr>
                                 <tr>
                                     <td><span class="font-bold">7</span></td>
-                                    <td class="font-medium">临翔区</td>
-                                    <td>临沧</td>
-                                    <td>54.20%</td>
-                                    <td>420</td>
-                                    <td>560</td>
-                                    <td>18-25</td>
-                                    <td>1,260-1,750</td>
+                                    <td class="font-medium">七星关区</td>
+                                    <td>毕节</td>
+                                    <td>50.20%</td>
+                                    <td>350</td>
+                                    <td>900</td>
+                                    <td>25-33</td>
+                                    <td>1,750-2,310</td>
                                     <td><span class="priority-badge priority-muted">第三梯队</span></td>
                                 </tr>
                                 <tr>
                                     <td><span class="font-bold">8</span></td>
-                                    <td class="font-medium">云县</td>
-                                    <td>临沧</td>
-                                    <td>52.10%</td>
-                                    <td>341</td>
-                                    <td>720</td>
-                                    <td>22-30</td>
-                                    <td>1,540-2,100</td>
+                                    <td class="font-medium">镇宁县</td>
+                                    <td>安顺</td>
+                                    <td>55.40%</td>
+                                    <td>200</td>
+                                    <td>750</td>
+                                    <td>20-28</td>
+                                    <td>1,400-1,960</td>
                                     <td><span class="priority-badge priority-muted">第三梯队</span></td>
                                 </tr>
                             </tbody>
@@ -728,31 +682,31 @@ body {
                 <!-- Section 5: Top 3 Counties Detail Cards -->
                 <section>
                     <div class="section-header mb-4">
-                        <h3 class="text-base font-semibold" style="color:var(--brand-foreground);">TOP 3 重点县区深度分析</h3>
+                        <h3 class="text-base font-semibold" style="color:var(--brand-foreground);">TOP 3 重点县市深度分析</h3>
                     </div>
                     <div class="top3-grid">
-                        <!-- Card 1: 勐海县 -->
+                        <!-- Card 1: 黔南州 -->
                         <div class="report-card p-5" style="border-color:var(--brand-primary);border-width:2px;">
                             <div class="flex items-center gap-3 mb-4">
                                 <span class="rank-badge rank-gold">1</span>
                                 <div>
-                                    <h4 class="text-base font-bold" style="color:var(--brand-foreground);">勐海县</h4>
-                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">西双版纳州</p>
+                                    <h4 class="text-base font-bold" style="color:var(--brand-foreground);">黔南州</h4>
+                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">黔南布依族苗族自治州</p>
                                 </div>
                                 <span class="priority-badge priority-high ml-auto">第一梯队</span>
                             </div>
                             <div class="grid grid-cols-2 gap-3 mb-4">
                                 <div class="rounded-md p-3" style="background:var(--brand-muted);">
                                     <p class="text-xs" style="color:var(--brand-muted-foreground);">森林覆盖率</p>
-                                    <p class="text-lg font-bold" style="color:var(--brand-primary);">56.18%</p>
+                                    <p class="text-lg font-bold" style="color:var(--brand-primary);">68.17%</p>
                                 </div>
                                 <div class="rounded-md p-3" style="background:var(--brand-muted);">
                                     <p class="text-xs" style="color:var(--brand-muted-foreground);">林业用地</p>
-                                    <p class="text-lg font-bold" style="color:var(--brand-foreground);">452<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万亩</span></p>
+                                    <p class="text-lg font-bold" style="color:var(--brand-foreground);">2,000<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万亩</span></p>
                                 </div>
                                 <div class="rounded-md p-3" style="background:var(--brand-muted);">
                                     <p class="text-xs" style="color:var(--brand-muted-foreground);">活立木蓄积</p>
-                                    <p class="text-lg font-bold" style="color:var(--brand-foreground);">3,977<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万m³</span></p>
+                                    <p class="text-lg font-bold" style="color:var(--brand-foreground);">8,000<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万m³</span></p>
                                 </div>
                                 <div class="rounded-md p-3" style="background:var(--brand-muted);">
                                     <p class="text-xs" style="color:var(--brand-muted-foreground);">年碳汇潜力</p>
@@ -762,10 +716,10 @@ body {
                             <div class="mb-3">
                                 <div class="flex items-center justify-between text-xs mb-1">
                                     <span style="color:var(--brand-muted-foreground);">覆盖率进度</span>
-                                    <span style="color:var(--brand-primary);font-weight:600;">56.18%</span>
+                                    <span style="color:var(--brand-primary);font-weight:600;">68.17%</span>
                                 </div>
                                 <div class="progress-bar-track">
-                                    <div class="progress-bar-fill" style="width:56.18%;"></div>
+                                    <div class="progress-bar-fill" style="width:68.17%;"></div>
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -773,78 +727,15 @@ body {
                                 <ul class="space-y-1.5">
                                     <li class="flex items-start gap-2 text-xs" style="color:var(--brand-muted-foreground);">
                                         <i data-lucide="check-circle" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style="color:var(--brand-primary);"></i>
-                                        <span>活立木蓄积量全省县区最高</span>
+                                        <span>"两江"上游生态屏障</span>
                                     </li>
                                     <li class="flex items-start gap-2 text-xs" style="color:var(--brand-muted-foreground);">
                                         <i data-lucide="check-circle" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style="color:var(--brand-primary);"></i>
-                                        <span>热带森林碳积累速度快</span>
+                                        <span>省级碳票交易20笔</span>
                                     </li>
                                     <li class="flex items-start gap-2 text-xs" style="color:var(--brand-muted-foreground);">
                                         <i data-lucide="check-circle" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style="color:var(--brand-primary);"></i>
-                                        <span>4个自然保护区</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div>
-                                <p class="text-xs font-medium mb-2" style="color:var(--brand-foreground);">适用方法学</p>
-                                <div>
-                                    <span class="method-tag">CCER-14-001-V01 造林碳汇</span>
-                                    <span class="method-tag">CCER-14-003-V01 竹林碳汇</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Card 2: 盈江县 -->
-                        <div class="report-card p-5">
-                            <div class="flex items-center gap-3 mb-4">
-                                <span class="rank-badge rank-silver">2</span>
-                                <div>
-                                    <h4 class="text-base font-bold" style="color:var(--brand-foreground);">盈江县</h4>
-                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">德宏州</p>
-                                </div>
-                                <span class="priority-badge priority-high ml-auto">第一梯队</span>
-                            </div>
-                            <div class="grid grid-cols-2 gap-3 mb-4">
-                                <div class="rounded-md p-3" style="background:var(--brand-muted);">
-                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">森林覆盖率</p>
-                                    <p class="text-lg font-bold" style="color:var(--brand-primary);">73.82%</p>
-                                </div>
-                                <div class="rounded-md p-3" style="background:var(--brand-muted);">
-                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">林业用地</p>
-                                    <p class="text-lg font-bold" style="color:var(--brand-foreground);">485<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万亩</span></p>
-                                </div>
-                                <div class="rounded-md p-3" style="background:var(--brand-muted);">
-                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">活立木蓄积</p>
-                                    <p class="text-lg font-bold" style="color:var(--brand-foreground);">3,200<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万m³</span></p>
-                                </div>
-                                <div class="rounded-md p-3" style="background:var(--brand-muted);">
-                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">年碳汇潜力</p>
-                                    <p class="text-lg font-bold" style="color:var(--brand-primary);">95-125<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万吨/年</span></p>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="flex items-center justify-between text-xs mb-1">
-                                    <span style="color:var(--brand-muted-foreground);">覆盖率进度</span>
-                                    <span style="color:var(--brand-primary);font-weight:600;">73.82%</span>
-                                </div>
-                                <div class="progress-bar-track">
-                                    <div class="progress-bar-fill" style="width:73.82%;"></div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <p class="text-xs font-medium mb-2" style="color:var(--brand-foreground);">核心优势</p>
-                                <ul class="space-y-1.5">
-                                    <li class="flex items-start gap-2 text-xs" style="color:var(--brand-muted-foreground);">
-                                        <i data-lucide="check-circle" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style="color:var(--brand-primary);"></i>
-                                        <span>森林覆盖率德宏州第一</span>
-                                    </li>
-                                    <li class="flex items-start gap-2 text-xs" style="color:var(--brand-muted-foreground);">
-                                        <i data-lucide="check-circle" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style="color:var(--brand-primary);"></i>
-                                        <span>高等植物4951种</span>
-                                    </li>
-                                    <li class="flex items-start gap-2 text-xs" style="color:var(--brand-muted-foreground);">
-                                        <i data-lucide="check-circle" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style="color:var(--brand-primary);"></i>
-                                        <span>全国"两山"实践创新基地</span>
+                                        <span>平浪林场交易笔数全省首位</span>
                                     </li>
                                 </ul>
                             </div>
@@ -857,41 +748,41 @@ body {
                             </div>
                         </div>
 
-                        <!-- Card 3: 耿马县 -->
+                        <!-- Card 2: 剑河县 -->
                         <div class="report-card p-5">
                             <div class="flex items-center gap-3 mb-4">
-                                <span class="rank-badge rank-bronze">3</span>
+                                <span class="rank-badge rank-silver">2</span>
                                 <div>
-                                    <h4 class="text-base font-bold" style="color:var(--brand-foreground);">耿马县</h4>
-                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">临沧市</p>
+                                    <h4 class="text-base font-bold" style="color:var(--brand-foreground);">剑河县</h4>
+                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">黔东南苗族侗族自治州</p>
                                 </div>
                                 <span class="priority-badge priority-high ml-auto">第一梯队</span>
                             </div>
                             <div class="grid grid-cols-2 gap-3 mb-4">
                                 <div class="rounded-md p-3" style="background:var(--brand-muted);">
                                     <p class="text-xs" style="color:var(--brand-muted-foreground);">森林覆盖率</p>
-                                    <p class="text-lg font-bold" style="color:var(--brand-primary);">58.30%</p>
+                                    <p class="text-lg font-bold" style="color:var(--brand-primary);">72.42%</p>
                                 </div>
                                 <div class="rounded-md p-3" style="background:var(--brand-muted);">
                                     <p class="text-xs" style="color:var(--brand-muted-foreground);">林业用地</p>
-                                    <p class="text-lg font-bold" style="color:var(--brand-foreground);">380<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万亩</span></p>
+                                    <p class="text-lg font-bold" style="color:var(--brand-foreground);">220<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万亩</span></p>
                                 </div>
                                 <div class="rounded-md p-3" style="background:var(--brand-muted);">
                                     <p class="text-xs" style="color:var(--brand-muted-foreground);">活立木蓄积</p>
-                                    <p class="text-lg font-bold" style="color:var(--brand-foreground);">2,100<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万m³</span></p>
+                                    <p class="text-lg font-bold" style="color:var(--brand-foreground);">1,100<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万m³</span></p>
                                 </div>
                                 <div class="rounded-md p-3" style="background:var(--brand-muted);">
                                     <p class="text-xs" style="color:var(--brand-muted-foreground);">年碳汇潜力</p>
-                                    <p class="text-lg font-bold" style="color:var(--brand-primary);">60-80<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万吨/年</span></p>
+                                    <p class="text-lg font-bold" style="color:var(--brand-primary);">35-45<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万吨/年</span></p>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <div class="flex items-center justify-between text-xs mb-1">
                                     <span style="color:var(--brand-muted-foreground);">覆盖率进度</span>
-                                    <span style="color:var(--brand-primary);font-weight:600;">58.30%</span>
+                                    <span style="color:var(--brand-primary);font-weight:600;">72.42%</span>
                                 </div>
                                 <div class="progress-bar-track">
-                                    <div class="progress-bar-fill" style="width:58.30%;"></div>
+                                    <div class="progress-bar-fill" style="width:72.42%;"></div>
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -899,15 +790,78 @@ body {
                                 <ul class="space-y-1.5">
                                     <li class="flex items-start gap-2 text-xs" style="color:var(--brand-muted-foreground);">
                                         <i data-lucide="check-circle" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style="color:var(--brand-primary);"></i>
-                                        <span>临沧林地面积最大县</span>
+                                        <span>全国28个重点集体林区之一</span>
                                     </li>
                                     <li class="flex items-start gap-2 text-xs" style="color:var(--brand-muted-foreground);">
                                         <i data-lucide="check-circle" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style="color:var(--brand-primary);"></i>
-                                        <span>林地分布集中</span>
+                                        <span>CCER项目全国市场已公示</span>
                                     </li>
                                     <li class="flex items-start gap-2 text-xs" style="color:var(--brand-muted-foreground);">
                                         <i data-lucide="check-circle" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style="color:var(--brand-primary);"></i>
-                                        <span>热带亚热带森林</span>
+                                        <span>碳票累计成交18853吨超160万元</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <p class="text-xs font-medium mb-2" style="color:var(--brand-foreground);">适用方法学</p>
+                                <div>
+                                    <span class="method-tag">CCER-14-001-V01 造林碳汇</span>
+                                    <span class="method-tag">CCER-14-002-V01 森林经营</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: 雷山县 -->
+                        <div class="report-card p-5">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="rank-badge rank-bronze">3</span>
+                                <div>
+                                    <h4 class="text-base font-bold" style="color:var(--brand-foreground);">雷山县</h4>
+                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">黔东南苗族侗族自治州</p>
+                                </div>
+                                <span class="priority-badge priority-high ml-auto">第一梯队</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 mb-4">
+                                <div class="rounded-md p-3" style="background:var(--brand-muted);">
+                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">森林覆盖率</p>
+                                    <p class="text-lg font-bold" style="color:var(--brand-primary);">76.20%</p>
+                                </div>
+                                <div class="rounded-md p-3" style="background:var(--brand-muted);">
+                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">林业用地</p>
+                                    <p class="text-lg font-bold" style="color:var(--brand-foreground);">180<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万亩</span></p>
+                                </div>
+                                <div class="rounded-md p-3" style="background:var(--brand-muted);">
+                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">活立木蓄积</p>
+                                    <p class="text-lg font-bold" style="color:var(--brand-foreground);">850<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万m³</span></p>
+                                </div>
+                                <div class="rounded-md p-3" style="background:var(--brand-muted);">
+                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">年碳汇潜力</p>
+                                    <p class="text-lg font-bold" style="color:var(--brand-primary);">25-33<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万吨/年</span></p>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="flex items-center justify-between text-xs mb-1">
+                                    <span style="color:var(--brand-muted-foreground);">覆盖率进度</span>
+                                    <span style="color:var(--brand-primary);font-weight:600;">76.20%</span>
+                                </div>
+                                <div class="progress-bar-track">
+                                    <div class="progress-bar-fill" style="width:76.20%;"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <p class="text-xs font-medium mb-2" style="color:var(--brand-foreground);">核心优势</p>
+                                <ul class="space-y-1.5">
+                                    <li class="flex items-start gap-2 text-xs" style="color:var(--brand-muted-foreground);">
+                                        <i data-lucide="check-circle" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style="color:var(--brand-primary);"></i>
+                                        <span>覆盖率居前列</span>
+                                    </li>
+                                    <li class="flex items-start gap-2 text-xs" style="color:var(--brand-muted-foreground);">
+                                        <i data-lucide="check-circle" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style="color:var(--brand-primary);"></i>
+                                        <span>省级碳票2106吨已获广东企业认购</span>
+                                    </li>
+                                    <li class="flex items-start gap-2 text-xs" style="color:var(--brand-muted-foreground);">
+                                        <i data-lucide="check-circle" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style="color:var(--brand-primary);"></i>
+                                        <span>苗族传统林药复合经营</span>
                                     </li>
                                 </ul>
                             </div>
@@ -952,10 +906,10 @@ body {
                                 </div>
                                 <div>
                                     <h4 class="text-sm font-bold" style="color:var(--brand-foreground);">第一梯队 - 立即开发</h4>
-                                    <p class="text-xs" style="color:var(--brand-primary);">勐海、盈江、耿马</p>
+                                    <p class="text-xs" style="color:var(--brand-primary);">黔南、剑河、雷山</p>
                                 </div>
                             </div>
-                            <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">热带森林碳积累速度是温带2-3倍，修订稿免额外性论证优势明显。三个县区活立木蓄积量大、林地集中，适合大规模造林和森林经营碳汇项目开发。</p>
+                            <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">剑河CCER项目已全国公示，跨省交易经验成熟（广州赛宝、国泰海通合作）。黔南州林地资源全省最大，平浪林场碳票交易活跃，三个县市优先推进造林与森林经营碳汇项目开发。</p>
                         </div>
                         <!-- Tier 2 -->
                         <div class="report-card p-5" style="border-left:4px solid var(--state-warning);">
@@ -965,10 +919,10 @@ body {
                                 </div>
                                 <div>
                                     <h4 class="text-sm font-bold" style="color:var(--brand-foreground);">第二梯队 - 重点跟进</h4>
-                                    <p class="text-xs" style="color:var(--state-warning);">双江、姚安、凤庆</p>
+                                    <p class="text-xs" style="color:var(--state-warning);">都匀、台江、丹寨</p>
                                 </div>
                             </div>
-                            <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">临沧已列为云南省林业碳汇试点区域，寻甸县已有碳汇交易经验。双江林地资源丰富，凤庆林产业发展基础好，适合探索林下经济与碳汇融合发展。</p>
+                            <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">黔东南4县已获省级碳票，台江杉木林碳汇84元/吨成交。都匀、台江、丹寨森林覆盖率高、碳汇交易渠道成熟，适合探索林下经济与碳汇融合发展模式。</p>
                         </div>
                         <!-- Tier 3 -->
                         <div class="report-card p-5" style="border-left:4px solid var(--brand-muted-foreground);">
@@ -978,20 +932,20 @@ body {
                                 </div>
                                 <div>
                                     <h4 class="text-sm font-bold" style="color:var(--brand-foreground);">第三梯队 - 储备培育</h4>
-                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">临翔、云县</p>
+                                    <p class="text-xs" style="color:var(--brand-muted-foreground);">七星关、镇宁</p>
                                 </div>
                             </div>
-                            <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">储备培育阶段。临翔区与云县当前碳汇潜力相对较低，建议加强森林经营和营造林力度，为后续纳入CCER开发计划储备碳汇资源。</p>
+                            <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">储备培育阶段。七星关已向全运会捐赠2万吨碳票，具备碳汇运营基础；镇宁造林碳汇项目已公示。建议加强森林经营和营造林力度，为后续纳入CCER开发计划储备碳汇资源。</p>
                         </div>
                     </div>
                 </section>
 
-                <!-- Section 8: 勐海县CCER项目开发路线图 -->
+                <!-- Section 8: 剑河县CCER项目开发路线图 -->
                 <section class="rounded-lg p-6" style="background:linear-gradient(135deg, var(--brand-primary-light) 0%, #F0FDFA 100%); border:1px solid var(--brand-primary);">
                     <div class="flex items-center gap-2 mb-5">
                         <i data-lucide="route" class="w-5 h-5" style="color:var(--brand-primary);"></i>
-                        <h3 class="text-base font-bold" style="color:var(--brand-foreground);">勐海县CCER项目开发路线图</h3>
-                        <span class="text-xs px-2 py-0.5 rounded-full ml-2" style="background:var(--brand-primary);color:var(--brand-primary-foreground);">No.1 重点县区</span>
+                        <h3 class="text-base font-bold" style="color:var(--brand-foreground);">剑河县CCER项目开发路线图</h3>
+                        <span class="text-xs px-2 py-0.5 rounded-full ml-2" style="background:var(--brand-primary);color:var(--brand-primary-foreground);">示范案例</span>
                     </div>
                     <div class="roadmap-grid">
                         <!-- Step 1 -->
@@ -1001,7 +955,7 @@ body {
                                 <i data-lucide="search" class="w-4 h-4" style="color:var(--brand-primary);"></i>
                                 <h4 class="text-sm font-semibold" style="color:var(--brand-foreground);">项目筛选</h4>
                             </div>
-                            <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">热带雨林修复+橡胶林碳汇，4个自然保护区周边碳汇开发</p>
+                            <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">全国28个重点集体林区，72.42%森林覆盖率</p>
                         </div>
                         <!-- Step 2 -->
                         <div class="rounded-md p-4" style="background:var(--brand-card);border:1px solid var(--brand-border);">
@@ -1010,7 +964,7 @@ body {
                                 <i data-lucide="book-open" class="w-4 h-4" style="color:var(--brand-primary);"></i>
                                 <h4 class="text-sm font-semibold" style="color:var(--brand-foreground);">方法学应用</h4>
                             </div>
-                            <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">CCER-14-001造林+CCER-14-003竹林双方法学</p>
+                            <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">CCER造林碳汇项目已在全国自愿减排市场公示</p>
                         </div>
                         <!-- Step 3 -->
                         <div class="rounded-md p-4" style="background:var(--brand-card);border:1px solid var(--brand-border);">
@@ -1019,7 +973,7 @@ body {
                                 <i data-lucide="satellite" class="w-4 h-4" style="color:var(--brand-primary);"></i>
                                 <h4 class="text-sm font-semibold" style="color:var(--brand-foreground);">AI遥感监测</h4>
                             </div>
-                            <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">Sentinel-2+无人机监测热带林生物量</p>
+                            <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">卫星+无人机监测苗族山区杉木林</p>
                         </div>
                         <!-- Step 4 -->
                         <div class="rounded-md p-4" style="background:var(--brand-card);border:1px solid var(--brand-border);">
@@ -1028,29 +982,29 @@ body {
                                 <i data-lucide="trending-up" class="w-4 h-4" style="color:var(--brand-primary);"></i>
                                 <h4 class="text-sm font-semibold" style="color:var(--brand-foreground);">碳汇交易</h4>
                             </div>
-                            <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">年碳汇量130万吨×70元=9,100万元</p>
+                            <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">年碳汇量40万吨×70元=2,800万元</p>
                         </div>
                     </div>
                     <!-- Summary bar -->
                     <div class="rounded-md p-4 mt-5 flex flex-wrap items-center justify-around gap-4" style="background:var(--brand-card);border:1px solid var(--brand-border);">
                         <div class="text-center">
                             <p class="text-xs" style="color:var(--brand-muted-foreground);">预期开发面积</p>
-                            <p class="text-lg font-bold" style="color:var(--brand-primary);">600<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万亩</span></p>
+                            <p class="text-lg font-bold" style="color:var(--brand-primary);">300<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万亩</span></p>
                         </div>
                         <div class="w-px h-10 hidden sm:block" style="background:var(--brand-border);"></div>
                         <div class="text-center">
                             <p class="text-xs" style="color:var(--brand-muted-foreground);">预期年碳汇量</p>
-                            <p class="text-lg font-bold" style="color:var(--brand-primary);">130<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万吨CO₂e</span></p>
+                            <p class="text-lg font-bold" style="color:var(--brand-primary);">40<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万吨CO₂e</span></p>
                         </div>
                         <div class="w-px h-10 hidden sm:block" style="background:var(--brand-border);"></div>
                         <div class="text-center">
                             <p class="text-xs" style="color:var(--brand-muted-foreground);">预期年收益</p>
-                            <p class="text-lg font-bold" style="color:var(--brand-primary);">9,100<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万元</span></p>
+                            <p class="text-lg font-bold" style="color:var(--brand-primary);">2,800<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">万元</span></p>
                         </div>
                         <div class="w-px h-10 hidden sm:block" style="background:var(--brand-border);"></div>
                         <div class="text-center">
                             <p class="text-xs" style="color:var(--brand-muted-foreground);">投资回收期</p>
-                            <p class="text-lg font-bold" style="color:var(--brand-primary);">2<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">年</span></p>
+                            <p class="text-lg font-bold" style="color:var(--brand-primary);">2.5<span class="text-xs ml-0.5" style="color:var(--brand-muted-foreground);">年</span></p>
                         </div>
                     </div>
                 </section>
@@ -1067,26 +1021,26 @@ body {
                             <ul class="space-y-1.5">
                                 <li class="flex items-start gap-2 text-xs" style="color:var(--brand-muted-foreground);">
                                     <i data-lucide="file-text" class="w-3 h-3 flex-shrink-0 mt-0.5" style="color:var(--brand-primary);"></i>
-                                    <span>云南省林业和草原局</span>
+                                    <span>贵州省人民政府林业年鉴</span>
                                 </li>
                                 <li class="flex items-start gap-2 text-xs" style="color:var(--brand-muted-foreground);">
                                     <i data-lucide="file-text" class="w-3 h-3 flex-shrink-0 mt-0.5" style="color:var(--brand-primary);"></i>
-                                    <span>《云南省2021年森林资源状况》</span>
+                                    <span>贵州省林业局</span>
                                 </li>
                                 <li class="flex items-start gap-2 text-xs" style="color:var(--brand-muted-foreground);">
                                     <i data-lucide="file-text" class="w-3 h-3 flex-shrink-0 mt-0.5" style="color:var(--brand-primary);"></i>
-                                    <span>临沧市自然资源局</span>
+                                    <span>黔南州人民政府</span>
                                 </li>
                                 <li class="flex items-start gap-2 text-xs" style="color:var(--brand-muted-foreground);">
                                     <i data-lucide="file-text" class="w-3 h-3 flex-shrink-0 mt-0.5" style="color:var(--brand-primary);"></i>
-                                    <span>各县人民政府公开数据</span>
+                                    <span>中国新闻网</span>
                                 </li>
                             </ul>
                         </div>
                         <div>
                             <p class="text-xs font-medium mb-2" style="color:var(--brand-foreground);">免责声明</p>
                             <div class="rounded-md p-3" style="background:var(--brand-muted);">
-                                <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">本报告碳汇潜力估算基于热带亚热带森林蓄积量年增长率4-5%的假设，实际碳汇量受树种组成、林龄结构、气候条件等多因素影响，具体项目需以CCER方法学核定结果为准。</p>
+                                <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">本报告碳汇潜力估算基于森林蓄积量年增长率3-4%的假设，实际碳汇量受树种组成、林龄结构、气候条件等多因素影响，具体项目需以CCER方法学核定结果为准。</p>
                             </div>
                             <p class="text-xs mt-3" style="color:var(--brand-muted-foreground);">报告日期: <span style="color:var(--brand-foreground);font-weight:500;">2026年8月</span></p>
                         </div>
@@ -1095,7 +1049,7 @@ body {
 
                 <!-- Footer -->
                 <footer class="text-center py-4">
-                    <p class="text-xs" style="color:var(--brand-muted-foreground);">AI智能碳汇管理平台 v1.0 | 云南省碳汇潜力分析报告</p>
+                    <p class="text-xs" style="color:var(--brand-muted-foreground);">AI智能碳汇管理平台 v1.0 | 贵州省碳汇潜力分析报告</p>
                 </footer>
             </div>
         </div>
@@ -1117,10 +1071,10 @@ body {
             new Chart(coverageCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['盈江县', '姚安县', '双江县', '耿马县', '勐海县', '临翔区', '云县', '凤庆县'],
+                    labels: ['雷山县', '丹寨县', '剑河县', '台江县', '黔南州', '都匀市', '镇宁县', '七星关区'],
                     datasets: [{
                         label: '森林覆盖率',
-                        data: [73.82, 67.56, 61.07, 58.30, 56.18, 54.20, 52.10, 50.50],
+                        data: [76.20, 72.50, 72.42, 70.10, 68.17, 65.30, 55.40, 50.20],
                         backgroundColor: [
                             '#0D9488', '#0D9488', '#0D9488',
                             '#94A3B8', '#94A3B8', '#94A3B8', '#94A3B8', '#94A3B8'
@@ -1167,9 +1121,9 @@ body {
             new Chart(volumeCtx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['盈江', '勐海', '耿马', '双江', '凤庆', '云县', '临翔', '姚安'],
+                    labels: ['黔南州', '剑河县', '都匀市', '雷山县', '七星关区', '台江县', '镇宁县', '丹寨县'],
                     datasets: [{
-                        data: [3200, 3977, 2100, 1169, 850, 720, 560, 380],
+                        data: [8000, 1100, 1200, 850, 900, 700, 750, 600],
                         backgroundColor: ['#0D9488', '#06B6D4', '#F59E0B', '#6366F1', '#EC4899', '#10B981', '#94A3B8', '#FCD34D'],
                         borderWidth: 2,
                         borderColor: '#FFFFFF'
@@ -1203,14 +1157,14 @@ body {
         var bubbleCtx = document.getElementById('bubbleChart');
         if (bubbleCtx) {
             var bubbleData = [
-                { label: '勐海', x: 452, y: 3977, r: 28, color: '#0D9488', potential: '120-155' },
-                { label: '盈江', x: 485, y: 3200, r: 22, color: '#0D9488', potential: '95-125' },
-                { label: '耿马', x: 380, y: 2100, r: 14, color: '#0D9488', potential: '60-80' },
-                { label: '双江', x: 268, y: 1169, r: 9, color: '#F59E0B', potential: '35-48' },
-                { label: '姚安', x: 194, y: 380, r: 4, color: '#F59E0B', potential: '12-18' },
-                { label: '凤庆', x: 310, y: 850, r: 7, color: '#F59E0B', potential: '25-35' },
-                { label: '临翔', x: 420, y: 560, r: 5, color: '#94A3B8', potential: '18-25' },
-                { label: '云县', x: 341, y: 720, r: 6, color: '#94A3B8', potential: '22-30' }
+                { label: '黔南州', x: 2000, y: 8000, r: 30, color: '#0D9488', potential: '120-155' },
+                { label: '剑河县', x: 220, y: 1100, r: 14, color: '#0D9488', potential: '35-45' },
+                { label: '雷山县', x: 180, y: 850, r: 11, color: '#0D9488', potential: '25-33' },
+                { label: '都匀市', x: 280, y: 1200, r: 14, color: '#F59E0B', potential: '35-45' },
+                { label: '台江县', x: 150, y: 700, r: 10, color: '#F59E0B', potential: '20-28' },
+                { label: '丹寨县', x: 130, y: 600, r: 9, color: '#F59E0B', potential: '18-25' },
+                { label: '七星关区', x: 350, y: 900, r: 11, color: '#94A3B8', potential: '25-33' },
+                { label: '镇宁县', x: 200, y: 750, r: 10, color: '#94A3B8', potential: '20-28' }
             ];
             new Chart(bubbleCtx, {
                 type: 'bubble',
