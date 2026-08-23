@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>区域碳汇分析总览 - AI智能碳汇管理平台</title>
+    <style id="theme-vars">
+/* ===== AI智能碳汇管理平台 - CCER Platform Design Tokens ===== */
+/* 简约商务风 - 专业沉稳的碳汇管理平台 */
+
+:root {
+  /* Background / Surface */
+  --brand-background: #F8FAFC;
+  --brand-foreground: #1E293B;
+  --brand-card: #FFFFFF;
+  --brand-card-foreground: #1E293B;
+  --brand-popover: #FFFFFF;
+  --brand-popover-foreground: #1E293B;
+  --brand-muted: #F1F5F9;
+  --brand-muted-foreground: #64748B;
+
+  /* Primary - 沉稳森林绿，传达碳汇与环保 */
+  --brand-primary: #0D9488;
+  --brand-primary-foreground: #FFFFFF;
+  --brand-primary-light: #E6FFFA;
+  --brand-primary-dark: #0F766E;
+
+  /* Border & Ring */
+  --brand-border: #E2E8F0;
+  --brand-input: #E2E8F0;
+  --brand-ring: #0D9488;
+
+  /* Radius */
+  --brand-radius-sm: 4px;
+  --brand-radius-md: 8px;
+  --brand-radius-lg: 16px;
+
+  /* Chart palette */
+  --chart-1: #0D9488;
+  --chart-2: #06B6D4;
+  --chart-3: #F59E0B;
+  --chart-4: #6366F1;
+  --chart-5: #EC4899;
+
+  /* State colors */
+  --state-success: #10B981;
+  --state-warning: #F59E0B;
+  --state-error: #EF4444;
+  --state-info: #3B82F6;
+
+  /* Typography */
+  --font-sans: 'Inter', 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+/* Spacing */
+body {
+  font-family: var(--font-sans);
+  background: var(--brand-background);
+  color: var(--brand-foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--brand-background);
+    --color-foreground: var(--brand-foreground);
+    --color-card: var(--brand-card);
+    --color-card-foreground: var(--brand-card-foreground);
+    --color-popover: var(--brand-popover);
+    --color-popover-foreground: var(--brand-popover-foreground);
+    --color-primary: var(--brand-primary);
+    --color-primary-foreground: var(--brand-primary-foreground);
+    --color-muted: var(--brand-muted);
+    --color-muted-foreground: var(--brand-muted-foreground);
+    --color-border: var(--brand-border);
+    --color-input: var(--brand-input);
+    --color-ring: var(--brand-ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --radius-sm: var(--brand-radius-sm);
+    --radius-md: var(--brand-radius-md);
+    --radius-lg: var(--brand-radius-lg);
+  }
+  @layer base {
+    body { background: var(--brand-background); color: var(--brand-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--brand-background); }
+      .text-background { color: var(--brand-background); }
+      .border-background { border-color: var(--brand-background); }
+      .ring-background { --tw-ring-color: var(--brand-background); }
+      .bg-foreground { background-color: var(--brand-foreground); }
+      .text-foreground { color: var(--brand-foreground); }
+      .border-foreground { border-color: var(--brand-foreground); }
+      .ring-foreground { --tw-ring-color: var(--brand-foreground); }
+      .bg-card { background-color: var(--brand-card); }
+      .text-card { color: var(--brand-card); }
+      .border-card { border-color: var(--brand-card); }
+      .ring-card { --tw-ring-color: var(--brand-card); }
+      .bg-card-foreground { background-color: var(--brand-card-foreground); }
+      .text-card-foreground { color: var(--brand-card-foreground); }
+      .border-card-foreground { border-color: var(--brand-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--brand-card-foreground); }
+      .bg-popover { background-color: var(--brand-popover); }
+      .text-popover { color: var(--brand-popover); }
+      .border-popover { border-color: var(--brand-popover); }
+      .ring-popover { --tw-ring-color: var(--brand-popover); }
+      .bg-popover-foreground { background-color: var(--brand-popover-foreground); }
+      .text-popover-foreground { color: var(--brand-popover-foreground); }
+      .border-popover-foreground { border-color: var(--brand-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--brand-popover-foreground); }
+      .bg-primary { background-color: var(--brand-primary); }
+      .text-primary { color: var(--brand-primary); }
+      .border-primary { border-color: var(--brand-primary); }
+      .ring-primary { --tw-ring-color: var(--brand-primary); }
+      .bg-primary-foreground { background-color: var(--brand-primary-foreground); }
+      .text-primary-foreground { color: var(--brand-primary-foreground); }
+      .border-primary-foreground { border-color: var(--brand-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--brand-primary-foreground); }
+      .bg-primary-light { background-color: var(--brand-primary-light); }
+      .text-primary-light { color: var(--brand-primary-light); }
+      .border-primary-light { border-color: var(--brand-primary-light); }
+      .ring-primary-light { --tw-ring-color: var(--brand-primary-light); }
+      .bg-primary-dark { background-color: var(--brand-primary-dark); }
+      .text-primary-dark { color: var(--brand-primary-dark); }
+      .border-primary-dark { border-color: var(--brand-primary-dark); }
+      .ring-primary-dark { --tw-ring-color: var(--brand-primary-dark); }
+      .bg-muted { background-color: var(--brand-muted); }
+      .text-muted { color: var(--brand-muted); }
+      .border-muted { border-color: var(--brand-muted); }
+      .ring-muted { --tw-ring-color: var(--brand-muted); }
+      .bg-muted-foreground { background-color: var(--brand-muted-foreground); }
+      .text-muted-foreground { color: var(--brand-muted-foreground); }
+      .border-muted-foreground { border-color: var(--brand-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--brand-muted-foreground); }
+      .bg-border { background-color: var(--brand-border); }
+      .text-border { color: var(--brand-border); }
+      .border-border { border-color: var(--brand-border); }
+      .ring-border { --tw-ring-color: var(--brand-border); }
+      .bg-input { background-color: var(--brand-input); }
+      .text-input { color: var(--brand-input); }
+      .border-input { border-color: var(--brand-input); }
+      .ring-input { --tw-ring-color: var(--brand-input); }
+      .bg-ring { background-color: var(--brand-ring); }
+      .text-ring { color: var(--brand-ring); }
+      .border-ring { border-color: var(--brand-ring); }
+      .ring-ring { --tw-ring-color: var(--brand-ring); }
+      .bg-chart-1 { background-color: var(--chart-1); }
+      .text-chart-1 { color: var(--chart-1); }
+      .border-chart-1 { border-color: var(--chart-1); }
+      .ring-chart-1 { --tw-ring-color: var(--chart-1); }
+      .bg-chart-2 { background-color: var(--chart-2); }
+      .text-chart-2 { color: var(--chart-2); }
+      .border-chart-2 { border-color: var(--chart-2); }
+      .ring-chart-2 { --tw-ring-color: var(--chart-2); }
+      .bg-chart-3 { background-color: var(--chart-3); }
+      .text-chart-3 { color: var(--chart-3); }
+      .border-chart-3 { border-color: var(--chart-3); }
+      .ring-chart-3 { --tw-ring-color: var(--chart-3); }
+      .bg-chart-4 { background-color: var(--chart-4); }
+      .text-chart-4 { color: var(--chart-4); }
+      .border-chart-4 { border-color: var(--chart-4); }
+      .ring-chart-4 { --tw-ring-color: var(--chart-4); }
+      .bg-chart-5 { background-color: var(--chart-5); }
+      .text-chart-5 { color: var(--chart-5); }
+      .border-chart-5 { border-color: var(--chart-5); }
+      .ring-chart-5 { --tw-ring-color: var(--chart-5); }
+      .bg-state-success { background-color: var(--state-success); }
+      .text-state-success { color: var(--state-success); }
+      .bg-state-warning { background-color: var(--state-warning); }
+      .text-state-warning { color: var(--state-warning); }
+      .bg-state-error { background-color: var(--state-error); }
+      .text-state-error { color: var(--state-error); }
+      .bg-state-info { background-color: var(--state-info); }
+      .text-state-info { color: var(--state-info); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+      /* Province card hover effect */
+      .province-card {
+        display: block;
+        text-decoration: none;
+        transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+      }
+      .province-card:hover {
+        box-shadow: 0 8px 24px rgba(13,148,136,0.12);
+        transform: translateY(-2px);
+        border-color: var(--brand-primary) !important;
+      }
+      /* Animated progress bar */
+      .progress-bar-fill {
+        width: 0;
+        transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .progress-bar-fill.animate {
+        width: var(--target-width);
+      }
+      /* Carbon sink potential bar animation */
+      .sink-bar-fill {
+        width: 0;
+        transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        transition-delay: 0.2s;
+      }
+      .sink-bar-fill.animate {
+        width: var(--target-width);
+      }
+      /* Star rating */
+      .star-rating {
+        letter-spacing: 1px;
+        font-size: 14px;
+      }
+    </style>
+</head>
+<body class="h-screen font-sans antialiased">
+    <div class="flex h-screen overflow-hidden" data-viewport-mode="app-shell">
+        <!-- Sidebar -->
+        <aside class="w-60 flex-shrink-0 flex flex-col" style="background:#0F172A;color:#E2E8F0;">
+            <div class="flex items-center gap-3 px-5 py-5 border-b" style="border-color:rgba(255,255,255,0.08);">
+                <div class="w-8 h-8 rounded-md flex items-center justify-center flex-shrink-0" style="background:var(--brand-primary);">
+                    <i data-lucide="leaf" class="w-5 h-5" style="color:var(--brand-primary-foreground);"></i>
+                </div>
+                <span class="text-base font-semibold tracking-wide whitespace-nowrap">碳汇管理平台</span>
+            </div>
+            <nav class="flex-1 py-3 px-3 space-y-1 overflow-y-auto no-scrollbar">
+                <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm transition-colors" style="color:#94A3B8;" onmouseenter="this.style.background='rgba(255,255,255,0.06)';this.style.color='#E2E8F0';" onmouseleave="this.style.background='transparent';this.style.color='#94A3B8';">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+                    <span>数据概览</span>
+                </a>
+                <a href="projects.html" class="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm transition-colors" style="color:#94A3B8;" onmouseenter="this.style.background='rgba(255,255,255,0.06)';this.style.color='#E2E8F0';" onmouseleave="this.style.background='transparent';this.style.color='#94A3B8';">
+                    <i data-lucide="folder-open" class="w-4 h-4"></i>
+                    <span>项目管理</span>
+                </a>
+                <a href="trading.html" class="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm transition-colors" style="color:#94A3B8;" onmouseenter="this.style.background='rgba(255,255,255,0.06)';this.style.color='#E2E8F0';" onmouseleave="this.style.background='transparent';this.style.color='#94A3B8';">
+                    <i data-lucide="trending-up" class="w-4 h-4"></i>
+                    <span>碳交易</span>
+                </a>
+                <a href="analysis.html" class="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm transition-colors" style="color:#94A3B8;" onmouseenter="this.style.background='rgba(255,255,255,0.06)';this.style.color='#E2E8F0';" onmouseleave="this.style.background='transparent';this.style.color='#94A3B8';">
+                    <i data-lucide="brain" class="w-4 h-4"></i>
+                    <span>AI分析</span>
+                </a>
+                <a href="methodology.html" class="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm transition-colors" style="color:#94A3B8;" onmouseenter="this.style.background='rgba(255,255,255,0.06)';this.style.color='#E2E8F0';" onmouseleave="this.style.background='transparent';this.style.color='#94A3B8';">
+                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                    <span>方法学中心</span>
+                </a>
+                <a href="province-hub.html" class="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors" style="background:var(--brand-primary);color:var(--brand-primary-foreground);">
+                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                    <span>区域分析报告</span>
+                </a>
+            </nav>
+            <div class="px-4 py-3 border-t" style="border-color:rgba(255,255,255,0.08);">
+                <div class="flex items-center gap-3 px-2 py-2 rounded-md" style="background:rgba(255,255,255,0.04);">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-semibold flex-shrink-0" style="background:var(--brand-primary);color:var(--brand-primary-foreground);">管</div>
+                    <div class="min-w-0">
+                        <p class="text-xs font-medium truncate">管理员</p>
+                        <p class="text-xs truncate" style="color:#64748B;">admin@ccer.cn</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden" data-scroll-region="primary">
+            <!-- Top Bar -->
+            <header class="flex items-center justify-between px-6 py-3 flex-shrink-0 border-b" style="background:var(--brand-card);border-color:var(--brand-border);">
+                <div>
+                    <div class="flex items-center gap-2 text-xs" style="color:var(--brand-muted-foreground);">
+                        <a href="dashboard.html" class="hover:underline transition-colors" style="color:var(--brand-muted-foreground);">首页</a>
+                        <span>/</span>
+                        <span style="color:var(--brand-foreground);font-weight:500;">区域分析报告</span>
+                    </div>
+                    <h1 class="text-lg font-semibold mt-1" style="color:var(--brand-foreground);">区域碳汇分析总览</h1>
+                    <p class="text-xs" style="color:var(--brand-muted-foreground);" id="header-date"></p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center" style="background:var(--brand-muted);">
+                        <i data-lucide="bell" class="w-4 h-4" style="color:var(--brand-muted-foreground);"></i>
+                    </div>
+                    <div class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-medium" style="background:var(--brand-primary);color:var(--brand-primary-foreground);">管</div>
+                </div>
+            </header>
+
+            <!-- Scrollable Content -->
+            <div class="flex-1 overflow-y-auto p-6 space-y-6" data-scroll-region="primary">
+
+                <!-- Section 1: Page Header -->
+                <section class="rounded-lg p-6 border" style="background:var(--brand-card);border-color:var(--brand-border);">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--brand-primary-light);">
+                            <i data-lucide="map" class="w-6 h-6" style="color:var(--brand-primary);"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h2 class="text-xl font-bold mb-1" style="color:var(--brand-foreground);">全国碳汇潜力区域分析</h2>
+                            <p class="text-sm mb-3" style="color:var(--brand-muted-foreground);">覆盖5个重点省份，36个林区县区，总碳汇潜力超3,000万吨CO₂e/年</p>
+                            <p class="text-sm leading-relaxed" style="color:var(--brand-card-foreground);">
+                                本平台已完成5个碳汇重点省份的区域分析，覆盖河南、云南、福建、广西、四川，合计分析36个重点林区县区，林业用地总量超1.8亿亩，年碳汇潜力超3,000万吨CO₂e，按CCER均价70元/吨计算，年碳汇价值超21亿元。
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: National Overview KPI Cards -->
+                <section id="national-kpi-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+                    <!-- KPI 1: 覆盖省份 -->
+                    <div class="rounded-lg p-5 border transition-shadow hover:shadow-sm" style="background:var(--brand-card);border-color:var(--brand-border);">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">覆盖省份</span>
+                            <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:var(--brand-primary-light);">
+                                <i data-lucide="map" class="w-4 h-4" style="color:var(--brand-primary);"></i>
+                            </div>
+                        </div>
+                        <p class="text-2xl font-bold" style="color:var(--brand-foreground);">5<span class="text-base font-medium ml-1" style="color:var(--brand-muted-foreground);">个</span></p>
+                        <p class="text-xs mt-1" style="color:var(--brand-muted-foreground);">河南、云南、福建、广西、四川</p>
+                    </div>
+                    <!-- KPI 2: 分析县区 -->
+                    <div class="rounded-lg p-5 border transition-shadow hover:shadow-sm" style="background:var(--brand-card);border-color:var(--brand-border);">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">分析县区</span>
+                            <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:var(--brand-primary-light);">
+                                <i data-lucide="map-pin" class="w-4 h-4" style="color:var(--brand-primary);"></i>
+                            </div>
+                        </div>
+                        <p class="text-2xl font-bold" style="color:var(--brand-foreground);">36<span class="text-base font-medium ml-1" style="color:var(--brand-muted-foreground);">个</span></p>
+                        <p class="text-xs mt-1" style="color:var(--brand-muted-foreground);">重点林区县区分析</p>
+                    </div>
+                    <!-- KPI 3: 林业用地总量 -->
+                    <div class="rounded-lg p-5 border transition-shadow hover:shadow-sm" style="background:var(--brand-card);border-color:var(--brand-border);">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">林业用地总量</span>
+                            <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:var(--brand-primary-light);">
+                                <i data-lucide="trees" class="w-4 h-4" style="color:var(--brand-primary);"></i>
+                            </div>
+                        </div>
+                        <p class="text-2xl font-bold" style="color:var(--brand-foreground);">18,199<span class="text-base font-medium ml-1" style="color:var(--brand-muted-foreground);">万亩</span></p>
+                        <p class="text-xs mt-1" style="color:var(--brand-muted-foreground);">超1.8亿亩林业用地</p>
+                    </div>
+                    <!-- KPI 4: 年碳汇潜力 -->
+                    <div class="rounded-lg p-5 border transition-shadow hover:shadow-sm" style="background:var(--brand-card);border-color:var(--brand-border);">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">年碳汇潜力</span>
+                            <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:var(--brand-primary-light);">
+                                <i data-lucide="cloud-sun" class="w-4 h-4" style="color:var(--brand-primary);"></i>
+                            </div>
+                        </div>
+                        <p class="text-2xl font-bold" style="color:var(--brand-foreground);">3,250-4,290</p>
+                        <p class="text-xs mt-1" style="color:var(--brand-muted-foreground);">万吨CO₂e/年</p>
+                    </div>
+                    <!-- KPI 5: 年碳汇价值 -->
+                    <div class="rounded-lg p-5 border transition-shadow hover:shadow-sm" style="background:var(--brand-card);border-color:var(--brand-border);">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">年碳汇价值</span>
+                            <div class="w-9 h-9 rounded-lg flex items-center justify-center" style="background:var(--brand-primary-light);">
+                                <i data-lucide="yen" class="w-4 h-4" style="color:var(--brand-primary);"></i>
+                            </div>
+                        </div>
+                        <p class="text-2xl font-bold" style="color:var(--brand-foreground);">227,500-300,300</p>
+                        <p class="text-xs mt-1" style="color:var(--brand-muted-foreground);">万元/年（按70元/吨）</p>
+                    </div>
+                </section>
+
+                <!-- Section 3: Province Cards Grid -->
+                <section>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="layers" class="w-4 h-4" style="color:var(--brand-primary);"></i>
+                        <h3 class="text-sm font-semibold" style="color:var(--brand-foreground);">省份碳汇潜力卡片</h3>
+                        <span class="text-xs px-2 py-0.5 rounded" style="background:var(--brand-muted);color:var(--brand-muted-foreground);">点击卡片查看详细报告</span>
+                    </div>
+                    <div id="province-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                        <!-- 河南省 -->
+                        <a href="henan-report.html" class="province-card rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);border-left:4px solid #0D9488;">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(13,148,136,0.1);">
+                                        <i data-lucide="trees" class="w-5 h-5" style="color:#0D9488;"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold" style="color:var(--brand-foreground);">河南省</h4>
+                                        <p class="text-xs" style="color:var(--brand-muted-foreground);">8个分析县区</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs px-2 py-1 rounded-full" style="background:rgba(13,148,136,0.1);color:#0D9488;font-weight:600;">中原碳汇</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 mb-4">
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">森林覆盖率</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">24.14%</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">年碳汇潜力</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">380-530<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">万吨</span></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">林业用地</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">3,200<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">万亩</span></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">年碳汇价值</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">2.66-3.71<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">亿元</span></p>
+                                </div>
+                            </div>
+                            <!-- Progress bar -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs" style="color:var(--brand-muted-foreground);">森林覆盖率</span>
+                                    <span class="text-xs font-medium" style="color:#0D9488;">24.14%</span>
+                                </div>
+                                <div class="w-full rounded-full" style="height:6px;background:var(--brand-muted);">
+                                    <div class="progress-bar-fill rounded-full" style="--target-width:24.14%;height:6px;background:#0D9488;"></div>
+                                </div>
+                            </div>
+                            <!-- Highlight -->
+                            <div class="rounded-md p-2.5 mb-4" style="background:var(--brand-muted);">
+                                <div class="flex items-start gap-2">
+                                    <i data-lucide="award" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style="color:#0D9488;"></i>
+                                    <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">栾川县森林覆盖率83.51%全省第一</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">查看详细报告</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4" style="color:#0D9488;"></i>
+                            </div>
+                        </a>
+
+                        <!-- 云南省 -->
+                        <a href="yunnan-report.html" class="province-card rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);border-left:4px solid #06B6D4;">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(6,182,212,0.1);">
+                                        <i data-lucide="leaf" class="w-5 h-5" style="color:#06B6D4;"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold" style="color:var(--brand-foreground);">云南省</h4>
+                                        <p class="text-xs" style="color:var(--brand-muted-foreground);">8个分析县区</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs px-2 py-1 rounded-full" style="background:rgba(6,182,212,0.1);color:#06B6D4;font-weight:600;">热带碳汇</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 mb-4">
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">森林覆盖率</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">55.04%</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">年碳汇潜力</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">520-680<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">万吨</span></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">林业用地</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">4,100<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">万亩</span></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">年碳汇价值</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">3.64-4.76<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">亿元</span></p>
+                                </div>
+                            </div>
+                            <!-- Progress bar -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs" style="color:var(--brand-muted-foreground);">森林覆盖率</span>
+                                    <span class="text-xs font-medium" style="color:#06B6D4;">55.04%</span>
+                                </div>
+                                <div class="w-full rounded-full" style="height:6px;background:var(--brand-muted);">
+                                    <div class="progress-bar-fill rounded-full" style="--target-width:55.04%;height:6px;background:#06B6D4;"></div>
+                                </div>
+                            </div>
+                            <!-- Highlight -->
+                            <div class="rounded-md p-2.5 mb-4" style="background:var(--brand-muted);">
+                                <div class="flex items-start gap-2">
+                                    <i data-lucide="award" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style="color:#06B6D4;"></i>
+                                    <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">勐海县活立木蓄积量3977万m³，热带碳积累速度突出</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">查看详细报告</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4" style="color:#06B6D4;"></i>
+                            </div>
+                        </a>
+
+                        <!-- 福建省 -->
+                        <a href="fujian-report.html" class="province-card rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);border-left:4px solid #0D9488;">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(13,148,136,0.1);">
+                                        <i data-lucide="trees" class="w-5 h-5" style="color:#0D9488;"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold" style="color:var(--brand-foreground);">福建省</h4>
+                                        <p class="text-xs" style="color:var(--brand-muted-foreground);">6个分析市县</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs px-2 py-1 rounded-full" style="background:rgba(13,148,136,0.1);color:#0D9488;font-weight:600;">全国第一</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 mb-4">
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">森林覆盖率</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">66.8%</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">年碳汇潜力</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">1,200-1,600<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">万吨</span></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">林业用地</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">5,500<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">万亩</span></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">年碳汇价值</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">8.40-11.20<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">亿元</span></p>
+                                </div>
+                            </div>
+                            <!-- Progress bar -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs" style="color:var(--brand-muted-foreground);">森林覆盖率（全国第一）</span>
+                                    <span class="text-xs font-medium" style="color:#0D9488;">66.8%</span>
+                                </div>
+                                <div class="w-full rounded-full" style="height:6px;background:var(--brand-muted);">
+                                    <div class="progress-bar-fill rounded-full" style="--target-width:66.8%;height:6px;background:#0D9488;"></div>
+                                </div>
+                            </div>
+                            <!-- Highlight -->
+                            <div class="rounded-md p-2.5 mb-4" style="background:var(--brand-muted);">
+                                <div class="flex items-start gap-2">
+                                    <i data-lucide="award" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style="color:#0D9488;"></i>
+                                    <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">三明市亩均蓄积量9.5m³全省最高，已交易碳汇443万吨</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">查看详细报告</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4" style="color:#0D9488;"></i>
+                            </div>
+                        </a>
+
+                        <!-- 广西壮族自治区 -->
+                        <a href="guangxi-report.html" class="province-card rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);border-left:4px solid #F59E0B;">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(245,158,11,0.1);">
+                                        <i data-lucide="trees" class="w-5 h-5" style="color:#F59E0B;"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold" style="color:var(--brand-foreground);">广西壮族自治区</h4>
+                                        <p class="text-xs" style="color:var(--brand-muted-foreground);">7个分析县区</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs px-2 py-1 rounded-full" style="background:rgba(245,158,11,0.1);color:#F59E0B;font-weight:600;">碳票先行</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 mb-4">
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">森林覆盖率</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">62.5%</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">年碳汇潜力</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">280-380<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">万吨</span></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">林业用地</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">2,300<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">万亩</span></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">年碳汇价值</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">1.96-2.66<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">亿元</span></p>
+                                </div>
+                            </div>
+                            <!-- Progress bar -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs" style="color:var(--brand-muted-foreground);">森林覆盖率</span>
+                                    <span class="text-xs font-medium" style="color:#F59E0B;">62.5%</span>
+                                </div>
+                                <div class="w-full rounded-full" style="height:6px;background:var(--brand-muted);">
+                                    <div class="progress-bar-fill rounded-full" style="--target-width:62.5%;height:6px;background:#F59E0B;"></div>
+                                </div>
+                            </div>
+                            <!-- Highlight -->
+                            <div class="rounded-md p-2.5 mb-4" style="background:var(--brand-muted);">
+                                <div class="flex items-start gap-2">
+                                    <i data-lucide="award" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style="color:#F59E0B;"></i>
+                                    <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">龙胜县森林覆盖率83.29%全区第一，已发行碳票12.49万吨</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">查看详细报告</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4" style="color:#F59E0B;"></i>
+                            </div>
+                        </a>
+
+                        <!-- 四川省 -->
+                        <a href="sichuan-report.html" class="province-card rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);border-left:4px solid #6366F1;">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(99,102,241,0.1);">
+                                        <i data-lucide="mountain" class="w-5 h-5" style="color:#6366F1;"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold" style="color:var(--brand-foreground);">四川省</h4>
+                                        <p class="text-xs" style="color:var(--brand-muted-foreground);">6个分析市州</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs px-2 py-1 rounded-full" style="background:rgba(99,102,241,0.1);color:#6366F1;font-weight:600;">西部重镇</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 mb-4">
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">森林覆盖率</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">40.3%</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">年碳汇潜力</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">850-1,100<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">万吨</span></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">林业用地</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">3,099<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">万亩</span></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">年碳汇价值</p>
+                                    <p class="text-base font-bold" style="color:var(--brand-foreground);">5.95-7.70<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">亿元</span></p>
+                                </div>
+                            </div>
+                            <!-- Progress bar -->
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-xs" style="color:var(--brand-muted-foreground);">森林覆盖率</span>
+                                    <span class="text-xs font-medium" style="color:#6366F1;">40.3%</span>
+                                </div>
+                                <div class="w-full rounded-full" style="height:6px;background:var(--brand-muted);">
+                                    <div class="progress-bar-fill rounded-full" style="--target-width:40.3%;height:6px;background:#6366F1;"></div>
+                                </div>
+                            </div>
+                            <!-- Highlight -->
+                            <div class="rounded-md p-2.5 mb-4" style="background:var(--brand-muted);">
+                                <div class="flex items-start gap-2">
+                                    <i data-lucide="award" class="w-3.5 h-3.5 flex-shrink-0 mt-0.5" style="color:#6366F1;"></i>
+                                    <p class="text-xs leading-relaxed" style="color:var(--brand-muted-foreground);">甘孜州活立木蓄积量3.8亿m³全省最高，三州贡献66.9%碳汇量</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-medium" style="color:var(--brand-muted-foreground);">查看详细报告</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4" style="color:#6366F1;"></i>
+                            </div>
+                        </a>
+
+                    </div>
+                </section>
+
+                <!-- Section 4: Province Comparison Chart -->
+                <section class="rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="bar-chart-3" class="w-4 h-4" style="color:var(--brand-primary);"></i>
+                            <h3 class="text-sm font-semibold" style="color:var(--brand-foreground);">五省碳汇指标对比</h3>
+                        </div>
+                        <span class="text-xs px-2 py-1 rounded" style="background:var(--brand-muted);color:var(--brand-muted-foreground);">森林覆盖率 / 年碳汇潜力 / 碳汇价值</span>
+                    </div>
+                    <div class="relative" style="height:340px;">
+                        <canvas id="provinceComparisonChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- Section 5: National Map Placeholder -->
+                <section class="rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);">
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="globe" class="w-4 h-4" style="color:var(--brand-primary);"></i>
+                            <h3 class="text-sm font-semibold" style="color:var(--brand-foreground);">各省碳汇潜力排行</h3>
+                        </div>
+                        <span class="text-xs px-2 py-1 rounded" style="background:var(--brand-muted);color:var(--brand-muted-foreground);">按年碳汇潜力降序</span>
+                    </div>
+
+                    <!-- Map visualization placeholder -->
+                    <div class="rounded-lg p-8 mb-5" style="background:linear-gradient(135deg, #F8FAFC 0%, #E6FFFA 100%);border:1px dashed var(--brand-border);">
+                        <div class="flex items-center justify-center gap-3 mb-2">
+                            <i data-lucide="map" class="w-6 h-6" style="color:var(--brand-muted-foreground);"></i>
+                            <span class="text-sm" style="color:var(--brand-muted-foreground);">全国碳汇重点省份分布</span>
+                        </div>
+                        <p class="text-center text-xs" style="color:var(--brand-muted-foreground);">覆盖河南、云南、福建、广西、四川5个碳汇重点省份</p>
+                    </div>
+
+                    <!-- Horizontal bars sorted descending -->
+                    <div class="space-y-4" id="sink-bars-container">
+                        <!-- 福建 -->
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center gap-2 flex-shrink-0" style="width:80px;">
+                                <span class="w-3 h-3 rounded-sm" style="background:#0D9488;"></span>
+                                <span class="text-sm font-medium" style="color:var(--brand-foreground);">福建省</span>
+                            </div>
+                            <div class="flex-1 rounded-full overflow-hidden" style="height:28px;background:var(--brand-muted);">
+                                <div class="sink-bar-fill rounded-full flex items-center justify-end pr-3" style="--target-width:100%;height:28px;background:linear-gradient(90deg, #0D9488 0%, #14B8A6 100%);">
+                                    <span class="text-xs font-bold text-white">1,400 万吨</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 四川 -->
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center gap-2 flex-shrink-0" style="width:80px;">
+                                <span class="w-3 h-3 rounded-sm" style="background:#6366F1;"></span>
+                                <span class="text-sm font-medium" style="color:var(--brand-foreground);">四川省</span>
+                            </div>
+                            <div class="flex-1 rounded-full overflow-hidden" style="height:28px;background:var(--brand-muted);">
+                                <div class="sink-bar-fill rounded-full flex items-center justify-end pr-3" style="--target-width:69.6%;height:28px;background:linear-gradient(90deg, #6366F1 0%, #818CF8 100%);">
+                                    <span class="text-xs font-bold text-white">975 万吨</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 云南 -->
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center gap-2 flex-shrink-0" style="width:80px;">
+                                <span class="w-3 h-3 rounded-sm" style="background:#06B6D4;"></span>
+                                <span class="text-sm font-medium" style="color:var(--brand-foreground);">云南省</span>
+                            </div>
+                            <div class="flex-1 rounded-full overflow-hidden" style="height:28px;background:var(--brand-muted);">
+                                <div class="sink-bar-fill rounded-full flex items-center justify-end pr-3" style="--target-width:42.9%;height:28px;background:linear-gradient(90deg, #06B6D4 0%, #22D3EE 100%);">
+                                    <span class="text-xs font-bold text-white">600 万吨</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 河南 -->
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center gap-2 flex-shrink-0" style="width:80px;">
+                                <span class="w-3 h-3 rounded-sm" style="background:#0D9488;"></span>
+                                <span class="text-sm font-medium" style="color:var(--brand-foreground);">河南省</span>
+                            </div>
+                            <div class="flex-1 rounded-full overflow-hidden" style="height:28px;background:var(--brand-muted);">
+                                <div class="sink-bar-fill rounded-full flex items-center justify-end pr-3" style="--target-width:32.5%;height:28px;background:linear-gradient(90deg, #0D9488 0%, #2DD4BF 100%);">
+                                    <span class="text-xs font-bold text-white">455 万吨</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 广西 -->
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center gap-2 flex-shrink-0" style="width:80px;">
+                                <span class="w-3 h-3 rounded-sm" style="background:#F59E0B;"></span>
+                                <span class="text-sm font-medium" style="color:var(--brand-foreground);">广西</span>
+                            </div>
+                            <div class="flex-1 rounded-full overflow-hidden" style="height:28px;background:var(--brand-muted);">
+                                <div class="sink-bar-fill rounded-full flex items-center justify-end pr-3" style="--target-width:23.6%;height:28px;background:linear-gradient(90deg, #F59E0B 0%, #FBBF24 100%);">
+                                    <span class="text-xs font-bold text-white">330 万吨</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Legend -->
+                    <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-5 pt-4 border-t" style="border-color:var(--brand-border);">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-sm" style="background:#0D9488;"></span>
+                            <span class="text-xs" style="color:var(--brand-muted-foreground);">福建省 / 河南省</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-sm" style="background:#06B6D4;"></span>
+                            <span class="text-xs" style="color:var(--brand-muted-foreground);">云南省</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-sm" style="background:#F59E0B;"></span>
+                            <span class="text-xs" style="color:var(--brand-muted-foreground);">广西壮族自治区</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-sm" style="background:#6366F1;"></span>
+                            <span class="text-xs" style="color:var(--brand-muted-foreground);">四川省</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 6: CCER Development Priority Ranking -->
+                <section class="rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="trophy" class="w-4 h-4" style="color:var(--brand-primary);"></i>
+                            <h3 class="text-sm font-semibold" style="color:var(--brand-foreground);">CCER开发优先级排名</h3>
+                        </div>
+                        <span class="text-xs px-2 py-1 rounded" style="background:var(--brand-muted);color:var(--brand-muted-foreground);">综合评级</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b" style="border-color:var(--brand-border);">
+                                    <th class="text-left py-3 px-3 font-semibold" style="color:var(--brand-muted-foreground);">排名</th>
+                                    <th class="text-left py-3 px-3 font-semibold" style="color:var(--brand-muted-foreground);">省份</th>
+                                    <th class="text-left py-3 px-3 font-semibold" style="color:var(--brand-muted-foreground);">森林覆盖率</th>
+                                    <th class="text-left py-3 px-3 font-semibold" style="color:var(--brand-muted-foreground);">年碳汇潜力</th>
+                                    <th class="text-left py-3 px-3 font-semibold" style="color:var(--brand-muted-foreground);">年碳汇价值</th>
+                                    <th class="text-left py-3 px-3 font-semibold" style="color:var(--brand-muted-foreground);">CCER交易基础</th>
+                                    <th class="text-left py-3 px-3 font-semibold" style="color:var(--brand-muted-foreground);">综合评级</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Rank 1: 福建 -->
+                                <tr class="border-b transition-colors hover:bg-muted" style="border-color:var(--brand-border);">
+                                    <td class="py-3 px-3">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold" style="background:#0D9488;color:#FFFFFF;">1</div>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-3 font-medium" style="color:var(--brand-foreground);">福建省</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">66.8%</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">1,200-1,600万吨</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">8.40-11.20亿元</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">已交易443万吨/7005万元</td>
+                                    <td class="py-3 px-3"><span class="star-rating" style="color:#F59E0B;">★★★★★</span></td>
+                                </tr>
+                                <!-- Rank 2: 四川 -->
+                                <tr class="border-b transition-colors hover:bg-muted" style="border-color:var(--brand-border);">
+                                    <td class="py-3 px-3">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold" style="background:#6366F1;color:#FFFFFF;">2</div>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-3 font-medium" style="color:var(--brand-foreground);">四川省</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">40.3%</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">850-1,100万吨</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">5.95-7.70亿元</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">雅安试点城市</td>
+                                    <td class="py-3 px-3"><span class="star-rating" style="color:#F59E0B;">★★★★</span><span style="color:var(--brand-border);">★</span></td>
+                                </tr>
+                                <!-- Rank 3: 云南 -->
+                                <tr class="border-b transition-colors hover:bg-muted" style="border-color:var(--brand-border);">
+                                    <td class="py-3 px-3">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold" style="background:#06B6D4;color:#FFFFFF;">3</div>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-3 font-medium" style="color:var(--brand-foreground);">云南省</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">55.04%</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">520-680万吨</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">3.64-4.76亿元</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">省级碳汇试点</td>
+                                    <td class="py-3 px-3"><span class="star-rating" style="color:#F59E0B;">★★★★</span><span style="color:var(--brand-border);">★</span></td>
+                                </tr>
+                                <!-- Rank 4: 广西 -->
+                                <tr class="border-b transition-colors hover:bg-muted" style="border-color:var(--brand-border);">
+                                    <td class="py-3 px-3">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold" style="background:#F59E0B;color:#FFFFFF;">4</div>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-3 font-medium" style="color:var(--brand-foreground);">广西</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">62.5%</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">280-380万吨</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">1.96-2.66亿元</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">已发行碳票12.49万吨</td>
+                                    <td class="py-3 px-3"><span class="star-rating" style="color:#F59E0B;">★★★</span><span style="color:var(--brand-border);">★★</span></td>
+                                </tr>
+                                <!-- Rank 5: 河南 -->
+                                <tr class="transition-colors hover:bg-muted">
+                                    <td class="py-3 px-3">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold" style="background:#0D9488;color:#FFFFFF;">5</div>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-3 font-medium" style="color:var(--brand-foreground);">河南省</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">24.14%</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">380-530万吨</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">2.66-3.71亿元</td>
+                                    <td class="py-3 px-3" style="color:var(--brand-foreground);">新县已交易</td>
+                                    <td class="py-3 px-3"><span class="star-rating" style="color:#F59E0B;">★★★</span><span style="color:var(--brand-border);">★★</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Footer -->
+                <footer class="text-center py-4">
+                    <p class="text-xs" style="color:var(--brand-muted-foreground);">AI智能碳汇管理平台 v1.0 | 区域碳汇分析总览</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <style id="critical-layout">
+        /* App-shell root frame */
+        [data-viewport-mode="app-shell"] {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        [data-viewport-mode="app-shell"] > aside {
+            width: 240px;
+            flex-shrink: 0;
+            overflow-y: auto;
+        }
+        [data-viewport-mode="app-shell"] > [data-scroll-region="primary"] {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        [data-scroll-region="primary"] > .flex-1.overflow-y-auto {
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* KPI card grid */
+        #national-kpi-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        @media (min-width: 640px) {
+            #national-kpi-cards { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            #national-kpi-cards { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (min-width: 1280px) {
+            #national-kpi-cards { grid-template-columns: repeat(5, 1fr); }
+        }
+
+        /* Province cards grid */
+        #province-cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        @media (min-width: 768px) {
+            #province-cards-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            #province-cards-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        /* Card base */
+        .rounded-lg {
+            border-radius: var(--brand-radius-md);
+        }
+        .rounded-md {
+            border-radius: var(--brand-radius-sm);
+        }
+
+        /* Sidebar responsive - hide on small screens */
+        @media (max-width: 1023px) {
+            [data-viewport-mode="app-shell"] > aside {
+                display: none;
+            }
+        }
+
+        /* Touch-friendly row spacing */
+        @media (hover: none) {
+            .province-card:hover {
+                transform: none;
+                box-shadow: 0 4px 12px rgba(13,148,136,0.08);
+            }
+        }
+    </style>
+
+    <script>
+    (function() {
+        // Set current date
+        var now = new Date();
+        var options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+        var dateEl = document.getElementById('header-date');
+        if (dateEl) dateEl.textContent = now.toLocaleDateString('zh-CN', options);
+
+        // Province Comparison Chart
+        var comparisonCtx = document.getElementById('provinceComparisonChart');
+        if (comparisonCtx) {
+            new Chart(comparisonCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['河南省', '云南省', '福建省', '广西', '四川省'],
+                    datasets: [
+                        {
+                            label: '森林覆盖率 (%)',
+                            data: [24.14, 55.04, 66.8, 62.5, 40.3],
+                            backgroundColor: 'rgba(13,148,136,0.75)',
+                            borderColor: '#0D9488',
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: '年碳汇潜力 (万吨)',
+                            data: [455, 600, 1400, 330, 975],
+                            backgroundColor: 'rgba(6,182,212,0.75)',
+                            borderColor: '#06B6D4',
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            yAxisID: 'y1'
+                        },
+                        {
+                            label: '碳汇价值 (亿元)',
+                            data: [3.19, 4.20, 9.80, 2.31, 6.83],
+                            backgroundColor: 'rgba(245,158,11,0.75)',
+                            borderColor: '#F59E0B',
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20,
+                                font: { size: 12 },
+                                color: '#64748B'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#1E293B',
+                            titleColor: '#FFFFFF',
+                            bodyColor: '#E2E8F0',
+                            padding: 12,
+                            cornerRadius: 8,
+                            titleFont: { size: 13 },
+                            bodyFont: { size: 12 }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#64748B', font: { size: 12 } }
+                        },
+                        y: {
+                            type: 'linear',
+                            position: 'left',
+                            beginAtZero: true,
+                            max: 100,
+                            grid: { color: 'rgba(226,232,240,0.6)' },
+                            ticks: {
+                                color: '#64748B',
+                                font: { size: 11 },
+                                callback: function(value) { return value + '%'; }
+                            },
+                            title: {
+                                display: true,
+                                text: '森林覆盖率',
+                                color: '#64748B',
+                                font: { size: 11 }
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            position: 'right',
+                            beginAtZero: true,
+                            grid: { display: false },
+                            ticks: {
+                                color: '#64748B',
+                                font: { size: 11 }
+                            },
+                            title: {
+                                display: true,
+                                text: '万吨 / 亿元',
+                                color: '#64748B',
+                                font: { size: 11 }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Animate progress bars on load
+        setTimeout(function() {
+            var progressBars = document.querySelectorAll('.progress-bar-fill');
+            progressBars.forEach(function(bar) {
+                bar.classList.add('animate');
+            });
+            var sinkBars = document.querySelectorAll('.sink-bar-fill');
+            sinkBars.forEach(function(bar, index) {
+                setTimeout(function() {
+                    bar.classList.add('animate');
+                }, index * 150);
+            });
+        }, 200);
+    })();
+    </script>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>
