@@ -24,7 +24,7 @@
 ```
 greylight-lab/
 ├── pages/               # 全部页面（离线优先，样式内联）
-├── assets/              # 标本图、站点图等静态资源
+├── assets/              # 标本图、站点图、微信公众号二维码（wechat-qrcode.png）等静态资源
 ├── vendor/              # Tailwind / Lucide / Chart.js 本地依赖
 ├── shared-app.js        # 共享交互层（模态框/筛选/搜索/通知/提示）
 ├── colors_and_type.css  # 设计令牌预检稿（历史产物）
@@ -40,7 +40,10 @@ greylight-lab/
 - **筛选引擎**：筛选片加 `data-chip-group="组名" data-chip-value="值"`，条目加 `data-f-group="组名" data-f-values="值1 值2"`；未标注的条目自动按文本匹配（如样品/报告台账）。搜索框加 `data-search="组名"`，计数元素加 `data-result-count="组名"`。程序改动后可调 `GL.refreshFilter(组名)` 刷新。
 - **行操作**：`data-action="view|review|export|download|edit|goto"`。`view` 自动读取行的 `data-d1..d8` + `data-d-labels` 生成详情弹窗，无标注时回退为按表头取列；`review` 默认跳转专家复核页，复核页内通过 `gl:review` 事件拦截为复核弹窗。
 - **通知/提示**：`GL.toast(msg, type)`；通知铃铛 `data-notifications` 自动绑定下拉面板。
-- 交互所需样式由脚本注入（`gl-modal`、`gl-toast`、`chip`、`gl-searchbar` 等），页面无需重复定义。
+- **页脚联系方式**：8 个页面底部自动挂一张「联系方式」卡（微信公众号二维码 + 邮箱），二维码可点击放大。数据源在 `shared-app.js` 顶部的 `GL_CONTACT` —— **改一处，全站 8 个页面同步**，页面 HTML 不用动。
+  - 二维码图放 `assets/wechat-qrcode.png`；把 `qrcode.src` 置空则整块二维码区域不渲染；图片缺失时自动隐藏，不会留破图。
+  - `items` 里 `value` 为空的条目自动隐藏；`href` 写 `tel:` / `mailto:` 会自动拼上 `value`。
+- 交互所需样式由脚本注入（`gl-modal`、`gl-toast`、`chip`、`gl-searchbar`、`gl-contact` 等），页面无需重复定义。
 
 ## 设计规范约定
 
@@ -66,6 +69,8 @@ greylight-lab/
 - [ ] 物种参考库已接入真实数据（CoSFISH 条形码 + 磁窑河/余杭塘河名录），其余页面（样品管理、报告中心等）仍是演示数据，可按同一模式逐步真实化。
 
 ## 版本
+
+v1.5 · 2026-09-17 · 8 个页面底部统一新增「联系方式」卡（微信公众号二维码 + 邮箱），数据源集中在 `shared-app.js` 的 `GL_CONTACT`，改一处全站生效；二维码点击可放大，移动端自动改为上下堆叠并把二维码放大到 118px 方便扫码。
 
 v1.4 · 2026-09-17 · 参考库页交互升级：点击物种卡片照片区域（或「详情」）弹出整张介绍卡，弹窗顶部显示该物种照片大图（无图物种显示「暂无照片（形态鉴定）」占位），并保留分类/站点/序列号/来源/标签完整信息。
 

@@ -1,5 +1,5 @@
 /* ============================================================
- * 灰灯实验室 AI 鉴定台 — 共享交互层 shared-app.js v1.1
+ * 灰灯实验室 AI 鉴定台 — 共享交互层 shared-app.js v1.2
  * ------------------------------------------------------------
  * 功能：
  *   1. 模态框系统（GL.modal）＋ 各页面演示表单模板
@@ -12,6 +12,9 @@
  *             计数元素带 data-result-count="组名"
  *   5. 表格行操作：data-action="view|review|download|goto"
  *   6. 演示表单：拦截 submit → 成功提示
+ *   7. 页脚联系方式卡（微信公众号二维码 + 邮箱）
+ *      - 数据源：文件顶部 GL_CONTACT，改一处全站 8 个页面同步
+ *      - 页面无需改 HTML，脚本自动挂到每个 <footer> 后面
  * ------------------------------------------------------------
  * 依赖：无（原生 JS）。lucide 存在时自动刷新图标。
  * ============================================================ */
@@ -19,6 +22,44 @@
   'use strict';
 
   var GL = window.GL = window.GL || {};
+
+  /* ============================================================
+   * 联系方式（全站唯一数据源）
+   * ------------------------------------------------------------
+   * 只改这里 → 8 个页面底部的联系卡同步生效，不要在页面里硬编码。
+   *
+   * qrcode.src  ：二维码图片路径，相对 shared-app.js 所在目录写。
+   *               留空 '' 或 null → 整个二维码区域不渲染。
+   * qrcode.caption：二维码下方小字（如「微信公众号」）。
+   * items       ：value 为空的条目自动隐藏，不会渲染空占位。
+   *               href 写 'tel:' / 'mailto:' 会自动拼上 value；
+   *               写 http(s) 地址会自动带 target="_blank"。
+   * ============================================================ */
+  var GL_CONTACT = window.GL_CONTACT = {
+    title: '联系方式',
+    icon: 'contact',
+    qrcode: {
+      src: 'assets/wechat-qrcode.png',
+      caption: '微信公众号',
+      alt: '微信公众号二维码'
+    },
+    items: [
+      { icon: 'mail', label: '邮箱', value: 'jinghao.song@gmail.com', href: 'mailto:' }
+    ],
+    note: '离线演示版（Demo）· 页面数据仅用于功能演示，非真实监测结果'
+  };
+
+  /* shared-app.js 自身所在目录：联系方式里的相对路径据此解析，
+     这样页面放在 pages/ 子目录下也能正确取到 assets/。 */
+  var ASSET_BASE = (function () {
+    var s = document.currentScript;
+    if (!s || !s.src) {
+      var all = document.getElementsByTagName('script');
+      s = all[all.length - 1];
+    }
+    var src = (s && s.src) ? String(s.src) : '';
+    return src ? src.replace(/[?#].*$/, '').replace(/[^\/]*$/, '') : '';
+  })();
 
   /* ---------------- 基础 DOM 工具 ---------------- */
   function $(sel, root) { return (root || document).querySelector(sel); }
@@ -99,7 +140,27 @@
     '.gl-search-input{flex:1;min-width:160px;border:none;outline:none;font-size:13px;font-family:var(--font-sans);color:var(--brand-foreground);background:transparent;}',
     '.gl-search-input::placeholder{color:var(--ink-3);}',
     '.gl-chiprow{display:flex;gap:8px;flex-wrap:wrap;}',
-    '.gl-search-count{font-size:12px;color:var(--ink-3);font-family:var(--font-mono);white-space:nowrap;flex-shrink:0;}'
+    '.gl-search-count{font-size:12px;color:var(--ink-3);font-family:var(--font-mono);white-space:nowrap;flex-shrink:0;}',
+    /* === 页脚联系方式卡 === */
+    '.gl-contact{margin-top:var(--s-4,24px);padding-top:var(--s-4,24px);border-top:1px dashed var(--brand-border);text-align:center;}',
+    '.gl-contact-inner{margin:0 auto;}',
+    '.gl-contact-title{display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--brand-foreground);margin-bottom:12px;}',
+    '.gl-contact-title [data-lucide]{width:14px;height:14px;color:var(--brand-primary);}',
+    '.gl-contact-card{display:inline-flex;align-items:center;gap:20px;padding:14px 22px;border:1px solid var(--brand-border);border-radius:var(--r-lg,8px);background:var(--brand-surface,#fff);text-align:left;box-shadow:var(--shadow-1,0 1px 3px rgba(15,23,42,.06));}',
+    '.gl-contact-qr{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;}',
+    '.gl-contact-qr img{width:92px;height:92px;object-fit:contain;display:block;border:1px solid var(--brand-border);border-radius:var(--r-md,4px);background:#fff;padding:4px;box-sizing:content-box;cursor:zoom-in;transition:border-color .15s;}',
+    '.gl-contact-qr img:hover{border-color:var(--brand-primary);}',
+    '.gl-contact-qr-cap{font-size:11px;color:var(--ink-3,#8b95a4);white-space:nowrap;}',
+    '.gl-contact-fields{display:flex;flex-direction:column;gap:8px;min-width:0;}',
+    '.gl-contact-item{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border:1px solid var(--brand-border);border-radius:var(--r-pill,999px);background:var(--brand-surface,#fff);font-size:12px;line-height:1.5;color:var(--ink-2,#5a6678);text-decoration:none;transition:border-color .15s,color .15s,box-shadow .15s;}',
+    'a.gl-contact-item:hover{border-color:var(--brand-primary);color:var(--brand-foreground);box-shadow:var(--shadow-1,0 1px 3px rgba(15,23,42,.08));}',
+    '.gl-contact-item [data-lucide]{width:13px;height:13px;flex-shrink:0;color:var(--brand-primary);}',
+    '.gl-contact-label{color:var(--ink-3,#8b95a4);}',
+    '.gl-contact-value{font-weight:500;color:var(--brand-foreground);font-variant-numeric:tabular-nums;word-break:break-all;}',
+    '.gl-contact-note{margin-top:10px;font-size:11px;color:var(--ink-3,#8b95a4);}',
+    '.gl-qr-modal{text-align:center;}',
+    '.gl-qr-modal img{max-width:min(320px,68vw);width:100%;height:auto;display:block;margin:0 auto;border:1px solid var(--brand-border);border-radius:var(--r-md,4px);background:#fff;padding:8px;box-sizing:border-box;}',
+    '@media (max-width:640px){.gl-contact-card{flex-direction:column;gap:14px;padding:14px 16px;}.gl-contact-qr img{width:118px;height:118px;}.gl-contact-item{padding:4px 10px;font-size:11px;}}'
   ].join('\n');
   var cssInjected = false;
   function injectSharedCss() {
@@ -407,6 +468,89 @@
     });
   }
 
+  /* ---------------- 页脚联系方式条 ---------------- */
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function contactHref(item) {
+    var h = item.href || '';
+    if (!h) return '';
+    if (h === 'tel:' || h === 'mailto:') return h + String(item.value).replace(/\s+/g, '');
+    return h;
+  }
+  function setupContactBar() {
+    var cfg = GL_CONTACT;
+    if (!cfg) return;
+
+    var items = (cfg.items || []).filter(function (it) { return it && it.value; });
+    var qr = (cfg.qrcode && cfg.qrcode.src) ? cfg.qrcode : null;
+    if (!items.length && !qr) return;   // 二维码和条目都没配 → 整块不渲染
+
+    var footers = $$('footer');
+    if (!footers.length) return;
+
+    var box = el('div', { class: 'gl-contact', role: 'contentinfo' });
+    var inner = el('div', { class: 'gl-contact-inner' });
+    inner.appendChild(el('div', { class: 'gl-contact-title' },
+      '<i data-lucide="' + esc(cfg.icon || 'contact') + '"></i><span>' + esc(cfg.title || '联系方式') + '</span>'));
+
+    var card = el('div', { class: 'gl-contact-card' });
+
+    /* 二维码：点击放大；图片缺失时整块优雅隐藏，不留破图 */
+    if (qr) {
+      var src = /^(https?:|data:|file:|\/)/.test(qr.src) ? qr.src : ASSET_BASE + qr.src;
+      var qrWrap = el('div', { class: 'gl-contact-qr' });
+      var img = el('img', { src: src, alt: qr.alt || qr.caption || '二维码', title: '点击放大' });
+      img.addEventListener('click', function () {
+        GL.modal({
+          title: qr.caption || '二维码',
+          icon: 'qr-code',
+          body: '<div class="gl-qr-modal"><img src="' + esc(src) + '" alt="' + esc(qr.alt || '') + '"></div>'
+        });
+      });
+      img.addEventListener('error', function () {
+        if (qrWrap.parentNode) qrWrap.parentNode.removeChild(qrWrap);
+      });
+      qrWrap.appendChild(img);
+      if (qr.caption) qrWrap.appendChild(el('div', { class: 'gl-contact-qr-cap' }, esc(qr.caption)));
+      card.appendChild(qrWrap);
+    }
+
+    if (items.length) {
+      var fields = el('div', { class: 'gl-contact-fields' });
+      items.forEach(function (it) {
+        var href = contactHref(it);
+        var node = el(href ? 'a' : 'span', { class: 'gl-contact-item' });
+        node.setAttribute('title', it.label + '：' + it.value);
+        if (href) {
+          node.setAttribute('href', href);
+          if (href.indexOf('http') === 0) {
+            node.setAttribute('target', '_blank');
+            node.setAttribute('rel', 'noopener noreferrer');
+          }
+        }
+        node.innerHTML = '<i data-lucide="' + esc(it.icon) + '"></i>' +
+          '<span class="gl-contact-label">' + esc(it.label) + '</span>' +
+          '<span class="gl-contact-value">' + esc(it.value) + '</span>';
+        fields.appendChild(node);
+      });
+      card.appendChild(fields);
+    }
+
+    inner.appendChild(card);
+    if (cfg.note) inner.appendChild(el('div', { class: 'gl-contact-note' }, esc(cfg.note)));
+    box.appendChild(inner);
+
+    footers.forEach(function (f) {
+      var host = f.parentNode;
+      if (!host || host.querySelector(':scope > .gl-contact')) return;
+      host.insertBefore(box.cloneNode(true), f.nextSibling);
+    });
+    refreshIcons();
+  }
+
   /* ---------------- 全局初始化 ---------------- */
   function init() {
     injectSharedCss();
@@ -459,6 +603,9 @@
     // 4) 通知铃铛
     var bell = $('[data-notifications]');
     if (bell) setupNotifications(bell);
+
+    // 4.5) 页脚联系方式卡（二维码 + 邮箱，数据源见文件顶部 GL_CONTACT）
+    setupContactBar();
 
     // 5) 通用表单提交拦截
     document.addEventListener('submit', function (e) {
