@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>水生态监测流程 — 灰灯实验室 AI 鉴定台</title>
+    <style id="theme-vars">
+/* Grey Light Lab — Government Monitoring Aesthetic */
+/* Brand: deep slate teal — authoritative, precise, civic */
+
+:root {
+  /* === Background & Surfaces === */
+  --brand-background: #f4f5f7;
+  --brand-surface: #ffffff;
+  --brand-surface-2: #ebedf0;
+  --brand-popover: #ffffff;
+
+  /* === Foreground / Text === */
+  --brand-foreground: #1a2332;
+  --brand-card-foreground: #1a2332;
+  --brand-popover-foreground: #1a2332;
+  --brand-muted: #ebedf0;
+  --brand-muted-foreground: #5a6678;
+  --brand-card: #ffffff;
+
+  /* === Brand Primary (Deep Slate Teal) === */
+  --brand-primary: #1d6b6b;
+  --brand-primary-foreground: #ffffff;
+
+  /* === Borders / Inputs === */
+  --brand-border: #d4d9e0;
+  --brand-input: #d4d9e0;
+  --brand-ring: #1d6b6b;
+
+  /* === Radius === */
+  --brand-radius-sm: 2px;
+  --brand-radius-md: 4px;
+  --brand-radius-lg: 8px;
+
+  /* === State Colors === */
+  --state-success: #2e7d32;
+  --state-warning: #e65100;
+  --state-error: #c62828;
+  --state-info: #1565c0;
+
+  /* === Extended Tokens === */
+  --ink: #1a2332;
+  --ink-2: #5a6678;
+  --ink-3: #8b95a4;
+  --line: #d4d9e0;
+  --surface: #ffffff;
+  --surface-2: #ebedf0;
+  --bg: #f4f5f7;
+  --brand: #1d6b6b;
+  --brand-ink: #ffffff;
+
+  /* Typography */
+  --font-sans: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Courier New", monospace;
+
+  /* Spacing (8pt grid) */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 80px;
+
+  /* Radius */
+  --r-xs: 2px;
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 16px;
+  --r-pill: 999px;
+
+  /* Borders & Shadows */
+  --border: 1px solid var(--line);
+  --shadow-1: 0 1px 2px rgba(15,23,42,.04), 0 1px 1px rgba(15,23,42,.02);
+  --shadow-2: 0 8px 24px -8px rgba(15,23,42,.12);
+  --shadow-3: 0 24px 60px -20px rgba(15,23,42,.20);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js" onerror="var s=document.createElement('script');s.src='../vendor/tailwind-browser.js';document.head.appendChild(s);"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js" onerror="var s=document.createElement('script');s.src='../vendor/lucide.min.js';document.head.appendChild(s);"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--brand-background);
+    --color-foreground: var(--brand-foreground);
+    --color-card: var(--brand-card);
+    --color-card-foreground: var(--brand-card-foreground);
+    --color-popover: var(--brand-popover);
+    --color-popover-foreground: var(--brand-popover-foreground);
+    --color-primary: var(--brand-primary);
+    --color-primary-foreground: var(--brand-primary-foreground);
+    --color-muted: var(--brand-muted);
+    --color-muted-foreground: var(--brand-muted-foreground);
+    --color-border: var(--brand-border);
+    --color-input: var(--brand-input);
+    --color-ring: var(--brand-ring);
+    --radius-sm: var(--brand-radius-sm);
+    --radius-md: var(--brand-radius-md);
+    --radius-lg: var(--brand-radius-lg);
+  }
+  @layer base {
+    body { background: var(--brand-background); color: var(--brand-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--brand-background); }
+      .text-background { color: var(--brand-background); }
+      .border-background { border-color: var(--brand-background); }
+      .ring-background { --tw-ring-color: var(--brand-background); }
+      .bg-foreground { background-color: var(--brand-foreground); }
+      .text-foreground { color: var(--brand-foreground); }
+      .border-foreground { border-color: var(--brand-foreground); }
+      .ring-foreground { --tw-ring-color: var(--brand-foreground); }
+      .bg-card { background-color: var(--brand-card); }
+      .text-card { color: var(--brand-card); }
+      .border-card { border-color: var(--brand-card); }
+      .ring-card { --tw-ring-color: var(--brand-card); }
+      .bg-card-foreground { background-color: var(--brand-card-foreground); }
+      .text-card-foreground { color: var(--brand-card-foreground); }
+      .border-card-foreground { border-color: var(--brand-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--brand-card-foreground); }
+      .bg-popover { background-color: var(--brand-popover); }
+      .text-popover { color: var(--brand-popover); }
+      .border-popover { border-color: var(--brand-popover); }
+      .ring-popover { --tw-ring-color: var(--brand-popover); }
+      .bg-popover-foreground { background-color: var(--brand-popover-foreground); }
+      .text-popover-foreground { color: var(--brand-popover-foreground); }
+      .border-popover-foreground { border-color: var(--brand-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--brand-popover-foreground); }
+      .bg-primary { background-color: var(--brand-primary); }
+      .text-primary { color: var(--brand-primary); }
+      .border-primary { border-color: var(--brand-primary); }
+      .ring-primary { --tw-ring-color: var(--brand-primary); }
+      .bg-primary-foreground { background-color: var(--brand-primary-foreground); }
+      .text-primary-foreground { color: var(--brand-primary-foreground); }
+      .border-primary-foreground { border-color: var(--brand-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--brand-primary-foreground); }
+      .bg-muted { background-color: var(--brand-muted); }
+      .text-muted { color: var(--brand-muted); }
+      .border-muted { border-color: var(--brand-muted); }
+      .ring-muted { --tw-ring-color: var(--brand-muted); }
+      .bg-muted-foreground { background-color: var(--brand-muted-foreground); }
+      .text-muted-foreground { color: var(--brand-muted-foreground); }
+      .border-muted-foreground { border-color: var(--brand-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--brand-muted-foreground); }
+      .bg-border { background-color: var(--brand-border); }
+      .text-border { color: var(--brand-border); }
+      .border-border { border-color: var(--brand-border); }
+      .ring-border { --tw-ring-color: var(--brand-border); }
+      .bg-input { background-color: var(--brand-input); }
+      .text-input { color: var(--brand-input); }
+      .border-input { border-color: var(--brand-input); }
+      .ring-input { --tw-ring-color: var(--brand-input); }
+      .bg-ring { background-color: var(--brand-ring); }
+      .text-ring { color: var(--brand-ring); }
+      .border-ring { border-color: var(--brand-ring); }
+      .ring-ring { --tw-ring-color: var(--brand-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <div class="app-shell">
+      <!-- 1. Top Header Bar -->
+      <header class="app-header">
+        <a href="index.html" style="text-decoration:none;color:inherit;">
+          <div class="logo">
+            <div class="logo-main">
+              <i data-lucide="flask-conical"></i>
+              <span>灰灯实验室</span>
+            </div>
+            <div class="logo-sub">AI 鉴定台</div>
+          </div>
+        </a>
+        <nav class="header-nav">
+          <a href="dashboard.html">鉴定台</a>
+          <a href="sample-management.html">样品管理</a>
+          <a href="expert-review.html">专家复核</a>
+          <a href="monitoring-workflow.html" class="active">监测流程</a>
+          <a href="species-library.html">参考库</a>
+          <a href="report-center.html">报告导出</a>
+          <a href="model-management.html">模型管理</a>
+        </nav>
+        <div class="header-right">
+          <div class="user-name">
+            <span>张研究员</span>
+            <i data-lucide="chevron-down"></i>
+          </div>
+          <button class="notification-btn" type="button">
+            <i data-lucide="bell"></i>
+            <span class="notification-badge"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- 2. Left Sidebar -->
+      <aside class="app-sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">
+            <i data-lucide="map-pin"></i>
+            <span>监测站点</span>
+          </div>
+          <div class="sidebar-item active">
+            <i data-lucide="map-pin"></i>
+            <span>信阳浉河</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>南湾水库</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>淮河干流</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>狮河区段</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>浉河支流</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>丹江口水库</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>小浪底水库</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>黄河郑州段</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>海河河南段</span>
+          </div>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">
+            <i data-lucide="zap"></i>
+            <span>快捷操作</span>
+          </div>
+          <div class="sidebar-item" data-modal="newSample" style="cursor:pointer;">
+            <i data-lucide="plus"></i>
+            <span>新建样品</span>
+          </div>
+          <div class="sidebar-item" data-modal="importSeq" style="cursor:pointer;">
+            <i data-lucide="upload"></i>
+            <span>导入序列</span>
+          </div>
+          <div class="sidebar-item" data-action="export" style="cursor:pointer;">
+            <i data-lucide="download"></i>
+            <span>导出报告</span>
+          </div>
+          <div class="sidebar-item" data-modal="finetune" style="cursor:pointer;">
+            <i data-lucide="sliders-horizontal"></i>
+            <span>模型微调</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 3. Main Content Area -->
+      <main class="app-main">
+        <!-- 3a. Page Title Row -->
+        <div class="page-title-row">
+          <div>
+            <h1 class="page-title">水生态监测流程</h1>
+            <div class="page-subtitle">人工监测标准操作规程</div>
+          </div>
+          <div class="title-actions">
+            <div class="date-selector">
+              <i data-lucide="calendar"></i>
+              <span>2026-09-08</span>
+            </div>
+            <button class="btn btn-primary" type="button" data-action="export">
+              <i data-lucide="download"></i>
+              <span>导出操作规程</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- SECTION 1: 监测实施方案         -->
+        <!-- ============================== -->
+        <div class="card section-gap">
+          <div class="card-header">
+            <div class="card-title">
+              <i data-lucide="clipboard-list"></i>
+              <span>监测实施方案</span>
+            </div>
+            <span style="font-size:12px;color:var(--ink-3);">HJ 1295-2023 / HJ 1296-2023</span>
+          </div>
+          <div class="card-body">
+
+            <!-- 3-column grid: 目标 / 依据 / 频次 -->
+            <div class="info-grid">
+
+              <!-- 1.1 监测目标 -->
+              <div class="info-block">
+                <div class="info-block-title">
+                  <i data-lucide="target"></i>
+                  <span>1.1 监测目标</span>
+                </div>
+                <ul>
+                  <li>查清河流水生生物群落结构与多样性状况</li>
+                  <li>评估水体生态健康状态及变化趋势</li>
+                  <li>为水生态保护与管理提供科学依据</li>
+                </ul>
+              </div>
+
+              <!-- 1.2 监测依据 -->
+              <div class="info-block">
+                <div class="info-block-title">
+                  <i data-lucide="book-open"></i>
+                  <span>1.2 监测依据</span>
+                </div>
+                <table class="task-table" style="font-size:12px;">
+                  <thead>
+                    <tr>
+                      <th>标准编号</th>
+                      <th>标准名称</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="mono">HJ 1295-2023</td><td>水生态监测技术指南 河流水生生物监测与评价</td></tr>
+                    <tr><td class="mono">HJ 1296-2023</td><td>水生态监测技术指南 湖泊水生生物监测与评价</td></tr>
+                    <tr><td class="mono">HJ 710.1-2022</td><td>生物多样性观测技术导则 淡水水域</td></tr>
+                    <tr><td class="mono">SL 493-2024</td><td>水资源监测规范</td></tr>
+                    <tr><td class="mono">HJ 91.2-2022</td><td>地表水环境质量监测技术规范</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- 1.3 监测频次与周期 -->
+              <div class="info-block">
+                <div class="info-block-title">
+                  <i data-lucide="calendar-clock"></i>
+                  <span>1.3 监测频次与周期</span>
+                </div>
+                <table class="task-table" style="font-size:12px;">
+                  <thead>
+                    <tr>
+                      <th>监测类型</th>
+                      <th>频次</th>
+                      <th>时间要求</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>浮游植物</td><td class="mono">4次/年</td><td>枯水期、平水期(2次)、丰水期</td></tr>
+                    <tr><td>着生藻类</td><td class="mono">2次/年</td><td>枯水期、丰水期</td></tr>
+                    <tr><td>底栖动物</td><td class="mono">2次/年</td><td>春末(4-5月)、秋初(9-10月)</td></tr>
+                    <tr><td>鱼类</td><td class="mono">2次/年</td><td>春季(4-5月)、秋季(9-10月)</td></tr>
+                    <tr><td>eDNA 补充</td><td class="mono">4次/年</td><td>与常规监测同步</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+
+            <!-- 1.4 监测点位布设 (full-width table) -->
+            <div class="info-block" style="margin-top:var(--s-2);">
+              <div class="info-block-title">
+                <i data-lucide="map"></i>
+                <span>1.4 监测点位布设</span>
+              </div>
+              <table class="task-table">
+                <thead>
+                  <tr>
+                    <th>断面名称</th>
+                    <th>类型</th>
+                    <th>坐标</th>
+                    <th>生境描述</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>信阳浉河上游</td>
+                    <td><span class="badge badge-completed"><span class="badge-dot"></span>对照断面</span></td>
+                    <td class="mono">32.1284°N, 114.0587°E</td>
+                    <td>山区溪流，砾石底质</td>
+                  </tr>
+                  <tr>
+                    <td>南湾水库库心</td>
+                    <td><span class="badge" style="color:var(--state-info);background:color-mix(in srgb, var(--state-info) 10%, transparent);"><span class="badge-dot"></span>库区监测</span></td>
+                    <td class="mono">32.0615°N, 113.9842°E</td>
+                    <td>深水区，泥沙底质</td>
+                  </tr>
+                  <tr>
+                    <td>淮河干流淮滨</td>
+                    <td><span class="badge badge-pending"><span class="badge-dot"></span>控制断面</span></td>
+                    <td class="mono">32.4502°N, 115.3714°E</td>
+                    <td>平原河流，沙泥底质</td>
+                  </tr>
+                  <tr>
+                    <td>狮河区段中游</td>
+                    <td><span class="badge badge-pending"><span class="badge-dot"></span>削减断面</span></td>
+                    <td class="mono">32.1156°N, 114.0723°E</td>
+                    <td>城镇河段，混合底质</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- SECTION 2: 详细操作步骤       -->
+        <!-- ============================== -->
+        <div class="card section-gap">
+          <div class="card-header">
+            <div class="card-title">
+              <i data-lucide="list-checks"></i>
+              <span>详细操作步骤</span>
+            </div>
+            <span style="font-size:12px;color:var(--ink-3);">三阶段全流程 · 含质控与记录表单</span>
+          </div>
+          <div class="card-body-tight">
+
+            <!-- Phase 1: 野外采样阶段 -->
+            <div class="phase-header">
+              <i data-lucide="map-pin"></i>
+              <span class="phase-title">Phase 1：野外采样阶段</span>
+              <span class="phase-badge"><i data-lucide="flag" style="width:12px;height:12px;"></i> 阶段一</span>
+            </div>
+            <table class="task-table step-table">
+              <thead>
+                <tr>
+                  <th>步骤</th>
+                  <th>操作内容</th>
+                  <th>仪器/工具</th>
+                  <th>质控要求</th>
+                  <th>记录表单</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="step-num">01</td>
+                  <td>采样准备：清点采样装备、固定剂、记录表、GPS定位</td>
+                  <td>采样箱、甲醛/乙醇、标签纸、现场记录表</td>
+                  <td>检查试剂有效期，校准GPS</td>
+                  <td class="mono">GL-WS-01 现场记录表</td>
+                </tr>
+                <tr>
+                  <td class="step-num">02</td>
+                  <td>水质参数现场测定：测定水温、pH、溶解氧、电导率、浊度、流速</td>
+                  <td>多参数水质仪(HQ40d)、流速仪</td>
+                  <td>现场校准仪器，记录标准液批号</td>
+                  <td class="mono">GL-WQ-01 水质现场记录</td>
+                </tr>
+                <tr>
+                  <td class="step-num">03</td>
+                  <td>浮游植物采样：采水器取1-5L表层水(0.5m)，浓缩至30mL，鲁哥氏液固定</td>
+                  <td>采水器(5L)、浮游生物网(25#)、鲁哥氏液</td>
+                  <td>现场平行样(≥10%)，标签双编号</td>
+                  <td class="mono">GL-PH-01 浮游植物记录</td>
+                </tr>
+                <tr>
+                  <td class="step-num">04</td>
+                  <td>着生藻类采样：刮取人工基质(载玻片/硅藻计)或天然基质表面，刷洗至样品瓶</td>
+                  <td>硅藻计、硬毛刷、蒸馏水洗瓶</td>
+                  <td>每断面≥3个平行样，4%甲醛固定</td>
+                  <td class="mono">GL-PE-01 着生藻类记录</td>
+                </tr>
+                <tr>
+                  <td class="step-num">05</td>
+                  <td>底栖动物采样：索伯网(0.0625m²)或D型网定量采样，按生境分层取样</td>
+                  <td>索伯网/Surber sampler、D型网(0.3m宽)、分样筛(40目/60目)</td>
+                  <td>每生境≥3个重复，现场活体分拣</td>
+                  <td class="mono">GL-BM-01 底栖动物记录</td>
+                </tr>
+                <tr>
+                  <td class="step-num">06</td>
+                  <td>鱼类调查：电鱼法(背式电鱼器)或定制网具(刺网/地笼)，记录种类、数量、体长</td>
+                  <td>背式电鱼器(LR-24)、刺网(多层)、解剖盘、量鱼板</td>
+                  <td>选择性捕捞，记录渔获物重量与丰度</td>
+                  <td class="mono">GL-FS-01 鱼类调查记录</td>
+                </tr>
+                <tr>
+                  <td class="step-num">07</td>
+                  <td>eDNA 水样采集：采水器取表层水1L，过0.22μm滤膜，滤膜冻存于液氮</td>
+                  <td>采水器、滤膜(Millipore)、冻存管、便携液氮罐</td>
+                  <td>现场空白对照，避免交叉污染</td>
+                  <td class="mono">GL-ED-01 eDNA采样记录</td>
+                </tr>
+                <tr>
+                  <td class="step-num">08</td>
+                  <td>样品固定与保存：浮游植物:鲁哥氏液;着生藻类/底栖:4%甲醛;鱼类:10%甲醛;eDNA:-20°C</td>
+                  <td>甲醛(AR级)、乙醇(95%)、液氮罐、冷链箱</td>
+                  <td>固定液体积比≥样品3倍，标签防水处理</td>
+                  <td class="mono">GL-SP-01 样品交接单</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Phase 2: 实验室分析阶段 -->
+            <div class="phase-header">
+              <i data-lucide="flask-conical"></i>
+              <span class="phase-title">Phase 2：实验室分析阶段</span>
+              <span class="phase-badge"><i data-lucide="flag" style="width:12px;height:12px;"></i> 阶段二</span>
+            </div>
+            <table class="task-table step-table">
+              <thead>
+                <tr>
+                  <th>步骤</th>
+                  <th>操作内容</th>
+                  <th>仪器/工具</th>
+                  <th>质控要求</th>
+                  <th>记录表单</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="step-num">01</td>
+                  <td>样品接收与登记：核对样品编号、数量、保存状态，录入LIMS系统</td>
+                  <td>LIMS系统、样品标签扫描器</td>
+                  <td>24h内完成接收登记，异常样品拍照记录</td>
+                  <td class="mono">GL-RE-01 样品接收记录</td>
+                </tr>
+                <tr>
+                  <td class="step-num">02</td>
+                  <td>浮游植物浓缩与制片：沉啶浓缩(24h)，移除上清液至10mL，取0.1mL制片</td>
+                  <td>沉淀器(100mL)、移液枪、计数框(0.1mL)、盖玻片</td>
+                  <td>平行样偏差≤15%</td>
+                  <td class="mono">GL-LA-01 实验室分析记录</td>
+                </tr>
+                <tr>
+                  <td class="step-num">03</td>
+                  <td>着生藻类前处理：酸化处理(浓HNO₃+H₂SO₄)清洗硅藻壳，制片封片</td>
+                  <td>酸处理装置、离心机、Naphrax封片胶</td>
+                  <td>每样品≥2张永久片</td>
+                  <td class="mono">GL-LA-02 硅藻制片记录</td>
+                </tr>
+                <tr>
+                  <td class="step-num">04</td>
+                  <td>底栖动物分拣：体视镜下按形态型分拣至样品瓶，编号登记</td>
+                  <td>体视显微镜(OLYMPUS SZ61)、培养皿、镊子、分样皿</td>
+                  <td>分拣效率验证(≥95%回收率)</td>
+                  <td class="mono">GL-LA-03 分拣记录</td>
+                </tr>
+                <tr>
+                  <td class="step-num">05</td>
+                  <td>显微镜鉴定：油镜(1000×)鉴定硅藻至种/属，体视镜鉴定底栖至科/属/种</td>
+                  <td>生物显微镜(OLYMPUS BX53)、体视镜、数码成像系统</td>
+                  <td>每样品鉴定≥200个个体(浮游)或≥300壳体(硅藻)</td>
+                  <td class="mono">GL-ID-01 鉴定记录表</td>
+                </tr>
+                <tr>
+                  <td class="step-num">06</td>
+                  <td>eDNA 提取与扩增：滤膜DNA提取(DNeasy试剂盒)，PCR扩增(12S/16S/COI标记基因)</td>
+                  <td>DNA提取试剂盒、PCR仪、电泳系统</td>
+                  <td>阴性对照、阳性对照、重复提取</td>
+                  <td class="mono">GL-ED-02 eDNA分析记录</td>
+                </tr>
+                <tr>
+                  <td class="step-num">07</td>
+                  <td>高通量测序：文库构建后Illumina测序，原始数据质控与去噪</td>
+                  <td>Illumina平台、FASTQC、DADA2</td>
+                  <td>测序深度≥30000 reads/样品</td>
+                  <td class="mono">GL-ED-03 测序报告</td>
+                </tr>
+                <tr>
+                  <td class="step-num">08</td>
+                  <td>生物信息分析：OTU聚类、分类比对(SILVA/NCBI)、物种注释</td>
+                  <td>DADA2、BLAST、R/vegan</td>
+                  <td>置信阈值≥97%，可疑序列人工复核</td>
+                  <td class="mono">GL-ED-04 生信分析报告</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Phase 3: 物种鉴定阶段 -->
+            <div class="phase-header">
+              <i data-lucide="scan-search"></i>
+              <span class="phase-title">Phase 3：物种鉴定阶段</span>
+              <span class="phase-badge"><i data-lucide="flag" style="width:12px;height:12px;"></i> 阶段三</span>
+            </div>
+            <table class="task-table step-table">
+              <thead>
+                <tr>
+                  <th>步骤</th>
+                  <th>操作内容</th>
+                  <th>仪器/工具</th>
+                  <th>质控要求</th>
+                  <th>记录表单</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="step-num">01</td>
+                  <td>形态学鉴定：对照分类检索表鉴定，记录关键形态特征</td>
+                  <td>分类检索表、参考标本库、数码成像</td>
+                  <td>AI辅助预鉴定→专家确认，低置信度送复核</td>
+                  <td class="mono">GL-ID-02 形态鉴定表</td>
+                </tr>
+                <tr>
+                  <td class="step-num">02</td>
+                  <td>分子生物学鉴定：DNA条形码比对(12S/COI)，BLAST同源性分析</td>
+                  <td>DNA条码数据库(BOLD)、BLAST</td>
+                  <td>相似度≥97%且覆盖率≥90%为可信</td>
+                  <td class="mono">GL-ID-03 分子鉴定表</td>
+                </tr>
+                <tr>
+                  <td class="step-num">03</td>
+                  <td>鉴定结果复核：AI鉴定结果与人工鉴定交叉验证，不一致项专家仲裁</td>
+                  <td>AI鉴定系统、专家库</td>
+                  <td>双盲复核率100%，仲裁一致率≥95%</td>
+                  <td class="mono">GL-RV-01 复核记录</td>
+                </tr>
+                <tr>
+                  <td class="step-num">04</td>
+                  <td>鉴定结果汇总：按分类单元汇总种类名录、丰度、生物量，录入数据库</td>
+                  <td>数据库系统、统计软件</td>
+                  <td>数据三查(自查/互查/抽查)</td>
+                  <td class="mono">GL-FN-01 鉴定汇总表</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- SECTION 2.5: 鱼类 eDNA 专项    -->
+        <!-- ============================== -->
+        <div class="card section-gap">
+          <div class="card-header">
+            <div class="card-title">
+              <i data-lucide="dna"></i>
+              <span>鱼类 eDNA 采样与鉴定专项</span>
+            </div>
+            <span style="font-size:12px;color:var(--ink-3);">环境 DNA 全流程 · 采样到物种注释</span>
+          </div>
+          <div class="card-body">
+
+            <!-- 2.5-A eDNA 采样方法详述 -->
+            <div class="info-block-title" style="margin-bottom:var(--s-3);">
+              <i data-lucide="map-pin"></i>
+              <span>2.5-A eDNA 采样方法</span>
+            </div>
+            <table class="task-table step-table" style="margin-bottom:var(--s-5);">
+              <thead>
+                <tr>
+                  <th style="width:50px;">步骤</th>
+                  <th style="width:160px;">操作环节</th>
+                  <th>详细操作</th>
+                  <th style="width:180px;">仪器/试剂</th>
+                  <th style="width:160px;">质控要求</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="step-num">01</td>
+                  <td>采样前准备</td>
+                  <td>穿戴一次性手套与防护服；准备灭菌冻存管与滤膜；检查便携液氮罐液位；预冷冷链箱至 -20°C；打印采样标签（含断面编号、日期、重复号）</td>
+                  <td>灭菌手套、防护服、冻存管(2mL)、滤膜(0.22μm PES)、便携液氮罐、冷链箱</td>
+                  <td>所有耗材 DNA-free 认证；液氮罐液位≥容积 1/3</td>
+                </tr>
+                <tr>
+                  <td class="step-num">02</td>
+                  <td>水样采集</td>
+                  <td>在断面中泓线处用 Niskin 采水器采集表层水(0-0.5m)与中层水(1-2m)各 1L；同时采集岸边浅水区水样 1L；合计 3L/断面；记录水温、pH、浊度</td>
+                  <td>Niskin 采水器(5L)、多参数水质仪(HQ40d)、采样杆(3m)</td>
+                  <td>每断面≥3个重复样；现场空白对照(超纯水 1L)</td>
+                </tr>
+                <tr>
+                  <td class="step-num">03</td>
+                  <td>过滤与富集</td>
+                  <td>水样在 6h 内完成过滤；依次过 1.0μm 预滤膜(去除大颗粒)和 0.22μm PES 滤膜(富集 eDNA)；每份水样过滤至滤膜堵塞或过滤完毕；记录过滤体积</td>
+                  <td>真空抽滤装置(Millipore)、预滤膜(1.0μm GF/F)、PES 滤膜(0.22μm)、真空泵</td>
+                  <td>过滤体积记录精确至 10mL；每组过滤间用 10% 漂白水浸泡装置 5min</td>
+                </tr>
+                <tr>
+                  <td class="step-num">04</td>
+                  <td>滤膜保存</td>
+                  <td>用无菌镊子将 0.22μm 滤膜对折两次，放入 2mL 冻存管；加入 1.5mL ATL 缓冲液(Qiagen)浸润滤膜；旋紧管盖，标记编号，立即投入液氮罐</td>
+                  <td>无菌镊子、冻存管(2mL)、ATL 缓冲液、液氮罐、记号笔</td>
+                  <td>从过滤到液氮冻存≤30min；空白对照滤膜同步处理</td>
+                </tr>
+                <tr>
+                  <td class="step-num">05</td>
+                  <td>现场对照与运输</td>
+                  <td>现场设置阴性对照(超纯水过滤全过程)与阳性对照(已知鱼类组织 DNA 溶液点膜)；所有样品冷链运输至实验室，运输温度≤-20°C</td>
+                  <td>超纯水(Milli-Q)、阳性 DNA(鲤鱼基因组 DNA)、冷链运输箱、温度记录仪</td>
+                  <td>运输全程温度记录不间断；到样温度≤-15°C</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- 2.5-B DNA 提取与 PCR 扩增 -->
+            <div class="info-block-title" style="margin-bottom:var(--s-3);">
+              <i data-lucide="flask-conical"></i>
+              <span>2.5-B DNA 提取与 PCR 扩增</span>
+            </div>
+            <table class="task-table step-table" style="margin-bottom:var(--s-5);">
+              <thead>
+                <tr>
+                  <th style="width:50px;">步骤</th>
+                  <th style="width:160px;">操作环节</th>
+                  <th>详细操作</th>
+                  <th style="width:180px;">仪器/试剂</th>
+                  <th style="width:160px;">质控要求</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="step-num">01</td>
+                  <td>DNA 提取</td>
+                  <td>滤膜剪碎后置 2mL 离心管；加入 20μL 蛋白酶 K + 200μL ATL 缓冲液；56°C 恒温摇床过夜消化(12-16h)；按 DNeasy Blood & Tissue Kit 流程过柱洗脱；最终洗脱体积 100μL</td>
+                  <td>DNeasy Blood & Tissue Kit(Qiagen)、蛋白酶 K、恒温摇床、高速离心机</td>
+                  <td>每批次提取含阴性对照(空白滤膜)和阳性对照(鲤鱼 DNA)；重复提取率≥20%</td>
+                </tr>
+                <tr>
+                  <td class="step-num">02</td>
+                  <td>DNA 质量检测</td>
+                  <td>NanoDrop 测定浓度与纯度(A260/280=1.7-1.9)；Qubit 3.0 荧光定量精确定量；不合格样品(浓度&lt;5ng/μL)重新提取或加倍洗脱体积</td>
+                  <td>NanoDrop One、Qubit 3.0、dsDNA HS Assay Kit</td>
+                  <td>A260/280&lt;1.7 需纯化；浓度记录精确至 0.1ng/μL</td>
+                </tr>
+                <tr>
+                  <td class="step-num">03</td>
+                  <td>引物选择与验证</td>
+                  <td>鱼类 eDNA 采用 12S rRNA 标记基因；引物对: MiFish-F/MiFish-R(扩增片段约 170-230bp，覆盖鱼类全线)；另选 16S rRNA(16S_F/16S_R)作为平行标记交叉验证；每批次引物做 BLAST 确认特异性</td>
+                  <td>MiFish-F: GTCGGTAAAACTCGTGCCAGC / MiFish-R: CATCCAGTCRCTGACTGCC</td>
+                  <td>引物特异性验证命中率≥95%；退化碱基(R/Y)位置记录</td>
+                </tr>
+                <tr>
+                  <td class="step-num">04</td>
+                  <td>第一轮 PCR 扩增</td>
+                  <td>反应体系 25μL: 2× Taq Master Mix 12.5μL，正反向引物(10μM)各 1μL，模板 DNA 2μL(约 10-20ng)，ddH₂O 补至 25μL；程序: 95°C 5min → (95°C 30s, 60°C 30s, 72°C 45s)×35 循环 → 72°C 10min</td>
+                  <td>PCR 仪(Bio-Rad T100)、Taq Master Mix、引物、ddH₂O</td>
+                  <td>每批次含阴性对照(无模板)和阳性对照(鲤鱼 DNA)；退火温度梯度优化</td>
+                </tr>
+                <tr>
+                  <td class="step-num">05</td>
+                  <td>扩增产物检测</td>
+                  <td>1.5% 琼脂糖凝胶电泳(120V, 30min)；EB 染色后紫外凝胶成像；确认目的条带清晰且无非特异性扩增；合格产物 4°C 保存待建库</td>
+                  <td>电泳仪、凝胶成像系统(Tanon 3500)、琼脂糖、EB 染料</td>
+                  <td>阴性对照无条带；阳性对照条带位置正确；产物浓度目测定量</td>
+                </tr>
+                <tr>
+                  <td class="step-num">06</td>
+                  <td>索引引物二轮 PCR</td>
+                  <td>第一轮 PCR 产物稀释 10 倍后取 2μL 作为二轮模板；使用带 Illumina 接头与 Index 的引物进行二轮扩增(8 循环)；每样品独立 Index 编号；程序: 95°C 3min → (95°C 30s, 55°C 30s, 72°C 30s)×8 → 72°C 5min</td>
+                  <td>Illumina Nextera Index Kit、PCR 仪、Taq Master Mix</td>
+                  <td>每样品独立 Index 双端唯一；Index 重复检测(低浓度重复率&lt;1%)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- 2.5-C 高通量测序与生信分析 -->
+            <div class="info-block-title" style="margin-bottom:var(--s-3);">
+              <i data-lucide="cpu"></i>
+              <span>2.5-C 高通量测序与生信分析</span>
+            </div>
+            <table class="task-table step-table" style="margin-bottom:var(--s-5);">
+              <thead>
+                <tr>
+                  <th style="width:50px;">步骤</th>
+                  <th style="width:160px;">操作环节</th>
+                  <th>详细操作</th>
+                  <th style="width:180px;">平台/工具</th>
+                  <th style="width:160px;">质控要求</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="step-num">01</td>
+                  <td>文库构建与定量</td>
+                  <td>二轮 PCR 产物等量混合后用 AMPure XP 磁珠纯化(0.8×比选)；Qubit 定量混合文库浓度；Agilent 2100 Bioanalyzer 验证片段大小分布(目标峰值 250-350bp)</td>
+                  <td>AMPure XP 磁珠(Beckman)、Qubit 3.0、Bioanalyzer 2100</td>
+                  <td>片段主峰偏差≤25bp；无接头二聚体污染</td>
+                </tr>
+                <tr>
+                  <td class="step-num">02</td>
+                  <td>上机测序</td>
+                  <td>文库稀释至 4nM 后加 NaOH 变性；上机 Illumina MiSeq 平台；采用 v2 试剂盒(2×250bp 双端测序)；每批次测序深度≥30000 reads/样品；加入 5% PhiX 内标</td>
+                  <td>Illumina MiSeq、MiSeq v2 Reagent Kit(500cycles)、PhiX</td>
+                  <td>簇密度 1000-1200K/mm²；Q30 比例≥85%</td>
+                </tr>
+                <tr>
+                  <td class="step-num">03</td>
+                  <td>原始数据质控</td>
+                  <td>使用 FastQC 评估原始 reads 质量；cutadapt 去除引物序列与接头；Trimmomatic 滑动窗口质量裁剪(窗宽 4, 质量阈值 20)；去除短于 100bp 的 reads</td>
+                  <td>FastQC v0.12.1、cutadapt、Trimmomatic v0.39</td>
+                  <td>质控后保留 reads≥原始 70%；平均质量值≥30</td>
+                </tr>
+                <tr>
+                  <td class="step-num">04</td>
+                  <td>ASV 聚类与去噪</td>
+                  <td>使用 DADA2 包(R 语言)进行序列去噪与 ASV 聚类；参数: truncLen=c(240,200), maxEE=c(2,2)；合并双端 reads；去除嵌合序列(方法: consensus)</td>
+                  <td>R v4.3、DADA2 v1.30、RStudio</td>
+                  <td>嵌合序列占比&lt;5%；ASV 总数合理范围 50-500/样品</td>
+                </tr>
+                <tr>
+                  <td class="step-num">05</td>
+                  <td>物种注释</td>
+                  <td>ASV 序列比对本地 MIDORI2 鱼类参考数据库(12S 标记)；BLAST 比对参数: identity≥97%, coverage≥90%；一级注释(物种/属/科)置信度阈值 97%；低于阈值标记"未鉴定到种"；同步比对 NCBI nt 数据库交叉验证</td>
+                  <td>MIDORI2 数据库、BLAST+ v2.14、NCBI nt 库</td>
+                  <td>双重数据库注释一致率≥90%；不一致项人工复核</td>
+                </tr>
+                <tr>
+                  <td class="step-num">06</td>
+                  <td>数据过滤与终审</td>
+                  <td>去除_reads 数&lt;10 的低频 ASV(疑似污染或索引跳跃)；去除仅出现在阴性对照中的 ASV(环境污染标签)；按分类层级汇总种类名录与相对丰度；生成物种组成表与多样性指数报告</td>
+                  <td>R/vegan、Excel、RStudio</td>
+                  <td>低频 ASV 删除率记录；阴性对照物种数=0；报告含 Shannon、Chao1 指数</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- 2.5-D 鱼类 eDNA 鉴定结果与形态学交叉验证 -->
+            <div class="info-block-title" style="margin-bottom:var(--s-3);">
+              <i data-lucide="scan-search"></i>
+              <span>2.5-D 鉴定结果与交叉验证</span>
+            </div>
+            <table class="task-table step-table" style="margin-bottom:var(--s-3);">
+              <thead>
+                <tr>
+                  <th style="width:50px;">步骤</th>
+                  <th style="width:160px;">操作环节</th>
+                  <th>详细操作</th>
+                  <th style="width:180px;">工具/参考</th>
+                  <th style="width:160px;">质控要求</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="step-num">01</td>
+                  <td>eDNA 物种名录整理</td>
+                  <td>按分类层级(目/科/属/种)整理 eDNA 检出物种清单；记录每个物种的 reads 数、相对丰度、检出断面；标注本土种与外来种；生成 eDNA 鱼类物种名录表</td>
+                  <td>R/vegan、Excel、FishBase 数据库</td>
+                  <td>物种名录≥形态学检出种数的 80%；异常检出(新纪录种)需专家确认</td>
+                </tr>
+                <tr>
+                  <td class="step-num">02</td>
+                  <td>与形态学鉴定交叉验证</td>
+                  <td>将 eDNA 物种名录与同断面鱼类调查(电鱼法/网具)形态学鉴定结果比对；计算一致性率(共同种/总种数)；分析仅 eDNA 检出种(隐存种/低丰度种)与仅形态学检出种(大个体/低 eDNA 释放种)</td>
+                  <td>鱼类调查记录表、AI 鉴定系统、统计软件</td>
+                  <td>一致性率目标≥75%；低于 60% 需排查污染或引物偏好</td>
+                </tr>
+                <tr>
+                  <td class="step-num">03</td>
+                  <td>AI 辅助复核</td>
+                  <td>将 eDNA 序列提交灰灯 AI 鉴定系统进行预鉴定；系统输出置信度评分(基于序列相似性+数据库覆盖率+分类距离)；置信度≥95% 直接采信；80-95% 送专家复核；&lt;80% 标记待定</td>
+                  <td>灰灯 AI 鉴定系统、专家库</td>
+                  <td>低置信度项专家复核率 100%；仲裁一致率≥95%</td>
+                </tr>
+                <tr>
+                  <td class="step-num">04</td>
+                  <td>结果归档与报告</td>
+                  <td>汇总 eDNA 鉴定终审结果；编制鱼类 eDNA 监测专项报告(含物种名录、丰度表、多样性指数、交叉验证结果、质控数据)；同步录入 LIMS 系统与灰灯数据库</td>
+                  <td>LIMS 系统、数据库、报告模板</td>
+                  <td>原始数据保存≥5 年；报告三级审核(编制/技术负责人/授权签字人)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- eDNA 标记基因与引物速查表 -->
+            <div class="info-block" style="margin-top:var(--s-4);">
+              <div class="info-block-title">
+                <i data-lucide="book-open"></i>
+                <span>鱼类 eDNA 标记基因与引物速查</span>
+              </div>
+              <table class="task-table" style="font-size:12px;">
+                <thead>
+                  <tr>
+                    <th>标记基因</th>
+                    <th>引物对</th>
+                    <th>片段长度</th>
+                    <th>覆盖类群</th>
+                    <th>适用场景</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>12S rRNA</td>
+                    <td class="mono">MiFish-F / MiFish-R</td>
+                    <td class="mono">170-230bp</td>
+                    <td>鱼类全线(目级覆盖)</td>
+                    <td>主用引物，物种分辨率高</td>
+                  </tr>
+                  <tr>
+                    <td>16S rRNA</td>
+                    <td class="mono">16S_F / 16S_R</td>
+                    <td class="mono">250-300bp</td>
+                    <td>鱼类(科/属级)</td>
+                    <td>交叉验证，补充 12S 盲区</td>
+                  </tr>
+                  <tr>
+                    <td>COI</td>
+                    <td class="mono">FishF1 / FishR1</td>
+                    <td class="mono">650bp</td>
+                    <td>鱼类全线(种级)</td>
+                    <td>DNA 条形码标准基因，种级分辨率最高</td>
+                  </tr>
+                  <tr>
+                    <td>Cytb</td>
+                    <td class="mono">Cytb_F / Cytb_R</td>
+                    <td class="mono">300-400bp</td>
+                    <td>鲤科/鳅科</td>
+                    <td>特定类群鉴定，鲤科鱼类分辨率优</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- SECTION 3: 监测流程图          -->
+        <!-- ============================== -->
+        <div class="card section-gap">
+          <div class="card-header">
+            <div class="card-title">
+              <i data-lucide="git-branch"></i>
+              <span>监测全流程</span>
+            </div>
+            <span style="font-size:12px;color:var(--ink-3);">方案编制 → 报告签发 · 全链路追踪</span>
+          </div>
+          <div class="card-body-tight">
+            <div class="workflow-flow">
+              <div class="workflow-node">
+                <div class="workflow-node-icon"><i data-lucide="clipboard-list"></i></div>
+                <div class="workflow-node-label">方案编制</div>
+              </div>
+              <div class="workflow-arrow"></div>
+              <div class="workflow-node">
+                <div class="workflow-node-icon"><i data-lucide="map-pin"></i></div>
+                <div class="workflow-node-label">野外采样</div>
+              </div>
+              <div class="workflow-arrow"></div>
+              <div class="workflow-node">
+                <div class="workflow-node-icon"><i data-lucide="package"></i></div>
+                <div class="workflow-node-label">样品保存</div>
+              </div>
+              <div class="workflow-arrow"></div>
+              <div class="workflow-node">
+                <div class="workflow-node-icon"><i data-lucide="flask-conical"></i></div>
+                <div class="workflow-node-label">实验室分析</div>
+              </div>
+              <div class="workflow-arrow"></div>
+              <div class="workflow-node">
+                <div class="workflow-node-icon"><i data-lucide="scan-search"></i></div>
+                <div class="workflow-node-label">物种鉴定</div>
+              </div>
+              <div class="workflow-arrow"></div>
+              <div class="workflow-node">
+                <div class="workflow-node-icon"><i data-lucide="database"></i></div>
+                <div class="workflow-node-label">数据处理</div>
+              </div>
+              <div class="workflow-arrow"></div>
+              <div class="workflow-node">
+                <div class="workflow-node-icon"><i data-lucide="calculator"></i></div>
+                <div class="workflow-node-label">指数计算</div>
+              </div>
+              <div class="workflow-arrow"></div>
+              <div class="workflow-node">
+                <div class="workflow-node-icon"><i data-lucide="leaf"></i></div>
+                <div class="workflow-node-label">生态评价</div>
+              </div>
+              <div class="workflow-arrow"></div>
+              <div class="workflow-node">
+                <div class="workflow-node-icon"><i data-lucide="file-text"></i></div>
+                <div class="workflow-node-label">报告编制</div>
+              </div>
+              <div class="workflow-arrow"></div>
+              <div class="workflow-node">
+                <div class="workflow-node-icon"><i data-lucide="shield-check"></i></div>
+                <div class="workflow-node-label">三级审核</div>
+              </div>
+              <div class="workflow-arrow"></div>
+              <div class="workflow-node">
+                <div class="workflow-node-icon"><i data-lucide="send"></i></div>
+                <div class="workflow-node-label">报告签发</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- SECTION 4: 报告出具流程        -->
+        <!-- ============================== -->
+        <div class="card section-gap">
+          <div class="card-header">
+            <div class="card-title">
+              <i data-lucide="file-text"></i>
+              <span>报告出具流程</span>
+            </div>
+            <span style="font-size:12px;color:var(--ink-3);">数据整理 → 三级审核 → 签发归档</span>
+          </div>
+          <div class="card-body">
+
+            <!-- 4.1 数据整理与统计分析 -->
+            <div class="info-block-title" style="margin-bottom:var(--s-3);">
+              <i data-lucide="bar-chart-3"></i>
+              <span>4.1 数据整理与统计分析</span>
+            </div>
+            <table class="task-table step-table" style="margin-bottom:var(--s-5);">
+              <thead>
+                <tr>
+                  <th>分析项目</th>
+                  <th>计算方法</th>
+                  <th>评价指标</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>物种组成</td>
+                  <td class="mono">各分类单元丰度占比、生物量占比</td>
+                  <td>优势种(Y值)、常见种</td>
+                </tr>
+                <tr>
+                  <td>多样性指数</td>
+                  <td class="mono">Shannon-Wiener (H') = -ΣPi×lnPi</td>
+                  <td>H'&gt;3清洁, 2-3轻污, 1-2中污, &lt;1重污</td>
+                </tr>
+                <tr>
+                  <td>丰富度指数</td>
+                  <td class="mono">Margalef (d) = (S-1)/lnN</td>
+                  <td>d&gt;5丰富, 3-5较丰富, 1-3一般, &lt;1贫乏</td>
+                </tr>
+                <tr>
+                  <td>均匀度指数</td>
+                  <td class="mono">Pielou (J') = H'/lnS</td>
+                  <td>J'&gt;0.8均匀, 0.5-0.8较均匀, &lt;0.5不均匀</td>
+                </tr>
+                <tr>
+                  <td>生物指数</td>
+                  <td class="mono">BI = Σ(ti×ni/N)</td>
+                  <td>BI&lt;5.0清洁, 5.0-6.0轻污, 6.0-7.0中污, &gt;7.0重污</td>
+                </tr>
+                <tr>
+                  <td>FBI指数</td>
+                  <td class="mono">Family Biotic Index</td>
+                  <td>FBI&lt;3.75极敏感, 3.75-5.0敏感, 5.0-6.0一般, &gt;6.0耐污</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- 4.2 水生态评价 -->
+            <div class="info-block-title" style="margin-bottom:var(--s-3);">
+              <i data-lucide="leaf"></i>
+              <span>4.2 水生态评价矩阵</span>
+            </div>
+            <div style="overflow-x:auto;margin-bottom:var(--s-5);">
+              <table class="task-table eval-table">
+                <thead>
+                  <tr>
+                    <th>评价指标</th>
+                    <th class="eval-excellent">优秀</th>
+                    <th class="eval-good">良好</th>
+                    <th class="eval-mild">轻度污染</th>
+                    <th class="eval-moderate">中度污染</th>
+                    <th class="eval-severe">重度污染</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Shannon-Wiener (H')</td>
+                    <td class="eval-excellent">&gt;3.0</td>
+                    <td class="eval-good">2.0-3.0</td>
+                    <td class="eval-mild">1.0-2.0</td>
+                    <td class="eval-moderate">0.5-1.0</td>
+                    <td class="eval-severe">&lt;0.5</td>
+                  </tr>
+                  <tr>
+                    <td>BI 生物指数</td>
+                    <td class="eval-excellent">&lt;4.0</td>
+                    <td class="eval-good">4.0-5.0</td>
+                    <td class="eval-mild">5.0-6.0</td>
+                    <td class="eval-moderate">6.0-7.0</td>
+                    <td class="eval-severe">&gt;7.0</td>
+                  </tr>
+                  <tr>
+                    <td>底栖动物 EPT%</td>
+                    <td class="eval-excellent">&gt;50%</td>
+                    <td class="eval-good">30-50%</td>
+                    <td class="eval-mild">15-30%</td>
+                    <td class="eval-moderate">5-15%</td>
+                    <td class="eval-severe">&lt;5%</td>
+                  </tr>
+                  <tr>
+                    <td>着生藻类 IBD</td>
+                    <td class="eval-excellent">17-20</td>
+                    <td class="eval-good">13-16</td>
+                    <td class="eval-mild">9-12</td>
+                    <td class="eval-moderate">5-8</td>
+                    <td class="eval-severe">1-4</td>
+                  </tr>
+                  <tr>
+                    <td>鱼类 IBI</td>
+                    <td class="eval-excellent">50-60</td>
+                    <td class="eval-good">40-49</td>
+                    <td class="eval-mild">30-39</td>
+                    <td class="eval-moderate">20-29</td>
+                    <td class="eval-severe">0-19</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- 4.3 报告编制流程 (timeline) -->
+            <div class="info-block-title" style="margin-bottom:var(--s-3);">
+              <i data-lucide="git-branch"></i>
+              <span>4.3 报告编制流程</span>
+            </div>
+            <div class="timeline" style="margin-bottom:var(--s-5);">
+              <div class="timeline-item">
+                <div class="timeline-dot"><i data-lucide="bar-chart-3"></i></div>
+                <div class="timeline-content">
+                  <div class="timeline-text"><strong>数据整理与统计分析</strong> — 完成各分类单元数据汇总，计算生物指数</div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"><i data-lucide="leaf"></i></div>
+                <div class="timeline-content">
+                  <div class="timeline-text"><strong>水生态评价</strong> — 依据HJ 1295标准进行分级评价，确定生态等级</div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"><i data-lucide="file-text"></i></div>
+                <div class="timeline-content">
+                  <div class="timeline-text"><strong>报告编制</strong> — 编写监测报告正文(概况/方法/结果/评价/建议)</div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"><i data-lucide="check"></i></div>
+                <div class="timeline-content">
+                  <div class="timeline-text"><strong>一级审核(编制人自检)</strong> — 核对原始数据、计算过程、结论合理性</div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"><i data-lucide="shield-check"></i></div>
+                <div class="timeline-content">
+                  <div class="timeline-text"><strong>二级审核(技术负责人审核)</strong> — 审查方法规范性、数据完整性、结论准确性</div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"><i data-lucide="award"></i></div>
+                <div class="timeline-content">
+                  <div class="timeline-text"><strong>三级审核(授权签字人审定)</strong> — CMA/CNAS授权签字人最终审定，签字盖章</div>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"><i data-lucide="send"></i></div>
+                <div class="timeline-content">
+                  <div class="timeline-text"><strong>报告签发与归档</strong> — 正式签发报告，同步归档原始记录与电子文档</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4.4 报告包含内容清单 -->
+            <div class="info-block-title" style="margin-bottom:var(--s-3);">
+              <i data-lucide="list-checks"></i>
+              <span>4.4 报告包含内容清单</span>
+            </div>
+            <table class="task-table step-table">
+              <thead>
+                <tr>
+                  <th style="width:60px;">序号</th>
+                  <th style="width:140px;">报告章节</th>
+                  <th>内容要求</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="step-num">01</td>
+                  <td>监测概况</td>
+                  <td>监测目的、范围、依据、频次、点位</td>
+                </tr>
+                <tr>
+                  <td class="step-num">02</td>
+                  <td>监测方法</td>
+                  <td>采样方法、分析手段、鉴定流程、质控措施</td>
+                </tr>
+                <tr>
+                  <td class="step-num">03</td>
+                  <td>监测结果</td>
+                  <td>种类名录、丰度/生物量、生物多样性指数</td>
+                </tr>
+                <tr>
+                  <td class="step-num">04</td>
+                  <td>生态评价</td>
+                  <td>生物指数评价、生态等级判定、变化趋势分析</td>
+                </tr>
+                <tr>
+                  <td class="step-num">05</td>
+                  <td>结论与建议</td>
+                  <td>水生态状况结论、存在问题、保护建议</td>
+                </tr>
+                <tr>
+                  <td class="step-num">06</td>
+                  <td>质控报告</td>
+                  <td>质控数据、平行样结果、空白对照</td>
+                </tr>
+                <tr>
+                  <td class="step-num">07</td>
+                  <td>附件</td>
+                  <td>原始记录表、鉴定图片、数据汇总表</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+          灰灯实验室 AI 鉴定台 v1.1 | HJ 1295/1296 合规 | 数据更新于 2026-09-08
+        </footer>
+      </main>
+    </div>
+
+    <script src="../shared-app.js"></script>
+    <script>lucide.createIcons();</script>
+
+    <style id="critical-layout">
+      /* === Font Foundation === */
+      body, .app-shell {
+        font-family: var(--font-sans);
+        font-size: 14px;
+      }
+
+      /* === App Shell Grid === */
+      .app-shell {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        grid-template-rows: 56px 1fr;
+        grid-template-areas: "header header" "sidebar main";
+        min-height: 100vh;
+        background: var(--brand-background);
+      }
+
+      /* === Header === */
+      .app-header {
+        grid-area: header;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        height: 56px;
+        background: var(--brand-surface);
+        border-bottom: 1px solid var(--brand-border);
+        display: flex;
+        align-items: center;
+        padding: 0 var(--s-5);
+        gap: var(--s-5);
+      }
+      .logo {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.3;
+        flex-shrink: 0;
+      }
+      .logo-main {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--brand-foreground);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .logo-main [data-lucide] {
+        width: 18px;
+        height: 18px;
+        color: var(--brand-primary);
+      }
+      .logo-sub {
+        font-size: 11px;
+        color: var(--ink-3);
+        padding-left: 24px;
+      }
+      .header-nav {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        flex: 1;
+        justify-content: center;
+      }
+      .header-nav a {
+        padding: 6px 14px;
+        font-size: 13px;
+        color: var(--brand-muted-foreground);
+        text-decoration: none;
+        border-radius: var(--r-sm);
+        white-space: nowrap;
+        transition: background 0.15s, color 0.15s;
+      }
+      .header-nav a:hover {
+        color: var(--brand-foreground);
+        background: var(--brand-surface-2);
+      }
+      .header-nav a.active {
+        color: var(--brand-primary);
+        background: color-mix(in srgb, var(--brand-primary) 8%, transparent);
+        font-weight: 500;
+      }
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: var(--s-3);
+        flex-shrink: 0;
+      }
+      .user-name {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 13px;
+        color: var(--brand-foreground);
+        cursor: pointer;
+      }
+      .user-name [data-lucide] {
+        width: 14px;
+        height: 14px;
+        color: var(--brand-muted-foreground);
+      }
+      .notification-btn {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--r-sm);
+        color: var(--brand-muted-foreground);
+        cursor: pointer;
+        position: relative;
+        background: none;
+        border: none;
+      }
+      .notification-btn:hover {
+        background: var(--brand-surface-2);
+        color: var(--brand-foreground);
+      }
+      .notification-btn [data-lucide] {
+        width: 18px;
+        height: 18px;
+      }
+      .notification-badge {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--state-error);
+        border: 1.5px solid var(--brand-surface);
+      }
+
+      /* === Sidebar === */
+      .app-sidebar {
+        grid-area: sidebar;
+        background: var(--brand-surface);
+        border-right: 1px solid var(--brand-border);
+        overflow-y: auto;
+        height: calc(100vh - 56px);
+        position: sticky;
+        top: 56px;
+      }
+      .sidebar-section {
+        padding: var(--s-4) 0 var(--s-1);
+      }
+      .sidebar-section-title {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--ink-3);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0 var(--s-4);
+        margin-bottom: var(--s-2);
+      }
+      .sidebar-section-title [data-lucide] {
+        width: 14px;
+        height: 14px;
+      }
+      .sidebar-item {
+        display: flex;
+        align-items: center;
+        gap: var(--s-2);
+        padding: 8px var(--s-4);
+        font-size: 13px;
+        color: var(--brand-foreground);
+        cursor: pointer;
+        border-radius: 0;
+        margin: 0;
+        transition: background 0.12s;
+      }
+      .sidebar-item:hover {
+        background: var(--brand-surface-2);
+      }
+      .sidebar-item.active {
+        background: color-mix(in srgb, var(--brand-primary) 7%, transparent);
+        color: var(--brand-primary);
+        font-weight: 500;
+        border-left: 3px solid var(--brand-primary);
+        padding-left: calc(var(--s-4) - 3px);
+      }
+      .sidebar-item [data-lucide] {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        color: var(--ink-2);
+      }
+      .sidebar-item.active [data-lucide] {
+        color: var(--brand-primary);
+      }
+      .sidebar-divider {
+        height: 1px;
+        background: var(--brand-border);
+        margin: var(--s-3) var(--s-4);
+      }
+
+      /* === Main Content === */
+      .app-main {
+        grid-area: main;
+        padding: var(--s-5);
+        overflow-x: hidden;
+        min-width: 0;
+      }
+
+      /* === Page Title Row === */
+      .page-title-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: var(--s-5);
+        gap: var(--s-4);
+        flex-wrap: wrap;
+      }
+      .page-title {
+        font-size: 22px;
+        font-weight: 600;
+        color: var(--brand-foreground);
+        line-height: 1.3;
+      }
+      .page-subtitle {
+        font-size: 13px;
+        color: var(--ink-2);
+        margin-top: 2px;
+      }
+      .title-actions {
+        display: flex;
+        align-items: center;
+        gap: var(--s-3);
+      }
+      .date-selector {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 12px;
+        border: 1px solid var(--brand-border);
+        border-radius: var(--r-md);
+        font-size: 13px;
+        color: var(--brand-foreground);
+        background: var(--brand-surface);
+        cursor: pointer;
+        font-variant-numeric: tabular-nums;
+      }
+      .date-selector [data-lucide] {
+        width: 14px;
+        height: 14px;
+        color: var(--brand-muted-foreground);
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 16px;
+        border-radius: var(--r-md);
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        border: none;
+        white-space: nowrap;
+        transition: background 0.15s;
+      }
+      .btn-primary {
+        background: var(--brand-primary);
+        color: var(--brand-primary-foreground);
+      }
+      .btn-primary:hover {
+        background: color-mix(in srgb, var(--brand-primary) 88%, black);
+      }
+      .btn [data-lucide] {
+        width: 14px;
+        height: 14px;
+      }
+
+      /* === Card === */
+      .card {
+        background: var(--brand-card);
+        border: 1px solid var(--brand-border);
+        border-radius: var(--r-md);
+        box-shadow: var(--shadow-1);
+        overflow: hidden;
+      }
+      .card-header {
+        padding: var(--s-3) var(--s-4);
+        border-bottom: 1px solid var(--brand-border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .card-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--brand-foreground);
+        display: flex;
+        align-items: center;
+        gap: var(--s-2);
+      }
+      .card-title [data-lucide] {
+        width: 16px;
+        height: 16px;
+        color: var(--brand-primary);
+      }
+      .card-body { padding: var(--s-3) var(--s-4); }
+      .card-body-tight { padding: 0; }
+
+      /* === Task Table === */
+      .task-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      .task-table th {
+        text-align: left;
+        padding: 9px var(--s-3);
+        font-weight: 600;
+        color: var(--brand-muted-foreground);
+        border-bottom: 1px solid var(--brand-border);
+        white-space: nowrap;
+        font-size: 12px;
+        background: var(--brand-surface-2);
+      }
+      .task-table td {
+        padding: 9px var(--s-3);
+        border-bottom: 1px solid var(--brand-border);
+        color: var(--brand-foreground);
+      }
+      .task-table tr:last-child td { border-bottom: none; }
+      .task-table tbody tr:hover { background: var(--brand-surface-2); }
+      .task-table .mono {
+        font-family: var(--font-mono);
+        font-variant-numeric: tabular-nums;
+        font-size: 12px;
+      }
+      .task-table .latin {
+        font-style: italic;
+        color: var(--ink-2);
+        font-size: 12px;
+      }
+      .task-table .action-link {
+        color: var(--brand-primary);
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      .task-table .action-link:hover {
+        text-decoration: underline;
+      }
+
+      /* === Status Badges === */
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 2px 8px;
+        border-radius: var(--r-sm);
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .badge-completed {
+        color: var(--state-success);
+        background: color-mix(in srgb, var(--state-success) 10%, transparent);
+      }
+      .badge-pending {
+        color: var(--state-warning);
+        background: color-mix(in srgb, var(--state-warning) 10%, transparent);
+      }
+      .badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: currentColor;
+        flex-shrink: 0;
+      }
+
+      /* === Timeline === */
+      .timeline {
+        display: flex;
+        flex-direction: column;
+        gap: var(--s-4);
+      }
+      .timeline-item {
+        display: flex;
+        gap: var(--s-3);
+        align-items: flex-start;
+      }
+      .timeline-dot {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--brand-surface-2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        color: var(--brand-primary);
+      }
+      .timeline-dot [data-lucide] {
+        width: 14px;
+        height: 14px;
+      }
+      .timeline-content { flex: 1; min-width: 0; }
+      .timeline-text {
+        font-size: 13px;
+        color: var(--brand-foreground);
+        line-height: 1.45;
+      }
+      .timeline-time {
+        font-size: 11px;
+        color: var(--ink-3);
+        margin-top: 2px;
+      }
+
+      /* === Footer === */
+      .app-footer {
+        padding: var(--s-4) 0;
+        border-top: 1px solid var(--brand-border);
+        text-align: center;
+        font-size: 12px;
+        color: var(--ink-3);
+        font-variant-numeric: tabular-nums;
+        margin-top: var(--s-5);
+      }
+
+      /* === Responsive (base) === */
+      @media (max-width: 1024px) {
+        .app-shell {
+          grid-template-columns: 1fr;
+          grid-template-areas: "header" "main";
+        }
+        .app-sidebar { display: none; }
+        .header-nav { display: none; }
+      }
+      @media (max-width: 640px) {
+        .page-title { font-size: 18px; }
+      }
+
+      /* ===========================
+         WORKFLOW-SPECIFIC CSS
+         =========================== */
+
+      /* Workflow Flowchart */
+      .workflow-flow {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0;
+        padding: var(--s-5) var(--s-4);
+      }
+      .workflow-node {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        padding: var(--s-3) var(--s-4);
+        border: 1px solid var(--brand-border);
+        border-radius: var(--r-md);
+        background: var(--brand-surface);
+        min-width: 100px;
+        flex-shrink: 0;
+        position: relative;
+      }
+      .workflow-node-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: color-mix(in srgb, var(--brand-primary) 10%, transparent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--brand-primary);
+      }
+      .workflow-node-icon [data-lucide] {
+        width: 16px;
+        height: 16px;
+      }
+      .workflow-node-label {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--brand-foreground);
+        white-space: nowrap;
+      }
+      .workflow-arrow {
+        flex-shrink: 0;
+        width: 24px;
+        height: 1px;
+        background: var(--brand-border);
+        position: relative;
+        margin: 0 2px;
+      }
+      .workflow-arrow::after {
+        content: '';
+        position: absolute;
+        right: -1px;
+        top: -3px;
+        border: 3.5px solid transparent;
+        border-left-color: var(--brand-border);
+      }
+
+      /* Phase Badge */
+      .phase-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 3px 10px;
+        border-radius: var(--r-pill);
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--brand-primary);
+        background: color-mix(in srgb, var(--brand-primary) 10%, transparent);
+      }
+
+      /* Info Grid */
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--s-4);
+        margin-bottom: var(--s-5);
+      }
+      .info-grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--s-4);
+      }
+      .info-block {
+        background: var(--brand-surface-2);
+        border-radius: var(--r-md);
+        padding: var(--s-4);
+        border: 1px solid var(--brand-border);
+      }
+      .info-block-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--brand-foreground);
+        margin-bottom: var(--s-3);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .info-block-title [data-lucide] {
+        width: 15px;
+        height: 15px;
+        color: var(--brand-primary);
+      }
+      .info-block ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .info-block li {
+        font-size: 12px;
+        color: var(--ink-2);
+        line-height: 1.5;
+        padding-left: 14px;
+        position: relative;
+      }
+      .info-block li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 7px;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--brand-primary);
+      }
+
+      /* Step Table (reuses task-table) */
+      .step-table th {
+        font-size: 11px;
+        white-space: nowrap;
+      }
+      .step-table td {
+        vertical-align: top;
+        line-height: 1.45;
+      }
+      .step-table .step-num {
+        font-family: var(--font-mono);
+        font-weight: 600;
+        color: var(--brand-primary);
+        white-space: nowrap;
+      }
+
+      /* Section Spacing */
+      .section-gap {
+        margin-bottom: var(--s-5);
+      }
+
+      /* Evaluation Table */
+      .eval-table th {
+        text-align: center;
+        font-size: 11px;
+      }
+      .eval-table td {
+        text-align: center;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-variant-numeric: tabular-nums;
+      }
+      .eval-table td:first-child,
+      .eval-table th:first-child {
+        text-align: left;
+        font-family: var(--font-sans);
+      }
+      .eval-table .eval-excellent { color: var(--state-success); }
+      .eval-table .eval-good { color: var(--brand-primary); }
+      .eval-table .eval-mild { color: var(--state-warning); }
+      .eval-table .eval-moderate { color: var(--state-warning); }
+      .eval-table .eval-severe { color: var(--state-error); }
+
+      /* Phase sub-card header */
+      .phase-header {
+        display: flex;
+        align-items: center;
+        gap: var(--s-3);
+        padding: var(--s-3) var(--s-4);
+        border-bottom: 1px solid var(--brand-border);
+        background: var(--brand-surface-2);
+      }
+      .phase-header [data-lucide] {
+        width: 18px;
+        height: 18px;
+        color: var(--brand-primary);
+      }
+      .phase-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--brand-foreground);
+        flex: 1;
+      }
+
+      /* Responsive (workflow) */
+      @media (max-width: 1024px) {
+        .info-grid { grid-template-columns: 1fr; }
+        .info-grid-2 { grid-template-columns: 1fr; }
+        .workflow-flow { flex-direction: column; }
+        .workflow-arrow { width: 1px; height: 20px; }
+        .workflow-arrow::after { right: -3px; top: 0; border: 3.5px solid transparent; border-top-color: var(--brand-border); border-left-color: transparent; }
+      }
+    </style>
+</body>
+</html>

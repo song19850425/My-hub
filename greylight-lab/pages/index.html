@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>灰灯实验室 AI 鉴定台 — 离线 Demo</title>
+    <style id="theme-vars">
+:root {
+  --brand-background: #f4f5f7;
+  --brand-surface: #ffffff;
+  --brand-surface-2: #ebedf0;
+  --brand-popover: #ffffff;
+  --brand-foreground: #1a2332;
+  --brand-card-foreground: #1a2332;
+  --brand-popover-foreground: #1a2332;
+  --brand-muted: #ebedf0;
+  --brand-muted-foreground: #5a6678;
+  --brand-card: #ffffff;
+  --brand-primary: #1d6b6b;
+  --brand-primary-foreground: #ffffff;
+  --brand-border: #d4d9e0;
+  --brand-input: #d4d9e0;
+  --brand-ring: #1d6b6b;
+  --brand-radius-sm: 2px;
+  --brand-radius-md: 4px;
+  --brand-radius-lg: 8px;
+  --state-success: #2e7d32;
+  --state-warning: #e65100;
+  --state-error: #c62828;
+  --state-info: #1565c0;
+  --ink: #1a2332;
+  --ink-2: #5a6678;
+  --ink-3: #8b95a4;
+  --line: #d4d9e0;
+  --surface: #ffffff;
+  --surface-2: #ebedf0;
+  --bg: #f4f5f7;
+  --brand: #1d6b6b;
+  --brand-ink: #ffffff;
+  --font-sans: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Courier New", monospace;
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 80px;
+  --r-xs: 2px; --r-sm: 4px; --r-md: 8px; --r-lg: 16px; --r-pill: 999px;
+  --border: 1px solid var(--line);
+  --shadow-1: 0 1px 2px rgba(15,23,42,.04), 0 1px 1px rgba(15,23,42,.02);
+  --shadow-2: 0 8px 24px -8px rgba(15,23,42,.12);
+  --shadow-3: 0 24px 60px -20px rgba(15,23,42,.20);
+}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js" onerror="var s=document.createElement('script');s.src='../vendor/tailwind-browser.js';document.head.appendChild(s);"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js" onerror="var s=document.createElement('script');s.src='../vendor/lucide.min.js';document.head.appendChild(s);"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--brand-background);
+    --color-foreground: var(--brand-foreground);
+    --color-card: var(--brand-card);
+    --color-card-foreground: var(--brand-card-foreground);
+    --color-popover: var(--brand-popover);
+    --color-popover-foreground: var(--brand-popover-foreground);
+    --color-primary: var(--brand-primary);
+    --color-primary-foreground: var(--brand-primary-foreground);
+    --color-muted: var(--brand-muted);
+    --color-muted-foreground: var(--brand-muted-foreground);
+    --color-border: var(--brand-border);
+    --color-input: var(--brand-input);
+    --color-ring: var(--brand-ring);
+    --radius-sm: var(--brand-radius-sm);
+    --radius-md: var(--brand-radius-md);
+    --radius-lg: var(--brand-radius-lg);
+  }
+  @layer base {
+    body { background: var(--brand-background); color: var(--brand-foreground); }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--brand-background); }
+      .text-background { color: var(--brand-background); }
+      .border-background { border-color: var(--brand-background); }
+      .ring-background { --tw-ring-color: var(--brand-background); }
+      .bg-foreground { background-color: var(--brand-foreground); }
+      .text-foreground { color: var(--brand-foreground); }
+      .border-foreground { border-color: var(--brand-foreground); }
+      .ring-foreground { --tw-ring-color: var(--brand-foreground); }
+      .bg-card { background-color: var(--brand-card); }
+      .text-card { color: var(--brand-card); }
+      .border-card { border-color: var(--brand-card); }
+      .ring-card { --tw-ring-color: var(--brand-card); }
+      .bg-card-foreground { background-color: var(--brand-card-foreground); }
+      .text-card-foreground { color: var(--brand-card-foreground); }
+      .border-card-foreground { border-color: var(--brand-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--brand-card-foreground); }
+      .bg-popover { background-color: var(--brand-popover); }
+      .text-popover { color: var(--brand-popover); }
+      .border-popover { border-color: var(--brand-popover); }
+      .ring-popover { --tw-ring-color: var(--brand-popover); }
+      .bg-popover-foreground { background-color: var(--brand-popover-foreground); }
+      .text-popover-foreground { color: var(--brand-popover-foreground); }
+      .border-popover-foreground { border-color: var(--brand-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--brand-popover-foreground); }
+      .bg-primary { background-color: var(--brand-primary); }
+      .text-primary { color: var(--brand-primary); }
+      .border-primary { border-color: var(--brand-primary); }
+      .ring-primary { --tw-ring-color: var(--brand-primary); }
+      .bg-primary-foreground { background-color: var(--brand-primary-foreground); }
+      .text-primary-foreground { color: var(--brand-primary-foreground); }
+      .border-primary-foreground { border-color: var(--brand-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--brand-primary-foreground); }
+      .bg-muted { background-color: var(--brand-muted); }
+      .text-muted { color: var(--brand-muted); }
+      .border-muted { border-color: var(--brand-muted); }
+      .ring-muted { --tw-ring-color: var(--brand-muted); }
+      .bg-muted-foreground { background-color: var(--brand-muted-foreground); }
+      .text-muted-foreground { color: var(--brand-muted-foreground); }
+      .border-muted-foreground { border-color: var(--brand-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--brand-muted-foreground); }
+      .bg-border { background-color: var(--brand-border); }
+      .text-border { color: var(--brand-border); }
+      .border-border { border-color: var(--brand-border); }
+      .ring-border { --tw-ring-color: var(--brand-border); }
+      .bg-input { background-color: var(--brand-input); }
+      .text-input { color: var(--brand-input); }
+      .border-input { border-color: var(--brand-input); }
+      .ring-input { --tw-ring-color: var(--brand-input); }
+      .bg-ring { background-color: var(--brand-ring); }
+      .text-ring { color: var(--brand-ring); }
+      .border-ring { border-color: var(--brand-ring); }
+      .ring-ring { --tw-ring-color: var(--brand-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <style id="critical-layout">
+      body, .demo-shell {
+        font-family: var(--font-sans);
+        font-size: 14px;
+      }
+      .demo-shell {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: var(--s-7) var(--s-5);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        gap: var(--s-6);
+      }
+      .demo-header {
+        text-align: center;
+        margin-bottom: var(--s-4);
+      }
+      .demo-logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: var(--s-3);
+      }
+      .demo-logo-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--r-md);
+        background: var(--brand-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--brand-primary-foreground);
+        box-shadow: var(--shadow-2);
+      }
+      .demo-logo-icon [data-lucide] {
+        width: 26px;
+        height: 26px;
+      }
+      .demo-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--brand-foreground);
+        line-height: 1.2;
+      }
+      .demo-subtitle {
+        font-size: 15px;
+        color: var(--ink-2);
+        margin-top: 6px;
+        line-height: 1.5;
+      }
+      .demo-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 14px;
+        border-radius: var(--r-pill);
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--state-success);
+        background: color-mix(in srgb, var(--state-success) 10%, transparent);
+        margin-top: var(--s-4);
+      }
+      .demo-badge [data-lucide] {
+        width: 14px;
+        height: 14px;
+      }
+      .demo-nav-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--s-5);
+        margin-bottom: var(--s-5);
+      }
+      .demo-nav-card {
+        background: var(--brand-card);
+        border: 1px solid var(--brand-border);
+        border-radius: var(--r-lg);
+        box-shadow: var(--shadow-1);
+        overflow: hidden;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        transition: box-shadow 0.2s, transform 0.15s;
+        cursor: pointer;
+      }
+      .demo-nav-card:hover {
+        box-shadow: var(--shadow-2);
+        transform: translateY(-2px);
+      }
+      .demo-nav-banner {
+        height: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .demo-nav-banner-bg {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, var(--brand-primary), color-mix(in srgb, var(--brand-primary) 60%, var(--ink)));
+      }
+      .demo-nav-banner-icon {
+        position: relative;
+        z-index: 1;
+        color: rgba(255,255,255,0.92);
+      }
+      .demo-nav-banner-icon [data-lucide] {
+        width: 56px;
+        height: 56px;
+      }
+      .demo-nav-body {
+        padding: var(--s-5);
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: var(--s-2);
+      }
+      .demo-nav-title {
+        font-size: 17px;
+        font-weight: 600;
+        color: var(--brand-foreground);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .demo-nav-title [data-lucide] {
+        width: 18px;
+        height: 18px;
+        color: var(--brand-primary);
+      }
+      .demo-nav-desc {
+        font-size: 13px;
+        color: var(--ink-2);
+        line-height: 1.5;
+      }
+      .demo-nav-tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: var(--s-2);
+      }
+      .demo-nav-tag {
+        font-size: 11px;
+        padding: 3px 8px;
+        border-radius: var(--r-sm);
+        color: var(--ink-2);
+        background: var(--brand-surface-2);
+        font-weight: 500;
+      }
+      .demo-nav-arrow {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--brand-primary);
+        margin-top: var(--s-3);
+        padding-top: var(--s-3);
+        border-top: 1px solid var(--brand-border);
+      }
+      .demo-nav-arrow [data-lucide] {
+        width: 14px;
+        height: 14px;
+      }
+      .demo-info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--s-4);
+        margin-bottom: var(--s-5);
+      }
+      .demo-info-card {
+        background: var(--brand-card);
+        border: 1px solid var(--brand-border);
+        border-radius: var(--r-md);
+        padding: var(--s-4);
+        text-align: center;
+      }
+      .demo-info-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: color-mix(in srgb, var(--brand-primary) 10%, transparent);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--brand-primary);
+        margin-bottom: var(--s-2);
+      }
+      .demo-info-icon [data-lucide] {
+        width: 20px;
+        height: 20px;
+      }
+      .demo-info-num {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--brand-foreground);
+        font-family: var(--font-mono);
+        font-variant-numeric: tabular-nums;
+      }
+      .demo-info-label {
+        font-size: 12px;
+        color: var(--ink-2);
+        margin-top: 2px;
+      }
+      .demo-footer {
+        text-align: center;
+        font-size: 12px;
+        color: var(--ink-3);
+        padding-top: var(--s-4);
+        border-top: 1px solid var(--brand-border);
+        margin-top: auto;
+      }
+      .demo-footer-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--s-4);
+        flex-wrap: wrap;
+      }
+      .demo-footer-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .demo-footer-item [data-lucide] {
+        width: 13px;
+        height: 13px;
+        color: var(--brand-primary);
+      }
+      @media (max-width: 768px) {
+        .demo-nav-grid { grid-template-columns: 1fr; }
+        .demo-info-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+
+    <div class="demo-shell">
+      <!-- Header -->
+      <div class="demo-header">
+        <div class="demo-logo">
+          <div class="demo-logo-icon">
+            <i data-lucide="flask-conical"></i>
+          </div>
+        </div>
+        <div class="demo-title">灰灯实验室 AI 鉴定台</div>
+        <div class="demo-subtitle">水生生物 AI 鉴定平台 · 政务监测报告风格 · 可离线演示</div>
+        <div class="demo-badge">
+          <i data-lucide="wifi-off"></i>
+          <span>离线模式已就绪 — 无需联网即可运行全部功能</span>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="demo-info-grid">
+        <div class="demo-info-card">
+          <div class="demo-info-icon"><i data-lucide="layout-dashboard"></i></div>
+          <div class="demo-info-num">7</div>
+          <div class="demo-info-label">演示页面</div>
+        </div>
+        <div class="demo-info-card">
+          <div class="demo-info-icon"><i data-lucide="database"></i></div>
+          <div class="demo-info-num">1,042</div>
+          <div class="demo-info-label">参考库物种数</div>
+        </div>
+        <div class="demo-info-card">
+          <div class="demo-info-icon"><i data-lucide="package"></i></div>
+          <div class="demo-info-num">3</div>
+          <div class="demo-info-label">本地依赖包</div>
+        </div>
+      </div>
+
+      <!-- Navigation Cards -->
+      <div class="demo-nav-grid">
+        <!-- Page 1: Dashboard -->
+        <a href="dashboard.html" class="demo-nav-card">
+          <div class="demo-nav-banner">
+            <div class="demo-nav-banner-bg"></div>
+            <div class="demo-nav-banner-icon"><i data-lucide="layout-dashboard"></i></div>
+          </div>
+          <div class="demo-nav-body">
+            <div class="demo-nav-title">
+              <i data-lucide="cpu"></i>
+              <span>AI 鉴定主控台</span>
+            </div>
+            <div class="demo-nav-desc">
+              鉴定任务总览、KPI 统计、AI 置信度分布、标本图库、采样站点监控。包含 Chart.js 数据可视化。
+            </div>
+            <div class="demo-nav-tag-row">
+              <span class="demo-nav-tag">数据可视化</span>
+              <span class="demo-nav-tag">Chart.js</span>
+              <span class="demo-nav-tag">KPI 面板</span>
+              <span class="demo-nav-tag">标本图库</span>
+            </div>
+            <div class="demo-nav-arrow">
+              <span>进入主控台</span>
+              <i data-lucide="arrow-right"></i>
+            </div>
+          </div>
+        </a>
+
+        <!-- Page 2: Monitoring Workflow -->
+        <a href="monitoring-workflow.html" class="demo-nav-card">
+          <div class="demo-nav-banner">
+            <div class="demo-nav-banner-bg"></div>
+            <div class="demo-nav-banner-icon"><i data-lucide="git-branch"></i></div>
+          </div>
+          <div class="demo-nav-body">
+            <div class="demo-nav-title">
+              <i data-lucide="clipboard-list"></i>
+              <span>水生态监测流程</span>
+            </div>
+            <div class="demo-nav-desc">
+              人工监测标准操作规程：实施方案、三阶段操作步骤、鱼类 eDNA 专项、监测流程图、报告出具流程。
+            </div>
+            <div class="demo-nav-tag-row">
+              <span class="demo-nav-tag">SOP 规程</span>
+              <span class="demo-nav-tag">eDNA 全流程</span>
+              <span class="demo-nav-tag">三级审核</span>
+              <span class="demo-nav-tag">HJ 1295</span>
+            </div>
+            <div class="demo-nav-arrow">
+              <span>查看监测流程</span>
+              <i data-lucide="arrow-right"></i>
+            </div>
+          </div>
+        </a>
+
+        <!-- Page 3: Species Library -->
+        <a href="species-library.html" class="demo-nav-card">
+          <div class="demo-nav-banner">
+            <div class="demo-nav-banner-bg"></div>
+            <div class="demo-nav-banner-icon"><i data-lucide="library"></i></div>
+          </div>
+          <div class="demo-nav-body">
+            <div class="demo-nav-title">
+              <i data-lucide="database"></i>
+              <span>物种参考库</span>
+            </div>
+            <div class="demo-nav-desc">
+              1,042 种水生生物参考库，含分类系统树、物种卡片、标记基因序列统计、指示种与外来种标签。
+            </div>
+            <div class="demo-nav-tag-row">
+              <span class="demo-nav-tag">1,042 种</span>
+              <span class="demo-nav-tag">分类系统树</span>
+              <span class="demo-nav-tag">序列统计</span>
+              <span class="demo-nav-tag">指示种</span>
+            </div>
+            <div class="demo-nav-arrow">
+              <span>浏览参考库</span>
+              <i data-lucide="arrow-right"></i>
+            </div>
+          </div>
+        </a>
+
+        <!-- Page 4: Sample Management -->
+        <a href="sample-management.html" class="demo-nav-card">
+          <div class="demo-nav-banner">
+            <div class="demo-nav-banner-bg"></div>
+            <div class="demo-nav-banner-icon"><i data-lucide="test-tube"></i></div>
+          </div>
+          <div class="demo-nav-body">
+            <div class="demo-nav-title">
+              <i data-lucide="test-tube"></i>
+              <span>样品管理</span>
+            </div>
+            <div class="demo-nav-desc">
+              样品全生命周期跟踪：采集登记、实验室分析、AI 鉴定、专家复核到归档，含状态进度条与质控信息。
+            </div>
+            <div class="demo-nav-tag-row">
+              <span class="demo-nav-tag">生命周期跟踪</span>
+              <span class="demo-nav-tag">状态进度条</span>
+              <span class="demo-nav-tag">质控信息</span>
+              <span class="demo-nav-tag">样品台账</span>
+            </div>
+            <div class="demo-nav-arrow">
+              <span>进入样品管理</span>
+              <i data-lucide="arrow-right"></i>
+            </div>
+          </div>
+        </a>
+
+        <!-- Page 5: Report Center -->
+        <a href="report-center.html" class="demo-nav-card">
+          <div class="demo-nav-banner">
+            <div class="demo-nav-banner-bg"></div>
+            <div class="demo-nav-banner-icon"><i data-lucide="file-text"></i></div>
+          </div>
+          <div class="demo-nav-body">
+            <div class="demo-nav-title">
+              <i data-lucide="file-text"></i>
+              <span>报告中心</span>
+            </div>
+            <div class="demo-nav-desc">
+              报告模板、报告台账、三级审核流程（编制→技术审核→CMA 签发）、报告内容清单与导出格式管理。
+            </div>
+            <div class="demo-nav-tag-row">
+              <span class="demo-nav-tag">报告模板</span>
+              <span class="demo-nav-tag">三级审核</span>
+              <span class="demo-nav-tag">CMA 签发</span>
+              <span class="demo-nav-tag">多格式导出</span>
+            </div>
+            <div class="demo-nav-arrow">
+              <span>进入报告中心</span>
+              <i data-lucide="arrow-right"></i>
+            </div>
+          </div>
+        </a>
+
+        <!-- Page 6: Model Management -->
+        <a href="model-management.html" class="demo-nav-card">
+          <div class="demo-nav-banner">
+            <div class="demo-nav-banner-bg"></div>
+            <div class="demo-nav-banner-icon"><i data-lucide="brain"></i></div>
+          </div>
+          <div class="demo-nav-body">
+            <div class="demo-nav-title">
+              <i data-lucide="brain"></i>
+              <span>模型管理</span>
+            </div>
+            <div class="demo-nav-desc">
+              AI 鉴定模型管理：底栖/硅藻/eDNA 三大模型卡片、准确率趋势折线图、版本历史与训练资源配置。
+            </div>
+            <div class="demo-nav-tag-row">
+              <span class="demo-nav-tag">3 个 AI 模型</span>
+              <span class="demo-nav-tag">性能趋势图</span>
+              <span class="demo-nav-tag">版本管理</span>
+              <span class="demo-nav-tag">GPU 资源</span>
+            </div>
+            <div class="demo-nav-arrow">
+              <span>进入模型管理</span>
+              <i data-lucide="arrow-right"></i>
+            </div>
+          </div>
+        </a>
+
+        <!-- Page 7: Expert Review -->
+        <a href="expert-review.html" class="demo-nav-card">
+          <div class="demo-nav-banner">
+            <div class="demo-nav-banner-bg"></div>
+            <div class="demo-nav-banner-icon"><i data-lucide="scan-search"></i></div>
+          </div>
+          <div class="demo-nav-body">
+            <div class="demo-nav-title">
+              <i data-lucide="clipboard-check"></i>
+              <span>专家复核</span>
+            </div>
+            <div class="demo-nav-desc">
+              AI 鉴定结果人工复核与仲裁：复核队列、低置信度优先、批量通过、复核工作量统计与复核规则。
+            </div>
+            <div class="demo-nav-tag-row">
+              <span class="demo-nav-tag">复核队列</span>
+              <span class="demo-nav-tag">低置信度优先</span>
+              <span class="demo-nav-tag">批量复核</span>
+              <span class="demo-nav-tag">一致性统计</span>
+            </div>
+            <div class="demo-nav-arrow">
+              <span>进入专家复核</span>
+              <i data-lucide="arrow-right"></i>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Footer -->
+      <footer class="demo-footer">
+        <div class="demo-footer-row">
+          <span class="demo-footer-item"><i data-lucide="shield-check"></i> HJ 1295/1296 合规</span>
+          <span class="demo-footer-item"><i data-lucide="wifi-off"></i> 离线运行</span>
+          <span class="demo-footer-item"><i data-lucide="package"></i> Tailwind + Lucide + Chart.js 本地加载</span>
+        </div>
+        <div style="margin-top:var(--s-2);">灰灯实验室 AI 鉴定台 v1.1 · 离线 Demo · 2026-09-08</div>
+      </footer>
+    </div>
+
+    <script src="../shared-app.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

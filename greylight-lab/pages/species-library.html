@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>物种参考库</title>
+    <style id="theme-vars">
+:root {
+  --brand-background: #f4f5f7;
+  --brand-surface: #ffffff;
+  --brand-surface-2: #ebedf0;
+  --brand-popover: #ffffff;
+  --brand-foreground: #1a2332;
+  --brand-card-foreground: #1a2332;
+  --brand-popover-foreground: #1a2332;
+  --brand-muted: #ebedf0;
+  --brand-muted-foreground: #5a6678;
+  --brand-card: #ffffff;
+  --brand-primary: #1d6b6b;
+  --brand-primary-foreground: #ffffff;
+  --brand-border: #d4d9e0;
+  --brand-input: #d4d9e0;
+  --brand-ring: #1d6b6b;
+  --brand-radius-sm: 2px;
+  --brand-radius-md: 4px;
+  --brand-radius-lg: 8px;
+  --state-success: #2e7d32;
+  --state-warning: #e65100;
+  --state-error: #c62828;
+  --state-info: #1565c0;
+  --ink: #1a2332;
+  --ink-2: #5a6678;
+  --ink-3: #8b95a4;
+  --line: #d4d9e0;
+  --surface: #ffffff;
+  --surface-2: #ebedf0;
+  --bg: #f4f5f7;
+  --brand: #1d6b6b;
+  --brand-ink: #ffffff;
+  --font-sans: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Courier New", monospace;
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 80px;
+  --r-xs: 2px; --r-sm: 4px; --r-md: 8px; --r-lg: 16px; --r-pill: 999px;
+  --border: 1px solid var(--line);
+  --shadow-1: 0 1px 2px rgba(15,23,42,.04), 0 1px 1px rgba(15,23,42,.02);
+  --shadow-2: 0 8px 24px -8px rgba(15,23,42,.12);
+  --shadow-3: 0 24px 60px -20px rgba(15,23,42,.20);
+}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js" onerror="var s=document.createElement('script');s.src='../vendor/tailwind-browser.js';document.head.appendChild(s);"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js" onerror="var s=document.createElement('script');s.src='../vendor/lucide.min.js';document.head.appendChild(s);"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--brand-background);
+    --color-foreground: var(--brand-foreground);
+    --color-card: var(--brand-card);
+    --color-card-foreground: var(--brand-card-foreground);
+    --color-popover: var(--brand-popover);
+    --color-popover-foreground: var(--brand-popover-foreground);
+    --color-primary: var(--brand-primary);
+    --color-primary-foreground: var(--brand-primary-foreground);
+    --color-muted: var(--brand-muted);
+    --color-muted-foreground: var(--brand-muted-foreground);
+    --color-border: var(--brand-border);
+    --color-input: var(--brand-input);
+    --color-ring: var(--brand-ring);
+    --radius-sm: var(--brand-radius-sm);
+    --radius-md: var(--brand-radius-md);
+    --radius-lg: var(--brand-radius-lg);
+  }
+  @layer base {
+    body { background: var(--brand-background); color: var(--brand-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--brand-background); }
+      .text-background { color: var(--brand-background); }
+      .border-background { border-color: var(--brand-background); }
+      .ring-background { --tw-ring-color: var(--brand-background); }
+      .bg-foreground { background-color: var(--brand-foreground); }
+      .text-foreground { color: var(--brand-foreground); }
+      .border-foreground { border-color: var(--brand-foreground); }
+      .ring-foreground { --tw-ring-color: var(--brand-foreground); }
+      .bg-card { background-color: var(--brand-card); }
+      .text-card { color: var(--brand-card); }
+      .border-card { border-color: var(--brand-card); }
+      .ring-card { --tw-ring-color: var(--brand-card); }
+      .bg-card-foreground { background-color: var(--brand-card-foreground); }
+      .text-card-foreground { color: var(--brand-card-foreground); }
+      .border-card-foreground { border-color: var(--brand-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--brand-card-foreground); }
+      .bg-popover { background-color: var(--brand-popover); }
+      .text-popover { color: var(--brand-popover); }
+      .border-popover { border-color: var(--brand-popover); }
+      .ring-popover { --tw-ring-color: var(--brand-popover); }
+      .bg-popover-foreground { background-color: var(--brand-popover-foreground); }
+      .text-popover-foreground { color: var(--brand-popover-foreground); }
+      .border-popover-foreground { border-color: var(--brand-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--brand-popover-foreground); }
+      .bg-primary { background-color: var(--brand-primary); }
+      .text-primary { color: var(--brand-primary); }
+      .border-primary { border-color: var(--brand-primary); }
+      .ring-primary { --tw-ring-color: var(--brand-primary); }
+      .bg-primary-foreground { background-color: var(--brand-primary-foreground); }
+      .text-primary-foreground { color: var(--brand-primary-foreground); }
+      .border-primary-foreground { border-color: var(--brand-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--brand-primary-foreground); }
+      .bg-muted { background-color: var(--brand-muted); }
+      .text-muted { color: var(--brand-muted); }
+      .border-muted { border-color: var(--brand-muted); }
+      .ring-muted { --tw-ring-color: var(--brand-muted); }
+      .bg-muted-foreground { background-color: var(--brand-muted-foreground); }
+      .text-muted-foreground { color: var(--brand-muted-foreground); }
+      .border-muted-foreground { border-color: var(--brand-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--brand-muted-foreground); }
+      .bg-border { background-color: var(--brand-border); }
+      .text-border { color: var(--brand-border); }
+      .border-border { border-color: var(--brand-border); }
+      .ring-border { --tw-ring-color: var(--brand-border); }
+      .bg-input { background-color: var(--brand-input); }
+      .text-input { color: var(--brand-input); }
+      .border-input { border-color: var(--brand-input); }
+      .ring-input { --tw-ring-color: var(--brand-input); }
+      .bg-ring { background-color: var(--brand-ring); }
+      .text-ring { color: var(--brand-ring); }
+      .border-ring { border-color: var(--brand-ring); }
+      .ring-ring { --tw-ring-color: var(--brand-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <style id="critical-layout">
+      /* === Font Foundation === */
+      body, .app-shell {
+        font-family: var(--font-sans);
+        font-size: 14px;
+      }
+
+      /* === App Shell Grid === */
+      .app-shell {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        grid-template-rows: 56px 1fr;
+        grid-template-areas: "header header" "sidebar main";
+        min-height: 100vh;
+        background: var(--brand-background);
+      }
+
+      /* === Header === */
+      .app-header {
+        grid-area: header;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        height: 56px;
+        background: var(--brand-surface);
+        border-bottom: 1px solid var(--brand-border);
+        display: flex;
+        align-items: center;
+        padding: 0 var(--s-5);
+        gap: var(--s-5);
+      }
+      .logo {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.3;
+        flex-shrink: 0;
+      }
+      .logo-main {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--brand-foreground);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .logo-main [data-lucide] {
+        width: 18px;
+        height: 18px;
+        color: var(--brand-primary);
+      }
+      .logo-sub {
+        font-size: 11px;
+        color: var(--ink-3);
+        padding-left: 24px;
+      }
+      .header-nav {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        flex: 1;
+        justify-content: center;
+      }
+      .header-nav a {
+        padding: 6px 14px;
+        font-size: 13px;
+        color: var(--brand-muted-foreground);
+        text-decoration: none;
+        border-radius: var(--r-sm);
+        white-space: nowrap;
+        transition: background 0.15s, color 0.15s;
+      }
+      .header-nav a:hover {
+        color: var(--brand-foreground);
+        background: var(--brand-surface-2);
+      }
+      .header-nav a.active {
+        color: var(--brand-primary);
+        background: color-mix(in srgb, var(--brand-primary) 8%, transparent);
+        font-weight: 500;
+      }
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: var(--s-3);
+        flex-shrink: 0;
+      }
+      .user-name {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 13px;
+        color: var(--brand-foreground);
+        cursor: pointer;
+      }
+      .user-name [data-lucide] {
+        width: 14px;
+        height: 14px;
+        color: var(--brand-muted-foreground);
+      }
+      .notification-btn {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--r-sm);
+        color: var(--brand-muted-foreground);
+        cursor: pointer;
+        position: relative;
+        background: none;
+        border: none;
+      }
+      .notification-btn:hover {
+        background: var(--brand-surface-2);
+        color: var(--brand-foreground);
+      }
+      .notification-btn [data-lucide] {
+        width: 18px;
+        height: 18px;
+      }
+      .notification-badge {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--state-error);
+        border: 1.5px solid var(--brand-surface);
+      }
+
+      /* === Sidebar === */
+      .app-sidebar {
+        grid-area: sidebar;
+        background: var(--brand-surface);
+        border-right: 1px solid var(--brand-border);
+        overflow-y: auto;
+        height: calc(100vh - 56px);
+        position: sticky;
+        top: 56px;
+      }
+      .sidebar-section {
+        padding: var(--s-4) 0 var(--s-1);
+      }
+      .sidebar-section-title {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--ink-3);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0 var(--s-4);
+        margin-bottom: var(--s-2);
+      }
+      .sidebar-section-title [data-lucide] {
+        width: 14px;
+        height: 14px;
+      }
+      .sidebar-item {
+        display: flex;
+        align-items: center;
+        gap: var(--s-2);
+        padding: 8px var(--s-4);
+        font-size: 13px;
+        color: var(--brand-foreground);
+        cursor: pointer;
+        border-radius: 0;
+        margin: 0;
+        transition: background 0.12s;
+      }
+      .sidebar-item:hover {
+        background: var(--brand-surface-2);
+      }
+      .sidebar-item.active {
+        background: color-mix(in srgb, var(--brand-primary) 7%, transparent);
+        color: var(--brand-primary);
+        font-weight: 500;
+        border-left: 3px solid var(--brand-primary);
+        padding-left: calc(var(--s-4) - 3px);
+      }
+      .sidebar-item [data-lucide] {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        color: var(--ink-2);
+      }
+      .sidebar-item.active [data-lucide] {
+        color: var(--brand-primary);
+      }
+      .sidebar-divider {
+        height: 1px;
+        background: var(--brand-border);
+        margin: var(--s-3) var(--s-4);
+      }
+
+      /* === Main Content === */
+      .app-main {
+        grid-area: main;
+        padding: var(--s-5);
+        overflow-x: hidden;
+        min-width: 0;
+      }
+
+      /* === Page Title Row === */
+      .page-title-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: var(--s-5);
+        gap: var(--s-4);
+        flex-wrap: wrap;
+      }
+      .page-title {
+        font-size: 22px;
+        font-weight: 600;
+        color: var(--brand-foreground);
+        line-height: 1.3;
+      }
+      .title-actions {
+        display: flex;
+        align-items: center;
+        gap: var(--s-3);
+      }
+      .date-selector {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 12px;
+        border: 1px solid var(--brand-border);
+        border-radius: var(--r-md);
+        font-size: 13px;
+        color: var(--brand-foreground);
+        background: var(--brand-surface);
+        cursor: pointer;
+        font-variant-numeric: tabular-nums;
+      }
+      .date-selector [data-lucide] {
+        width: 14px;
+        height: 14px;
+        color: var(--brand-muted-foreground);
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 16px;
+        border-radius: var(--r-md);
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        border: none;
+        white-space: nowrap;
+        transition: background 0.15s;
+      }
+      .btn-primary {
+        background: var(--brand-primary);
+        color: var(--brand-primary-foreground);
+      }
+      .btn-primary:hover {
+        background: color-mix(in srgb, var(--brand-primary) 88%, black);
+      }
+      .btn [data-lucide] {
+        width: 14px;
+        height: 14px;
+      }
+
+      /* === KPI Row === */
+      .kpi-card {
+        background: var(--brand-card);
+        border: 1px solid var(--brand-border);
+        border-radius: var(--r-md);
+        box-shadow: var(--shadow-1);
+        display: flex;
+        align-items: stretch;
+        overflow: hidden;
+        margin-bottom: var(--s-5);
+      }
+      .kpi-item {
+        flex: 1;
+        padding: var(--s-4) var(--s-5);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 0;
+      }
+      .kpi-item + .kpi-item {
+        border-left: 1px solid var(--brand-border);
+      }
+      .kpi-label {
+        font-size: 12px;
+        color: var(--brand-muted-foreground);
+        white-space: nowrap;
+      }
+      .kpi-value {
+        font-size: 28px;
+        font-weight: 600;
+        color: var(--brand-primary);
+        font-family: var(--font-mono);
+        font-variant-numeric: tabular-nums;
+        font-feature-settings: "tnum";
+        line-height: 1.2;
+      }
+      .kpi-value.warning { color: var(--state-warning); }
+      .kpi-trend {
+        font-size: 12px;
+        font-variant-numeric: tabular-nums;
+        font-family: var(--font-mono);
+        display: flex;
+        align-items: center;
+        gap: 2px;
+      }
+      .kpi-trend.up { color: var(--state-success); }
+      .kpi-trend.neutral { color: var(--ink-3); }
+      .kpi-trend [data-lucide] {
+        width: 13px;
+        height: 13px;
+      }
+      .kpi-unit {
+        font-size: 13px;
+        color: var(--ink-2);
+        font-weight: 400;
+      }
+
+      /* === Species List (full width) + Info Cards Row === */
+      .two-col-split {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--s-5);
+        margin-bottom: var(--s-5);
+      }
+      .col-main, .col-side {
+        display: flex;
+        flex-direction: column;
+        gap: var(--s-5);
+        min-width: 0;
+      }
+      .info-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--s-5);
+        margin-bottom: var(--s-5);
+      }
+      @media (max-width: 1024px) {
+        .info-cards { grid-template-columns: 1fr; }
+      }
+
+      /* === Card === */
+      .card {
+        background: var(--brand-card);
+        border: 1px solid var(--brand-border);
+        border-radius: var(--r-md);
+        box-shadow: var(--shadow-1);
+        overflow: hidden;
+      }
+      .card-header {
+        padding: var(--s-3) var(--s-4);
+        border-bottom: 1px solid var(--brand-border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .card-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--brand-foreground);
+        display: flex;
+        align-items: center;
+        gap: var(--s-2);
+      }
+      .card-title [data-lucide] {
+        width: 16px;
+        height: 16px;
+        color: var(--brand-primary);
+      }
+      .card-body { padding: var(--s-3) var(--s-4); }
+      .card-body-tight { padding: 0; }
+
+      /* === Task Table === */
+      .task-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      .task-table th {
+        text-align: left;
+        padding: 9px var(--s-3);
+        font-weight: 600;
+        color: var(--brand-muted-foreground);
+        border-bottom: 1px solid var(--brand-border);
+        white-space: nowrap;
+        font-size: 12px;
+        background: var(--brand-surface-2);
+      }
+      .task-table td {
+        padding: 9px var(--s-3);
+        border-bottom: 1px solid var(--brand-border);
+        color: var(--brand-foreground);
+      }
+      .task-table tr:last-child td { border-bottom: none; }
+      .task-table tbody tr:hover { background: var(--brand-surface-2); }
+      .task-table .mono {
+        font-family: var(--font-mono);
+        font-variant-numeric: tabular-nums;
+        font-size: 12px;
+      }
+      .task-table .latin {
+        font-style: italic;
+        color: var(--ink-2);
+        font-size: 12px;
+      }
+      .task-table .action-link {
+        color: var(--brand-primary);
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      .task-table .action-link:hover {
+        text-decoration: underline;
+      }
+
+      /* === Status Badges === */
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 2px 8px;
+        border-radius: var(--r-sm);
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .badge-completed {
+        color: var(--state-success);
+        background: color-mix(in srgb, var(--state-success) 10%, transparent);
+      }
+      .badge-pending {
+        color: var(--state-warning);
+        background: color-mix(in srgb, var(--state-warning) 10%, transparent);
+      }
+      .badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: currentColor;
+        flex-shrink: 0;
+      }
+
+      /* === Chart Container === */
+      .chart-container {
+        position: relative;
+        height: 220px;
+        width: 100%;
+      }
+
+      /* === Specimen Gallery === */
+      .specimen-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--s-3);
+      }
+      .specimen-item {
+        border: 1px solid var(--brand-border);
+        border-radius: var(--r-md);
+        overflow: hidden;
+        background: var(--brand-card);
+      }
+      .specimen-item img {
+        width: 100%;
+        height: 110px;
+        object-fit: cover;
+        display: block;
+        background: var(--brand-surface-2);
+      }
+      .specimen-label {
+        padding: var(--s-2) var(--s-3);
+      }
+      .specimen-label .name {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--brand-foreground);
+      }
+      .specimen-label .name .latin {
+        font-style: italic;
+        color: var(--ink-2);
+        font-weight: 400;
+      }
+      .specimen-label .date {
+        font-size: 11px;
+        color: var(--ink-3);
+        margin-top: 2px;
+        font-family: var(--font-mono);
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* === Timeline === */
+      .timeline {
+        display: flex;
+        flex-direction: column;
+        gap: var(--s-4);
+      }
+      .timeline-item {
+        display: flex;
+        gap: var(--s-3);
+        align-items: flex-start;
+      }
+      .timeline-dot {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--brand-surface-2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        color: var(--brand-primary);
+      }
+      .timeline-dot [data-lucide] {
+        width: 14px;
+        height: 14px;
+      }
+      .timeline-content { flex: 1; min-width: 0; }
+      .timeline-text {
+        font-size: 13px;
+        color: var(--brand-foreground);
+        line-height: 1.45;
+      }
+      .timeline-time {
+        font-size: 11px;
+        color: var(--ink-3);
+        margin-top: 2px;
+      }
+
+      /* === Site Banner === */
+      .site-banner {
+        position: relative;
+        border-radius: var(--r-md);
+        overflow: hidden;
+        background: var(--brand-card);
+        border: 1px solid var(--brand-border);
+        margin-bottom: var(--s-5);
+      }
+      .site-banner-img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        display: block;
+        background: var(--brand-surface-2);
+      }
+      .site-banner-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.78), rgba(15, 23, 42, 0.45));
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 var(--s-6);
+        color: #ffffff;
+      }
+      .site-banner-title {
+        font-size: 20px;
+        font-weight: 600;
+      }
+      .site-banner-meta {
+        font-size: 13px;
+        margin-top: 4px;
+        opacity: 0.85;
+        font-family: var(--font-mono);
+        font-variant-numeric: tabular-nums;
+        display: flex;
+        gap: var(--s-4);
+      }
+      .site-stats {
+        display: flex;
+        gap: var(--s-6);
+        padding: var(--s-3) var(--s-5);
+        border-top: 1px solid var(--brand-border);
+        background: var(--brand-card);
+      }
+      .site-stat {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .site-stat .label {
+        font-size: 11px;
+        color: var(--brand-muted-foreground);
+      }
+      .site-stat .value {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--brand-foreground);
+        font-family: var(--font-mono);
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* === Footer === */
+      .app-footer {
+        padding: var(--s-4) 0;
+        border-top: 1px solid var(--brand-border);
+        text-align: center;
+        font-size: 12px;
+        color: var(--ink-3);
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* === Responsive === */
+      @media (max-width: 1024px) {
+        .app-shell {
+          grid-template-columns: 1fr;
+          grid-template-areas: "header" "main";
+        }
+        .app-sidebar { display: none; }
+        .two-col-split { grid-template-columns: 1fr; }
+        .kpi-card { flex-wrap: wrap; }
+        .kpi-item { flex: 1 1 50%; }
+        .kpi-item + .kpi-item { border-left: none; }
+        .kpi-item:nth-child(odd) { border-right: 1px solid var(--brand-border); }
+        .header-nav { display: none; }
+        .site-stats { flex-wrap: wrap; gap: var(--s-4); }
+      }
+      @media (max-width: 640px) {
+        .specimen-grid { grid-template-columns: 1fr; }
+        .kpi-item { flex: 1 1 100%; border-left: none !important; border-right: none !important; }
+        .page-title { font-size: 18px; }
+      }
+
+      /* === Species Library specific === */
+      .search-bar {
+        display: flex;
+        align-items: center;
+        gap: var(--s-3);
+        padding: var(--s-3) var(--s-4);
+        background: var(--brand-card);
+        border: 1px solid var(--brand-border);
+        border-radius: var(--r-md);
+        margin-bottom: var(--s-5);
+        box-shadow: var(--shadow-1);
+      }
+      .search-input {
+        flex: 1;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        color: var(--brand-foreground);
+        background: transparent;
+      }
+      .search-input::placeholder { color: var(--ink-3); }
+      .filter-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 12px;
+        border-radius: var(--r-pill);
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        border: 1px solid var(--brand-border);
+        color: var(--ink-2);
+        background: var(--brand-surface);
+        white-space: nowrap;
+        transition: all 0.15s;
+      }
+      .filter-chip.active {
+        background: color-mix(in srgb, var(--brand-primary) 10%, transparent);
+        color: var(--brand-primary);
+        border-color: var(--brand-primary);
+      }
+      .filter-chip:hover {
+        background: var(--brand-surface-2);
+      }
+      .filter-chip.active:hover {
+        background: color-mix(in srgb, var(--brand-primary) 15%, transparent);
+      }
+      .species-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--s-4);
+      }
+      .species-card {
+        background: var(--brand-card);
+        border: 1px solid var(--brand-border);
+        border-radius: var(--r-md);
+        box-shadow: var(--shadow-1);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .species-card-photo-placeholder { position: relative; width: 100%; height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: var(--brand-surface-2); color: var(--ink-3); font-size: 12px; border-bottom: 1px solid var(--brand-border); }
+      .species-card-photo-placeholder [data-lucide] { width: 26px; height: 26px; color: var(--ink-3); }
+      .species-card-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .25s ease, opacity .25s ease; }
+      .species-card-photo-placeholder:hover .species-card-photo { transform: scale(1.04); }
+      .species-card-photo-placeholder:hover { background: var(--brand-surface-1); }
+      .species-card-header {
+        padding: var(--s-3) var(--s-4);
+        border-bottom: 1px solid var(--brand-border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .species-card-name {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--brand-foreground);
+      }
+      .species-card-latin {
+        font-size: 12px;
+        font-style: italic;
+        color: var(--ink-2);
+        margin-top: 2px;
+      }
+      .species-card-body {
+        padding: var(--s-4);
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: var(--s-2);
+      }
+      .species-info-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+      }
+      .species-info-label {
+        color: var(--ink-3);
+      }
+      .species-info-value {
+        color: var(--brand-foreground);
+        font-weight: 500;
+      }
+      .species-tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-top: var(--s-2);
+      }
+      .species-tag {
+        font-size: 11px;
+        padding: 2px 8px;
+        border-radius: var(--r-sm);
+        background: var(--brand-surface-2);
+        color: var(--ink-2);
+      }
+      .species-tag.toxin { background: color-mix(in srgb, var(--state-error) 10%, transparent); color: var(--state-error); }
+      .species-tag.indicator { background: color-mix(in srgb, var(--state-info) 10%, transparent); color: var(--state-info); }
+      .species-tag.native { background: color-mix(in srgb, var(--state-success) 10%, transparent); color: var(--state-success); }
+      .species-tag.invasive { background: color-mix(in srgb, var(--state-warning) 10%, transparent); color: var(--state-warning); }
+      .taxonomy-tree {
+        padding: var(--s-4);
+        background: var(--brand-surface-2);
+        border-radius: var(--r-md);
+      }
+      .taxonomy-row {
+        display: flex;
+        align-items: center;
+        gap: var(--s-2);
+        padding: 4px 0;
+        font-size: 13px;
+      }
+      .taxonomy-level {
+        display: inline-block;
+        width: 60px;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--ink-3);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        flex-shrink: 0;
+      }
+      .taxonomy-name {
+        color: var(--brand-foreground);
+        font-weight: 500;
+      }
+      .taxonomy-name.italic {
+        font-style: italic;
+      }
+      .taxonomy-count {
+        font-size: 11px;
+        color: var(--ink-3);
+        font-family: var(--font-mono);
+        margin-left: auto;
+      }
+      .taxonomy-children {
+        margin-left: 68px;
+        border-left: 2px solid var(--brand-border);
+        padding-left: var(--s-3);
+      }
+      @media (max-width: 1400px) {
+        .species-grid { grid-template-columns: repeat(3, 1fr); }
+      }
+      @media (max-width: 1024px) {
+        .species-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 640px) {
+        .species-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+    <div class="app-shell">
+      <!-- 1. Top Header Bar -->
+      <header class="app-header">
+        <a href="index.html" style="text-decoration:none;color:inherit;">
+          <div class="logo">
+            <div class="logo-main">
+              <i data-lucide="flask-conical"></i>
+              <span>灰灯实验室</span>
+            </div>
+            <div class="logo-sub">AI 鉴定台</div>
+          </div>
+        </a>
+        <nav class="header-nav">
+          <a href="dashboard.html">鉴定台</a>
+          <a href="sample-management.html">样品管理</a>
+          <a href="expert-review.html">专家复核</a>
+          <a href="monitoring-workflow.html">监测流程</a>
+          <a href="species-library.html" class="active">参考库</a>
+          <a href="report-center.html">报告导出</a>
+          <a href="model-management.html">模型管理</a>
+        </nav>
+        <div class="header-right">
+          <div class="user-name">
+            <span>张研究员</span>
+            <i data-lucide="chevron-down"></i>
+          </div>
+          <button class="notification-btn" type="button">
+            <i data-lucide="bell"></i>
+            <span class="notification-badge"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- 2. Left Sidebar -->
+      <aside class="app-sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">
+            <i data-lucide="map-pin"></i>
+            <span>监测站点</span>
+          </div>
+          <div class="sidebar-item active">
+            <i data-lucide="map-pin"></i>
+            <span>磁窑河·入汾口</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>磁窑河·交城段</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>磁窑河·白石南河</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>余杭塘河·W1</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>余杭塘河·W2</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>余杭塘河·W3</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>淇河·盘石头水库</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>淇河·鹤壁城区段</span>
+          </div>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">
+            <i data-lucide="zap"></i>
+            <span>快捷操作</span>
+          </div>
+          <div class="sidebar-item" data-modal="newSample" style="cursor:pointer;">
+            <i data-lucide="plus"></i>
+            <span>新建样品</span>
+          </div>
+          <div class="sidebar-item" data-modal="importSeq" style="cursor:pointer;">
+            <i data-lucide="upload"></i>
+            <span>导入序列</span>
+          </div>
+          <div class="sidebar-item" data-action="export" style="cursor:pointer;">
+            <i data-lucide="download"></i>
+            <span>导出报告</span>
+          </div>
+          <div class="sidebar-item" data-modal="finetune" style="cursor:pointer;">
+            <i data-lucide="sliders-horizontal"></i>
+            <span>模型微调</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 3. Main Content Area -->
+      <main class="app-main">
+        <!-- 3a. Page Title Row -->
+        <div class="page-title-row">
+          <h1 class="page-title">物种参考库</h1>
+          <div class="title-actions">
+            <div class="date-selector">
+              <i data-lucide="calendar"></i>
+              <span>2026-09-08</span>
+            </div>
+            <button class="btn btn-primary" type="button" data-modal="importSeq">
+              <i data-lucide="upload"></i>
+              <span>导入参考序列</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3b. Filter Bar -->
+        <div class="search-bar">
+          <i data-lucide="search" style="width:16px;height:16px;color:var(--ink-3);flex-shrink:0;"></i>
+          <input type="text" class="search-input" data-search="species" placeholder="搜索物种名/拉丁名/序列号...">
+          <div style="display:flex;align-items:center;gap:var(--s-2);flex-wrap:wrap;">
+            <span class="filter-chip active" data-chip-group="species" data-chip-value="*">全部</span>
+            <span class="filter-chip" data-chip-group="species" data-chip-value="鱼类">鱼类</span>
+            <span class="filter-chip" data-chip-group="species" data-chip-value="底栖无脊椎">底栖无脊椎</span>
+            <span class="filter-chip" data-chip-group="species" data-chip-value="浮游植物">浮游植物</span>
+            <span class="filter-chip" data-chip-group="species" data-chip-value="浮游动物">浮游动物</span>
+            <span class="filter-chip" data-chip-group="species" data-chip-value="硅藻">硅藻</span>
+            <span class="filter-chip" data-chip-group="species" data-chip-value="鸟类">鸟类</span>
+            <span class="filter-chip" data-chip-group="species" data-chip-value="指示种">指示种</span>
+            <span class="filter-chip" data-chip-group="species" data-chip-value="本土种">本土种</span>
+          </div>
+          <span style="font-size:12px;color:var(--ink-3);font-family:var(--font-mono);white-space:nowrap;flex-shrink:0;">真实名录 166 种 · 条形码参考 22,609 条 · <span data-result-count="species" style="color:var(--brand-primary);">显示 166 / 166 条</span></span>
+        </div>
+
+        <!-- 3c. KPI Stats Row -->
+        <div class="kpi-card">
+          <div class="kpi-item">
+            <div class="kpi-label">参考库总数</div>
+            <div class="kpi-value">166 <span class="kpi-unit">种</span></div>
+            <div class="kpi-trend up">
+              <i data-lucide="badge-check"></i>
+              <span>真实名录</span>
+            </div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">鱼类(条形码)</div>
+            <div class="kpi-value">31 <span class="kpi-unit">种</span></div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">底栖无脊椎</div>
+            <div class="kpi-value">38 <span class="kpi-unit">种</span></div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">浮游植物</div>
+            <div class="kpi-value">40 <span class="kpi-unit">种</span></div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">浮游动物</div>
+            <div class="kpi-value">25 <span class="kpi-unit">种</span></div>
+          </div>
+          <div class="kpi-item">
+            <div class="kpi-label">硅藻 + 鸟类</div>
+            <div class="kpi-value">32 <span class="kpi-unit">种</span></div>
+          </div>
+        </div>
+
+        <!-- 3d. 物种名录（全宽） -->
+        <div class="two-col-split">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <i data-lucide="library"></i>
+                <span>物种名录</span>
+              </div>
+              <a href="#" class="action-link" style="font-size:12px;color:var(--brand-primary);cursor:pointer;text-decoration:none;">全部物种</a>
+            </div>
+            <div class="card-body">
+              <div id="speciesGrid" class="species-grid" style="min-height:120px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3e. 信息卡片（分类树 / 序列统计 / 最近更新） -->
+        <div class="info-cards">
+
+          <!-- 分类系统概览 -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <i data-lucide="git-fork"></i>
+                <span>分类系统概览</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="taxonomy-tree">
+                <!-- Kingdom: 动物界 -->
+                <div class="taxonomy-row">
+                  <span class="taxonomy-level">界</span>
+                  <span class="taxonomy-name">动物界</span>
+                  <span class="taxonomy-name italic" style="margin-left:var(--s-2);">Animalia</span>
+                  <span class="taxonomy-count">90种</span>
+                </div>
+                <div class="taxonomy-children">
+                  <div class="taxonomy-row">
+                    <span class="taxonomy-level">门</span>
+                    <span class="taxonomy-name">节肢动物门</span>
+                    <span class="taxonomy-name italic" style="margin-left:var(--s-2);">Arthropoda</span>
+                    <span class="taxonomy-count">52种</span>
+                  </div>
+                  <div class="taxonomy-row">
+                    <span class="taxonomy-level">门</span>
+                    <span class="taxonomy-name">脊索动物门</span>
+                    <span class="taxonomy-name italic" style="margin-left:var(--s-2);">Chordata</span>
+                    <span class="taxonomy-count">31种</span>
+                  </div>
+                  <div class="taxonomy-row">
+                    <span class="taxonomy-level">门</span>
+                    <span class="taxonomy-name">软体动物门</span>
+                    <span class="taxonomy-name italic" style="margin-left:var(--s-2);">Mollusca</span>
+                    <span class="taxonomy-count">7种</span>
+                  </div>
+                  <div class="taxonomy-row">
+                    <span class="taxonomy-level">门</span>
+                    <span class="taxonomy-name">环节动物门</span>
+                    <span class="taxonomy-name italic" style="margin-left:var(--s-2);">Annelida</span>
+                    <span class="taxonomy-count">7种</span>
+                  </div>
+                </div>
+
+                <!-- Kingdom: 植物界 -->
+                <div class="taxonomy-row" style="margin-top:var(--s-3);">
+                  <span class="taxonomy-level">界</span>
+                  <span class="taxonomy-name">植物界</span>
+                  <span class="taxonomy-name italic" style="margin-left:var(--s-2);">Plantae</span>
+                  <span class="taxonomy-count">51种</span>
+                </div>
+                <div class="taxonomy-children">
+                  <div class="taxonomy-row">
+                    <span class="taxonomy-level">门</span>
+                    <span class="taxonomy-name">硅藻门</span>
+                    <span class="taxonomy-name italic" style="margin-left:var(--s-2);">Bacillariophyta</span>
+                    <span class="taxonomy-count">51种</span>
+                  </div>
+                  <div class="taxonomy-row">
+                    <span class="taxonomy-level">门</span>
+                    <span class="taxonomy-name">绿藻门</span>
+                    <span class="taxonomy-name italic" style="margin-left:var(--s-2);">Chlorophyta</span>
+                    <span class="taxonomy-count">14种</span>
+                  </div>
+                  <div class="taxonomy-row">
+                    <span class="taxonomy-level">门</span>
+                    <span class="taxonomy-name">蓝藻门</span>
+                    <span class="taxonomy-name italic" style="margin-left:var(--s-2);">Cyanobacteria</span>
+                    <span class="taxonomy-count">4种</span>
+                  </div>
+                </div>
+
+                <!-- Kingdom: 原生生物界 -->
+                <div class="taxonomy-row" style="margin-top:var(--s-3);">
+                  <span class="taxonomy-level">界</span>
+                  <span class="taxonomy-name">原生生物界</span>
+                  <span class="taxonomy-name italic" style="margin-left:var(--s-2);">Protista</span>
+                  <span class="taxonomy-count">32种</span>
+                </div>
+                <div class="taxonomy-children">
+                  <div class="taxonomy-row">
+                    <span class="taxonomy-level">门</span>
+                    <span class="taxonomy-name">甲藻门</span>
+                    <span class="taxonomy-name italic" style="margin-left:var(--s-2);">Dinoflagellata</span>
+                    <span class="taxonomy-count">1种</span>
+                  </div>
+                  <div class="taxonomy-row">
+                    <span class="taxonomy-level">门</span>
+                    <span class="taxonomy-name">隐藻门</span>
+                    <span class="taxonomy-name italic" style="margin-left:var(--s-2);">Cryptophyta</span>
+                    <span class="taxonomy-count">2种</span>
+                  </div>
+                  <div class="taxonomy-row">
+                    <span class="taxonomy-level">门</span>
+                    <span class="taxonomy-name">眼虫藻门</span>
+                    <span class="taxonomy-name italic" style="margin-left:var(--s-2);">Euglenophyta</span>
+                    <span class="taxonomy-count">5种</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 参考序列统计 -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <i data-lucide="database"></i>
+                <span>参考序列统计</span>
+              </div>
+            </div>
+            <div class="card-body-tight">
+              <table class="task-table">
+                <thead>
+                  <tr>
+                    <th>标记基因</th>
+                    <th>序列数</th>
+                    <th>覆盖物种</th>
+                    <th>覆盖率</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="mono">COI</td>
+                    <td class="mono">21,535条</td>
+                    <td class="mono">21,589种</td>
+                    <td class="mono">鱼类 8纲90目</td>
+                  </tr>
+                  <tr>
+                    <td class="mono">18S rRNA</td>
+                    <td class="mono">1,074条</td>
+                    <td class="mono">1,074种</td>
+                    <td class="mono">鱼类</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="4" style="font-size:11px;color:var(--ink-3);padding:6px 8px;border-top:1px solid var(--line);">数据来源：CoSFISH 鱼类DNA条形码数据库（珠江水产研究所，2024），DOI: 10.1093/database/baae038</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <!-- 最近更新 -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                <i data-lucide="clock"></i>
+                <span>最近更新</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-dot">
+                    <i data-lucide="database"></i>
+                  </div>
+                  <div class="timeline-content">
+                    <div class="timeline-text">接入 CoSFISH 鱼类条形码库（21,535 COI + 1,074 18S）</div>
+                    <div class="timeline-time">2024·数据库</div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot">
+                    <i data-lucide="map-pin"></i>
+                  </div>
+                  <div class="timeline-content">
+                    <div class="timeline-text">磁窑河水生态调查名录入库（鱼/底栖/浮游 94 种）</div>
+                    <div class="timeline-time">2021-08 调查</div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot">
+                    <i data-lucide="git-branch"></i>
+                  </div>
+                  <div class="timeline-content">
+                    <div class="timeline-text">余杭塘河健康评价名录入库（鱼/底栖/硅藻/鸟 82 种）</div>
+                    <div class="timeline-time">2021-09 调查</div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot">
+                    <i data-lucide="plus-circle"></i>
+                  </div>
+                  <div class="timeline-content">
+                    <div class="timeline-text">鱼类序列号统一为 GenBank accession，可溯源比对</div>
+                    <div class="timeline-time">本次更新</div>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-dot">
+                    <i data-lucide="alert-triangle"></i>
+                  </div>
+                  <div class="timeline-content">
+                    <div class="timeline-text">外来种参考：福寿螺（余杭塘河）标记入库</div>
+                    <div class="timeline-time">本次更新</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 3f. Footer -->
+        <footer class="app-footer">
+          灰灯实验室 AI 鉴定台 v1.4 真实数据版 | HJ 1295/1296 合规 | 物种数据：CoSFISH + 磁窑河(2021) + 余杭塘河(2021) 调查名录 | 161/166 种配真实照片 | 点击照片弹出整张介绍卡
+        </footer>
+      </main>
+    </div>
+
+    <script src="species-data.js"></script>
+    <script>
+    /* 真实物种卡片渲染：数据来自 species-data.js */
+    (function () {
+      var data = window.SPECIES_DATA || [];
+      var grid = document.getElementById('speciesGrid');
+      if (!grid) return;
+      function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+      var cards = data.map(function (s, i) {
+        var values = (s.tags || []).join(' ');
+        var photoBlock;
+        if (s.photo) {
+          photoBlock = '<div class="species-card-photo-placeholder" data-action="view" style="cursor:pointer;"><img class="species-card-photo" src="' + esc(s.photo) + '" alt="' + esc(s.cn) + '" loading="lazy" onerror="this.remove();"><i data-lucide="image-off"></i><span>暂无照片</span></div>';
+        } else {
+          photoBlock = '<div class="species-card-photo-placeholder" data-action="view" style="cursor:pointer;"><i data-lucide="image-off"></i><span>暂无照片</span></div>';
+        }
+        var creditLine = s.photoCredit ? '<div class="species-info-row"><span class="species-info-label">图片来源</span><span class="species-info-value" style="font-size:11px;">' + esc(s.photoCredit) + '</span></div>' : '';
+        var searchText = [s.cn, s.latin, s.acc, s.phylum].join(' ').toLowerCase();
+        var tags = (s.tags || []).map(function (t) {
+          var cls = '';
+          if (t === '指示种') cls = ' indicator';
+          else if (t === '本土种') cls = ' native';
+          else if (t === '外来种') cls = ' alien';
+          return '<span class="species-tag' + cls + '">' + esc(t) + '</span>';
+        }).join('');
+        return '<div class="species-card" data-f-group="species" data-f-values="' + esc(values) + '" data-search-text="' + esc(searchText) + '">' + photoBlock +
+          '<div class="species-card-header"><div>' +
+          '<div class="species-card-name">' + esc(s.cn) + '</div>' +
+          '<div class="species-card-latin">' + esc(s.latin) + '</div></div>' +
+          '<a href="#" data-action="view" style="font-size:12px;color:var(--brand-primary);cursor:pointer;text-decoration:none;">详情</a></div>' +
+          '<div class="species-card-body">' +
+          '<div class="species-info-row"><span class="species-info-label">分类</span><span class="species-info-value">' + esc(s.phylum) + '</span></div>' +
+          '<div class="species-info-row"><span class="species-info-label">采集站点</span><span class="species-info-value">' + esc(s.site) + '</span></div>' +
+          '<div class="species-info-row"><span class="species-info-label">序列号</span><span class="species-info-value" style="font-family:var(--font-mono);font-size:11px;">' + (s.acc ? esc(s.acc) : '形态鉴定') + '</span></div>' +
+          '<div class="species-info-row"><span class="species-info-label">数据来源</span><span class="species-info-value" style="font-size:11px;">' + esc(s.source) + '</span></div>' +
+          creditLine +
+          (tags ? '<div class="species-tag-row">' + tags + '</div>' : '') +
+          '</div></div>';
+      });
+      grid.innerHTML = cards.join('');
+    })();
+    </script>
+    <script src="../shared-app.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
