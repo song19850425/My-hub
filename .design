@@ -1,0 +1,303 @@
+{
+  "data": [
+    {
+      "id": "page-dashboard",
+      "title": "AI 鉴定主控台",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1725772800000,
+      "canvasData": {
+        "x": 0,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 2681,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-9948b152",
+          "measuredAt": 1788841687057
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/dashboard.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-monitoring-workflow",
+      "title": "水生态监测流程",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1725772810000,
+      "canvasData": {
+        "x": 480,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 6365,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-d3186de1",
+          "measuredAt": 1788841687057
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/monitoring-workflow.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-index",
+      "title": "离线 Demo 入口",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1725772820000,
+      "canvasData": {
+        "x": 960,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1730,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-01d58369",
+          "measuredAt": 1788840624563
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/index.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-species-library",
+      "title": "物种参考库",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1725772830000,
+      "canvasData": {
+        "x": 1440,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 2268,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-ecb1515c",
+          "measuredAt": 1788841687057
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/species-library.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-sample-management",
+      "title": "样品管理",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1725772840000,
+      "canvasData": {
+        "x": 1920,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1611,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-9a53324c",
+          "measuredAt": 1788841687057
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/sample-management.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-report-center",
+      "title": "报告中心",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1725772850000,
+      "canvasData": {
+        "x": 2400,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1442,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-85c1a8f0",
+          "measuredAt": 1788841687057
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/report-center.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-model-management",
+      "title": "模型管理",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1725772860000,
+      "canvasData": {
+        "x": 2880,
+        "y": 0,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 1708,
+          "viewportWidth": 1440,
+          "sourceHash": "fnv1a-3c7af924",
+          "measuredAt": 1788841687057
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/model-management.html",
+        "interactions": []
+      }
+    },
+    {
+      "id": "page-expert-review",
+      "title": "专家复核",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1725772860000,
+      "canvasData": {
+        "x": 960,
+        "y": 480,
+        "group": 0,
+        "layoutSnapshot": {
+          "version": 1,
+          "contentHeight": 2200,
+          "viewportWidth": 1440
+        }
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/expert-review.html",
+        "interactions": [
+          "复核队列状态筛选与搜索",
+          "复核/批量通过交互（演示）",
+          "复核工作量折线图"
+        ]
+      }
+    },
+    {
+      "id": "image-001",
+      "title": "显微镜视野 - 硅藻与底栖标本",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1725772800100,
+      "canvasData": {
+        "x": 0,
+        "y": 1966,
+        "naturalSize": {
+          "width": 2560,
+          "height": 1440
+        }
+      },
+      "devMetadata": {
+        "imageSrc": "assets/hero-microscope.jpg"
+      }
+    },
+    {
+      "id": "image-002",
+      "title": "硅藻标本 - Navicula",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1725772800200,
+      "canvasData": {
+        "x": 480,
+        "y": 1966,
+        "naturalSize": {
+          "width": 2240,
+          "height": 1680
+        }
+      },
+      "devMetadata": {
+        "imageSrc": "assets/specimen-diatom.jpg"
+      }
+    },
+    {
+      "id": "image-003",
+      "title": "底栖无脊椎 - 蜉蝣稚虫",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1725772800300,
+      "canvasData": {
+        "x": 960,
+        "y": 1966,
+        "naturalSize": {
+          "width": 2240,
+          "height": 1680
+        }
+      },
+      "devMetadata": {
+        "imageSrc": "assets/specimen-macroinvert.jpg"
+      }
+    },
+    {
+      "id": "image-004",
+      "title": "鱼类标本 - 麦穗鱼",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1725772800400,
+      "canvasData": {
+        "x": 1440,
+        "y": 1966,
+        "naturalSize": {
+          "width": 2240,
+          "height": 1680
+        }
+      },
+      "devMetadata": {
+        "imageSrc": "assets/specimen-fish.jpg"
+      }
+    },
+    {
+      "id": "image-005",
+      "title": "浮游植物 - 绿藻群体",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1725772800500,
+      "canvasData": {
+        "x": 1920,
+        "y": 1966,
+        "naturalSize": {
+          "width": 2240,
+          "height": 1680
+        }
+      },
+      "devMetadata": {
+        "imageSrc": "assets/specimen-phyto.jpg"
+      }
+    },
+    {
+      "id": "image-006",
+      "title": "浉河监测断面",
+      "type": "image",
+      "version": 1,
+      "createdAt": 1725772800600,
+      "canvasData": {
+        "x": 2400,
+        "y": 1966,
+        "naturalSize": {
+          "width": 2240,
+          "height": 1680
+        }
+      },
+      "devMetadata": {
+        "imageSrc": "assets/lab-waterway.jpg"
+      }
+    }
+  ],
+  "config": {
+    "autoLayout": true,
+    "deviceType": "desktop",
+    "projectName": "灰灯实验室 AI 鉴定台"
+  }
+}
