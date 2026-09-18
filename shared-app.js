@@ -1,5 +1,5 @@
 /* ============================================================
- * 灰灯实验室 AI 鉴定台 — 共享交互层 shared-app.js v1.2
+ * 灰灯实验室 AI 鉴定台 — 共享交互层 shared-app.js v1.3
  * ------------------------------------------------------------
  * 功能：
  *   1. 模态框系统（GL.modal）＋ 各页面演示表单模板
@@ -40,8 +40,10 @@
     icon: 'contact',
     qrcode: {
       src: 'assets/wechat-qrcode.png',
-      caption: '微信公众号',
-      alt: '微信公众号二维码'
+      name: '小宋的环保笔记',
+      // caption 里的 \n 会渲染成换行，用来控制二维码下方小字的分行
+      caption: '微信公众号\n小宋的环保笔记',
+      alt: '微信公众号「小宋的环保笔记」二维码'
     },
     items: [
       { icon: 'mail', label: '邮箱', value: 'jinghao.song@gmail.com', href: 'mailto:' }
@@ -150,7 +152,7 @@
     '.gl-contact-qr{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;}',
     '.gl-contact-qr img{width:92px;height:92px;object-fit:contain;display:block;border:1px solid var(--brand-border);border-radius:var(--r-md,4px);background:#fff;padding:4px;box-sizing:content-box;cursor:zoom-in;transition:border-color .15s;}',
     '.gl-contact-qr img:hover{border-color:var(--brand-primary);}',
-    '.gl-contact-qr-cap{font-size:11px;color:var(--ink-3,#8b95a4);white-space:nowrap;}',
+    '.gl-contact-qr-cap{font-size:11px;line-height:1.35;color:var(--ink-3,#8b95a4);text-align:center;max-width:132px;}',
     '.gl-contact-fields{display:flex;flex-direction:column;gap:8px;min-width:0;}',
     '.gl-contact-item{display:inline-flex;align-items:center;gap:7px;padding:5px 12px;border:1px solid var(--brand-border);border-radius:var(--r-pill,999px);background:var(--brand-surface,#fff);font-size:12px;line-height:1.5;color:var(--ink-2,#5a6678);text-decoration:none;transition:border-color .15s,color .15s,box-shadow .15s;}',
     'a.gl-contact-item:hover{border-color:var(--brand-primary);color:var(--brand-foreground);box-shadow:var(--shadow-1,0 1px 3px rgba(15,23,42,.08));}',
@@ -160,6 +162,7 @@
     '.gl-contact-note{margin-top:10px;font-size:11px;color:var(--ink-3,#8b95a4);}',
     '.gl-qr-modal{text-align:center;}',
     '.gl-qr-modal img{max-width:min(320px,68vw);width:100%;height:auto;display:block;margin:0 auto;border:1px solid var(--brand-border);border-radius:var(--r-md,4px);background:#fff;padding:8px;box-sizing:border-box;}',
+    '.gl-qr-modal-cap{margin-top:10px;font-size:12px;color:var(--ink-2,#5a6678);}',
     '@media (max-width:640px){.gl-contact-card{flex-direction:column;gap:14px;padding:14px 16px;}.gl-contact-qr img{width:118px;height:118px;}.gl-contact-item{padding:4px 10px;font-size:11px;}}'
   ].join('\n');
   var cssInjected = false;
@@ -480,17 +483,10 @@
     if (h === 'tel:' || h === 'mailto:') return h + String(item.value).replace(/\s+/g, '');
     return h;
   }
-  function setupContactBar() {
-    var cfg = GL_CONTACT;
-    if (!cfg) return;
-
-    var items = (cfg.items || []).filter(function (it) { return it && it.value; });
-    var qr = (cfg.qrcode && cfg.qrcode.src) ? cfg.qrcode : null;
-    if (!items.length && !qr) return;   // 二维码和条目都没配 → 整块不渲染
-
-    var footers = $$('footer');
-    if (!footers.length) return;
-
+  /* 构建一张全新的联系卡。
+     注意：每个 <footer> 都要重新构建，不能用 cloneNode —— cloneNode 不复制事件监听器，
+     克隆出来的二维码会点不动、图片缺失时也不会自动隐藏。 */
+  function buildContactBox(cfg, items, qr) {
     var box = el('div', { class: 'gl-contact', role: 'contentinfo' });
     var inner = el('div', { class: 'gl-contact-inner' });
     inner.appendChild(el('div', { class: 'gl-contact-title' },
@@ -505,16 +501,17 @@
       var img = el('img', { src: src, alt: qr.alt || qr.caption || '二维码', title: '点击放大' });
       img.addEventListener('click', function () {
         GL.modal({
-          title: qr.caption || '二维码',
+          title: qr.name || qr.caption || '二维码',
           icon: 'qr-code',
-          body: '<div class="gl-qr-modal"><img src="' + esc(src) + '" alt="' + esc(qr.alt || '') + '"></div>'
+          body: '<div class="gl-qr-modal"><img src="' + esc(src) + '" alt="' + esc(qr.alt || '') + '">' +
+                (qr.caption ? '<div class="gl-qr-modal-cap">' + esc(qr.caption).replace(/\n/g, '<br>') + '</div>' : '') + '</div>'
         });
       });
       img.addEventListener('error', function () {
         if (qrWrap.parentNode) qrWrap.parentNode.removeChild(qrWrap);
       });
       qrWrap.appendChild(img);
-      if (qr.caption) qrWrap.appendChild(el('div', { class: 'gl-contact-qr-cap' }, esc(qr.caption)));
+      if (qr.caption) qrWrap.appendChild(el('div', { class: 'gl-contact-qr-cap' }, esc(qr.caption).replace(/\n/g, '<br>')));
       card.appendChild(qrWrap);
     }
 
@@ -542,11 +539,24 @@
     inner.appendChild(card);
     if (cfg.note) inner.appendChild(el('div', { class: 'gl-contact-note' }, esc(cfg.note)));
     box.appendChild(inner);
+    return box;
+  }
+
+  function setupContactBar() {
+    var cfg = GL_CONTACT;
+    if (!cfg) return;
+
+    var items = (cfg.items || []).filter(function (it) { return it && it.value; });
+    var qr = (cfg.qrcode && cfg.qrcode.src) ? cfg.qrcode : null;
+    if (!items.length && !qr) return;   // 二维码和条目都没配 → 整块不渲染
+
+    var footers = $$('footer');
+    if (!footers.length) return;
 
     footers.forEach(function (f) {
       var host = f.parentNode;
       if (!host || host.querySelector(':scope > .gl-contact')) return;
-      host.insertBefore(box.cloneNode(true), f.nextSibling);
+      host.insertBefore(buildContactBox(cfg, items, qr), f.nextSibling);
     });
     refreshIcons();
   }
