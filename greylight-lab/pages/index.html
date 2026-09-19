@@ -211,6 +211,40 @@
         width: 14px;
         height: 14px;
       }
+      /* 介绍区的直达入口：一排细文字链接，与下方卡片互为「快 / 详」 */
+      .demo-quick {
+        margin-top: var(--s-4);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 6px var(--s-3);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      .demo-quick-label {
+        color: var(--ink-3);
+        font-size: 12px;
+      }
+      .demo-quick a {
+        color: var(--brand-primary);
+        text-decoration: none;
+        white-space: nowrap;
+        border-radius: var(--r-xs);
+        transition: color 0.15s;
+      }
+      .demo-quick a:hover {
+        color: color-mix(in srgb, var(--brand-primary) 78%, black);
+        text-decoration: underline;
+      }
+      .demo-quick a:focus-visible {
+        outline: 2px solid var(--brand-ring);
+        outline-offset: 2px;
+      }
+      .demo-quick .sep {
+        color: var(--brand-border);
+        user-select: none;
+      }
       .demo-nav-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -395,6 +429,23 @@
           <i data-lucide="wifi-off"></i>
           <span>离线模式已就绪 — 无需联网即可运行全部功能</span>
         </div>
+        <!-- 演示页入口：直接放在介绍区，不用往下翻 -->
+        <nav class="demo-quick" aria-label="演示页入口">
+          <span class="demo-quick-label">直接进入</span>
+          <a href="dashboard.html">AI 鉴定主控台</a>
+          <span class="sep" aria-hidden="true">·</span>
+          <a href="sample-management.html">样品管理</a>
+          <span class="sep" aria-hidden="true">·</span>
+          <a href="expert-review.html">专家复核</a>
+          <span class="sep" aria-hidden="true">·</span>
+          <a href="monitoring-workflow.html">水生态监测流程</a>
+          <span class="sep" aria-hidden="true">·</span>
+          <a href="species-library.html">物种参考库</a>
+          <span class="sep" aria-hidden="true">·</span>
+          <a href="report-center.html">报告中心</a>
+          <span class="sep" aria-hidden="true">·</span>
+          <a href="model-management.html">模型管理</a>
+        </nav>
       </div>
 
       <!-- Stats -->

@@ -2,22 +2,42 @@
 
 水生生物 AI 鉴定平台离线演示站 · 苹果官网简约风配色 · 无需联网即可运行全部功能。
 
+**在线演示：<https://song19850425.github.io/My-hub/greylight-lab/>**
+
+**演示页直达：**
+[离线 Demo 入口](https://song19850425.github.io/My-hub/greylight-lab/) ·
+[AI 鉴定主控台](https://song19850425.github.io/My-hub/greylight-lab/pages/dashboard.html) ·
+[样品管理](https://song19850425.github.io/My-hub/greylight-lab/pages/sample-management.html) ·
+[专家复核](https://song19850425.github.io/My-hub/greylight-lab/pages/expert-review.html) ·
+[水生态监测流程](https://song19850425.github.io/My-hub/greylight-lab/pages/monitoring-workflow.html) ·
+[物种参考库](https://song19850425.github.io/My-hub/greylight-lab/pages/species-library.html) ·
+[报告中心](https://song19850425.github.io/My-hub/greylight-lab/pages/report-center.html) ·
+[模型管理](https://song19850425.github.io/My-hub/greylight-lab/pages/model-management.html)
+
+> 仓库 `My-hub` 的 `gh-pages` 分支上同时跑着另一个站点（AI 智能碳汇管理平台，位于仓库根目录 `/My-hub/`）。
+> 本站点在 `/My-hub/greylight-lab/` 子目录下，两者互不影响。
+
 ## 快速开始
 
-直接双击打开 `pages/index.html`（或任意页面）即可浏览。依赖（Tailwind、Lucide、Chart.js）均放在 `vendor/` 本地加载，带 CDN 回退兜底。
+**在线看** —— 直接打开 <https://song19850425.github.io/My-hub/greylight-lab/>，入口页会自动跳到首页导航。
+
+**本地看** —— 双击打开 `pages/index.html`（或任意页面）即可浏览。
+依赖（Tailwind、Lucide、Chart.js）均放在 `vendor/` 本地加载，带 CDN 回退兜底，**断网也能用**。
 
 ## 页面清单
 
+线上地址 = `https://song19850425.github.io/My-hub/greylight-lab/` + 下表路径。
+
 | 页面 | 文件 | 说明 |
 | --- | --- | --- |
-| 离线 Demo 入口 | `pages/index.html` | 首页导航与统计 |
-| AI 鉴定主控台 | `pages/dashboard.html` | 任务总览、KPI、置信度分布、标本图库、站点监控 |
-| 样品管理 | `pages/sample-management.html` | 样品台账、生命周期、类型分布（环形图） |
-| **专家复核** | `pages/expert-review.html` | **AI 结果人工复核与仲裁（本版新增）** |
-| 水生态监测流程 | `pages/monitoring-workflow.html` | SOP 规程、三阶段流程、eDNA 专项、报告出具流程 |
-| 物种参考库 | `pages/species-library.html` | 1,042 种参考库、分类树、序列统计（可筛选/搜索） |
-| 报告中心 | `pages/report-center.html` | 模板、台账、三级审核、导出格式 |
-| 模型管理 | `pages/model-management.html` | 三大模型卡片、性能趋势、版本历史 |
+| 离线 Demo 入口 | [`pages/index.html`](https://song19850425.github.io/My-hub/greylight-lab/pages/index.html) | 首页导航与统计 |
+| AI 鉴定主控台 | [`pages/dashboard.html`](https://song19850425.github.io/My-hub/greylight-lab/pages/dashboard.html) | 任务总览、KPI、置信度分布、标本图库、站点监控 |
+| 样品管理 | [`pages/sample-management.html`](https://song19850425.github.io/My-hub/greylight-lab/pages/sample-management.html) | 样品台账、生命周期、类型分布（环形图） |
+| **专家复核** | [`pages/expert-review.html`](https://song19850425.github.io/My-hub/greylight-lab/pages/expert-review.html) | **AI 结果人工复核与仲裁（本版新增）** |
+| 水生态监测流程 | [`pages/monitoring-workflow.html`](https://song19850425.github.io/My-hub/greylight-lab/pages/monitoring-workflow.html) | SOP 规程、三阶段流程、eDNA 专项、报告出具流程 |
+| 物种参考库 | [`pages/species-library.html`](https://song19850425.github.io/My-hub/greylight-lab/pages/species-library.html) | 1,042 种参考库、分类树、序列统计（可筛选/搜索） |
+| 报告中心 | [`pages/report-center.html`](https://song19850425.github.io/My-hub/greylight-lab/pages/report-center.html) | 模板、台账、三级审核、导出格式 |
+| 模型管理 | [`pages/model-management.html`](https://song19850425.github.io/My-hub/greylight-lab/pages/model-management.html) | 三大模型卡片、性能趋势、版本历史 |
 
 ## 目录结构
 
@@ -127,6 +147,8 @@ greylight-lab/
 - [ ] 物种参考库已接入真实数据（CoSFISH 条形码 + 磁窑河/余杭塘河名录），其余页面（样品管理、报告中心等）仍是演示数据，可按同一模式逐步真实化。
 
 ## 版本
+
+v1.8 · 2026-09-19 · 补齐入口链接。README 之前**一个链接都没有** —— 页面清单是纯文本路径，全文也没写线上地址，访客在仓库首页点不进任何演示页。现在：介绍区加了线上地址与「演示页直达」一行 8 条链接，页面清单的路径列也改成可点击；同时补了「本地看 / 在线看」两条快速开始路径，并说明本站点与同仓库根目录的碳汇平台互不影响。站点首页的介绍区（标题/副标题/徽章下方）新增一排「直接进入」文字链接，7 个演示页在首屏即可点进，不用往下翻。
 
 v1.7 · 2026-09-18 · 配色改为苹果官网简约风。全站 12 个品牌色 1:1 换成 apple.com 现行令牌（底色 `#f5f5f7`、正文 `#1d1d1f`、发丝线 `#d2d2d7`、强调蓝 `#0071e3`），状态色改用 Apple HIG 无障碍档位；圆角放大到 18px 档、阴影改为中性黑低透明度、字体栈改为 SF Pro 系统栈；阴影/遮罩里的蓝色调 `rgba(15,23,42,…)` 全部中性化。首页卡片顶部的实心青色渐变色带改成浅灰图标区 + 蓝色细线图标（苹果的克制在于不做大面积饱和色块）。共 10 个文件、约 400 处改动，全部走令牌，未动任何结构。
 
