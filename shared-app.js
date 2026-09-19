@@ -242,7 +242,7 @@
       icon: 'cpu',
       body: field('样品编号', '<input class="gl-input" value="GL-2026-0956" readonly style="background:var(--brand-surface-2);">') +
         field('样品类型', select('type', ['底栖无脊椎', '硅藻', '浮游植物', '鱼类 eDNA', '着生藻类'])) +
-        field('采集站点', select('site', ['信阳浉河', '南湾水库', '淮河干流', '狮河区段', '浉河支流', '丹江口水库', '小浪底水库', '黄河郑州段', '海河河南段'])) +
+        field('采集站点', select('site', ['示范断面 01', '示范断面 02', '示范断面 03', '示范断面 04', '示范断面 05', '示范断面 06', '示范断面 07', '示范断面 08', '示范断面 09'])) +
         field('鉴定模式', select('mode', ['AI 自动鉴定', 'AI 辅助 + 人工确认', '人工鉴定'])) +
         field('备注', '<textarea class="gl-textarea" placeholder="选填：样品描述、采集信息等"></textarea>'),
       foot: cancelBtn() + primaryBtn('提交任务', 'play')
@@ -252,7 +252,7 @@
       icon: 'test-tube',
       body: field('样品编号', '<input class="gl-input" value="GL-2026-0956" readonly style="background:var(--brand-surface-2);">') +
         field('样品类型', select('type', ['底栖无脊椎', '硅藻', '浮游植物', '鱼类 eDNA', '着生藻类'])) +
-        field('采集站点', select('site', ['信阳浉河', '南湾水库', '淮河干流', '狮河区段', '浉河支流', '丹江口水库', '小浪底水库', '黄河郑州段', '海河河南段'])) +
+        field('采集站点', select('site', ['示范断面 01', '示范断面 02', '示范断面 03', '示范断面 04', '示范断面 05', '示范断面 06', '示范断面 07', '示范断面 08', '示范断面 09'])) +
         field('采集日期', '<input class="gl-input" type="date" value="2026-09-17">') +
         field('采集人', '<input class="gl-input" value="张研究员">') +
         field('固定方式', select('fix', ['4% 甲醛', '95% 乙醇', '鲁哥氏液', '液氮冻存（eDNA）', '不固定（活体）'])) +
@@ -263,7 +263,7 @@
       title: '生成报告',
       icon: 'file-plus',
       body: field('报告模板', select('tmpl', ['水质监测月报（HJ 1295）', '水生态调查报告', 'eDNA 专项报告'])) +
-        field('监测断面', select('site', ['信阳浉河', '南湾水库', '淮河干流', '狮河区段', '浉河支流', '丹江口水库', '小浪底水库', '黄河郑州段', '海河河南段'])) +
+        field('监测断面', select('site', ['示范断面 01', '示范断面 02', '示范断面 03', '示范断面 04', '示范断面 05', '示范断面 06', '示范断面 07', '示范断面 08', '示范断面 09'])) +
         field('报告周期', select('period', ['2026年9月', '2026年3季度', '2026年度'])) +
         field('编制人', '<input class="gl-input" value="张研究员">') +
         field('备注', '<textarea class="gl-textarea" placeholder="选填：报告重点、范围说明等"></textarea>'),
@@ -291,7 +291,7 @@
     exportReport: {
       title: '导出报告',
       icon: 'download',
-      body: field('报告', '<input class="gl-input" value="GL-RPT-2026-0928 信阳浉河水质月报" readonly style="background:var(--brand-surface-2);">') +
+      body: field('报告', '<input class="gl-input" value="GL-RPT-2026-0928 示范断面 01水质月报" readonly style="background:var(--brand-surface-2);">') +
         field('导出格式', select('fmt', ['PDF 正式版（带 CMA 签章）', 'Word 可编辑版', 'Excel 数据汇总表', '电子归档包（含原始记录）'])) +
         field('水印', select('wm', ['无水印', '内部资料水印', '受控文件水印'])),
       foot: cancelBtn() + primaryBtn('开始导出', 'download')
@@ -438,8 +438,8 @@
   var NOTIFICATIONS = [
     { title: '模型微调完成 — 底栖识别模型 v2.3.1 已上线', time: '10:24', icon: 'cpu' },
     { title: 'GL-2026-0945 等待专家复核', time: '09:47', icon: 'check-circle' },
-    { title: '丹江口水库 9 月批次样品已接收（48 份）', time: '09:12', icon: 'package' },
-    { title: '海河河南段 BI=8.3 触发生态预警', time: '昨天', icon: 'alert-triangle' },
+    { title: '示范断面 06 9 月批次样品已接收（48 份）', time: '09:12', icon: 'package' },
+    { title: '示范断面 09 BI=8.3 触发生态预警', time: '昨天', icon: 'alert-triangle' },
     { title: '参考库新增 47 条硅藻 16S 序列', time: '昨天', icon: 'database' }
   ];
   function setupNotifications(btn) {

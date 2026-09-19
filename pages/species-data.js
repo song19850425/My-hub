@@ -5,7 +5,7 @@ window.SPECIES_DATA = [
   "acc": "JN673558.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W1~W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -20,7 +20,7 @@ window.SPECIES_DATA = [
   "acc": "KJ415113.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W1~W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -35,7 +35,7 @@ window.SPECIES_DATA = [
   "acc": "KR862054.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -50,7 +50,7 @@ window.SPECIES_DATA = [
   "acc": "KC108645.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W1~W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -65,7 +65,7 @@ window.SPECIES_DATA = [
   "acc": "KY244107.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -80,7 +80,7 @@ window.SPECIES_DATA = [
   "acc": "EF452896.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W1~W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -95,7 +95,7 @@ window.SPECIES_DATA = [
   "acc": "MZ871084.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -110,7 +110,7 @@ window.SPECIES_DATA = [
   "acc": "KP112222.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W1~W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -125,7 +125,7 @@ window.SPECIES_DATA = [
   "acc": "KF492988.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W1~W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -140,7 +140,7 @@ window.SPECIES_DATA = [
   "acc": "GU434318.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -155,7 +155,7 @@ window.SPECIES_DATA = [
   "acc": "MF122715.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -170,7 +170,7 @@ window.SPECIES_DATA = [
   "acc": "HQ536500.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W1~W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -185,7 +185,7 @@ window.SPECIES_DATA = [
   "acc": "KR861748.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W1",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -200,7 +200,7 @@ window.SPECIES_DATA = [
   "acc": "MF140395.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -215,7 +215,7 @@ window.SPECIES_DATA = [
   "acc": "KR862164.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -230,7 +230,7 @@ window.SPECIES_DATA = [
   "acc": "MF805660.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -245,7 +245,7 @@ window.SPECIES_DATA = [
   "acc": "HQ536228.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -260,7 +260,7 @@ window.SPECIES_DATA = [
   "acc": "MF122002.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -275,7 +275,7 @@ window.SPECIES_DATA = [
   "acc": "KX224146.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -290,7 +290,7 @@ window.SPECIES_DATA = [
   "acc": "JN673561.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W1~W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -305,7 +305,7 @@ window.SPECIES_DATA = [
   "acc": "KP112262.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -320,7 +320,7 @@ window.SPECIES_DATA = [
   "acc": "KJ994639.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -335,7 +335,7 @@ window.SPECIES_DATA = [
   "acc": "JN177217.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W1~W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -350,7 +350,7 @@ window.SPECIES_DATA = [
   "acc": "JN177218.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W1",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -365,7 +365,7 @@ window.SPECIES_DATA = [
   "acc": "MH317141.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W1~W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -380,7 +380,7 @@ window.SPECIES_DATA = [
   "acc": "KP976277.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W1",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -395,7 +395,7 @@ window.SPECIES_DATA = [
   "acc": "KJ937343.1",
   "phylum": "脊索动物门/鱼纲",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -409,8 +409,8 @@ window.SPECIES_DATA = [
   "latin": "Hypseleotris swinhonis",
   "acc": "KJ669480.1",
   "phylum": "脊索动物门/鱼纲",
-  "site": "交城/裴会/入汾口/白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段/下游段/汇入口段/支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -424,8 +424,8 @@ window.SPECIES_DATA = [
   "latin": "Rhinogobius giurinus",
   "acc": "MK858195.1",
   "phylum": "脊索动物门/鱼纲",
-  "site": "岭底/交城/入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "上游段/城区段/汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -439,8 +439,8 @@ window.SPECIES_DATA = [
   "latin": "Rhinogobius cliffordpopei",
   "acc": "MZ871001.1",
   "phylum": "脊索动物门/鱼纲",
-  "site": "武良",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "中游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -454,8 +454,8 @@ window.SPECIES_DATA = [
   "latin": "Silurus asotus",
   "acc": "KP112427.1",
   "phylum": "脊索动物门/鱼纲",
-  "site": "入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "鱼类",
   "tags": [
    "鱼类",
@@ -469,8 +469,8 @@ window.SPECIES_DATA = [
   "latin": "Hydropsychidae spp.",
   "acc": "",
   "phylum": "Arthropoda/Insecta",
-  "site": "岭底",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "上游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -484,8 +484,8 @@ window.SPECIES_DATA = [
   "latin": "Gomphidae spp.",
   "acc": "",
   "phylum": "Arthropoda/Insecta",
-  "site": "岭底/武良/裴会",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "上游段/中游段/下游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -499,8 +499,8 @@ window.SPECIES_DATA = [
   "latin": "Coenagrionidae spp.",
   "acc": "",
   "phylum": "Arthropoda/Insecta",
-  "site": "裴会",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "下游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -514,8 +514,8 @@ window.SPECIES_DATA = [
   "latin": "Calopterygidae spp.",
   "acc": "",
   "phylum": "Arthropoda/Insecta",
-  "site": "入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -529,8 +529,8 @@ window.SPECIES_DATA = [
   "latin": "Lestidae spp.",
   "acc": "",
   "phylum": "Arthropoda/Insecta",
-  "site": "裴会",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "下游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -544,8 +544,8 @@ window.SPECIES_DATA = [
   "latin": "Tipulidae spp.",
   "acc": "",
   "phylum": "Arthropoda/Insecta",
-  "site": "岭底",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "上游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -559,8 +559,8 @@ window.SPECIES_DATA = [
   "latin": "Chironomidae spp.",
   "acc": "",
   "phylum": "Arthropoda/Insecta",
-  "site": "交城/武良/裴会/入汾口/白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段/中游段/下游段/汇入口段/支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -574,8 +574,8 @@ window.SPECIES_DATA = [
   "latin": "Dytiscidae spp.",
   "acc": "",
   "phylum": "Arthropoda/Insecta",
-  "site": "武良",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "中游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -589,8 +589,8 @@ window.SPECIES_DATA = [
   "latin": "Hydrophilidae spp.",
   "acc": "",
   "phylum": "Arthropoda/Insecta",
-  "site": "白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -604,8 +604,8 @@ window.SPECIES_DATA = [
   "latin": "Nepidae spp.",
   "acc": "",
   "phylum": "Arthropoda/Insecta",
-  "site": "武良",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "中游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -619,8 +619,8 @@ window.SPECIES_DATA = [
   "latin": "Gerridae spp.",
   "acc": "",
   "phylum": "Arthropoda/Insecta",
-  "site": "岭底/交城/入汾口/白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "上游段/城区段/汇入口段/支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -634,8 +634,8 @@ window.SPECIES_DATA = [
   "latin": "Palaemonetes sinensis",
   "acc": "",
   "phylum": "Arthropoda/Malacostraca",
-  "site": "交城/武良/入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段/中游段/汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -649,8 +649,8 @@ window.SPECIES_DATA = [
   "latin": "Caridina denticulata",
   "acc": "",
   "phylum": "Arthropoda/Malacostraca",
-  "site": "交城/武良/裴会/入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段/中游段/下游段/汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -664,8 +664,8 @@ window.SPECIES_DATA = [
   "latin": "Radix auricularia",
   "acc": "",
   "phylum": "Mollusca/Gastropoda",
-  "site": "入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -679,8 +679,8 @@ window.SPECIES_DATA = [
   "latin": "Radix swinhoei",
   "acc": "",
   "phylum": "Mollusca/Gastropoda",
-  "site": "岭底/交城/武良",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "上游段/城区段/中游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -694,8 +694,8 @@ window.SPECIES_DATA = [
   "latin": "Viviparidae spp.",
   "acc": "",
   "phylum": "Mollusca/Gastropoda",
-  "site": "裴会",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "下游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -709,8 +709,8 @@ window.SPECIES_DATA = [
   "latin": "Unionidae spp.",
   "acc": "",
   "phylum": "Mollusca/Bivalvia",
-  "site": "入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -724,8 +724,8 @@ window.SPECIES_DATA = [
   "latin": "Limnodrilus spp.",
   "acc": "",
   "phylum": "Annelida/Oligochaeta",
-  "site": "交城/武良/入汾口/白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段/中游段/汇入口段/支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -739,8 +739,8 @@ window.SPECIES_DATA = [
   "latin": "Hirudinidae spp.",
   "acc": "",
   "phylum": "Annelida/Hirudinea",
-  "site": "裴会",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "下游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -755,7 +755,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Annelida/Oligochaeta",
   "site": "W1",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -770,7 +770,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Annelida/Oligochaeta",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -785,7 +785,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Annelida/Oligochaeta",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -800,7 +800,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Annelida/Hirudinea",
   "site": "W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -815,7 +815,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Mollusca/Bivalvia",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -830,7 +830,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Mollusca/Bivalvia",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -845,7 +845,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Mollusca/Gastropoda",
   "site": "W1/W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -860,7 +860,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Mollusca/Gastropoda",
   "site": "W1/W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -875,7 +875,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Mollusca/Gastropoda",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -890,7 +890,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Mollusca/Gastropoda",
   "site": "W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -905,7 +905,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Mollusca/Gastropoda",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -920,7 +920,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Arthropoda/Malacostraca",
   "site": "W1/W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -935,7 +935,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Arthropoda/Malacostraca",
   "site": "W1/W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -950,7 +950,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Arthropoda/Malacostraca",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -965,7 +965,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Arthropoda/Malacostraca",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -980,7 +980,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Arthropoda/Insecta",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -995,7 +995,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Arthropoda/Insecta",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -1010,7 +1010,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Arthropoda/Insecta",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -1025,7 +1025,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Arthropoda/Insecta",
   "site": "W1",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "底栖无脊椎",
   "tags": [
    "底栖无脊椎",
@@ -1039,8 +1039,8 @@ window.SPECIES_DATA = [
   "latin": "Chroococcus",
   "acc": "",
   "phylum": "Cyanophyta",
-  "site": "裴会/入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "下游段/汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1054,7 +1054,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Cyanophyta",
   "site": "全部6河段",
-  "source": "磁窑河水生态调查 2021-08",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1067,8 +1067,8 @@ window.SPECIES_DATA = [
   "latin": "Oscillatoria",
   "acc": "",
   "phylum": "Cyanophyta",
-  "site": "入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1081,8 +1081,8 @@ window.SPECIES_DATA = [
   "latin": "Oscillatoria amphibia",
   "acc": "",
   "phylum": "Cyanophyta",
-  "site": "裴会",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "下游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1096,7 +1096,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Bacillariophyta",
   "site": "全部6河段",
-  "source": "磁窑河水生态调查 2021-08",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1109,8 +1109,8 @@ window.SPECIES_DATA = [
   "latin": "Cymbella",
   "acc": "",
   "phylum": "Bacillariophyta",
-  "site": "交城/裴会/入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段/下游段/汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1124,7 +1124,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Bacillariophyta",
   "site": "全部6河段",
-  "source": "磁窑河水生态调查 2021-08",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1138,7 +1138,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Bacillariophyta",
   "site": "全部6河段",
-  "source": "磁窑河水生态调查 2021-08",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1151,8 +1151,8 @@ window.SPECIES_DATA = [
   "latin": "Synedra",
   "acc": "",
   "phylum": "Bacillariophyta",
-  "site": "裴会/入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "下游段/汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1165,8 +1165,8 @@ window.SPECIES_DATA = [
   "latin": "Cocconeis",
   "acc": "",
   "phylum": "Bacillariophyta",
-  "site": "岭底/武良/入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "上游段/中游段/汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1179,8 +1179,8 @@ window.SPECIES_DATA = [
   "latin": "Gyrosigma",
   "acc": "",
   "phylum": "Bacillariophyta",
-  "site": "岭底/武良/裴会/入汾口/白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "上游段/中游段/下游段/汇入口段/支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1193,8 +1193,8 @@ window.SPECIES_DATA = [
   "latin": "Achnanthes",
   "acc": "",
   "phylum": "Bacillariophyta",
-  "site": "岭底",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "上游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1207,8 +1207,8 @@ window.SPECIES_DATA = [
   "latin": "Gomphonema",
   "acc": "",
   "phylum": "Bacillariophyta",
-  "site": "岭底/交城",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "上游段/城区段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1221,8 +1221,8 @@ window.SPECIES_DATA = [
   "latin": "Pinnularia",
   "acc": "",
   "phylum": "Bacillariophyta",
-  "site": "交城/武良",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段/中游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1235,8 +1235,8 @@ window.SPECIES_DATA = [
   "latin": "Surirella",
   "acc": "",
   "phylum": "Bacillariophyta",
-  "site": "交城/裴会",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段/下游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1249,8 +1249,8 @@ window.SPECIES_DATA = [
   "latin": "Diatoma",
   "acc": "",
   "phylum": "Bacillariophyta",
-  "site": "交城",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1263,8 +1263,8 @@ window.SPECIES_DATA = [
   "latin": "Amphiprora",
   "acc": "",
   "phylum": "Bacillariophyta",
-  "site": "武良/裴会/入汾口/白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "中游段/下游段/汇入口段/支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1277,8 +1277,8 @@ window.SPECIES_DATA = [
   "latin": "Amphora",
   "acc": "",
   "phylum": "Bacillariophyta",
-  "site": "入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1291,8 +1291,8 @@ window.SPECIES_DATA = [
   "latin": "Cymatopleura",
   "acc": "",
   "phylum": "Bacillariophyta",
-  "site": "交城/入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段/汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1305,8 +1305,8 @@ window.SPECIES_DATA = [
   "latin": "Chlamydomonas",
   "acc": "",
   "phylum": "Chlorophyta",
-  "site": "岭底/武良/裴会/入汾口/白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "上游段/中游段/下游段/汇入口段/支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1319,8 +1319,8 @@ window.SPECIES_DATA = [
   "latin": "Tetrachlorella",
   "acc": "",
   "phylum": "Chlorophyta",
-  "site": "入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1333,8 +1333,8 @@ window.SPECIES_DATA = [
   "latin": "Scenedesmus",
   "acc": "",
   "phylum": "Chlorophyta",
-  "site": "岭底/裴会/入汾口/白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "上游段/下游段/汇入口段/支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1347,8 +1347,8 @@ window.SPECIES_DATA = [
   "latin": "Scenedesmus quadricauda",
   "acc": "",
   "phylum": "Chlorophyta",
-  "site": "交城/入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段/汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1361,8 +1361,8 @@ window.SPECIES_DATA = [
   "latin": "Closterium",
   "acc": "",
   "phylum": "Chlorophyta",
-  "site": "岭底/白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "上游段/支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1375,8 +1375,8 @@ window.SPECIES_DATA = [
   "latin": "Closterium gracile",
   "acc": "",
   "phylum": "Chlorophyta",
-  "site": "入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1389,8 +1389,8 @@ window.SPECIES_DATA = [
   "latin": "Chlorella",
   "acc": "",
   "phylum": "Chlorophyta",
-  "site": "交城/武良/裴会/入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段/中游段/下游段/汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1403,8 +1403,8 @@ window.SPECIES_DATA = [
   "latin": "Pediastrum",
   "acc": "",
   "phylum": "Chlorophyta",
-  "site": "武良/裴会/入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "中游段/下游段/汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1417,8 +1417,8 @@ window.SPECIES_DATA = [
   "latin": "Closterium lunula",
   "acc": "",
   "phylum": "Chlorophyta",
-  "site": "武良",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "中游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1431,8 +1431,8 @@ window.SPECIES_DATA = [
   "latin": "Oocystis",
   "acc": "",
   "phylum": "Chlorophyta",
-  "site": "裴会/入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "下游段/汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1445,8 +1445,8 @@ window.SPECIES_DATA = [
   "latin": "Pandorina",
   "acc": "",
   "phylum": "Chlorophyta",
-  "site": "裴会",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "下游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1459,8 +1459,8 @@ window.SPECIES_DATA = [
   "latin": "Eudorina",
   "acc": "",
   "phylum": "Chlorophyta",
-  "site": "入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1473,8 +1473,8 @@ window.SPECIES_DATA = [
   "latin": "Schroederia nitzschioides",
   "acc": "",
   "phylum": "Chlorophyta",
-  "site": "入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1487,8 +1487,8 @@ window.SPECIES_DATA = [
   "latin": "Actinastrum",
   "acc": "",
   "phylum": "Chlorophyta",
-  "site": "入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1501,8 +1501,8 @@ window.SPECIES_DATA = [
   "latin": "Phacus",
   "acc": "",
   "phylum": "Euglenophyta",
-  "site": "交城/裴会/入汾口/白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段/下游段/汇入口段/支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1515,8 +1515,8 @@ window.SPECIES_DATA = [
   "latin": "Euglena oxyuris",
   "acc": "",
   "phylum": "Euglenophyta",
-  "site": "岭底/白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "上游段/支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1529,8 +1529,8 @@ window.SPECIES_DATA = [
   "latin": "Euglena caudata",
   "acc": "",
   "phylum": "Euglenophyta",
-  "site": "交城/武良/裴会/入汾口/白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段/中游段/下游段/汇入口段/支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1543,8 +1543,8 @@ window.SPECIES_DATA = [
   "latin": "Euglena acus",
   "acc": "",
   "phylum": "Euglenophyta",
-  "site": "交城/入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段/汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1557,8 +1557,8 @@ window.SPECIES_DATA = [
   "latin": "Chroomonas",
   "acc": "",
   "phylum": "Cryptophyta",
-  "site": "白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1571,8 +1571,8 @@ window.SPECIES_DATA = [
   "latin": "Cryptomonas",
   "acc": "",
   "phylum": "Cryptophyta",
-  "site": "交城/入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段/汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1585,8 +1585,8 @@ window.SPECIES_DATA = [
   "latin": "Glenodinium",
   "acc": "",
   "phylum": "Dinophyta",
-  "site": "武良/裴会",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "中游段/下游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游植物",
   "tags": [
    "浮游植物"
@@ -1600,7 +1600,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Protozoa",
   "site": "全部6河段",
-  "source": "磁窑河水生态调查 2021-08",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1614,7 +1614,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Protozoa",
   "site": "全部6河段",
-  "source": "磁窑河水生态调查 2021-08",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1627,8 +1627,8 @@ window.SPECIES_DATA = [
   "latin": "Tetrahymena",
   "acc": "",
   "phylum": "Protozoa",
-  "site": "岭底/裴会/白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "上游段/下游段/支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1641,8 +1641,8 @@ window.SPECIES_DATA = [
   "latin": "Tetrahymena pyriformis",
   "acc": "",
   "phylum": "Protozoa",
-  "site": "武良/入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "中游段/汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1655,8 +1655,8 @@ window.SPECIES_DATA = [
   "latin": "Epistylis",
   "acc": "",
   "phylum": "Protozoa",
-  "site": "白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1669,8 +1669,8 @@ window.SPECIES_DATA = [
   "latin": "Cucurbitella",
   "acc": "",
   "phylum": "Protozoa",
-  "site": "武良/裴会/白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "中游段/下游段/支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1683,8 +1683,8 @@ window.SPECIES_DATA = [
   "latin": "Keratella cochlearis",
   "acc": "",
   "phylum": "Rotifera",
-  "site": "岭底/白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "上游段/支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1697,8 +1697,8 @@ window.SPECIES_DATA = [
   "latin": "Keratella valga",
   "acc": "",
   "phylum": "Rotifera",
-  "site": "岭底",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "上游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1711,8 +1711,8 @@ window.SPECIES_DATA = [
   "latin": "Brachionus urceolaris",
   "acc": "",
   "phylum": "Rotifera",
-  "site": "交城/裴会/入汾口/白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段/下游段/汇入口段/支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1725,8 +1725,8 @@ window.SPECIES_DATA = [
   "latin": "Brachionus angularis",
   "acc": "",
   "phylum": "Rotifera",
-  "site": "武良/入汾口/白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "中游段/汇入口段/支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1739,8 +1739,8 @@ window.SPECIES_DATA = [
   "latin": "Brachionus calyciflorus",
   "acc": "",
   "phylum": "Rotifera",
-  "site": "武良/裴会/入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "中游段/下游段/汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1753,8 +1753,8 @@ window.SPECIES_DATA = [
   "latin": "Monostyla",
   "acc": "",
   "phylum": "Rotifera",
-  "site": "交城/武良/裴会/白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段/中游段/下游段/支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1767,8 +1767,8 @@ window.SPECIES_DATA = [
   "latin": "Monostyla lunaris",
   "acc": "",
   "phylum": "Rotifera",
-  "site": "白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1781,8 +1781,8 @@ window.SPECIES_DATA = [
   "latin": "Lecane",
   "acc": "",
   "phylum": "Rotifera",
-  "site": "白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1795,8 +1795,8 @@ window.SPECIES_DATA = [
   "latin": "Colurella",
   "acc": "",
   "phylum": "Rotifera",
-  "site": "交城/裴会/入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段/下游段/汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1809,8 +1809,8 @@ window.SPECIES_DATA = [
   "latin": "Lepadella",
   "acc": "",
   "phylum": "Rotifera",
-  "site": "入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1823,8 +1823,8 @@ window.SPECIES_DATA = [
   "latin": "Cephalodella gibba",
   "acc": "",
   "phylum": "Rotifera",
-  "site": "交城",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1837,8 +1837,8 @@ window.SPECIES_DATA = [
   "latin": "Cephalodella exigua",
   "acc": "",
   "phylum": "Rotifera",
-  "site": "交城",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1851,8 +1851,8 @@ window.SPECIES_DATA = [
   "latin": "Trichotria",
   "acc": "",
   "phylum": "Rotifera",
-  "site": "交城",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1865,8 +1865,8 @@ window.SPECIES_DATA = [
   "latin": "Gastropus stylifer",
   "acc": "",
   "phylum": "Rotifera",
-  "site": "交城/裴会",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "城区段/下游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1879,8 +1879,8 @@ window.SPECIES_DATA = [
   "latin": "Monostyla bulla",
   "acc": "",
   "phylum": "Rotifera",
-  "site": "裴会",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "下游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1893,8 +1893,8 @@ window.SPECIES_DATA = [
   "latin": "Anuraeopsis fissa",
   "acc": "",
   "phylum": "Rotifera",
-  "site": "裴会",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "下游段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1907,8 +1907,8 @@ window.SPECIES_DATA = [
   "latin": "Trichocerca",
   "acc": "",
   "phylum": "Rotifera",
-  "site": "裴会/入汾口",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "下游段/汇入口段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1921,8 +1921,8 @@ window.SPECIES_DATA = [
   "latin": "Harpacticoida",
   "acc": "",
   "phylum": "Arthropoda/Copepoda",
-  "site": "入汾口/白石南河",
-  "source": "磁窑河水生态调查 2021-08",
+  "site": "汇入口段/支流段",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1936,7 +1936,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Arthropoda/Copepoda",
   "site": "全部6河段",
-  "source": "磁窑河水生态调查 2021-08",
+  "source": "北方某河（一）水生态调查 2021-08",
   "group": "浮游动物",
   "tags": [
    "浮游动物"
@@ -1950,7 +1950,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Bacillariophyta",
   "site": "W1",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "硅藻",
   "tags": [
    "硅藻",
@@ -1965,7 +1965,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Bacillariophyta",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "硅藻",
   "tags": [
    "硅藻",
@@ -1980,7 +1980,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Bacillariophyta",
   "site": "W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "硅藻",
   "tags": [
    "硅藻",
@@ -1995,7 +1995,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Bacillariophyta",
   "site": "W1",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "硅藻",
   "tags": [
    "硅藻",
@@ -2010,7 +2010,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Bacillariophyta",
   "site": "W1/W2/W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "硅藻",
   "tags": [
    "硅藻",
@@ -2025,7 +2025,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Bacillariophyta",
   "site": "W2",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "硅藻",
   "tags": [
    "硅藻",
@@ -2040,7 +2040,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Bacillariophyta",
   "site": "W2/W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "硅藻",
   "tags": [
    "硅藻",
@@ -2055,7 +2055,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Bacillariophyta",
   "site": "W1",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "硅藻",
   "tags": [
    "硅藻",
@@ -2070,7 +2070,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Bacillariophyta",
   "site": "W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "硅藻",
   "tags": [
    "硅藻",
@@ -2085,7 +2085,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Bacillariophyta",
   "site": "W2/W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "硅藻",
   "tags": [
    "硅藻",
@@ -2100,7 +2100,7 @@ window.SPECIES_DATA = [
   "acc": "",
   "phylum": "Bacillariophyta",
   "site": "W3",
-  "source": "余杭塘河健康评价 2021-09",
+  "source": "南方某河健康评价 2021-09",
   "group": "硅藻",
   "tags": [
    "硅藻",
@@ -2114,8 +2114,8 @@ window.SPECIES_DATA = [
   "latin": "Egretta garzetta",
   "acc": "",
   "phylum": "Aves/Pelecaniformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2128,8 +2128,8 @@ window.SPECIES_DATA = [
   "latin": "Ardeola bacchus",
   "acc": "",
   "phylum": "Aves/Pelecaniformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2142,8 +2142,8 @@ window.SPECIES_DATA = [
   "latin": "Bubulcus ibis",
   "acc": "",
   "phylum": "Aves/Pelecaniformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2156,8 +2156,8 @@ window.SPECIES_DATA = [
   "latin": "Nycticorax nycticorax",
   "acc": "",
   "phylum": "Aves/Pelecaniformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2170,8 +2170,8 @@ window.SPECIES_DATA = [
   "latin": "Streptopelia chinensis",
   "acc": "",
   "phylum": "Aves/Columbiformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2184,8 +2184,8 @@ window.SPECIES_DATA = [
   "latin": "Tachybaptus ruficollis",
   "acc": "",
   "phylum": "Aves/Podicipediformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2198,8 +2198,8 @@ window.SPECIES_DATA = [
   "latin": "Gallinula chloropus",
   "acc": "",
   "phylum": "Aves/Gruiformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2212,8 +2212,8 @@ window.SPECIES_DATA = [
   "latin": "Amaurornis phoenicurus",
   "acc": "",
   "phylum": "Aves/Gruiformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2226,8 +2226,8 @@ window.SPECIES_DATA = [
   "latin": "Lanius schach",
   "acc": "",
   "phylum": "Aves/Passeriformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2240,8 +2240,8 @@ window.SPECIES_DATA = [
   "latin": "Lanius cristatus",
   "acc": "",
   "phylum": "Aves/Passeriformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2254,8 +2254,8 @@ window.SPECIES_DATA = [
   "latin": "Hirundo rustica",
   "acc": "",
   "phylum": "Aves/Passeriformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2268,8 +2268,8 @@ window.SPECIES_DATA = [
   "latin": "Passer montanus",
   "acc": "",
   "phylum": "Aves/Passeriformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2282,8 +2282,8 @@ window.SPECIES_DATA = [
   "latin": "Pycnonotus sinensis",
   "acc": "",
   "phylum": "Aves/Passeriformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2296,8 +2296,8 @@ window.SPECIES_DATA = [
   "latin": "Pica serica",
   "acc": "",
   "phylum": "Aves/Passeriformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2310,8 +2310,8 @@ window.SPECIES_DATA = [
   "latin": "Acridotheres cristatellus",
   "acc": "",
   "phylum": "Aves/Passeriformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2324,8 +2324,8 @@ window.SPECIES_DATA = [
   "latin": "Sturnus cineraceus",
   "acc": "",
   "phylum": "Aves/Passeriformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2338,8 +2338,8 @@ window.SPECIES_DATA = [
   "latin": "Dicrurus macrocercus",
   "acc": "",
   "phylum": "Aves/Passeriformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2352,8 +2352,8 @@ window.SPECIES_DATA = [
   "latin": "Copsychus saularis",
   "acc": "",
   "phylum": "Aves/Passeriformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2366,8 +2366,8 @@ window.SPECIES_DATA = [
   "latin": "Vanellus cinereus",
   "acc": "",
   "phylum": "Aves/Charadriiformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2380,8 +2380,8 @@ window.SPECIES_DATA = [
   "latin": "Motacilla alba",
   "acc": "",
   "phylum": "Aves/Passeriformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
@@ -2394,8 +2394,8 @@ window.SPECIES_DATA = [
   "latin": "Sturnus sericeus",
   "acc": "",
   "phylum": "Aves/Passeriformes",
-  "site": "余杭塘河沿岸",
-  "source": "余杭塘河健康评价 2021-09",
+  "site": "南方某河沿岸",
+  "source": "南方某河健康评价 2021-09",
   "group": "鸟类",
   "tags": [
    "鸟类"
