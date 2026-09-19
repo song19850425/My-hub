@@ -411,7 +411,7 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/ctenopharyngodon_idella.jpg",
-  "photoCredit": "台湾数位典藏",
+  "photoCredit": "中国台湾数位典藏",
   "distribution": [
    "黄河上中下游"
   ],
@@ -1394,7 +1394,7 @@ window.SPECIES_DATA = [
    "浮游植物"
   ],
   "photo": "assets/species-photos/gomphonema.jpg",
-  "photoCredit": "台湾大学生命科学院"
+  "photoCredit": "中国台湾大学生命科学院"
  },
  {
   "cn": "羽纹藻",
@@ -1436,7 +1436,7 @@ window.SPECIES_DATA = [
    "浮游植物"
   ],
   "photo": "assets/species-photos/diatoma.jpg",
-  "photoCredit": "台湾数位典藏"
+  "photoCredit": "中国台湾数位典藏"
  },
  {
   "cn": "茧形藻",

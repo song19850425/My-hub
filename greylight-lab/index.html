@@ -7,6 +7,20 @@
 <title>灰灯实验室 · 水生态智能工作平台</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
+<script>
+/* 本页是跳转壳，不是内容页 —— head 里就 location.replace 走了，
+   **body 里的脚本永远不会执行**，所以用不了 i18n.js 那套「遍历文本节点」的运行时，
+   也不能引 i18n-dict.js（276 KB，会拖慢跳转）。
+   本页唯一可见的中文是**标签页标题**（跳转前那一瞬），按已记住的语言就地换掉。
+   内联执行、不发起任何请求，因此不影响跳转时机。
+   也正因如此，本文件被抽取脚本按「跳转壳」跳过，不进双语待译清单。 */
+try {
+  if (localStorage.getItem('gl-lang') === 'en') {
+    document.documentElement.lang = 'en';
+    document.title = 'Grey Light Lab · Aquatic Ecology Intelligence Platform';
+  }
+} catch (e) { /* 隐私模式等，忽略 */ }
+</script>
 <script>location.replace('pages/index.html');</script>
 </head>
 <body>
