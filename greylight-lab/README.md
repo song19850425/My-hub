@@ -11,6 +11,7 @@
 [专家复核](https://song19850425.github.io/My-hub/greylight-lab/pages/expert-review.html) ·
 [水生态监测流程](https://song19850425.github.io/My-hub/greylight-lab/pages/monitoring-workflow.html) ·
 [物种参考库](https://song19850425.github.io/My-hub/greylight-lab/pages/species-library.html) ·
+[生物多样性参考库](https://song19850425.github.io/My-hub/greylight-lab/pages/biodiversity-library.html) ·
 [报告中心](https://song19850425.github.io/My-hub/greylight-lab/pages/report-center.html) ·
 [模型管理](https://song19850425.github.io/My-hub/greylight-lab/pages/model-management.html)
 
@@ -35,7 +36,8 @@
 | 样品管理 | [`pages/sample-management.html`](https://song19850425.github.io/My-hub/greylight-lab/pages/sample-management.html) | 样品台账、生命周期、类型分布（环形图） |
 | **专家复核** | [`pages/expert-review.html`](https://song19850425.github.io/My-hub/greylight-lab/pages/expert-review.html) | **AI 结果人工复核与仲裁（本版新增）** |
 | 水生态监测流程 | [`pages/monitoring-workflow.html`](https://song19850425.github.io/My-hub/greylight-lab/pages/monitoring-workflow.html) | SOP 规程、三阶段流程、eDNA 专项、报告出具流程 |
-| 物种参考库 | [`pages/species-library.html`](https://song19850425.github.io/My-hub/greylight-lab/pages/species-library.html) | 1,042 种参考库、分类树、序列统计（可筛选/搜索） |
+| 物种参考库（水生态） | [`pages/species-library.html`](https://song19850425.github.io/My-hub/greylight-lab/pages/species-library.html) | 247 种真实名录、分类树、序列统计（可筛选/搜索） |
+| **生物多样性参考库** | [`pages/biodiversity-library.html`](https://song19850425.github.io/My-hub/greylight-lab/pages/biodiversity-library.html) | **297 种陆生类群：陆生植物 / 昆虫与陆生无脊椎 / 哺乳动物 / 真菌与地衣（本版新增）** |
 | 报告中心 | [`pages/report-center.html`](https://song19850425.github.io/My-hub/greylight-lab/pages/report-center.html) | 模板、台账、三级审核、导出格式 |
 | 模型管理 | [`pages/model-management.html`](https://song19850425.github.io/My-hub/greylight-lab/pages/model-management.html) | 三大模型卡片、性能趋势、版本历史 |
 
@@ -44,13 +46,25 @@
 ```
 greylight-lab/
 ├── pages/               # 全部页面（离线优先，样式内联）
+│   ├── species-data.js / species-library.html            # 水生态物种库（247 种）
+│   ├── biodiversity-data.js / biodiversity-library.html  # 生物多样性库（297 种）
+│   └── assets/
+│       ├── species-photos/        # 水生态物种照片 243 张（47 MB）
+│       └── biodiversity-photos/   # 生物多样性照片 297 张（约 11 MB，长边 900px）
 ├── assets/              # 标本图、站点图、微信公众号二维码（wechat-qrcode.png）等静态资源
+├── favicon.svg          # 站点图标（各页按目录深度用相对路径引用）
+├── favicon-180.png      # apple-touch-icon，180×180 透明底
 ├── vendor/              # Tailwind / Lucide / Chart.js 本地依赖
 ├── shared-app.js        # 共享交互层（模态框/筛选/搜索/通知/提示）
 ├── colors_and_type.css  # 设计令牌预检稿（历史产物）
 ├── .design              # 设计画布清单（含全部页面节点）
 └── validation-report.json / runtime-*.json   # 生成流水线记录（历史产物）
 ```
+
+> 两个参考库的数据文件都由脚本生成，**不要手工编辑**：
+> `_tools/_gen_biodiversity.py`（取数 + 下照片 + 写 `biodiversity-data.js`）、
+> `_tools/_gen_biodiversity_page.py`（从 `species-library.html` 抽壳生成页面）。
+> 工具链在 `.gitignore` 里（见下方版本记录 v1.9 的说明）。
 
 ## 共享交互层（shared-app.js）
 
@@ -60,7 +74,7 @@ greylight-lab/
 - **筛选引擎**：筛选片加 `data-chip-group="组名" data-chip-value="值"`，条目加 `data-f-group="组名" data-f-values="值1 值2"`；未标注的条目自动按文本匹配（如样品/报告台账）。搜索框加 `data-search="组名"`，计数元素加 `data-result-count="组名"`。程序改动后可调 `GL.refreshFilter(组名)` 刷新。
 - **行操作**：`data-action="view|review|export|download|edit|goto"`。`view` 自动读取行的 `data-d1..d8` + `data-d-labels` 生成详情弹窗，无标注时回退为按表头取列；`review` 默认跳转专家复核页，复核页内通过 `gl:review` 事件拦截为复核弹窗。
 - **通知/提示**：`GL.toast(msg, type)`；通知铃铛 `data-notifications` 自动绑定下拉面板。
-- **页脚联系方式**：8 个页面底部自动挂一张「联系方式」卡（微信公众号「小宋的环保笔记」二维码 + 邮箱），二维码可点击放大。数据源在 `shared-app.js` 顶部的 `GL_CONTACT` —— **改一处，全站 8 个页面同步**，页面 HTML 不用动。
+- **页脚联系方式**：9 个页面底部自动挂一张「联系方式」卡（微信公众号「小宋的环保笔记」二维码 + 邮箱），二维码可点击放大。数据源在 `shared-app.js` 顶部的 `GL_CONTACT` —— **改一处，全站 9 个页面同步**，页面 HTML 不用动。
   - 二维码图放 `assets/wechat-qrcode.png`（600×600，源图为微信公众平台导出的 `qrcode_for_gh_*_860.jpg`，缩到页脚实际显示的 92px 仍可正常扫码）；把 `qrcode.src` 置空则整块二维码区域不渲染；图片缺失时自动隐藏，不会留破图。
   - `qrcode.caption` 里的 `\n` 会渲染成换行，用来控制二维码下方小字的分行；`qrcode.name` 用作放大弹窗的标题。
   - `items` 里 `value` 为空的条目自动隐藏；`href` 写 `tel:` / `mailto:` 会自动拼上 `value`。
@@ -128,7 +142,7 @@ greylight-lab/
   若要严格达标，改成 `#22803a`（4.98:1）即可，肉眼几乎看不出差别。
 
 改法（若决定调）：只动各页 `theme-vars` 里的 `--state-success` / `--brand-primary`，
-全站 8 个页面同步改，别在页面里写死。
+全站 10 个页面同步改，别在页面里写死。
 
 ## 新增页面步骤
 
@@ -145,8 +159,13 @@ greylight-lab/
 - [ ] `validation-report.json` / `runtime-*.json` 为旧生成流水线产物，本次开发未重新生成。
 - [ ] 专家复核页的「批量通过」与复核弹窗为纯前端演示，无后端持久化。
 - [ ] 物种参考库已接入真实数据（CoSFISH 条形码 + 北方某河（一）/南方某河名录），其余页面（样品管理、报告中心等）仍是演示数据，可按同一模式逐步真实化。
+- [ ] 生物多样性库的「栽培 vs 野生」边界：iNaturalist 的 research grade 本身已要求「非圈养 / 栽培个体」，但桑、桃、板栗这类既有大量栽培也有野生种群的物种，仍可能拍到人工栽植的个体。当前保持选种依据客观可复现（不做人工取舍），页面「数据口径」弹层里已如实说明。
 
 ## 版本
+
+v1.11 · 2026-09-19 · 补上全站 favicon（此前 13 个页面**一个都没声明**，连图标资源都没有）。不声明 `<link rel="icon">` 时浏览器会去请求**域名根**的 `/favicon.ico`，而本站托管在 `/My-hub/greylight-lab/` 子路径下，根上没有这个文件 —— 于是每个页面都产生一条自动发起的 404，页面上完全看不出来。本版新建 `favicon.svg`（蓝底 `#0071e3` 圆角方 + 白色烧瓶，与站点苹果风一致）与 `favicon-180.png`（180×180 透明底，供 iOS 加到主屏），并给 13 个页面按**目录深度**注入相对路径（第 0 层 `favicon.svg`、第 1 层 `../favicon.svg`）。注入脚本 `scripts/inject_favicon.py` 的纪律：已是规范状态就一个字节不动、自定义图标绝不覆盖、全量校验后才统一写盘、站点根缺图标资源直接报错退出、幂等。**注意 `file://` 测不出来** —— 双击打开时浏览器不做域名根回退，必须起本地 HTTP 服务并带子路径才能复现与验证。同一次也修了 EnvLab 站（115 页里 111 页缺声明）。
+
+v1.10 · 2026-09-19 · 新增「生物多样性参考库」（297 种）。原有物种参考库只覆盖水生态（鱼 / 底栖 / 浮游 / 藻 / 鸟 / 两栖爬行），陆地类群完全空白，本版补上：陆生植物 120、昆虫与陆生无脊椎 90（昆虫纲 65 + 蛛形纲 25）、哺乳动物 37、真菌与地衣 50。**选种不是人工拟名单** —— 按 iNaturalist 中国境内（place_id 6903）research-grade 观测记录数排序取各字段前列，观测数同时充当「常见程度」的近似；每条记录都带完整中文阶元链（界/门/纲/目/科，297/297 覆盖）、IUCN 保护等级、中国与全球观测数，以及可回原页复核的 `sourceUrl`。照片只收 CC0 / CC BY / CC BY-SA：iNaturalist 上 `license` 为空表示观察者未选择任何 CC 协议、默认「保留所有权利」，**不是**公共领域，一律不采用；严格许可下通过率约 1/5，故候选池开到目标的 14 倍，并利用 `species_counts` 响应里已带的 rank / 中文名 / 照片许可字段先筛后取，只对最终入选者再补分类阶元，池子开大不增加请求数。297 张照片本地化到 `pages/assets/biodiversity-photos/`（长边压到 900px，约 11 MB），离线可用。页面不手写 —— 由 `_tools/_gen_biodiversity_page.py` 从 `species-library.html` **抽取外壳**生成（950 行内联壳 CSS 抄一份必然与上游分叉），只替换 title / 侧边栏 / 正文 / 页脚 / 末尾脚本，锚点缺失即报错不写盘。两库互相有入口；主库页脚与 KPI 里过期的 166 也一并改成实际值 247。
 
 v1.9 · 2026-09-19 · 全站地名脱敏。演示数据里的真实水体名与行政区名统一替换为通用描述：两条调查河流改为「北方某河（一）/（二）」「南方某河」；河段与点位按下游位置改为「汇入口段 / 城区段 / 支流段 / 上游段 / 中游段 / 下游段 / 水库点位」；9 个演示监测断面统一改为「示范断面 01」~「示范断面 09」。共 11 个文件、433 行改动。新增生成器 `_tools/_gen_anonymize.py`，带全站残留自检：具体名先于宽泛名替换（避免「城区段段」）、`X监测断面` 整体换（避免语义重复）、裸河名兜底（站名整体替换后仍会残留的、不带站点前缀的裸水体名），未覆盖的残留直接报错不写盘；图片署名（`photoCredit`）等合法来源信息经白名单保留。生成器幂等，复跑零改动。**工具链不进仓库** —— `_tools/` 已列入 `.gitignore`，因为映射表本身就写着被抹掉的地名，公开等于脱敏可逆。
 

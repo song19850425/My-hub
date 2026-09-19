@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" sizes="180x180" href="../favicon-180.png">
+<title>生物多样性调查 SOP · 太行山/山地型通用版</title>
+<style>
+:root{
+  --bg:#f5f5f7; --surface:#fff; --ink:#1d1d1f; --ink-2:#6e6e73; --ink-3:#86868b;
+  --line:#d2d2d7; --brand:#0071e3; --brand-ink:#fff;
+  --success:#248a3d; --warning:#c93400; --error:#d70015; --info:#5856d6;
+  --r-sm:8px; --r-md:12px; --r-lg:18px;
+  --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;padding:24px;max-width:1100px;margin:0 auto}
+h1{font-size:28px;font-weight:700;margin-bottom:8px}
+.sub{color:var(--ink-2);margin-bottom:32px;font-size:15px}
+h2{font-size:20px;font-weight:600;margin:36px 0 16px;display:flex;align-items:center;gap:8px}
+h2 .num{display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--brand);color:#fff;align-items:center;justify-content:center;font-size:14px;font-weight:600}
+.card{background:var(--surface);border-radius:var(--r-md);padding:20px;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.progress-bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin:8px 0}
+.progress-bar > div{height:100%;background:var(--brand);transition:width .3s}
+.progress-label{font-size:13px;color:var(--ink-2)}
+label.check{display:flex;gap:10px;align-items:flex-start;padding:8px 0;cursor:pointer;font-size:15px}
+label.check input{margin-top:4px;accent-color:var(--brand);width:16px;height:16px}
+label.check.done{color:var(--ink-3);text-decoration:line-through}
+.month-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;margin:12px 0}
+.month{padding:10px 4px;text-align:center;border-radius:var(--r-sm);background:#fff;border:1px solid var(--line);font-size:12px;cursor:pointer;transition:all .15s}
+.month:hover{border-color:var(--brand)}
+.month.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+.month .ml{display:block;font-weight:600;font-size:14px}
+.month .mt{display:block;font-size:10px;margin-top:2px;opacity:.8}
+.month.active .mt{opacity:1}
+.season-tasks{background:#fff8e6;border-left:3px solid #ff9500;padding:12px 16px;border-radius:0 var(--r-sm) var(--r-sm) 0;margin-top:8px;font-size:14px;min-height:60px}
+details{background:#fff;border:1px solid var(--line);border-radius:var(--r-sm);margin-bottom:8px;overflow:hidden}
+details summary{padding:14px 18px;cursor:pointer;font-weight:500;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+details summary::after{content:"+";font-size:20px;color:var(--ink-2);font-weight:300}
+details[open] summary::after{content:"−"}
+details .body{padding:0 18px 16px;font-size:14px;color:var(--ink-2)}
+details .body strong{color:var(--ink)}
+.tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;margin-right:4px;font-weight:500}
+.tag-red{background:#ffe5e5;color:var(--error)}
+.tag-orange{background:#fff1e0;color:#c93400}
+.tag-yellow{background:#fff9d6;color:#8a6d00}
+.tag-green{background:#e3f5e8;color:var(--success)}
+.tag-blue{background:#e0effd;color:var(--brand)}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{background:#f5f5f7;font-weight:600;color:var(--ink-2);font-size:12px;text-transform:uppercase}
+.slider-row{display:flex;align-items:center;gap:12px;padding:8px 0}
+.slider-row label{flex:0 0 140px;font-size:14px;color:var(--ink-2)}
+.slider-row input[type=range]{flex:1;accent-color:var(--brand)}
+.slider-row .val{flex:0 0 80px;text-align:right;font-weight:600;font-family:var(--font)}
+.total{background:var(--brand);color:#fff;padding:16px 20px;border-radius:var(--r-md);margin-top:12px;font-size:16px;display:flex;justify-content:space-between;align-items:center}
+.warn{background:#fff1e0;border-left:3px solid #ff9500;padding:12px 16px;border-radius:0 var(--r-sm) var(--r-sm) 0;margin:8px 0;font-size:14px}
+.danger{background:#ffe5e5;border-left:3px solid var(--error);padding:12px 16px;border-radius:0 var(--r-sm) var(--r-sm) 0;margin:8px 0;font-size:14px}
+.hero{background:linear-gradient(135deg,#0071e3,#5856d6);color:#fff;padding:32px;border-radius:var(--r-lg);margin-bottom:24px}
+.hero h1{color:#fff;margin:0 0 8px;font-size:32px}
+.hero p{opacity:.9;font-size:15px;max-width:700px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.grid-2{grid-template-columns:1fr}.month-grid{grid-template-columns:repeat(6,1fr)}}
+.chip{display:inline-block;padding:3px 10px;background:#e8e8ed;border-radius:999px;font-size:12px;margin:2px}
+footer{margin-top:48px;padding-top:24px;border-top:1px solid var(--line);color:var(--ink-3);font-size:13px;text-align:center}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
+.kpi{background:#fff;padding:12px;border-radius:var(--r-sm);text-align:center}
+.kpi .v{font-size:20px;font-weight:700;color:var(--brand)}
+.kpi .l{font-size:11px;color:var(--ink-2);margin-top:2px}
+@media(max-width:700px){.kpi-row{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>山地型生物多样性调查 SOP</h1>
+  <p>适用于太行山/秦岭/燕山等山地型保护区、关键区域、小流域综合调查。按现场工作流组织：设计 → 季节 → 类群 → 专项 → 数据 → 预算。</p>
+</div>
+
+<!-- 1. 调查设计 -->
+<h2><span class="num">1</span>调查设计 Checklist</h2>
+<div class="card">
+  <div class="progress-label" id="designProgress">0 / 8</div>
+  <div class="progress-bar"><div id="designBar" style="width:0%"></div></div>
+  <label class="check"><input type="checkbox" onchange="tick('design',this)"><div><strong>生境分区</strong>：用 GIS 叠加海拔/植被/人为干扰图层，分出生境单元（每单元 ≥3 样点）</div></label>
+  <label class="check"><input type="checkbox" onchange="tick('design',this)"><div><strong>公里网格布点</strong>：2km×2km 网格，每网格中心或代表性生境布 1 点（小五台山标准做法）</div></label>
+  <label class="check"><input type="checkbox" onchange="tick('design',this)"><div><strong>垂直样带</strong>：沿海拔每 200m 一个点，覆盖完整海拔梯度</div></label>
+  <label class="check"><input type="checkbox" onchange="tick('design',this)"><div><strong>参照点</strong>：至少 1 个人为干扰最轻的本底样点（算多样性指数必须有对照）</div></label>
+  <label class="check"><input type="checkbox" onchange="tick('design',this)"><div><strong>样线设计</strong>：每条 2-3km，速度 1-1.5 km/h，每条线只走一个生境，重复 3 次</div></label>
+  <label class="check"><input type="checkbox" onchange="tick('design',this)"><div><strong>红外相机位点</strong>：优先兽径、垭口、水源地，避免路边/人为活动区</div></label>
+  <label class="check"><input type="checkbox" onchange="tick('design',this)"><div><strong>季节安排</strong>：春秋必做（迁徙+繁殖），夏季昆虫/两栖，冬季足迹/越冬鸟</div></label>
+  <label class="check"><input type="checkbox" onchange="tick('design',this)"><div><strong>资料预收集</strong>：已有调查报告、标本记录、老乡访谈、近 5 年红外相机数据</div></label>
+</div>
+
+<!-- 2. 季节时间表 -->
+<h2><span class="num">2</span>季节时间表（点月份看当季任务）</h2>
+<div class="card">
+  <div class="month-grid" id="monthGrid"></div>
+  <div class="season-tasks" id="seasonTasks">点上面月份查看当季必做项</div>
+</div>
+
+<!-- 3. 分类群方法 -->
+<h2><span class="num">3</span>分类群调查方法（点击展开）</h2>
+
+<details><summary>维管植物 <span><span class="tag tag-blue">样方法</span></span></summary>
+<div class="body">
+<p><strong>样方规格</strong>：乔木 20×20m、灌木 5×5m、草本 1×1m；每个生境单元各 5 个重复。</p>
+<p><strong>调查内容</strong>：物种、数量、胸径（乔木）、盖度、伴生种、物候期。</p>
+<p><strong>季节</strong>：夏秋（开花/果期便于鉴定）；春天补一次木本。</p>
+<p><strong>必算</strong>：物种丰富度、Shannon-Wiener、重要值、特有种/保护种。</p>
+</div></details>
+
+<details><summary>兽类 <span><span class="tag tag-orange">红外相机+痕迹</span></span></summary>
+<div class="body">
+<p><strong>红外相机</strong>：每 2km² 1 台，连续 30 天，高度 50-70cm，避开直射光；记 RAI = 独立照片数/100 相机日。</p>
+<p><strong>样线痕迹法</strong>：沿样线记足迹、粪便、食迹、卧迹、兽径。</p>
+<p><strong>重点种</strong>：华北豹、原麝、猕猴、野猪、狍、岩松鼠；粪便可送 DNA 鉴定。</p>
+<p><strong>国标</strong>：GB/T 37364.3-2024 陆生野生动物及其栖息地调查技术规程 第 3 部分：兽类。</p>
+</div></details>
+
+<details><summary>鸟类 <span><span class="tag tag-green">样线+定点</span></span></summary>
+<div class="body">
+<p><strong>样线法</strong>：2-3km，步行 1-1.5 km/h，两侧各 50m 记录；日出后 3h / 日落前 3h。</p>
+<p><strong>定点计数</strong>：每个样点 10 分钟，记录听到/看到的鸟种和数量。</p>
+<p><strong>季节</strong>：四季各 2 次（繁殖/越冬至为关键）。</p>
+<p><strong>重点种</strong>：褐马鸡、金雕、黑鹳、大鵟、红嘴山鸦、褐头山雀。</p>
+</div></details>
+
+<details><summary>两栖爬行 <span><span class="tag tag-yellow">夜间搜捕</span></span></summary>
+<div class="body">
+<p><strong>方法</strong>：夜间沿溪流/石缝/路边搜索，手电+长夹；繁殖期听鸣叫（春）。</p>
+<p><strong>样方</strong>：100m 溪流段，记录所有个体。</p>
+<p><strong>季节</strong>：4-8 月（北方两栖类活动期短）。</p>
+<p><strong>重点种</strong>：大鲵、中国林蛙、中华蟾蜍、丽斑麻蜥、虎斑颈槽蛇。</p>
+<p><strong>标本</strong>：70% 乙醇固定，标签记录 GPS/日期/采集人。</p>
+</div></details>
+
+<details><summary>昆虫 <span><span class="tag tag-blue">马氏网+灯诱</span></span></summary>
+<div class="body">
+<p><strong>马氏网</strong>：每生境 1 台，挂 7 天，乙醇收集。</p>
+<p><strong>灯诱</strong>：每点 1 晚，黑光灯/水银灯，雨后初晴最佳。</p>
+<p><strong>扫网</strong>：草本层 200 网次/样点。</p>
+<p><strong>季节</strong>：6-9 月；蝶蛾类白天扫网，夜行性昆虫灯诱。</p>
+<p><strong>注意</strong>：近缘种（如薹草属、螽斯、叶蝉）必须送分类学专家复核。</p>
+</div></details>
+
+<details><summary>水生生物 <span><span class="tag tag-green">你已有的 SOP</span></span></summary>
+<div class="body">
+<p><strong>浮游植物</strong>：采水 1L，鲁哥氏液固定，镜检。</p>
+<p><strong>浮游动物</strong>：25# 网过滤 10-50L，福尔马林固定。</p>
+<p><strong>底栖无脊椎</strong>：D-frame 网/索伯网，1m²，挑出固定。</p>
+<p><strong>鱼类</strong>：电捕/撒网/地笼，记录尾数重量，不能识别的拍照+酒精固定。</p>
+<p><strong>季节</strong>：丰水期（7-9）+ 枯水期（3-4）。</p>
+<p><strong>提效</strong>：水样送 eDNA（MiFish-U/12SV5），检出隐匿种。</p>
+</div></details>
+
+<!-- 4. 重点物种专项 -->
+<h2><span class="num">4</span>重点保护物种专项</h2>
+<div class="grid-2">
+  <details><summary>华北豹 / 金钱豹</summary><div class="body">
+    <span class="tag tag-red">国家一级</span><span class="tag tag-orange">近危</span>
+    <p>方法：30-50 台红外相机 × 3 个月网格布设；粪便 DNA 个体识别。</p>
+    <p>点位：兽径、垭口、有蹄类活动区。</p>
+  </div></details>
+  <details><summary>褐马鸡</summary><div class="body">
+    <span class="tag tag-red">国家一级</span>
+    <p>方法：繁殖季（4-6 月）红外相机+鸣声回放+样线；针阔混交林/亚高山灌丛。</p>
+  </div></details>
+  <details><summary>猕猴（太行山种群）</summary><div class="body">
+    <span class="tag tag-orange">国家二级</span>
+    <p>方法：样群跟踪+照片个体识别；南麓（河南）为主。</p>
+  </div></details>
+  <details><summary>大鲵</summary><div class="body">
+    <span class="tag tag-red">国家二级</span><span class="tag tag-red">CR</span>
+    <p>方法：4-6 月夜间溪流调查 + eDNA 水样（1L 过滤）。</p>
+  </div></details>
+  <details><summary>黑鹳 / 金雕</summary><div class="body">
+    <span class="tag tag-red">国家一级</span>
+    <p>方法：繁殖季巢址搜索+定点观察；河流/崖壁。</p>
+  </div></details>
+  <details><summary>原麝 / 林麝</summary><div class="body">
+    <span class="tag tag-red">国家一级</span>
+    <p>方法：高海拔灌丛红外相机 + 粪便 DNA。</p>
+  </div></details>
+</div>
+
+<!-- 5. 数据字段 -->
+<h2><span class="num">5</span>每条记录必须带的 7 个字段</h2>
+<div class="card">
+  <div class="progress-label" id="dataProgress">0 / 7</div>
+  <div class="progress-bar"><div id="dataBar" style="width:0%"></div></div>
+  <label class="check"><input type="checkbox" onchange="tick('data',this)"><div>中文名 / 拉丁名（接受名，非异名）</div></label>
+  <label class="check"><input type="checkbox" onchange="tick('data',this)"><div>经纬度 + 海拔 + 生境类型</div></label>
+  <label class="check"><input type="checkbox" onchange="tick('data',this)"><div>数量（实体/痕迹/目击次数，不要写"若干"）</div></label>
+  <label class="check"><input type="checkbox" onchange="tick('data',this)"><div>调查方法（红外/样线/标本/eDNA）</div></label>
+  <label class="check"><input type="checkbox" onchange="tick('data',this)"><div>照片或标本编号（编号规则：项目-类群-序号）</div></label>
+  <label class="check"><input type="checkbox" onchange="tick('data',this)"><div>保护级别（国家一/二级、IUCN、中国红色名录）</div></label>
+  <label class="check"><input type="checkbox" onchange="tick('data',this)"><div>数据来源（谁、什么时候、什么方法）</div></label>
+</div>
+
+<!-- 6. 预算计算器 -->
+<h2><span class="num">6</span>预算估算器（拖动滑块）</h2>
+<div class="card">
+  <div class="slider-row"><label>调查面积（km²）</label><input type="range" id="area" min="50" max="500" value="200" oninput="calcBudget()"><span class="val" id="areaV">200</span></div>
+  <div class="slider-row"><label>调查人员（人）</label><input type="range" id="team" min="3" max="10" value="5" oninput="calcBudget()"><span class="val" id="teamV">5</span></div>
+  <div class="slider-row"><label>野外月数</label><input type="range" id="months" min="2" max="12" value="6" oninput="calcBudget()"><span class="val" id="monthsV">6</span></div>
+  <div class="slider-row"><label>红外相机（台）</label><input type="range" id="cams" min="0" max="100" value="30" oninput="calcBudget()"><span class="val" id="camsV">30</span></div>
+  <div class="slider-row"><label>eDNA 样点数</label><input type="range" id="edna" min="0" max="50" value="0" oninput="calcBudget()"><span class="val" id="ednaV">0</span></div>
+  <div class="total"><span>预估总预算</span><span id="total">--</span></div>
+</div>
+
+<!-- 7. 常见坑 -->
+<h2><span class="num">7</span>最容易踩的 7 个坑</h2>
+<div class="danger"><strong>红外相机乱布</strong>：布在路边/人为活动区，拍出来全是人/狗。要找兽径、垭口、水源地。</div>
+<div class="warn"><strong>样线跨生境</strong>：一条线从阔叶林走到针叶林，数据没法分析。每条线只走一个生境。</div>
+<div class="warn"><strong>只跑夏天</strong>：冬季兽类足迹最清楚，北方冬季调查反而效率最高。</div>
+<div class="warn"><strong>标本不当天处理</strong>：两栖爬行用 70% 乙醇，植物标本当天压，别堆着。</div>
+<div class="warn"><strong>不做老乡访问</strong>：老乡知道哪有豹子、哪有猴群，比你跑一个月样线都管用。</div>
+<div class="danger"><strong>近缘种不复核</strong>：叶蝉、螽斯、薹草、鳅鮀属这类大属，自己定的种必须请分类学专家复核。</div>
+<div class="danger"><strong>没有参照生境</strong>：保护区内找一个干扰最轻的样点，否则多样性指数没有基准。</div>
+
+<footer>
+  Grey Light Lab · 山地型生物多样性调查 SOP v1.0 · 参考 GB/T 37364、HJ 710、小五台山/太行山调查实践<br>
+  配套：species-library.html（247 种水生生物参考库）· monitoring-workflow.html
+</footer>
+
+<script>
+// 季节数据
+const seasons = {
+  1:{t:"冬季 · 越冬与足迹",c:["越冬水鸟调查","兽类足迹/雪地上的痕迹","红外相机回收（冬季数据量最大）","裸岩区岩石蜥蜴观察"]},
+  2:{t:"冬季 · 越冬与足迹",c:["越冬水鸟","红外相机持续运行","整理全年数据、写报告"]},
+  3:{t:"早春 · 准备与两栖开始",c:["越冬鸟收尾","两栖类出蛰（林蛙/蟾蜍）","植物样方本底（木本发芽前）","枯水期水生生物调查"]},
+  4:{t:"春季 · 繁殖高峰",c:["鸟类繁殖期样线","两栖类鸣叫调查（大鲵 4-6 月重点）","昆虫马氏网开始挂","开花期植物鉴定"]},
+  5:{t:"春季 · 繁殖高峰",c:["鸟类样线（繁殖高峰）","两栖类卵团/蝌蚪调查","褐马鸡繁殖期专项","灯诱开始"]},
+  6:{t:"夏季 · 昆虫与两栖",c:["昆虫马氏网+灯诱","两栖类成体/幼体","浮游植物/浮游动物丰水期","鱼类丰水期电捕"]},
+  7:{t:"夏季 · 昆虫与两栖",c:["昆虫高峰（蝴蝶/蛾类）","两栖类夜间搜捕","着生藻类采样","大型真菌雨后调查"]},
+  8:{t:"夏末 · 准备秋季",c:["昆虫收尾","两栖类准备越冬","鸟类迁徙前基线","植物果期鉴定"]},
+  9:{t:"秋季 · 迁徙与贮食",c:["鸟类迁徙样线（秋季高峰）","兽类贮食行为","植物叶果鉴定","大型真菌高峰"]},
+  10:{t:"秋季 · 迁徙与贮食",c:["越冬鸟前哨","兽类足迹/粪便样本采集","红外相机秋点更换","水生生物枯水期开始"]},
+  11:{t:"初冬 · 准备越冬",c:["越冬水鸟","红外相机冬季布点","整理秋季数据","写年度报告"]},
+  12:{t:"冬季 · 越冬与足迹",c:["越冬水鸟","雪地足迹","红外相机持续","年度数据汇总"]}
+};
+
+// 生成月份格
+const grid = document.getElementById('monthGrid');
+const taskBox = document.getElementById('seasonTasks');
+Object.keys(seasons).forEach(m=>{
+  const d=document.createElement('div');
+  d.className='month';
+  d.dataset.m=m;
+  const names=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  d.innerHTML=`<span class="ml">${names[m-1]}</span><span class="mt">${seasons[m].t.split(' · ')[0]}</span>`;
+  d.onclick=()=>{
+    document.querySelectorAll('.month').forEach(x=>x.classList.remove('active'));
+    d.classList.add('active');
+    taskBox.innerHTML=`<strong>${seasons[m].t}</strong><br>`+seasons[m].c.map(x=>`• ${x}`).join('<br>');
+  };
+  grid.appendChild(d);
+});
+// 默认选当前月
+const now = new Date().getMonth()+1;
+document.querySelector(`.month[data-m="${now}"]`).click();
+
+// checklist 进度
+function tick(prefix, el){
+  el.closest('.check').classList.toggle('done', el.checked);
+  const cards = el.closest('.card');
+  const total = cards.querySelectorAll('input[type=checkbox]').length;
+  const done = cards.querySelectorAll('input[type=checkbox]:checked').length;
+  const label = document.getElementById(prefix+'Progress');
+  const bar = document.getElementById(prefix+'Bar');
+  label.textContent = `${done} / ${total}`;
+  bar.style.width = (done/total*100)+'%';
+}
+
+// 预算
+function calcBudget(){
+  const area=+document.getElementById('area').value;
+  const team=+document.getElementById('team').value;
+  const months=+document.getElementById('months').value;
+  const cams=+document.getElementById('cams').value;
+  const edna=+document.getElementById('edna').value;
+  document.getElementById('areaV').textContent=area;
+  document.getElementById('teamV').textContent=team;
+  document.getElementById('monthsV').textContent=months;
+  document.getElementById('camsV').textContent=cams;
+  document.getElementById('ednaV').textContent=edna;
+  const personnel = team*months*1.2; // 人月×1.2万
+  const camCost = cams*0.35; // 相机+存储
+  const ednaCost = edna*0.15;
+  const lab = area*0.08; // 实验室鉴定
+  const travel = team*months*0.3;
+  const report = 5;
+  const total = personnel+camCost+ednaCost+lab+travel+report;
+  document.getElementById('total').textContent = `约 ${total.toFixed(0)} 万元`;
+}
+calcBudget();
+</script>
+</body>
+</html>

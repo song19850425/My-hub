@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" sizes="180x180" href="../favicon-180.png">
+    <title>标准合规映射 — 灰灯实验室 AI 鉴定台</title>
+    <style id="theme-vars">
+/* Grey Light Lab — Apple-style minimal */
+/* Brand: Apple blue #0071e3 — clean, airy, product-page restraint */
+
+:root {
+  /* === Background & Surfaces === */
+  --brand-background: #f5f5f7;
+  --brand-surface: #ffffff;
+  --brand-surface-2: #e8e8ed;
+  --brand-popover: #ffffff;
+
+  /* === Foreground / Text === */
+  --brand-foreground: #1d1d1f;
+  --brand-card-foreground: #1d1d1f;
+  --brand-popover-foreground: #1d1d1f;
+  --brand-muted: #e8e8ed;
+  --brand-muted-foreground: #6e6e73;
+  --brand-card: #ffffff;
+
+  /* === Brand Primary (Apple Blue) === */
+  --brand-primary: #0071e3;
+  --brand-primary-foreground: #ffffff;
+
+  /* === Borders / Inputs === */
+  --brand-border: #d2d2d7;
+  --brand-input: #d2d2d7;
+  --brand-ring: #0071e3;
+
+  /* === Radius === */
+  --brand-radius-sm: 8px;
+  --brand-radius-md: 12px;
+  --brand-radius-lg: 18px;
+
+  /* === State Colors === */
+  --state-success: #248a3d;
+  --state-warning: #c93400;
+  --state-error: #d70015;
+  --state-info: #5856d6;
+
+  /* === Extended Tokens === */
+  --ink: #1d1d1f;
+  --ink-2: #6e6e73;
+  --ink-3: #86868b;
+  --line: #d2d2d7;
+  --surface: #ffffff;
+  --surface-2: #e8e8ed;
+  --bg: #f5f5f7;
+  --brand: #0071e3;
+  --brand-ink: #ffffff;
+
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Courier New", monospace;
+
+  /* Spacing (8pt grid) */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 80px;
+
+  /* Radius */
+  --r-xs: 6px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 18px;
+  --r-pill: 999px;
+
+  /* Borders & Shadows */
+  --border: 1px solid var(--line);
+  --shadow-1: 0 1px 2px rgba(0,0,0,.04), 0 1px 1px rgba(0,0,0,.02);
+  --shadow-2: 0 4px 16px -4px rgba(0,0,0,.08);
+  --shadow-3: 0 20px 48px -16px rgba(0,0,0,.18);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js" onerror="var s=document.createElement('script');s.src='../vendor/tailwind-browser.js';document.head.appendChild(s);"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js" onerror="var s=document.createElement('script');s.src='../vendor/lucide.min.js';document.head.appendChild(s);"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--brand-background);
+    --color-foreground: var(--brand-foreground);
+    --color-card: var(--brand-card);
+    --color-card-foreground: var(--brand-card-foreground);
+    --color-popover: var(--brand-popover);
+    --color-popover-foreground: var(--brand-popover-foreground);
+    --color-primary: var(--brand-primary);
+    --color-primary-foreground: var(--brand-primary-foreground);
+    --color-muted: var(--brand-muted);
+    --color-muted-foreground: var(--brand-muted-foreground);
+    --color-border: var(--brand-border);
+    --color-input: var(--brand-input);
+    --color-ring: var(--brand-ring);
+    --radius-sm: var(--brand-radius-sm);
+    --radius-md: var(--brand-radius-md);
+    --radius-lg: var(--brand-radius-lg);
+  }
+  @layer base {
+    body { background: var(--brand-background); color: var(--brand-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--brand-background); }
+      .text-background { color: var(--brand-background); }
+      .border-background { border-color: var(--brand-background); }
+      .ring-background { --tw-ring-color: var(--brand-background); }
+      .bg-foreground { background-color: var(--brand-foreground); }
+      .text-foreground { color: var(--brand-foreground); }
+      .border-foreground { border-color: var(--brand-foreground); }
+      .ring-foreground { --tw-ring-color: var(--brand-foreground); }
+      .bg-card { background-color: var(--brand-card); }
+      .text-card { color: var(--brand-card); }
+      .border-card { border-color: var(--brand-card); }
+      .ring-card { --tw-ring-color: var(--brand-card); }
+      .bg-card-foreground { background-color: var(--brand-card-foreground); }
+      .text-card-foreground { color: var(--brand-card-foreground); }
+      .border-card-foreground { border-color: var(--brand-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--brand-card-foreground); }
+      .bg-popover { background-color: var(--brand-popover); }
+      .text-popover { color: var(--brand-popover); }
+      .border-popover { border-color: var(--brand-popover); }
+      .ring-popover { --tw-ring-color: var(--brand-popover); }
+      .bg-popover-foreground { background-color: var(--brand-popover-foreground); }
+      .text-popover-foreground { color: var(--brand-popover-foreground); }
+      .border-popover-foreground { border-color: var(--brand-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--brand-popover-foreground); }
+      .bg-primary { background-color: var(--brand-primary); }
+      .text-primary { color: var(--brand-primary); }
+      .border-primary { border-color: var(--brand-primary); }
+      .ring-primary { --tw-ring-color: var(--brand-primary); }
+      .bg-primary-foreground { background-color: var(--brand-primary-foreground); }
+      .text-primary-foreground { color: var(--brand-primary-foreground); }
+      .border-primary-foreground { border-color: var(--brand-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--brand-primary-foreground); }
+      .bg-muted { background-color: var(--brand-muted); }
+      .text-muted { color: var(--brand-muted); }
+      .border-muted { border-color: var(--brand-muted); }
+      .ring-muted { --tw-ring-color: var(--brand-muted); }
+      .bg-muted-foreground { background-color: var(--brand-muted-foreground); }
+      .text-muted-foreground { color: var(--brand-muted-foreground); }
+      .border-muted-foreground { border-color: var(--brand-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--brand-muted-foreground); }
+      .bg-border { background-color: var(--brand-border); }
+      .text-border { color: var(--brand-border); }
+      .border-border { border-color: var(--brand-border); }
+      .ring-border { --tw-ring-color: var(--brand-border); }
+      .bg-input { background-color: var(--brand-input); }
+      .text-input { color: var(--brand-input); }
+      .border-input { border-color: var(--brand-input); }
+      .ring-input { --tw-ring-color: var(--brand-input); }
+      .bg-ring { background-color: var(--brand-ring); }
+      .text-ring { color: var(--brand-ring); }
+      .border-ring { border-color: var(--brand-ring); }
+      .ring-ring { --tw-ring-color: var(--brand-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <div class="app-shell">
+      <!-- 1. Top Header Bar -->
+      <header class="app-header">
+        <a href="index.html" style="text-decoration:none;color:inherit;">
+          <div class="logo">
+            <div class="logo-main">
+              <i data-lucide="flask-conical"></i>
+              <span>灰灯实验室</span>
+            </div>
+            <div class="logo-sub">AI 鉴定台</div>
+          </div>
+        </a>
+        <nav class="header-nav">
+          <a href="dashboard.html">鉴定台</a>
+          <a href="sample-management.html">样品管理</a>
+          <a href="expert-review.html">专家复核</a>
+          <a href="monitoring-workflow.html">监测流程</a>
+          <a href="species-library.html">参考库</a>
+          <a href="compliance-matrix.html" class="active">合规映射</a>
+          <a href="report-center.html">报告导出</a>
+          <a href="model-management.html">模型管理</a>
+        </nav>
+        <div class="header-right">
+          <div class="user-name">
+            <span>张研究员</span>
+            <i data-lucide="chevron-down"></i>
+          </div>
+          <button class="notification-btn" type="button">
+            <i data-lucide="bell"></i>
+            <span class="notification-badge"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- 2. Left Sidebar -->
+      <aside class="app-sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">
+            <i data-lucide="map-pin"></i>
+            <span>监测站点</span>
+          </div>
+          <div class="sidebar-item active">
+            <i data-lucide="map-pin"></i>
+            <span>示范断面 01</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>示范断面 02</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>示范断面 03</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>示范断面 04</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>示范断面 05</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>示范断面 06</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>示范断面 07</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>示范断面 08</span>
+          </div>
+          <div class="sidebar-item">
+            <i data-lucide="map-pin"></i>
+            <span>示范断面 09</span>
+          </div>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-section">
+          <div class="sidebar-section-title">
+            <i data-lucide="zap"></i>
+            <span>快捷操作</span>
+          </div>
+          <div class="sidebar-item" data-modal="newSample" style="cursor:pointer;">
+            <i data-lucide="plus"></i>
+            <span>新建样品</span>
+          </div>
+          <div class="sidebar-item" data-modal="importSeq" style="cursor:pointer;">
+            <i data-lucide="upload"></i>
+            <span>导入序列</span>
+          </div>
+          <div class="sidebar-item" data-action="export" style="cursor:pointer;">
+            <i data-lucide="download"></i>
+            <span>导出报告</span>
+          </div>
+          <div class="sidebar-item" data-modal="finetune" style="cursor:pointer;">
+            <i data-lucide="sliders-horizontal"></i>
+            <span>模型微调</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 3. Main Content Area -->
+      <main class="app-main">
+        <!-- 3a. Page Title Row -->
+        <div class="page-title-row">
+          <div>
+            <h1 class="page-title">标准合规映射表</h1>
+            <div class="page-subtitle">标准条款 → 平台实现 · 逐条可核验</div>
+          </div>
+          <div class="title-actions">
+            <div class="date-selector">
+              <i data-lucide="calendar"></i>
+              <span>2026-09-08</span>
+            </div>
+            <button class="btn btn-primary" type="button" data-action="export">
+              <i data-lucide="download"></i>
+              <span>导出操作规程</span>
+            </button>
+          </div>
+        </div>
+
+
+        <!-- ============================== -->
+        <!-- 说明 + 图例 + KPI               -->
+        <!-- ============================== -->
+        <div class="card section-gap">
+          <div class="card-header">
+            <div class="card-title">
+              <i data-lucide="clipboard-list"></i>
+              <span>映射说明</span>
+            </div>
+            <span style="font-size:12px;color:var(--ink-3);">逐条可核验</span>
+          </div>
+          <div class="card-body">
+            <p style="font-size:13px;color:var(--ink-2);line-height:1.6;">
+              本表将现行标准的每项要求，逐条映射到本平台的实现位置。
+              <b style="color:var(--ink);">有原文依据的</b>（水利部《河湖健康评价指南（试行）》2020.8，下称"水利指南"）直接引用条款号与赋分阈值；
+              <b style="color:var(--ink);">项目自报遵循但手头无原文的</b>（HJ 1295/1296-2023）标注"待核"，不替代原文核验。
+              状态分四档：✅ 已实现 · ⚠️ 部分实现或口径待核 · ❌ 未实现 · ➕ 平台增强（标准未要求）。
+            </p>
+            <div style="display:flex;gap:var(--s-4);flex-wrap:wrap;margin-top:var(--s-3);font-size:12px;">
+              <span class="badge badge-completed"><span class="badge-dot"></span>✅ 已实现</span>
+              <span class="badge badge-pending"><span class="badge-dot"></span>⚠️ 部分/待核</span>
+              <span class="badge" style="color:var(--state-error);background:color-mix(in srgb,var(--state-error) 10%,transparent);"><span class="badge-dot"></span>❌ 未实现</span>
+              <span class="badge" style="color:var(--state-info);background:color-mix(in srgb,var(--state-info) 10%,transparent);"><span class="badge-dot"></span>➕ 平台增强</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-block">
+            <div class="info-block-title"><i data-lucide="list-checks"></i><span>映射条款</span></div>
+            <div style="font-size:28px;font-weight:600;color:var(--brand-foreground);">26</div>
+            <div style="font-size:12px;color:var(--ink-3);margin-top:2px;">覆盖 6 个分节</div>
+          </div>
+          <div class="info-block">
+            <div class="info-block-title"><i data-lucide="check-circle-2"></i><span>已实现</span></div>
+            <div style="font-size:28px;font-weight:600;color:var(--state-success);">15</div>
+            <div style="font-size:12px;color:var(--ink-3);margin-top:2px;">含质控、eDNA、审核链</div>
+          </div>
+          <div class="info-block">
+            <div class="info-block-title"><i data-lucide="alert-triangle"></i><span>部分/待核</span></div>
+            <div style="font-size:28px;font-weight:600;color:var(--state-warning);">6</div>
+            <div style="font-size:12px;color:var(--ink-3);margin-top:2px;">多为口径与阈值待核</div>
+          </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- A. 评价体系架构                 -->
+        <!-- ============================== -->
+        <div class="card section-gap">
+          <div class="card-header">
+            <div class="card-title">
+              <i data-lucide="layers"></i>
+              <span>A. 评价体系架构</span>
+            </div>
+            <span style="font-size:12px;color:var(--ink-3);">水利指南 §2 指标体系 · §4 评价</span>
+          </div>
+          <div class="card-body-tight">
+            <table class="task-table step-table">
+              <thead>
+                <tr><th style="width:36px;">#</th><th>标准条款</th><th style="width:260px;">标准要求</th><th style="width:170px;">平台实现位置</th><th style="width:90px;">状态</th><th>差距 / 说明</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="step-num">A1</td>
+                  <td>准则层架构（表 4.1.1）</td>
+                  <td>4 准则层：盆 0.2 + 水 0.3 + 生物 0.2 + 社会服务功能 0.3</td>
+                  <td>monitoring-workflow.html §4.2</td>
+                  <td><span class="badge badge-pending"><span class="badge-dot"></span>⚠️ 部分</span></td>
+                  <td>平台仅实现"生物"准则层；"盆""水""社会服务"三层无指标、无权重、无赋分。当前不是完整健康评价，只是生物评价。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">A2</td>
+                  <td>综合赋分 RHI（式 22/23）</td>
+                  <td>逐指标赋分 → 准则层加权 → 按河段长度/湖面面积加权得 RHI</td>
+                  <td>—</td>
+                  <td><span class="badge" style="color:var(--state-error);background:color-mix(in srgb,var(--state-error) 10%,transparent);"><span class="badge-dot"></span>❌ 未实现</span></td>
+                  <td>无 RHI 综合赋分公式实现；各指数独立分档，不做跨层合成。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">A3</td>
+                  <td>健康分级（表 4.2.1）</td>
+                  <td>百分制 RHI 分 5 类：≥90 非常健康（蓝）/75–90 健康（绿）/60–75 亚健康（黄）/40–60 不健康（橙）/&lt;40 劣态（红）</td>
+                  <td>monitoring-workflow.html §4.2 评价矩阵</td>
+                  <td><span class="badge badge-pending"><span class="badge-dot"></span>⚠️ 口径不同</span></td>
+                  <td>平台用"优秀/良好/轻度/中度/重度污染"5 级——这是<b>污染度</b>口径；标准要求的是<b>健康度</b>口径（RHI 百分制）。两套分级不可直接互译，需明确声明本平台输出为"生物污染等级"而非"河湖健康类别"。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- B. 生物监测指标                 -->
+        <!-- ============================== -->
+        <div class="card section-gap">
+          <div class="card-header">
+            <div class="card-title">
+              <i data-lucide="fish-symbol"></i>
+              <span>B. 生物监测指标（河流）</span>
+            </div>
+            <span style="font-size:12px;color:var(--ink-3);">水利指南 §2(三) 生物 · HJ 1295-2023</span>
+          </div>
+          <div class="card-body-tight">
+            <table class="task-table step-table">
+              <thead>
+                <tr><th style="width:36px;">#</th><th>指标</th><th style="width:260px;">标准要求</th><th style="width:170px;">平台实现位置</th><th style="width:90px;">状态</th><th>差距 / 说明</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="step-num">B1</td>
+                  <td>鱼类保有指数 FOEI（必选）</td>
+                  <td>FOEI = FO/FE×100，FE 取 1980s 前历史鱼类种数；阈值 100/75/50/25/0 → 赋分 100/60/30/10/0</td>
+                  <td>—</td>
+                  <td><span class="badge" style="color:var(--state-error);background:color-mix(in srgb,var(--state-error) 10%,transparent);"><span class="badge-dot"></span>❌ 未实现</span></td>
+                  <td>河流生物<b>必选</b>指标。缺历史基线（1980s 鱼类名录）——这是数据缺口，不是工程缺口。磁窑河/余杭塘河 2021 名录可作现状 FO，但 FE 需历史资料。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">B2</td>
+                  <td>大型底栖无脊椎动物 B-IBI（备选）</td>
+                  <td>BIBIS = BIBIO/BIBIE×100，BIBIE 取所在水生态分区最佳期望值；阈值 1.62/1.03/0.31/0.1/0 → 100/80/60/30/0</td>
+                  <td>monitoring-workflow.html §4.1</td>
+                  <td><span class="badge badge-pending"><span class="badge-dot"></span>⚠️ 口径不同</span></td>
+                  <td>平台用的是 BI、FBI、EPT%（经典污染生物学指数），不是 B-IBI 参考点对比法。二者都评价底栖，但 B-IBI 需要参考点数据并选核心指标。需明确：平台当前输出的是 BI/FBI，不是 B-IBI。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">B3</td>
+                  <td>水鸟状况（备选）</td>
+                  <td>按种类/数量/珍稀度分 5 级赋分（好 90–100 / 较好 80–90 / 一般 60–80 / 较差 30–60 / 非常差 0–30）</td>
+                  <td>species-library.html（鸟类 21 种名录）</td>
+                  <td><span class="badge badge-pending"><span class="badge-dot"></span>⚠️ 部分</span></td>
+                  <td>有鸟类名录与照片，但无现场观测数据、无分级赋分实现。名录 ≠ 调查。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">B4</td>
+                  <td>水生植物群落状况（备选）</td>
+                  <td>按丰富/较丰富/一般/较少/无 5 级赋分，每 5–10 km 一断面</td>
+                  <td>—</td>
+                  <td><span class="badge" style="color:var(--state-error);background:color-mix(in srgb,var(--state-error) 10%,transparent);"><span class="badge-dot"></span>❌ 未实现</span></td>
+                  <td>无水生植物调查模块、无评价。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">B5</td>
+                  <td>鱼类 IBI</td>
+                  <td>HJ 1295 框架下鱼类生物完整性指数；阈值需对照原文</td>
+                  <td>monitoring-workflow.html §4.2</td>
+                  <td><span class="badge badge-pending"><span class="badge-dot"></span>⚠️ 待核</span></td>
+                  <td>平台阈值 50–60/40–49/30–39/20–29/0–19 为自填分级，未引 HJ 1295 原文条款号。需核：IBI 指标选择（12 项/18 项）与赋分是否与 HJ 1295 附录一致。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">B6</td>
+                  <td>着生藻类 IBD</td>
+                  <td>德朗 IBD（diatom biological index），范围 1–20</td>
+                  <td>monitoring-workflow.html §4.2</td>
+                  <td><span class="badge badge-pending"><span class="badge-dot"></span>⚠️ 待核</span></td>
+                  <td>阈值 17–20/13–16/9–12/5–8/1–4 与经典 IBD 分级一致，但需声明引用来源（Prygiel & Coste 1999）而非 HJ 1295。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">B7</td>
+                  <td>浮游植物 Shannon/Margalef/Pielou</td>
+                  <td>HJ 1295 对浮游植物多样性的评价要求（待原文核）</td>
+                  <td>monitoring-workflow.html §4.1</td>
+                  <td><span class="badge badge-pending"><span class="badge-dot"></span>⚠️ 待核</span></td>
+                  <td>公式正确（H'=−ΣPi·lnPi，d=(S−1)/lnN，J'=H'/lnS），但分级阈值（H'&gt;3 清洁等）源自经典污染生物学（欧盟/国内教材），非 HJ 1295 规定。页面不应笼统写"HJ 1295 合规"。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- C. 频次与断面                   -->
+        <!-- ============================== -->
+        <div class="card section-gap">
+          <div class="card-header">
+            <div class="card-title">
+              <i data-lucide="map-pin"></i>
+              <span>C. 监测频次与断面布设</span>
+            </div>
+            <span style="font-size:12px;color:var(--ink-3);">水利指南 §3 · HJ 1295 §1.3</span>
+          </div>
+          <div class="card-body-tight">
+            <table class="task-table step-table">
+              <thead>
+                <tr><th style="width:36px;">#</th><th>要求</th><th style="width:260px;">标准要求</th><th style="width:170px;">平台实现位置</th><th style="width:90px;">状态</th><th>差距 / 说明</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="step-num">C1</td>
+                  <td>断面类型</td>
+                  <td>对照/控制/削减断面，河流按河段评价单元</td>
+                  <td>monitoring-workflow.html §1.4</td>
+                  <td><span class="badge badge-completed"><span class="badge-dot"></span>✅ 已实现</span></td>
+                  <td>9 个示范断面含对照（上游）、控制（中游）、削减（下游）三类，与标准一致。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">C2</td>
+                  <td>水生生物监测频次</td>
+                  <td>HJ 1295 常规要求：浮游植物季度/月、底栖春秋、鱼类春秋（待原文核）</td>
+                  <td>monitoring-workflow.html §1.3</td>
+                  <td><span class="badge badge-completed"><span class="badge-dot"></span>✅ 已实现</span></td>
+                  <td>平台：浮游植物 4 次/年、着生藻 2 次、底栖 2 次、鱼类 2 次、eDNA 4 次——与 HJ 1295 常规频次一致。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">C3</td>
+                  <td>社会服务功能频次</td>
+                  <td>水利指南 §3.2：防洪/供水/水质/公众满意度 1 次/年</td>
+                  <td>—</td>
+                  <td><span class="badge" style="color:var(--state-error);background:color-mix(in srgb,var(--state-error) 10%,transparent);"><span class="badge-dot"></span>❌ 未实现</span></td>
+                  <td>随 A1 准则层缺口一并缺失。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">C4</td>
+                  <td>多样品综合为代表值</td>
+                  <td>水生生物类群同断面多样品综合为一个代表值；多断面按河长/湖面加权</td>
+                  <td>monitoring-workflow.html §2 各节</td>
+                  <td><span class="badge badge-completed"><span class="badge-dot"></span>✅ 已实现</span></td>
+                  <td>每断面≥3 平行样、eDNA≥3 重复，均综合为断面代表值。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- D. 采样与鉴定质控               -->
+        <!-- ============================== -->
+        <div class="card section-gap">
+          <div class="card-header">
+            <div class="card-title">
+              <i data-lucide="shield-check"></i>
+              <span>D. 采样与鉴定质控</span>
+            </div>
+            <span style="font-size:12px;color:var(--ink-3);">HJ 1295 · CMA/CNAS 体系要求</span>
+          </div>
+          <div class="card-body-tight">
+            <table class="task-table step-table">
+              <thead>
+                <tr><th style="width:36px;">#</th><th>质控项</th><th style="width:260px;">要求</th><th style="width:170px;">平台实现位置</th><th style="width:90px;">状态</th><th>差距 / 说明</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="step-num">D1</td>
+                  <td>现场平行样</td>
+                  <td>≥10%，标签双编号</td>
+                  <td>monitoring-workflow.html §2 Phase1</td>
+                  <td><span class="badge badge-completed"><span class="badge-dot"></span>✅ 已实现</span></td>
+                  <td>已写入 SOP。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">D2</td>
+                  <td>鉴定个体数</td>
+                  <td>浮游 ≥200 个体/样，硅藻 ≥300 壳体/样</td>
+                  <td>monitoring-workflow.html §2 Phase2</td>
+                  <td><span class="badge badge-completed"><span class="badge-dot"></span>✅ 已实现</span></td>
+                  <td>已写入 SOP。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">D3</td>
+                  <td>双盲复核 + 仲裁</td>
+                  <td>双盲复核率 100%，仲裁一致率 ≥95%</td>
+                  <td>monitoring-workflow.html §2 Phase3</td>
+                  <td><span class="badge badge-completed"><span class="badge-dot"></span>✅ 已实现</span></td>
+                  <td>SOP 已写；但专家复核页"批量通过"为纯前端演示，无实际复核记录落库（见 README Backlog）。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">D4</td>
+                  <td>三级审核</td>
+                  <td>编制人自检 / 技术负责人 / 授权签字人（CMA/CNAS）</td>
+                  <td>monitoring-workflow.html §4.3</td>
+                  <td><span class="badge badge-completed"><span class="badge-dot"></span>✅ 已实现</span></td>
+                  <td>流程已画；但报告中心未真正跑审核状态机，仍为演示数据。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">D5</td>
+                  <td>原始数据保存</td>
+                  <td>≥5 年</td>
+                  <td>monitoring-workflow.html §2.5-D</td>
+                  <td><span class="badge badge-completed"><span class="badge-dot"></span>✅ 已实现</span></td>
+                  <td>eDNA 节已写入。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- E. eDNA 专项                    -->
+        <!-- ============================== -->
+        <div class="card section-gap">
+          <div class="card-header">
+            <div class="card-title">
+              <i data-lucide="dna"></i>
+              <span>E. eDNA 专项</span>
+            </div>
+            <span style="font-size:12px;color:var(--ink-3);">2.5-A ~ 2.5-D</span>
+          </div>
+          <div class="card-body-tight">
+            <table class="task-table step-table">
+              <thead>
+                <tr><th style="width:36px;">#</th><th>环节</th><th style="width:260px;">要求</th><th style="width:170px;">平台实现位置</th><th style="width:90px;">状态</th><th>差距 / 说明</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="step-num">E1</td>
+                  <td>引物与标记基因</td>
+                  <td>12S MiFish-F/R（主用）+ 16S（交叉验证）；COI 条形码种级</td>
+                  <td>monitoring-workflow.html §2.5-B + 速查表</td>
+                  <td><span class="badge badge-completed"><span class="badge-dot"></span>✅ 已实现</span></td>
+                  <td>引物对、片段长度、覆盖类群完整。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">E2</td>
+                  <td>测序深度与内标</td>
+                  <td>≥30000 reads/样；5% PhiX 内标</td>
+                  <td>monitoring-workflow.html §2.5-C</td>
+                  <td><span class="badge badge-completed"><span class="badge-dot"></span>✅ 已实现</span></td>
+                  <td>已写入 SOP。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">E3</td>
+                  <td>生信 pipeline</td>
+                  <td>FastQC → cutadapt → Trimmomatic → DADA2 → MIDORI2/NCBI 比对</td>
+                  <td>monitoring-workflow.html §2.5-C</td>
+                  <td><span class="badge badge-completed"><span class="badge-dot"></span>✅ 已实现</span></td>
+                  <td>工具链与参数（truncLen、maxEE、identity≥97%、coverage≥90%）完整。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">E4</td>
+                  <td>污染控制</td>
+                  <td>现场空白、阴性对照；去除仅阴性对照 ASV；reads&lt;10 低频 ASV 剔除</td>
+                  <td>monitoring-workflow.html §2.5-A/D</td>
+                  <td><span class="badge badge-completed"><span class="badge-dot"></span>✅ 已实现</span></td>
+                  <td>已写入 SOP。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">E5</td>
+                  <td>形态学交叉验证</td>
+                  <td>eDNA 名录 vs 同断面形态学名录；一致性率 ≥75%，&lt;60% 排查污染/引物偏好</td>
+                  <td>monitoring-workflow.html §2.5-D</td>
+                  <td><span class="badge badge-completed"><span class="badge-dot"></span>✅ 已实现</span></td>
+                  <td>已写入 SOP。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- F. 平台增强项                   -->
+        <!-- ============================== -->
+        <div class="card section-gap">
+          <div class="card-header">
+            <div class="card-title">
+              <i data-lucide="sparkles"></i>
+              <span>F. 平台增强项（标准未要求）</span>
+            </div>
+            <span style="font-size:12px;color:var(--ink-3);">AI / 数据资产层</span>
+          </div>
+          <div class="card-body-tight">
+            <table class="task-table step-table">
+              <thead>
+                <tr><th style="width:36px;">#</th><th>增强项</th><th style="width:260px;">内容</th><th style="width:170px;">平台位置</th><th style="width:90px;">状态</th><th>备注</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="step-num">F1</td>
+                  <td>AI 预鉴定 + 置信度分级</td>
+                  <td>≥95% 直接采信；80–95% 送专家；&lt;80% 待定</td>
+                  <td>monitoring-workflow.html §2.5-D / expert-review.html</td>
+                  <td><span class="badge" style="color:var(--state-info);background:color-mix(in srgb,var(--state-info) 10%,transparent);"><span class="badge-dot"></span>➕ 增强</span></td>
+                  <td>标准未要求 AI；但分级阈值（95/80）需用真实鉴定集验证，当前无实测准确率。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">F2</td>
+                  <td>CoSFISH 条形码参考库</td>
+                  <td>21,535 COI + 1,074 18S（珠江水产所，DOI 10.1093/database/baae038）</td>
+                  <td>species-library.html</td>
+                  <td><span class="badge" style="color:var(--state-info);background:color-mix(in srgb,var(--state-info) 10%,transparent);"><span class="badge-dot"></span>➕ 增强</span></td>
+                  <td>真实数据，可溯源。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">F3</td>
+                  <td>物种照片离线库</td>
+                  <td>246/247 种真实照片，本地 assets，带 photoCredit</td>
+                  <td>species-library.html</td>
+                  <td><span class="badge" style="color:var(--state-info);background:color-mix(in srgb,var(--state-info) 10%,transparent);"><span class="badge-dot"></span>➕ 增强</span></td>
+                  <td>5 种显微物种如实留空。</td>
+                </tr>
+                <tr>
+                  <td class="step-num">F4</td>
+                  <td>模型性能指标</td>
+                  <td>底栖 91.2% / 硅藻 94.8% / eDNA 86.3%（训练样本 12.4k/18.6k/8.2k）</td>
+                  <td>model-management.html</td>
+                  <td><span class="badge badge-pending"><span class="badge-dot"></span>⚠️ 待核</span></td>
+                  <td><b>红线：</b>这些数字当前无真实评估集支撑，不能作为实测结果展示。要么补最小验证集，要么标注"示意数据"。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- 关键差异提示                    -->
+        <!-- ============================== -->
+        <div class="card section-gap">
+          <div class="card-header">
+            <div class="card-title">
+              <i data-lucide="alert-triangle"></i>
+              <span>三处必须说清的口径差异</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="info-block" style="margin-bottom:var(--s-3);">
+              <div class="info-block-title"><i data-lucide="alert-circle"></i><span>1. "HJ 1295 合规"是声明，不是证据</span></div>
+              <p style="font-size:13px;color:var(--ink-2);line-height:1.6;">
+                页面多处标注"HJ 1295/1296 合规"，但分级阈值（H'&gt;3 清洁、BI&lt;5 清洁等）源自经典污染生物学，未引 HJ 1295 具体条款号。
+                建议：要么逐条补 HJ 1295 条款引用，要么把页面措辞改为"参考 HJ 1295/1296 框架"。
+              </p>
+            </div>
+            <div class="info-block" style="margin-bottom:var(--s-3);">
+              <div class="info-block-title"><i data-lucide="alert-circle"></i><span>2. 输出的是"污染等级"，不是"健康类别"</span></div>
+              <p style="font-size:13px;color:var(--ink-2);line-height:1.6;">
+                标准要求的是 RHI 百分制 → 5 类健康（非常健康/健康/亚健康/不健康/劣态）；平台输出的是 5 级污染（优秀/良好/轻/中/重污染）。
+                两者不能直接互译。对外报告时须标注输出口径。
+              </p>
+            </div>
+            <div class="info-block">
+              <div class="info-block-title"><i data-lucide="alert-circle"></i><span>3. 缺历史基线 → FOEI 做不出来</span></div>
+              <p style="font-size:13px;color:var(--ink-2);line-height:1.6;">
+                河流生物必选指标 FOEI 需要 1980s 前历史鱼类种数 FE。现有名录（磁窑河 2021、余杭塘河 2021）只能算现状 FO，不能算 FOEI。
+                补这条数据（历史文献、鱼类志、科考记录）比补代码更重要。
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- footer -->
+        <div class="app-footer">
+          灰灯实验室 AI 鉴定台 v1.5 · 标准合规映射表<br/>
+          依据：水利部《河湖健康评价指南（试行）》(2020.8) 逐条对照 · HJ 1295/1296-2023 待原文核验<br/>
+          26 条款 · 15 ✅ / 6 ⚠️ / 5 ❌
+        </div>
+      </main>
+    </div>
+
+    <script src="../shared-app.js"></script>
+    <script>lucide.createIcons();</script>
+
+    <style id="critical-layout">
+      /* === Font Foundation === */
+      body, .app-shell {
+        font-family: var(--font-sans);
+        font-size: 14px;
+      }
+
+      /* === App Shell Grid === */
+      .app-shell {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        grid-template-rows: 56px 1fr;
+        grid-template-areas: "header header" "sidebar main";
+        min-height: 100vh;
+        background: var(--brand-background);
+      }
+
+      /* === Header === */
+      .app-header {
+        grid-area: header;
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        height: 56px;
+        background: var(--brand-surface);
+        border-bottom: 1px solid var(--brand-border);
+        display: flex;
+        align-items: center;
+        padding: 0 var(--s-5);
+        gap: var(--s-5);
+      }
+      .logo {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.3;
+        flex-shrink: 0;
+      }
+      .logo-main {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--brand-foreground);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .logo-main [data-lucide] {
+        width: 18px;
+        height: 18px;
+        color: var(--brand-primary);
+      }
+      .logo-sub {
+        font-size: 11px;
+        color: var(--ink-3);
+        padding-left: 24px;
+      }
+      .header-nav {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        flex: 1;
+        justify-content: center;
+      }
+      .header-nav a {
+        padding: 6px 14px;
+        font-size: 13px;
+        color: var(--brand-muted-foreground);
+        text-decoration: none;
+        border-radius: var(--r-sm);
+        white-space: nowrap;
+        transition: background 0.15s, color 0.15s;
+      }
+      .header-nav a:hover {
+        color: var(--brand-foreground);
+        background: var(--brand-surface-2);
+      }
+      .header-nav a.active {
+        color: var(--brand-primary);
+        background: color-mix(in srgb, var(--brand-primary) 8%, transparent);
+        font-weight: 500;
+      }
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: var(--s-3);
+        flex-shrink: 0;
+      }
+      .user-name {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 13px;
+        color: var(--brand-foreground);
+        cursor: pointer;
+      }
+      .user-name [data-lucide] {
+        width: 14px;
+        height: 14px;
+        color: var(--brand-muted-foreground);
+      }
+      .notification-btn {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--r-sm);
+        color: var(--brand-muted-foreground);
+        cursor: pointer;
+        position: relative;
+        background: none;
+        border: none;
+      }
+      .notification-btn:hover {
+        background: var(--brand-surface-2);
+        color: var(--brand-foreground);
+      }
+      .notification-btn [data-lucide] {
+        width: 18px;
+        height: 18px;
+      }
+      .notification-badge {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--state-error);
+        border: 1.5px solid var(--brand-surface);
+      }
+
+      /* === Sidebar === */
+      .app-sidebar {
+        grid-area: sidebar;
+        background: var(--brand-surface);
+        border-right: 1px solid var(--brand-border);
+        overflow-y: auto;
+        height: calc(100vh - 56px);
+        position: sticky;
+        top: 56px;
+      }
+      .sidebar-section {
+        padding: var(--s-4) 0 var(--s-1);
+      }
+      .sidebar-section-title {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--ink-3);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0 var(--s-4);
+        margin-bottom: var(--s-2);
+      }
+      .sidebar-section-title [data-lucide] {
+        width: 14px;
+        height: 14px;
+      }
+      .sidebar-item {
+        display: flex;
+        align-items: center;
+        gap: var(--s-2);
+        padding: 8px var(--s-4);
+        font-size: 13px;
+        color: var(--brand-foreground);
+        cursor: pointer;
+        border-radius: 0;
+        margin: 0;
+        transition: background 0.12s;
+      }
+      .sidebar-item:hover {
+        background: var(--brand-surface-2);
+      }
+      .sidebar-item.active {
+        background: color-mix(in srgb, var(--brand-primary) 7%, transparent);
+        color: var(--brand-primary);
+        font-weight: 500;
+        border-left: 3px solid var(--brand-primary);
+        padding-left: calc(var(--s-4) - 3px);
+      }
+      .sidebar-item [data-lucide] {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        color: var(--ink-2);
+      }
+      .sidebar-item.active [data-lucide] {
+        color: var(--brand-primary);
+      }
+      .sidebar-divider {
+        height: 1px;
+        background: var(--brand-border);
+        margin: var(--s-3) var(--s-4);
+      }
+
+      /* === Main Content === */
+      .app-main {
+        grid-area: main;
+        padding: var(--s-5);
+        overflow-x: hidden;
+        min-width: 0;
+      }
+
+      /* === Page Title Row === */
+      .page-title-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: var(--s-5);
+        gap: var(--s-4);
+        flex-wrap: wrap;
+      }
+      .page-title {
+        font-size: 22px;
+        font-weight: 600;
+        color: var(--brand-foreground);
+        line-height: 1.3;
+      }
+      .page-subtitle {
+        font-size: 13px;
+        color: var(--ink-2);
+        margin-top: 2px;
+      }
+      .title-actions {
+        display: flex;
+        align-items: center;
+        gap: var(--s-3);
+      }
+      .date-selector {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 12px;
+        border: 1px solid var(--brand-border);
+        border-radius: var(--r-md);
+        font-size: 13px;
+        color: var(--brand-foreground);
+        background: var(--brand-surface);
+        cursor: pointer;
+        font-variant-numeric: tabular-nums;
+      }
+      .date-selector [data-lucide] {
+        width: 14px;
+        height: 14px;
+        color: var(--brand-muted-foreground);
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 16px;
+        border-radius: var(--r-md);
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        border: none;
+        white-space: nowrap;
+        transition: background 0.15s;
+      }
+      .btn-primary {
+        background: var(--brand-primary);
+        color: var(--brand-primary-foreground);
+      }
+      .btn-primary:hover {
+        background: color-mix(in srgb, var(--brand-primary) 88%, black);
+      }
+      .btn [data-lucide] {
+        width: 14px;
+        height: 14px;
+      }
+
+      /* === Card === */
+      .card {
+        background: var(--brand-card);
+        border: 1px solid var(--brand-border);
+        border-radius: var(--r-md);
+        box-shadow: var(--shadow-1);
+        overflow: hidden;
+      }
+      .card-header {
+        padding: var(--s-3) var(--s-4);
+        border-bottom: 1px solid var(--brand-border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .card-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--brand-foreground);
+        display: flex;
+        align-items: center;
+        gap: var(--s-2);
+      }
+      .card-title [data-lucide] {
+        width: 16px;
+        height: 16px;
+        color: var(--brand-primary);
+      }
+      .card-body { padding: var(--s-3) var(--s-4); }
+      .card-body-tight { padding: 0; }
+
+      /* === Task Table === */
+      .task-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      .task-table th {
+        text-align: left;
+        padding: 9px var(--s-3);
+        font-weight: 600;
+        color: var(--brand-muted-foreground);
+        border-bottom: 1px solid var(--brand-border);
+        white-space: nowrap;
+        font-size: 12px;
+        background: var(--brand-surface-2);
+      }
+      .task-table td {
+        padding: 9px var(--s-3);
+        border-bottom: 1px solid var(--brand-border);
+        color: var(--brand-foreground);
+      }
+      .task-table tr:last-child td { border-bottom: none; }
+      .task-table tbody tr:hover { background: var(--brand-surface-2); }
+      .task-table .mono {
+        font-family: var(--font-mono);
+        font-variant-numeric: tabular-nums;
+        font-size: 12px;
+      }
+      .task-table .latin {
+        font-style: italic;
+        color: var(--ink-2);
+        font-size: 12px;
+      }
+      .task-table .action-link {
+        color: var(--brand-primary);
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      .task-table .action-link:hover {
+        text-decoration: underline;
+      }
+
+      /* === Status Badges === */
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 2px 8px;
+        border-radius: var(--r-sm);
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .badge-completed {
+        color: var(--state-success);
+        background: color-mix(in srgb, var(--state-success) 10%, transparent);
+      }
+      .badge-pending {
+        color: var(--state-warning);
+        background: color-mix(in srgb, var(--state-warning) 10%, transparent);
+      }
+      .badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: currentColor;
+        flex-shrink: 0;
+      }
+
+      /* === Timeline === */
+      .timeline {
+        display: flex;
+        flex-direction: column;
+        gap: var(--s-4);
+      }
+      .timeline-item {
+        display: flex;
+        gap: var(--s-3);
+        align-items: flex-start;
+      }
+      .timeline-dot {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--brand-surface-2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        color: var(--brand-primary);
+      }
+      .timeline-dot [data-lucide] {
+        width: 14px;
+        height: 14px;
+      }
+      .timeline-content { flex: 1; min-width: 0; }
+      .timeline-text {
+        font-size: 13px;
+        color: var(--brand-foreground);
+        line-height: 1.45;
+      }
+      .timeline-time {
+        font-size: 11px;
+        color: var(--ink-3);
+        margin-top: 2px;
+      }
+
+      /* === Footer === */
+      .app-footer {
+        padding: var(--s-4) 0;
+        border-top: 1px solid var(--brand-border);
+        text-align: center;
+        font-size: 12px;
+        color: var(--ink-3);
+        font-variant-numeric: tabular-nums;
+        margin-top: var(--s-5);
+      }
+
+      /* === Responsive (base) === */
+      @media (max-width: 1024px) {
+        .app-shell {
+          grid-template-columns: 1fr;
+          grid-template-areas: "header" "main";
+        }
+        .app-sidebar { display: none; }
+        .header-nav { display: none; }
+      }
+      @media (max-width: 640px) {
+        .page-title { font-size: 18px; }
+      }
+
+      /* ===========================
+         WORKFLOW-SPECIFIC CSS
+         =========================== */
+
+      /* Workflow Flowchart */
+      .workflow-flow {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0;
+        padding: var(--s-5) var(--s-4);
+      }
+      .workflow-node {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        padding: var(--s-3) var(--s-4);
+        border: 1px solid var(--brand-border);
+        border-radius: var(--r-md);
+        background: var(--brand-surface);
+        min-width: 100px;
+        flex-shrink: 0;
+        position: relative;
+      }
+      .workflow-node-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: color-mix(in srgb, var(--brand-primary) 10%, transparent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--brand-primary);
+      }
+      .workflow-node-icon [data-lucide] {
+        width: 16px;
+        height: 16px;
+      }
+      .workflow-node-label {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--brand-foreground);
+        white-space: nowrap;
+      }
+      .workflow-arrow {
+        flex-shrink: 0;
+        width: 24px;
+        height: 1px;
+        background: var(--brand-border);
+        position: relative;
+        margin: 0 2px;
+      }
+      .workflow-arrow::after {
+        content: '';
+        position: absolute;
+        right: -1px;
+        top: -3px;
+        border: 3.5px solid transparent;
+        border-left-color: var(--brand-border);
+      }
+
+      /* Phase Badge */
+      .phase-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 3px 10px;
+        border-radius: var(--r-pill);
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--brand-primary);
+        background: color-mix(in srgb, var(--brand-primary) 10%, transparent);
+      }
+
+      /* Info Grid */
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--s-4);
+        margin-bottom: var(--s-5);
+      }
+      .info-grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--s-4);
+      }
+      .info-block {
+        background: var(--brand-surface-2);
+        border-radius: var(--r-md);
+        padding: var(--s-4);
+        border: 1px solid var(--brand-border);
+      }
+      .info-block-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--brand-foreground);
+        margin-bottom: var(--s-3);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .info-block-title [data-lucide] {
+        width: 15px;
+        height: 15px;
+        color: var(--brand-primary);
+      }
+      .info-block ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .info-block li {
+        font-size: 12px;
+        color: var(--ink-2);
+        line-height: 1.5;
+        padding-left: 14px;
+        position: relative;
+      }
+      .info-block li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 7px;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--brand-primary);
+      }
+
+      /* Step Table (reuses task-table) */
+      .step-table th {
+        font-size: 11px;
+        white-space: nowrap;
+      }
+      .step-table td {
+        vertical-align: top;
+        line-height: 1.45;
+      }
+      .step-table .step-num {
+        font-family: var(--font-mono);
+        font-weight: 600;
+        color: var(--brand-primary);
+        white-space: nowrap;
+      }
+
+      /* Section Spacing */
+      .section-gap {
+        margin-bottom: var(--s-5);
+      }
+
+      /* Evaluation Table */
+      .eval-table th {
+        text-align: center;
+        font-size: 11px;
+      }
+      .eval-table td {
+        text-align: center;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-variant-numeric: tabular-nums;
+      }
+      .eval-table td:first-child,
+      .eval-table th:first-child {
+        text-align: left;
+        font-family: var(--font-sans);
+      }
+      .eval-table .eval-excellent { color: var(--state-success); }
+      .eval-table .eval-good { color: var(--brand-primary); }
+      .eval-table .eval-mild { color: var(--state-warning); }
+      .eval-table .eval-moderate { color: var(--state-warning); }
+      .eval-table .eval-severe { color: var(--state-error); }
+
+      /* Phase sub-card header */
+      .phase-header {
+        display: flex;
+        align-items: center;
+        gap: var(--s-3);
+        padding: var(--s-3) var(--s-4);
+        border-bottom: 1px solid var(--brand-border);
+        background: var(--brand-surface-2);
+      }
+      .phase-header [data-lucide] {
+        width: 18px;
+        height: 18px;
+        color: var(--brand-primary);
+      }
+      .phase-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--brand-foreground);
+        flex: 1;
+      }
+
+      /* Responsive (workflow) */
+      @media (max-width: 1024px) {
+        .info-grid { grid-template-columns: 1fr; }
+        .info-grid-2 { grid-template-columns: 1fr; }
+        .workflow-flow { flex-direction: column; }
+        .workflow-arrow { width: 1px; height: 20px; }
+        .workflow-arrow::after { right: -3px; top: 0; border: 3.5px solid transparent; border-top-color: var(--brand-border); border-left-color: transparent; }
+      }
+    </style>
+</body>
+</html>
