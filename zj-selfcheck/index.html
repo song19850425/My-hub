@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>浙江绩效分级 · 自诊助手 | 免费初判</title>
+<style>
+/* === Design System === */
+:root{
+  --ink:#1f2933; --soft:#4a5563; --gray:#5F5E5A;
+  --navy:#16284a; --navy2:#2a3d5f;
+  --rose:#d6336c; --rose-light:#fce4ec;
+  --green:#3B6D11; --green-light:#EAF3DE;
+  --amber:#B45B0D; --amber-light:#FAEEDA;
+  --red:#A32D2D; --red-light:#FCEBEB;
+  --blue:#185FA5; --blue-light:#E6F1FB;
+  --card:#fffdf8; --paper:#f6f3ec;
+  --line:rgba(22,40,74,.14); --line-strong:rgba(22,40,74,.28);
+  --shadow:0 2px 6px rgba(22,40,74,.08);
+  --radius:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;min-height:100vh}
+.wrap{max-width:820px;margin:0 auto;padding:20px 16px 40px}
+
+/* === Header === */
+.tool-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--navy);border-radius:var(--radius);color:#fff;margin-bottom:20px}
+.tool-header h1{font-size:16px;font-weight:600}
+.tool-header .tag{font-size:11px;background:rgba(255,255,255,.12);padding:3px 9px;border-radius:6px}
+.tool-header .ver{font-size:11px;opacity:.6}
+
+/* === Progress Bar === */
+.progress-wrap{margin:0 0 16px}
+.progress-track{background:var(--line);border-radius:10px;height:5px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--navy),var(--rose));border-radius:10px;transition:width .5s ease}
+.progress-labels{display:flex;justify-content:space-between;margin-top:5px;font-size:11px;color:var(--gray)}
+
+/* === Steps Nav === */
+.steps-nav{display:flex;gap:0;margin-bottom:22px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.step-btn{flex:1;padding:10px 6px;text-align:center;font-size:12px;color:var(--gray);cursor:pointer;border:0;background:transparent;transition:all .2s;position:relative}
+.step-btn:hover{background:rgba(22,40,74,.03)}
+.step-btn.active{color:var(--navy);font-weight:600;background:var(--blue-light)}
+.step-btn.active::after{content:'';position:absolute;bottom:0;left:20%;width:60%;height:3px;background:var(--navy);border-radius:3px}
+.step-btn.done{color:var(--green)}.step-btn.done::after{content:'✓';margin-left:3px;font-size:10px}
+.step-btn .num{display:inline-block;width:18px;height:18px;line-height:18px;border-radius:50%;font-size:10px;margin-right:4px;background:var(--line);color:var(--gray)}
+.step-btn.active .num{background:var(--navy);color:#fff}
+.step-btn.done .num{background:var(--green);color:#fff}
+
+/* === Panels === */
+.panel{display:none}
+.panel.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.panel-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin-bottom:16px}
+.panel-card h2{font-size:17px;color:var(--navy);font-weight:600;margin-bottom:4px}
+.panel-card .sub{font-size:13px;color:var(--gray);margin-bottom:14px}
+.panel-card .hint{font-size:12px;color:var(--soft);padding:8px 12px;background:var(--blue-light);border-radius:8px;margin-bottom:12px}
+
+/* === Form Elements === */
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.form-group label .req{color:var(--red);margin-left:2px}
+input[type="text"],input[type="number"],select,.fake-select{width:100%;padding:8px 12px;border:1px solid var(--line);border-radius:8px;font-size:13.5px;background:var(--card);color:var(--ink);transition:border-color .2s}
+input:focus,select:focus{border-color:var(--navy);outline:none}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+
+/* === Dimension Cards (Step 4) === */
+.dim-card{border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px;transition:border-color .2s}
+.dim-card:hover{border-color:var(--navy2)}
+.dim-card .dim-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.dim-card .dim-name{font-size:14px;font-weight:600;color:var(--navy)}
+.dim-card .dim-status{font-size:11px;padding:2px 8px;border-radius:6px}
+.dim-card .items{display:grid;gap:8px}
+.dim-card .item{display:flex;align-items:center;gap:8px;padding:6px 8px;background:var(--paper);border-radius:8px}
+.dim-card .item label{font-size:12.5px;color:var(--soft);flex:1;min-width:0}
+.dim-card .item input[type="range"]{-webkit-appearance:none;width:80px;height:4px;border-radius:2px;background:var(--line);outline:none}
+.dim-card .item input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--navy);cursor:pointer}
+.dim-card .item .value{font-size:12px;font-weight:600;min-width:28px;text-align:center}
+.dim-card .item .desc{font-size:11px;color:var(--gray);flex:0 0 50px;text-align:right}
+.select-group{display:flex;gap:6px;flex-wrap:wrap}
+.select-group button{padding:4px 12px;border:1px solid var(--line);border-radius:6px;font-size:12px;background:var(--card);cursor:pointer;color:var(--soft);transition:all .15s}
+.select-group button.selected{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* === Score Badge === */
+.score-circle{width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.score-ok{background:var(--green-light);color:var(--green)}
+.score-warn{background:var(--amber-light);color:var(--amber)}
+.score-bad{background:var(--red-light);color:var(--red)}
+
+/* === Result Card === */
+.result-card{border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin-bottom:12px}
+.result-card h3{font-size:14px;color:var(--navy);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.result-card .score-bar{display:flex;align-items:center;gap:10px;margin:6px 0}
+.result-card .bar{flex:1;height:10px;border-radius:6px;background:var(--line);overflow:hidden}
+.result-card .bar-fill{height:100%;border-radius:6px;transition:width .6s ease}
+.result-card .bar-fill.green{background:var(--green)}
+.result-card .bar-fill.amber{background:#D98E2E}
+.result-card .bar-fill.red{background:var(--red)}
+.result-card .score-text{font-size:13px;font-weight:600;min-width:50px;text-align:right}
+.result-card .gap-list{padding:0;list-style:none}
+.result-card .gap-list li{font-size:12.5px;padding:4px 0;border-bottom:1px solid var(--line);color:var(--soft)}
+.result-card .gap-list li:last-child{border:0}
+.result-card .gap-list .urgent{color:var(--red);font-weight:500}
+.result-card .gap-list .normal{color:var(--amber)}
+
+/* === Radar Chart Area === */
+.radar-wrap{display:flex;justify-content:center;padding:10px 0}
+
+/* === Roadmap === */
+.roadmap-item{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.roadmap-item:last-child{border:0}
+.roadmap-item .priority{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0}
+.roadmap-item .p-high{background:var(--red-light);color:var(--red)}
+.roadmap-item .p-mid{background:var(--amber-light);color:var(--amber)}
+.roadmap-item .p-low{background:var(--green-light);color:var(--green)}
+.roadmap-item .info{flex:1}
+.roadmap-item .info .title{font-size:13px;font-weight:600;color:var(--ink)}
+.roadmap-item .info .desc{font-size:12px;color:var(--soft);margin:2px 0}
+.roadmap-item .info .meta{font-size:11px;color:var(--gray)}
+.roadmap-item .info .meta span{margin-right:14px}
+
+/* === Buttons === */
+.btn-wrap{display:flex;gap:10px;margin-top:16px;justify-content:space-between}
+.btn{padding:9px 20px;border-radius:8px;font-size:13.5px;font-weight:500;cursor:pointer;border:1px solid var(--line);transition:all .15s;background:var(--card);color:var(--ink)}
+.btn:hover{background:var(--paper)}
+.btn-primary{background:var(--navy);color:#fff;border-color:var(--navy)}
+.btn-primary:hover{background:var(--navy2)}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed}
+.btn-rose{background:var(--rose);color:#fff;border-color:var(--rose)}
+.btn-rose:hover{background:#c02d5e}
+.btn-outline{background:transparent;border:1px solid var(--navy);color:var(--navy)}
+.btn-outline:hover{background:var(--blue-light)}
+.btn-sm{padding:6px 14px;font-size:12px}
+
+/* === Report === */
+.report-area{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin-top:10px;white-space:pre-wrap;font-size:12.5px;line-height:1.8;display:none}
+
+/* === Summary Dashboard === */
+.summary-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:10px 0}
+.stat-card{text-align:center;padding:12px;background:var(--paper);border-radius:10px}
+.stat-card .num{font-size:24px;font-weight:700;color:var(--navy)}
+.stat-card .label{font-size:11px;color:var(--gray);margin-top:2px}
+
+/* === Responsive === */
+@media(max-width:600px){
+  .form-row,.form-row-3{grid-template-columns:1fr}
+  .steps-nav{overflow-x:auto}
+  .step-btn{padding:8px 4px;font-size:11px}
+  .step-btn .num{margin-right:2px}
+  .summary-grid{grid-template-columns:1fr 1fr 1fr;gap:6px}
+  .stat-card{padding:8px 4px}
+  .stat-card .num{font-size:18px}
+  .stat-card .label{font-size:10px}
+  .btn-wrap{flex-direction:column;gap:6px}
+  .btn-wrap > div{display:flex;flex-direction:column;gap:6px}
+
+  /* Dimension cards: stack label above buttons */
+  .dim-card{padding:12px}
+  .dim-card .item{
+    flex-direction:column;
+    align-items:stretch;
+    padding:8px;
+    gap:6px;
+  }
+  .dim-card .item label{
+    font-size:12.5px;
+    line-height:1.4;
+    word-break:break-all;
+    white-space:normal;
+  }
+  .dim-card .select-group{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:5px;
+    width:100%;
+  }
+  .dim-card .select-group button{
+    padding:8px 4px;
+    font-size:12px;
+    text-align:center;
+  }
+
+  /* Score badge smaller on mobile */
+  .score-circle{width:24px;height:24px;font-size:11px}
+
+  /* Header */
+  .tool-header{padding:12px 14px}
+  .tool-header h1{font-size:15px}
+  .wrap{padding:14px 12px 30px}
+
+  /* Result cards */
+  .result-card{padding:14px}
+
+  /* Roadmap */
+  .roadmap-item{gap:10px}
+  .roadmap-item .priority{width:32px;height:32px;font-size:13px}
+
+  /* Radar chart - make it scale to viewport */
+  .radar-wrap{padding:0;margin:8px 0}
+  .radar-wrap svg{width:100%!important;height:auto!important;max-width:320px;max-height:300px}
+
+  /* Industry buttons */
+  .industry-btn{padding:10px 12px;font-size:13px}
+}
+@media(max-width:380px){
+  .dim-card .select-group{grid-template-columns:1fr}
+  .summary-grid{grid-template-columns:1fr 1fr 1fr;gap:4px}
+  .stat-card .num{font-size:16px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- Header -->
+<div class="tool-header">
+<div>
+<h1>🏭 浙江绩效分级 · 自诊助手</h1>
+<div style="font-size:11px;opacity:.7;margin-top:2px">依据浙环发〔2026〕33号 · 免费初判企业环保绩效等级与整改差距</div>
+</div>
+<div style="display:flex;gap:8px;align-items:center">
+<span class="tag">🎯 免费自诊 · 30秒出初判</span>
+<button onclick="toggleHistory()" style="background:rgba(255,255,255,.14);color:#fff;border:0;padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer;margin-left:6px">📂 记录</button>
+<span class="ver">免费工具</span>
+</div>
+</div>
+
+<!-- Progress -->
+<div class="progress-wrap">
+<div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div class="progress-labels">
+<span id="stepLabel">① 选行业</span>
+<span>② 填信息</span>
+<span>③ 六维自诊</span>
+<span>④ 差距分析</span>
+<span>⑤ 路线图</span>
+</div>
+</div>
+
+<!-- Step Nav -->
+<div class="steps-nav" id="stepsNav">
+<button class="step-btn active" data-step="0"><span class="num">1</span>选行业</button>
+<button class="step-btn" data-step="1"><span class="num">2</span>企业信息</button>
+<button class="step-btn" data-step="2"><span class="num">3</span>六维自诊</button>
+<button class="step-btn" data-step="3"><span class="num">4</span>差距分析</button>
+<button class="step-btn" data-step="4"><span class="num">5</span>路线图</button>
+</div>
+
+<!-- ============================== Step 1: 行业选择 ============================== -->
+<div class="panel active" id="panel0">
+<div class="panel-card">
+<h2>选择行业</h2>
+<div class="sub">浙环发〔2026〕33号覆盖20个重点行业（创A10/提B5/减D5），选一个开始诊断</div>
+<div class="hint">💡 浙江主战场：创A 10行业（2030年400家）/ 提B 5行业（1600家）/ 减D 5行业（5000家）。未列出的选"通用模板"。</div>
+<div style="margin:10px 0 6px;font-size:12px;font-weight:600;color:var(--red);border-left:3px solid var(--red);padding-left:8px">【创A 10行业 · 2030年400家】</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px">
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="燃煤火电">燃煤火电</button>
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="钢铁">钢铁</button>
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="水泥">水泥</button>
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="玻璃">玻璃</button>
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="石化">石化</button>
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="化工">化工</button>
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="生活垃圾焚烧">生活垃圾焚烧</button>
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="汽车整车制造">汽车整车制造</button>
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="纺织染整">纺织染整</button>
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="化学纤维制造">化学纤维制造</button>
+</div>
+<div style="margin:6px 0;font-size:12px;font-weight:600;color:var(--amber);border-left:3px solid var(--amber);padding-left:8px">【提B 5行业 · 1600家】</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px">
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="煤制氮肥">煤制氮肥</button>
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="涂料制造">涂料制造</button>
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="油墨制造">油墨制造</button>
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="工程机械整机制造">工程机械整机制造</button>
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="砖瓦窑">砖瓦窑</button>
+</div>
+<div style="margin:6px 0;font-size:12px;font-weight:600;color:var(--green);border-left:3px solid var(--green);padding-left:8px">【减D 5行业 · 5000家】</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px">
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="耐火材料">耐火材料</button>
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="石灰窑">石灰窑</button>
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="铸造">铸造</button>
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="工业涂装">工业涂装</button>
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="包装印刷">包装印刷</button>
+<button class="fake-select industry-btn" style="text-align:left;cursor:pointer" data-industry="通用">其他行业（通用模板）</button>
+</div>
+<div style="margin-top:10px;padding:8px 12px;background:var(--amber-light);border-radius:8px;font-size:12px;color:var(--amber)">
+⚠️ 政策依据：浙环发〔2026〕33号；A级/ B级由省级评定，C级及以下由市级评定；申报走「浙江大气智治平台」；具体指标以省厅最新附件及 HJ 1330 为准，本工具仅作框架参考。
+</div>
+<div style="margin-top:14px;text-align:right">
+<button class="btn btn-primary" id="step1Next" disabled>选择行业后继续 →</button>
+</div>
+</div>
+</div>
+
+<!-- ============================== Step 2: 企业信息 ============================== -->
+<div class="panel" id="panel1">
+<div class="panel-card">
+<h2>企业基本信息</h2>
+<div class="sub">录入企业基础信息，用于生成定制化差距分析报告</div>
+<div class="form-row">
+<div class="form-group">
+<label>企业名称 <span class="req">*</span></label>
+<input type="text" id="companyName" placeholder="XX有限公司">
+</div>
+<div class="form-group">
+<label>所在设区市 <span class="req">*</span></label>
+<select id="companyRegion">
+<option value="杭州">杭州（创A45/提B190/减D300）</option>
+<option value="宁波">宁波（67/190/650）</option>
+<option value="温州">温州（25/200/1000）</option>
+<option value="湖州">湖州（39/160/260）</option>
+<option value="嘉兴">嘉兴（69/180/450）</option>
+<option value="绍兴">绍兴（68/140/200）</option>
+<option value="金华">金华（33/200/910）</option>
+<option value="衢州">衢州（15/70/80）</option>
+<option value="舟山">舟山（5/15/40）</option>
+<option value="台州">台州（28/200/880）</option>
+<option value="丽水">丽水（6/55/230）</option>
+</select>
+</div>
+</div>
+<div class="form-row-3">
+<div class="form-group">
+<label>年产值（万元）</label>
+<input type="number" id="companyOutput" placeholder="5000">
+</div>
+<div class="form-group">
+<label>员工人数</label>
+<input type="number" id="companyStaff" placeholder="200">
+</div>
+<div class="form-group">
+<label>联系人</label>
+<input type="text" id="companyContact" placeholder="姓名">
+</div>
+</div>
+<div class="form-row">
+<div class="form-group">
+<label>联系电话 <span class="req">*</span></label>
+<input type="tel" id="companyPhone" placeholder="手机号，用于领取完整报告">
+</div>
+</div>
+<div class="form-row">
+<div class="form-group">
+<label>当前环保等级</label>
+<select id="currentGrade">
+<option value="C">C级（需全面升级）</option>
+<option value="D">D级（最差）</option>
+<option value="none">未评级</option>
+<option value="B">已B级（复核/保持）</option>
+</select>
+</div>
+<div class="form-group">
+<label>是否已有绩效分级申报经验</label>
+<select id="hasExp">
+<option value="no">否，第一次做</option>
+<option value="yes">是，有申报经历</option>
+</select>
+</div>
+</div>
+<div class="btn-wrap" style="justify-content:flex-end">
+<button class="btn btn-outline btn-sm" onclick="goStep(0)">← 返回</button>
+<button class="btn btn-primary" onclick="goStep(2)">下一步 →</button>
+</div>
+</div>
+</div>
+
+<!-- ============================== Step 3: 六维自诊 ============================== -->
+<div class="panel" id="panel2">
+<div class="panel-card">
+<h2>六维自诊</h2>
+<div class="sub">按六个维度评估企业现状，系统自动与浙环发〔2026〕33号对应层级标准对标</div>
+<div class="hint" id="dimIndustryHint">💡 当前行业：<span id="dimIndustryLabel">未选择</span> · 每项评分：1=差 → 5=达标</div>
+<div id="dimensionsContainer"></div>
+<div class="btn-wrap">
+<button class="btn btn-outline btn-sm" onclick="goStep(1)">← 返回</button>
+<div style="display:flex;gap:6px">
+<button class="btn btn-outline" onclick="quickFillDemo()">📋 快速填入示范数据</button>
+<button class="btn btn-primary" onclick="goStep(3)">查看差距分析 →</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ============================== Step 4: 差距分析 ============================== -->
+<div class="panel" id="panel3">
+<div class="panel-card">
+<h2>差距分析 · 综合诊断</h2>
+<div class="sub">各维度与B级标准的差距一目了然</div>
+
+<!-- Summary Stats -->
+<div class="summary-grid">
+<div class="stat-card"><div class="num" id="totalScore">0</div><div class="label">综合评分（/30）</div></div>
+<div class="stat-card"><div class="num" id="bLevel">0</div><div class="label">B级达标项（/6）</div></div>
+<div class="stat-card"><div class="num" id="gapCount">0</div><div class="label">需整改项</div></div>
+</div>
+
+<!-- Radar Chart -->
+<div class="radar-wrap">
+<svg viewBox="-110 -110 220 230" preserveAspectRatio="xMidYMid meet" id="radarChart">
+<defs>
+<filter id="shadow"><feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity=".15"/></filter>
+</defs>
+<style>
+.axis-line{stroke:var(--line-strong);stroke-width:1}
+.axis-label{font-size:10px;fill:var(--gray);text-anchor:middle}
+.grid-poly{fill:none;stroke:var(--line);stroke-width:.5}
+</style>
+<line class="axis-line" x1="0" y1="0" x2="0" y2="-95" id="radarAxis0"/>
+<line class="axis-line" x1="0" y1="0" x2="82" y2="-48" id="radarAxis1"/>
+<line class="axis-line" x1="0" y1="0" x2="82" y2="48" id="radarAxis2"/>
+<line class="axis-line" x1="0" y1="0" x2="0" y2="95" id="radarAxis3"/>
+<line class="axis-line" x1="0" y1="0" x2="-82" y2="48" id="radarAxis4"/>
+<line class="axis-line" x1="0" y1="0" x2="-82" y2="-48" id="radarAxis5"/>
+<text class="axis-label" x="0" y="-100" id="radarLabel0">有组织排放</text>
+<text class="axis-label" x="95" y="-50" id="radarLabel1">无组织排放</text>
+<text class="axis-label" x="95" y="58" id="radarLabel2">清洁运输</text>
+<text class="axis-label" x="0" y="108" id="radarLabel3">监测监控</text>
+<text class="axis-label" x="-95" y="58" id="radarLabel4">环境管理</text>
+<text class="axis-label" x="-95" y="-50" id="radarLabel5">能源消耗</text>
+<polygon class="grid-poly" points="0,-95 82,-48 82,48 0,95 -82,48 -82,-48" stroke="var(--navy)" stroke-dasharray="4,3" fill="rgba(22,40,74,.05)"/>
+<polygon id="scorePolygon" points="0,0 0,0 0,0 0,0 0,0 0,0" fill="rgba(214,51,108,.2)" stroke="var(--rose)" stroke-width="1.5" filter="url(#shadow)"/>
+<circle id="dot0" r="3" fill="var(--rose)" cx="0" cy="0"/>
+<circle id="dot1" r="3" fill="var(--rose)" cx="0" cy="0"/>
+<circle id="dot2" r="3" fill="var(--rose)" cx="0" cy="0"/>
+<circle id="dot3" r="3" fill="var(--rose)" cx="0" cy="0"/>
+<circle id="dot4" r="3" fill="var(--rose)" cx="0" cy="0"/>
+<circle id="dot5" r="3" fill="var(--rose)" cx="0" cy="0"/>
+</svg>
+</div>
+
+<!-- Dimension Results -->
+<div id="resultCards"></div>
+
+<div class="btn-wrap">
+<button class="btn btn-outline btn-sm" onclick="goStep(2)">← 返回自诊</button>
+<button class="btn btn-primary" onclick="goStep(4)">生成整改路线图 →</button>
+</div>
+</div>
+</div>
+
+<!-- ============================== Step 5: 路线图 ============================== -->
+<div class="panel" id="panel4">
+<div class="panel-card">
+<h2>整改路线图</h2>
+<div class="sub">按优先级排序的现场整改建议清单</div>
+<div id="roadmapContainer"></div>
+
+<div class="btn-wrap" style="margin-top:16px">
+<button class="btn btn-outline btn-sm" onclick="goStep(3)">← 返回差距分析</button>
+<div style="display:flex;gap:6px;flex-wrap:wrap">
+<button class="btn btn-primary" onclick="checkLead()">🔓 解锁完整诊断报告</button>
+<button class="btn btn-rose" onclick="printReport()">🖨️ 打印/导出PDF</button>
+<button class="btn btn-outline" onclick="saveCurrentToHistory()">💾 保存本机</button>
+</div>
+</div>
+
+<!-- Report Area -->
+<div id="reportArea" class="report-area"></div>
+</div>
+
+<button class="btn btn-outline btn-sm" onclick="resetDraft()" style="width:100%;margin-top:8px">🔄 重新开始（清空当前填写）</button>
+</div>
+
+</div>
+
+<script>
+// ===================== B级标准数据库 =====================
+const INDUSTRY_STANDARDS = {
+  通用: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"颗粒物、SO₂、NOx 排放浓度达到国家/地方特别排放限值（具体值以浙环发〔2026〕33号附件及 HJ 1330 为准）",
+      "无组织排放":"物料储存、输送、混料等环节密闭/封闭，配备抑尘设施",
+      "清洁运输":"物料运输采用国五及以上标准车辆，厂区内非道路机械达标",
+      "监测监控":"主要排放口安装 CEMS 并联网，厂界有监测设备",
+      "环境管理":"排污许可证、自行监测方案、台账记录齐全",
+      "能源消耗":"单位产品综合能耗达到行业基准水平"
+    }
+  },
+  钢铁: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"烧结/球团、炼铁/炼钢/轧钢工序有组织排放稳定达标（具体限值以 HJ 1330 及省厅附件为准，本工具不臆造数字）",
+      "无组织排放":"密闭/封闭式料场、皮带通廊密闭、铁水预处理除尘、钢包热修除尘",
+      "清洁运输":"大宗物料铁路/水路/新能源车比例按指南要求，厂内非道路机械达标",
+      "监测监控":"主要排放口全部 CEMS，厂界 TSP 实时监控，DCS 系统运行",
+      "环境管理":"排污许可证规范、自行监测执行、环保台账完整、有专职环保人员",
+      "能源消耗":"吨钢综合能耗达到行业标杆水平（具体值以省厅最新文件为准）"
+    },
+    refs:{
+      "有组织排放":["烧结机头颗粒物/SO₂/NOx 达标","炼铁炼钢工序颗粒物达标","二噁英达标"],
+      "无组织排放":["料场密闭/封闭","车间抑尘系统","厂界 TSP 达标","运输皮带密闭"],
+      "清洁运输":["铁路/水路/电车比例达标","国五及以上车辆","非道路机械达标"],
+      "监测监控":["主要排放口 CEMS","DCS 全覆盖","联网浙江大气智治平台"],
+      "环境管理":["排污许可证有效","台账完整","专职环保人员"],
+      "能源消耗":["吨钢能耗对标","废钢比要求","煤气回收率"]
+    }
+  },
+  水泥: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"窑尾颗粒物、SO₂、NOx、氨逃逸稳定达标（具体限值以 HJ 1330 及省厅附件为准）",
+      "无组织排放":"原料预均化库密闭、皮带密闭、粉磨车间除尘、水泥包装车间收尘",
+      "清洁运输":"大宗物料清洁运输比例按指南要求，厂内车辆达标",
+      "监测监控":"窑尾/窑头 CEMS，颗粒物浓度在线监测，DCS 数据可查",
+      "环境管理":"排污许可证、危废管理、自行监测方案执行到位",
+      "能源消耗":"吨熟料综合能耗达到行业标杆水平"
+    },
+    refs:{
+      "有组织排放":["窑尾颗粒物/SO₂/NOx 达标","氨逃逸达标"],
+      "无组织排放":["预均化库密闭","皮带输送密闭","粉磨车间收尘","包装除尘"],
+      "清洁运输":["清洁运输比例达标","国五及以上车辆"],
+      "监测监控":["窑尾 CEMS","颗粒物在线监测","DCS 系统"],
+      "环境管理":["排污许可证有效","自行监测执行","危废台账规范"],
+      "能源消耗":["吨熟料能耗对标","余热发电配套"]
+    }
+  },
+  玻璃: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"熔窑烟气颗粒物、SO₂、NOx 稳定达标（具体限值以 HJ 1330 及省厅附件为准）",
+      "无组织排放":"原料配料车间密闭除尘、碎玻璃输送密闭",
+      "清洁运输":"大宗物料清洁运输比例按指南要求",
+      "监测监控":"熔窑烟囱 CEMS 联网",
+      "环境管理":"排污许可证、自行监测、台账齐全",
+      "能源消耗":"单位产品综合能耗达到行业标杆水平"
+    },
+    refs:{
+      "有组织排放":["熔窑颗粒物/SO₂/NOx 达标","烟粉尘无组织受控"],
+      "无组织排放":["配料车间密闭","碎玻璃输送密闭"],
+      "清洁运输":["清洁运输比例达标"],
+      "监测监控":["熔窑 CEMS 联网"],
+      "环境管理":["排污许可证有效","台账规范"],
+      "能源消耗":["单位能耗对标"]
+    }
+  },
+  燃煤火电: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"烟囱颗粒物、SO₂、NOx、氨逃逸、汞及其化合物稳定达标（具体限值以 HJ 1330 及省厅附件为准）",
+      "无组织排放":"煤场封闭、灰渣库密闭、输煤皮带通廊密闭",
+      "清洁运输":"大宗物料清洁运输比例按指南要求",
+      "监测监控":"烟囱 CEMS 联网、DCS 关键参数记录",
+      "环境管理":"排污许可证、自行监测、台账齐全",
+      "能源消耗":"供电煤耗达到行业标杆水平"
+    },
+    refs:{
+      "有组织排放":["颗粒物/SO₂/NOx 达标","氨逃逸达标","汞及其化合物达标"],
+      "无组织排放":["煤场封闭","灰渣库密闭","输煤通廊密闭"],
+      "清洁运输":["清洁运输比例达标"],
+      "监测监控":["烟囱 CEMS 联网","DCS 参数记录"],
+      "环境管理":["排污许可证有效","台账规范"],
+      "能源消耗":["供电煤耗对标"]
+    }
+  },
+  生活垃圾焚烧: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"炉膛/烟气颗粒物、SO₂、NOx、HCl、二噁英、CO 稳定达标（具体限值以 HJ 1330 及省厅附件为准）",
+      "无组织排放":"垃圾储坑密闭负压、渗滤液收集、恶臭收集处理",
+      "清洁运输":"垃圾运输专用车辆、厂内车辆达标",
+      "监测监控":"烟气 CEMS 联网、DCS 记录",
+      "环境管理":"排污许可证、自行监测、台账齐全",
+      "能源消耗":"厂用电率、余热利用达到行业标杆水平"
+    },
+    refs:{
+      "有组织排放":["颗粒物/SO₂/NOx 达标","HCl 达标","二噁英达标"],
+      "无组织排放":["垃圾储坑密闭负压","恶臭收集处理"],
+      "清洁运输":["垃圾专用运输"],
+      "监测监控":["烟气 CEMS 联网","DCS 记录"],
+      "环境管理":["排污许可证有效","台账规范"],
+      "能源消耗":["余热利用"]
+    }
+  },
+  汽车整车制造: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"涂装工艺有组织 VOCs、颗粒物、NOx 稳定达标（具体限值以 HJ 1330 及省厅附件为准）",
+      "无组织排放":"涂装车间密闭、VOCs 密闭集气、含 VOCs 物料密闭储存",
+      "清洁运输":"整车/零部件运输清洁比例按指南要求",
+      "监测监控":"VOCs 治理设施在线监测、DCS 记录",
+      "环境管理":"排污许可证、自行监测、台账齐全",
+      "能源消耗":"单位产品综合能耗达到行业标杆水平"
+    },
+    refs:{
+      "有组织排放":["涂装 VOCs 达标","颗粒物达标"],
+      "无组织排放":["涂装车间密闭","VOCs 密闭集气","含 VOCs 物料密闭"],
+      "清洁运输":["清洁运输比例达标"],
+      "监测监控":["VOCs 在线监测","DCS 记录"],
+      "环境管理":["排污许可证有效","台账规范"],
+      "能源消耗":["单位能耗对标"]
+    }
+  },
+  煤制氮肥: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"气化、合成氨、尿素等工序有组织排放稳定达标（具体限值以 HJ 1330 及省厅附件为准）",
+      "无组织排放":"煤场封闭、气柜/储罐密闭、VOCs 收集处理",
+      "清洁运输":"原料/产品清洁运输比例按指南要求",
+      "监测监控":"主要排放口 CEMS 联网",
+      "环境管理":"排污许可证、自行监测、台账齐全",
+      "能源消耗":"合成氨综合能耗达到行业标杆水平"
+    },
+    refs:{
+      "有组织排放":["气化/合成氨有组织达标"],
+      "无组织排放":["煤场封闭","气柜/储罐密闭"],
+      "清洁运输":["清洁运输比例达标"],
+      "监测监控":["CEMS 联网"],
+      "环境管理":["排污许可证有效"],
+      "能源消耗":["合成氨能耗对标"]
+    }
+  },
+  铸造: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"熔炼、制芯、浇注、落砂、清理工序有组织颗粒物/废气稳定达标（具体限值以 HJ 1330 及省厅附件为准）",
+      "无组织排放":"物料密闭、产尘点集气、车间无可见烟粉尘外逸",
+      "清洁运输":"原料/产品清洁运输比例按指南要求",
+      "监测监控":"重点排放口在线/手工监测",
+      "环境管理":"排污许可证、自行监测、台账齐全",
+      "能源消耗":"单位产品综合能耗达到行业标杆水平"
+    },
+    refs:{
+      "有组织排放":["熔炼/浇注/清理颗粒物达标"],
+      "无组织排放":["物料密闭","产尘点集气"],
+      "清洁运输":["清洁运输比例达标"],
+      "监测监控":["重点排放口监测"],
+      "环境管理":["排污许可证有效"],
+      "能源消耗":["单位能耗对标"]
+    }
+  },
+  纺织染整: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"定型机、锅炉等有组织废气颗粒物/VOCs/SO₂/NOx 稳定达标（具体限值以浙环发〔2026〕33号附件及 HJ 1330 为准）",
+      "无组织排放":"定型机废气收集、含油废气密闭集气、染化料密闭储存",
+      "清洁运输":"原料/产品清洁运输比例按指南要求",
+      "监测监控":"定型机 VOCs 在线/手工监测、DCS 记录",
+      "环境管理":"排污许可证、自行监测、台账齐全",
+      "能源消耗":"单位产品能耗、水耗达到行业标杆水平"
+    },
+    refs:{
+      "有组织排放":["定型机 VOCs 达标","锅炉烟气达标"],
+      "无组织排放":["定型机废气收集","染化料密闭"],
+      "清洁运输":["清洁运输比例达标"],
+      "监测监控":["定型机监测","DCS 记录"],
+      "环境管理":["排污许可证有效"],
+      "能源消耗":["单位能耗对标"]
+    }
+  },
+  化学纤维制造: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"聚合、纺丝、后加工工序有组织废气 VOCs/颗粒物稳定达标（具体限值以浙环发〔2026〕33号附件及 HJ 1330 为准）",
+      "无组织排放":"含 VOCs 物料密闭、工艺废气集气、车间无明显异味",
+      "清洁运输":"原料/产品清洁运输比例按指南要求",
+      "监测监控":"重点排放口 VOCs 在线/手工监测",
+      "环境管理":"排污许可证、自行监测、台账齐全",
+      "能源消耗":"单位产品综合能耗达到行业标杆水平"
+    },
+    refs:{
+      "有组织排放":["聚合/纺丝 VOCs 达标"],
+      "无组织排放":["含 VOCs 物料密闭","工艺废气集气"],
+      "清洁运输":["清洁运输比例达标"],
+      "监测监控":["VOCs 监测"],
+      "环境管理":["排污许可证有效"],
+      "能源消耗":["单位能耗对标"]
+    }
+  },
+  石化: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"工艺加热炉、催化裂化、重整等有组织废气稳定达标（具体限值以浙环发〔2026〕33号附件及 HJ 1330 为准）",
+      "无组织排放":"LDAR 泄漏检测与修复、储罐/装卸密闭、废水处理恶臭收集",
+      "清洁运输":"原料/产品清洁运输比例按指南要求",
+      "监测监控":"主要排放口 CEMS、VOCs 在线",
+      "环境管理":"排污许可证、自行监测、台账齐全",
+      "能源消耗":"单位产品综合能耗达到行业标杆水平"
+    },
+    refs:{
+      "有组织排放":["加热炉/工艺烟气达标"],
+      "无组织排放":["LDAR 泄漏检测","储罐/装卸密闭"],
+      "清洁运输":["清洁运输比例达标"],
+      "监测监控":["CEMS/VOCs 在线"],
+      "环境管理":["排污许可证有效"],
+      "能源消耗":["单位能耗对标"]
+    }
+  },
+  化工: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"工艺废气、锅炉、RTO 等有组织排放稳定达标（具体限值以浙环发〔2026〕33号附件及 HJ 1330 为准）",
+      "无组织排放":"LDAR、VOCs 密闭集气、含 VOCs 物料密闭",
+      "清洁运输":"原料/产品清洁运输比例按指南要求",
+      "监测监控":"主要排放口 CEMS/VOCs 在线",
+      "环境管理":"排污许可证、自行监测、台账齐全",
+      "能源消耗":"单位产品综合能耗达到行业标杆水平"
+    },
+    refs:{
+      "有组织排放":["工艺废气达标"],
+      "无组织排放":["LDAR","VOCs 密闭集气"],
+      "清洁运输":["清洁运输比例达标"],
+      "监测监控":["CEMS/VOCs 在线"],
+      "环境管理":["排污许可证有效"],
+      "能源消耗":["单位能耗对标"]
+    }
+  },
+  涂料制造: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"配料、分散、研磨、灌装等有组织 VOCs/颗粒物稳定达标（具体限值以浙环发〔2026〕33号附件及 HJ 1330 为准）",
+      "无组织排放":"含 VOCs 物料密闭、工艺废气负压集气",
+      "清洁运输":"原料/产品清洁运输比例按指南要求",
+      "监测监控":"VOCs 治理设施监测",
+      "环境管理":"排污许可证、自行监测、台账齐全",
+      "能源消耗":"单位产品综合能耗达到行业标杆水平"
+    },
+    refs:{
+      "有组织排放":["VOCs 达标"],
+      "无组织排放":["含 VOCs 物料密闭","负压集气"],
+      "清洁运输":["清洁运输比例达标"],
+      "监测监控":["VOCs 监测"],
+      "环境管理":["排污许可证有效"],
+      "能源消耗":["单位能耗对标"]
+    }
+  },
+  油墨制造: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"配料、分散、搅拌、灌装等有组织 VOCs/颗粒物稳定达标（具体限值以浙环发〔2026〕33号附件及 HJ 1330 为准）",
+      "无组织排放":"含 VOCs 物料密闭、工艺废气负压集气",
+      "清洁运输":"原料/产品清洁运输比例按指南要求",
+      "监测监控":"VOCs 治理设施监测",
+      "环境管理":"排污许可证、自行监测、台账齐全",
+      "能源消耗":"单位产品综合能耗达到行业标杆水平"
+    },
+    refs:{
+      "有组织排放":["VOCs 达标"],
+      "无组织排放":["含 VOCs 物料密闭","负压集气"],
+      "清洁运输":["清洁运输比例达标"],
+      "监测监控":["VOCs 监测"],
+      "环境管理":["排污许可证有效"],
+      "能源消耗":["单位能耗对标"]
+    }
+  },
+  工程机械整机制造: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"涂装、焊接、调试等有组织 VOCs/颗粒物/NOx 稳定达标（具体限值以浙环发〔2026〕33号附件及 HJ 1330 为准）",
+      "无组织排放":"涂装车间密闭、焊接烟尘集气、含 VOCs 物料密闭",
+      "清洁运输":"整机/零部件清洁运输比例按指南要求",
+      "监测监控":"VOCs 治理设施监测",
+      "环境管理":"排污许可证、自行监测、台账齐全",
+      "能源消耗":"单位产品综合能耗达到行业标杆水平"
+    },
+    refs:{
+      "有组织排放":["涂装 VOCs 达标","焊接烟尘达标"],
+      "无组织排放":["涂装车间密闭","焊接烟尘集气"],
+      "清洁运输":["清洁运输比例达标"],
+      "监测监控":["VOCs 监测"],
+      "环境管理":["排污许可证有效"],
+      "能源消耗":["单位能耗对标"]
+    }
+  },
+  砖瓦窑: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"窑炉烟气颗粒物、SO₂、NOx 稳定达标（具体限值以浙环发〔2026〕33号附件及 HJ 1330 为准）",
+      "无组织排放":"原料陈化/破碎密闭、砖坯干燥车间受控",
+      "清洁运输":"原料/成品清洁运输比例按指南要求",
+      "监测监控":"窑炉烟囱 CEMS 联网",
+      "环境管理":"排污许可证、自行监测、台账齐全",
+      "能源消耗":"单位产品综合能耗达到行业标杆水平"
+    },
+    refs:{
+      "有组织排放":["窑炉颗粒物/SO₂/NOx 达标"],
+      "无组织排放":["原料车间密闭"],
+      "清洁运输":["清洁运输比例达标"],
+      "监测监控":["窑炉 CEMS"],
+      "环境管理":["排污许可证有效"],
+      "能源消耗":["单位能耗对标"]
+    }
+  },
+  耐火材料: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"烧成窑、破碎、筛分有组织颗粒物稳定达标（具体限值以浙环发〔2026〕33号附件及 HJ 1330 为准）",
+      "无组织排放":"原料密闭、产尘点集气",
+      "清洁运输":"原料/成品清洁运输比例按指南要求",
+      "监测监控":"重点排放口监测",
+      "环境管理":"排污许可证、自行监测、台账齐全",
+      "能源消耗":"单位产品综合能耗达到行业标杆水平"
+    },
+    refs:{
+      "有组织排放":["烧成窑颗粒物达标"],
+      "无组织排放":["原料密闭","产尘点集气"],
+      "清洁运输":["清洁运输比例达标"],
+      "监测监控":["重点排放口监测"],
+      "环境管理":["排污许可证有效"],
+      "能源消耗":["单位能耗对标"]
+    }
+  },
+  石灰窑: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"窑尾烟气颗粒物、SO₂、NOx 稳定达标（具体限值以浙环发〔2026〕33号附件及 HJ 1330 为准）",
+      "无组织排放":"石料密闭、窑顶/窑尾集气",
+      "清洁运输":"原料/成品清洁运输比例按指南要求",
+      "监测监控":"窑尾 CEMS 联网",
+      "环境管理":"排污许可证、自行监测、台账齐全",
+      "能源消耗":"单位产品综合能耗达到行业标杆水平"
+    },
+    refs:{
+      "有组织排放":["窑尾颗粒物/SO₂/NOx 达标"],
+      "无组织排放":["石料密闭","窑尾集气"],
+      "清洁运输":["清洁运输比例达标"],
+      "监测监控":["窑尾 CEMS"],
+      "环境管理":["排污许可证有效"],
+      "能源消耗":["单位能耗对标"]
+    }
+  },
+  工业涂装: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"喷涂、流平、烘干有组织 VOCs/颗粒物稳定达标（具体限值以浙环发〔2026〕33号附件及 HJ 1330 为准）",
+      "无组织排放":"喷漆室密闭、VOCs 密闭集气、含 VOCs 物料密闭",
+      "清洁运输":"工件/物料清洁运输比例按指南要求",
+      "监测监控":"VOCs 治理设施监测",
+      "环境管理":"排污许可证、自行监测、台账齐全",
+      "能源消耗":"单位产品综合能耗达到行业标杆水平"
+    },
+    refs:{
+      "有组织排放":["喷涂 VOCs 达标"],
+      "无组织排放":["喷漆室密闭","VOCs 密闭集气"],
+      "清洁运输":["清洁运输比例达标"],
+      "监测监控":["VOCs 监测"],
+      "环境管理":["排污许可证有效"],
+      "能源消耗":["单位能耗对标"]
+    }
+  },
+  包装印刷: {
+    dims:["有组织排放","无组织排放","清洁运输","监测监控","环境管理","能源消耗"],
+    desc:{
+      "有组织排放":"印刷、复合、烘干有组织 VOCs 稳定达标（具体限值以浙环发〔2026〕33号附件及 HJ 1330 为准）",
+      "无组织排放":"含 VOCs 原辅料密闭、印刷单元集气",
+      "清洁运输":"原料/成品清洁运输比例按指南要求",
+      "监测监控":"VOCs 治理设施监测",
+      "环境管理":"排污许可证、自行监测、台账齐全",
+      "能源消耗":"单位产品综合能耗达到行业标杆水平"
+    },
+    refs:{
+      "有组织排放":["印刷 VOCs 达标"],
+      "无组织排放":["含 VOCs 原辅料密闭","印刷单元集气"],
+      "清洁运输":["清洁运输比例达标"],
+      "监测监控":["VOCs 监测"],
+      "环境管理":["排污许可证有效"],
+      "能源消耗":["单位能耗对标"]
+    }
+  }
+};
+
+// ===================== 状态管理 =====================
+let state = {
+  step: 0,
+  industry: '',
+  company: { name: '', region: '', output: '', staff: '', contact: '', grade: 'C', exp: 'no' },
+  scores: [3,3,3,3,3,3],  // per dimension 1-5
+  sel: {},                // 记录每个小题的选中项 di-ii -> 选项序号
+  currentDim: 0
+};
+
+// ===================== 储存（本机草稿 + 服务端回传） =====================
+const LS_DRAFT = 'pjfz_draft_v1';
+const LS_HISTORY = 'pjfz_history_v1';
+// 回传后端地址（留资用）：留空时线索走"加微信 + 复制备注话术"兜底，照样能收到。
+// 免费方案：用 FormSubmit 收邮件 —— 填 https://formsubmit.co/ajax/你的邮箱 （首次需去邮箱点激活链接）
+const UPLOAD_URL = '';
+// 客户领取报告时展示的微信号（填了会在解锁后引导客户加这个微信领报告/咨询）
+const LEAD_WECHAT = '请填写你的微信号';
+// 微信二维码图片地址（可选，填了在解锁弹窗展示；留空则显示微信号文字）
+const LEAD_WECHAT_QR = '';
+// 留资本地标记
+const LS_LEAD = 'pjfz_lead_v1';
+
+function val(id){ const e=document.getElementById(id); return e?e.value:''; }
+function setVal(id,v){ const e=document.getElementById(id); if(e) e.value=v||''; }
+
+// 把当前界面状态序列化为可保存对象
+function collectState(){
+  const sel = {};
+  DIM_QUESTIONS.forEach((dim,di)=>{
+    dim.items.forEach((item,ii)=>{
+      const btns=document.querySelectorAll(`#selectGroup-${di}-${ii} button`);
+      btns.forEach((b,i)=>{ if(b.classList.contains('selected')) sel[di+'-'+ii]=i; });
+    });
+  });
+  return {
+    industry: state.industry,
+    scores: state.scores.slice(),
+    sel,
+    company: {
+      name: val('companyName'), region: val('companyRegion'),
+      output: val('companyOutput'), staff: val('companyStaff'),
+      contact: val('companyContact'), phone: val('companyPhone'),
+      grade: val('currentGrade'), exp: val('hasExp')
+    },
+    step: state.step, ts: Date.now()
+  };
+}
+function saveDraft(){ try{ localStorage.setItem(LS_DRAFT, JSON.stringify(collectState())); }catch(e){} }
+function loadDraft(){
+  try{
+    const raw=localStorage.getItem(LS_DRAFT); if(!raw) return false;
+    const d=JSON.parse(raw);
+    setVal('companyName',d.company.name); setVal('companyRegion',d.company.region);
+    setVal('companyOutput',d.company.output); setVal('companyStaff',d.company.staff);
+    setVal('companyContact',d.company.contact); setVal('companyPhone',d.company.phone);
+    setVal('currentGrade',d.company.grade||'C'); setVal('hasExp',d.company.exp||'no');
+    state.industry=d.industry||'';
+    if(d.industry){
+      document.querySelectorAll('.industry-btn').forEach(b=>{
+        if(b.dataset.industry===d.industry){
+          b.style.borderColor='var(--navy)'; b.style.background='var(--blue-light)';
+          document.getElementById('step1Next').disabled=false;
+          document.getElementById('dimIndustryLabel').textContent=d.industry;
+        }
+      });
+    }
+    state.scores=d.scores?d.scores.slice():[3,3,3,3,3,3];
+    initDimensions();
+    if(d.sel){ Object.keys(d.sel).forEach(k=>{ const p=k.split('-').map(Number); selectOption(p[0],p[1],d.sel[k]); }); }
+    state.step=d.step||0; goStep(state.step);
+    return true;
+  }catch(e){ return false; }
+}
+function getHistory(){ try{ return JSON.parse(localStorage.getItem(LS_HISTORY)||'[]'); }catch(e){ return []; } }
+function saveHistory(rec){ const h=getHistory(); h.unshift(rec); if(h.length>50) h.length=50; localStorage.setItem(LS_HISTORY, JSON.stringify(h)); }
+function renderHistory(){
+  const list=document.getElementById('historyList'); if(!list) return;
+  const h=getHistory();
+  if(!h.length){ list.innerHTML='<p style="font-size:13px;color:var(--gray)">暂无记录。在“整改路线图”页点「保存本机」即可留档在本机。</p>'; return; }
+  list.innerHTML=h.map((r,i)=>`
+    <div style="border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <strong style="font-size:13px;color:var(--navy)">${r.name||'(未填名称)'}</strong>
+        <span style="font-size:11px;color:var(--gray)">${r.date||''}</span>
+      </div>
+      <div style="font-size:12px;color:var(--soft);margin:4px 0">行业：${r.industry||'-'} ｜ 综合 ${r.total}/30 ｜ 达标 ${r.bCount}/6</div>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-sm btn-outline" onclick="reloadHistory(${i})">查看/继续</button>
+        <button class="btn btn-sm" onclick="deleteHistory(${i})">删除</button>
+      </div>
+    </div>`).join('');
+}
+function toggleHistory(){ const m=document.getElementById('historyModal'); m.style.display = m.style.display==='block'?'none':'block'; }
+function deleteHistory(i){ const h=getHistory(); h.splice(i,1); localStorage.setItem(LS_HISTORY, JSON.stringify(h)); renderHistory(); }
+function reloadHistory(i){
+  const r=getHistory()[i]; if(!r) return;
+  setVal('companyName',r.company&&r.company.name); setVal('companyRegion',r.company&&r.company.region);
+  setVal('companyOutput',r.company&&r.company.output); setVal('companyStaff',r.company&&r.company.staff);
+  setVal('companyContact',r.company&&r.company.contact); setVal('companyPhone',r.company&&r.company.phone);
+  setVal('currentGrade',(r.company&&r.company.grade)||'C'); setVal('hasExp',(r.company&&r.company.exp)||'no');
+  state.industry=r.industry||'';
+  if(r.industry){
+    document.querySelectorAll('.industry-btn').forEach(b=>{
+      if(b.dataset.industry===r.industry){ b.style.borderColor='var(--navy)'; b.style.background='var(--blue-light)';
+        document.getElementById('step1Next').disabled=false; document.getElementById('dimIndustryLabel').textContent=r.industry; }
+    });
+  }
+  state.scores=r.scores?r.scores.slice():[3,3,3,3,3,3];
+  initDimensions();
+  if(r.sel){ Object.keys(r.sel).forEach(k=>{ const p=k.split('-').map(Number); selectOption(p[0],p[1],r.sel[k]); }); }
+  toggleHistory(); goStep(3);
+}
+function saveCurrentToHistory(){
+  const d=collectState(); const total=d.scores.reduce((a,b)=>a+b,0);
+  const rec={ ts:Date.now(), date:new Date().toLocaleString('zh-CN'),
+    name:d.company.name||'(未填名称)', industry:d.industry||'未选择', grade:d.company.grade,
+    total, bCount:d.scores.filter(s=>s>=4).length, scores:d.scores.slice(), sel:d.sel, company:d.company };
+  saveHistory(rec); renderHistory();
+  alert('已保存记录（'+rec.date+'）');
+}
+let leadSubmitted = false;
+let leadInfo = null;
+function getLead(){ try{ return JSON.parse(localStorage.getItem(LS_LEAD)||'null'); }catch(e){ return null; } }
+function submitLead(silent){
+  const d=collectState();
+  const payload={ ts:Date.now(), company:d.company, industry:d.industry, scores:d.scores,
+    total:d.scores.reduce((a,b)=>a+b,0), bCount:d.scores.filter(s=>s>=4).length,
+    phone:(d.company&&d.company.phone)||(leadInfo&&leadInfo.phone)||'' };
+  if(!UPLOAD_URL){ if(!silent) return {ok:false,msg:'UPLOAD_URL 未配置'}; return; }
+  return fetch(UPLOAD_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+    .then(r=>r.json()).then(j=>{ if(!silent&&(!j||!j.ok)) alert('回传失败：'+(j&&j.msg||'未知错误')); return j; })
+    .catch(e=>{ if(!silent) alert('回传失败：网络或地址错误'); return {ok:false}; });
+}
+function resetDraft(){
+  localStorage.removeItem(LS_DRAFT);
+  state.industry=''; state.scores=[3,3,3,3,3,3]; state.sel={}; state.step=0;
+  ['companyName','companyRegion','companyOutput','companyStaff','companyContact','companyPhone'].forEach(id=>setVal(id,''));
+  setVal('currentGrade','C'); setVal('hasExp','no');
+  document.querySelectorAll('.industry-btn').forEach(b=>{ b.style.borderColor='var(--line)'; b.style.background=''; });
+  document.getElementById('step1Next').disabled=true;
+  document.getElementById('dimIndustryLabel').textContent='未选择';
+  initDimensions(); goStep(0);
+}
+
+// ===================== 初始化 =====================
+document.addEventListener('DOMContentLoaded', ()=>{
+  // Industry buttons
+  document.querySelectorAll('.industry-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.industry-btn').forEach(b=>b.style.borderColor='var(--line)');
+      btn.style.borderColor='var(--navy)';
+      btn.style.background='var(--blue-light)';
+      state.industry = btn.dataset.industry;
+      document.getElementById('step1Next').disabled = false;
+      document.getElementById('dimIndustryLabel').textContent = state.industry;
+      saveDraft();
+    });
+  });
+  document.getElementById('step1Next').addEventListener('click', ()=>goStep(1));
+  initDimensions();
+  ['companyName','companyRegion','companyOutput','companyStaff','companyContact','companyPhone','currentGrade','hasExp'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el) return;
+    el.addEventListener('input', saveDraft);
+    if(id==='currentGrade'||id==='hasExp') el.addEventListener('change', saveDraft);
+  });
+  loadDraft();
+  renderHistory();
+});
+
+// ===================== Step Navigation =====================
+function goStep(n){
+  state.step = n;
+  // Update progress
+  const pct = [0,25,50,75,100][n];
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('stepLabel').textContent = ['① 选行业','② 填信息','③ 六维自诊','④ 差距分析','⑤ 路线图'][n];
+  
+  // Update panels
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel'+n).classList.add('active');
+  
+  // Update step nav
+  document.querySelectorAll('.step-btn').forEach((btn,i)=>{
+    btn.classList.remove('active','done');
+    if(i===n) btn.classList.add('active');
+    else if(i<n) btn.classList.add('done');
+  });
+  
+  // On step 3 (analysis), calculate
+  if(n===3) calcAnalysis();
+  // On step 4 (roadmap), generate
+  if(n===4){ generateRoadmap(); generatePreview(); }
+}
+
+// ===================== 维度数据 (Step 3) =====================
+const DIM_QUESTIONS = [
+  {
+    name:"有组织排放",
+    icon:"🏭",
+    items:[
+      {id:"y1",label:"主要排放口是否安装治理设施（除尘/脱硫/脱硝）",type:"select",opts:["未安装","部分安装","全部安装","高效运行","优于标准"]},
+      {id:"y2",label:"排放浓度与行业B级标准差距",type:"select",opts:["差2倍以上","差1.5倍","接近标准","已达标准","优于标准"]},
+      {id:"y3",label:"在线监测数据稳定性",type:"select",opts:["频繁超标","偶尔超标","基本稳定","稳定达标","长期优于"]}
+    ]
+  },
+  {
+    name:"无组织排放",
+    icon:"🌫️",
+    items:[
+      {id:"w1",label:"物料储存（料场/堆场）管控",type:"select",opts:["露天堆放","半封闭","封闭+喷淋","全密闭","全密闭+负压"]},
+      {id:"w2",label:"车间粉尘/烟气无组织逸散",type:"select",opts:["严重可见","明显逸散","有管控","基本受控","完全受控"]},
+      {id:"w3",label:"厂界无组织浓度达标情况",type:"select",opts:["超2倍以上","超1倍","接近限值","达标","稳定低于限值"]}
+    ]
+  },
+  {
+    name:"清洁运输",
+    icon:"🚛",
+    items:[
+      {id:"t1",label:"大宗物料清洁运输比例",type:"select",opts:["<30%","30-50%","50-70%","70-85%","≥85%"]},
+      {id:"t2",label:"厂内运输车辆排放标准",type:"select",opts:["国三为主","国三/国四混","国四为主","国五为主","国六/新能源"]},
+      {id:"t3",label:"非道路移动机械达标情况",type:"select",opts:["国二及以下","国三","国四","国四+DPF","新能源/国五"]}
+    ]
+  },
+  {
+    name:"监测监控",
+    icon:"📡",
+    items:[
+      {id:"m1",label:"CEMS安装与联网情况",type:"select",opts:["未安装","部分安装","全面安装","联网但不稳定","稳定联网"]},
+      {id:"m2",label:"DCS系统与关键参数记录",type:"select",opts:["无DCS","部分工序","全部工序","全部+历史可查","智能管控"]},
+      {id:"m3",label:"自行监测方案执行率",type:"select",opts:["<50%","50-70%","70-90%","90-100%","100%+比对"]}
+    ]
+  },
+  {
+    name:"环境管理",
+    icon:"📋",
+    items:[
+      {id:"e1",label:"排污许可证合规性",type:"select",opts:["超期/无证","未分批执行","已执行但不全","全面执行","标杆管理"]},
+      {id:"e2",label:"环保台账完整性",type:"select",opts:["无台账","不完整","基本完整","完整规范","数字化管理"]},
+      {id:"e3",label:"环保管理人员配置",type:"select",opts:["无专职人员","1人兼职","1人专职","2人专职","3人+体系"]}
+    ]
+  },
+  {
+    name:"能源消耗",
+    icon:"⚡",
+    items:[
+      {id:"n1",label:"单位产品能耗对标B级标准",type:"select",opts:["超20%以上","超10-20%","接近标准","已达标准","优于标准"]},
+      {id:"n2",label:"余热/余能回收利用",type:"select",opts:["无回收","部分回收","基本回收","高效回收","最优配置"]},
+      {id:"n3",label:"清洁能源使用占比",type:"select",opts:["<10%","10-30%","30-50%","50-80%","≥80%"]}
+    ]
+  }
+];
+
+function initDimensions(){
+  const container = document.getElementById('dimensionsContainer');
+  container.innerHTML = '';
+  DIM_QUESTIONS.forEach((dim,di)=>{
+    const card = document.createElement('div');
+    card.className = 'dim-card';
+    card.id = 'dimCard'+di;
+    const score = state.scores[di];
+    const scoreClass = score>=4?'score-ok':(score>=3?'score-warn':'score-bad');
+    card.innerHTML = `
+      <div class="dim-header">
+        <div><span class="dim-name">${dim.icon} ${dim.name}</span></div>
+        <div><span class="score-circle ${scoreClass}" id="dimScore${di}">${score}</span></div>
+      </div>
+      <div class="items">
+        ${dim.items.map((item,ii)=>{
+          const key = di+'-'+ii;
+          return `<div class="item">
+            <label>${item.label}</label>
+            <div class="select-group" id="selectGroup-${key}">
+              ${item.opts.map((opt,oi)=>`<button data-di="${di}" data-ii="${ii}" data-val="${oi}" class="${oi===2?'selected':''}" onclick="selectOption(${di},${ii},${oi})">${opt}</button>`).join('')}
+            </div>
+          </div>`;
+        }).join('')}
+      </div>`;
+    container.appendChild(card);
+  });
+}
+
+function selectOption(di,ii,val){
+  const buttons = document.querySelectorAll(`#selectGroup-${di}-${ii} button`);
+  buttons.forEach((b,i)=>{
+    b.classList.toggle('selected',i===val);
+  });
+  state.sel[di+'-'+ii]=val;
+  // Recalculate dimension score: average of 3 items
+  let total = 0;
+  DIM_QUESTIONS.forEach((dim,di2)=>{
+    let dimTotal = 0;
+    dim.items.forEach((item,ii2)=>{
+      const btns = document.querySelectorAll(`#selectGroup-${di2}-${ii2} button`);
+      btns.forEach((b,i)=>{if(b.classList.contains('selected')) dimTotal += (i+1);});
+    });
+    state.scores[di2] = Math.round(dimTotal / dim.items.length);
+  });
+  // Update score badges
+  state.scores.forEach((s,i)=>{
+    const el = document.getElementById('dimScore'+i);
+    if(el){
+      el.textContent = s;
+      el.className = 'score-circle '+(s>=4?'score-ok':(s>=3?'score-warn':'score-bad'));
+    }
+  });
+  saveDraft();
+}
+
+function quickFillDemo(){
+  // Fill all options with mid-to-high values (demo: mostly 3-4 out of 5)
+  DIM_QUESTIONS.forEach((dim,di)=>{
+    dim.items.forEach((item,ii)=>{
+      const val = item.opts.length - 2; // 4th option out of 5
+      selectOption(di,ii,Math.min(val,item.opts.length-1));
+    });
+  });
+  // Also fill company info
+  document.getElementById('companyName').value = 'XX纺织染整有限公司';
+  document.getElementById('companyRegion').value = '绍兴';
+  document.getElementById('companyOutput').value = '8000';
+  document.getElementById('companyStaff').value = '350';
+  document.getElementById('companyContact').value = '张经理';
+  document.getElementById('companyPhone').value = '13800000000';
+}
+
+// ===================== 差距分析 (Step 4) =====================
+function calcAnalysis(){
+  const scores = state.scores;
+  const total = scores.reduce((a,b)=>a+b,0);
+  const maxScore = DIM_QUESTIONS.length * 5;
+  document.getElementById('totalScore').textContent = total + '/' + maxScore;
+  const bCount = scores.filter(s=>s>=4).length;
+  document.getElementById('bLevel').textContent = bCount + '/' + scores.length;
+  const gaps = scores.filter(s=>s<4).length;
+  document.getElementById('gapCount').textContent = gaps;
+  
+  // Radar chart - calc points (now centered at 0,0)
+  const cx=0, cy=0, r=95;
+  const angles = [-90,-30,30,90,150,210].map(a=>a*Math.PI/180);
+  const bPoints = angles.map(a=>{
+    const x = cx + r * Math.cos(a);
+    const y = cy + r * Math.sin(a);
+    return {x,y};
+  });
+  
+  const scorePoints = angles.map((a,i)=>{
+    const score = scores[i] / 5;
+    const dist = r * Math.max(score, 0.05);
+    const x = cx + dist * Math.cos(a);
+    const y = cy + dist * Math.sin(a);
+    return {x,y};
+  });
+  
+  // Update polygon
+  const polyEl = document.getElementById('scorePolygon');
+  polyEl.setAttribute('points', scorePoints.map(p=>`${p.x},${p.y}`).join(' '));
+  
+  // Update dots
+  scorePoints.forEach((p,i)=>{
+    const dot = document.getElementById('dot'+i);
+    if(dot){dot.setAttribute('cx',p.x);dot.setAttribute('cy',p.y);}
+  });
+  
+  // Result cards
+  const container = document.getElementById('resultCards');
+  container.innerHTML = '';
+  const std = INDUSTRY_STANDARDS[state.industry] || INDUSTRY_STANDARDS['通用'];
+  
+  DIM_QUESTIONS.forEach((dim,di)=>{
+    const score = scores[di];
+    const pct = (score/5)*100;
+    const barClass = score>=4?'green':(score>=3?'amber':'red');
+    const statusText = score>=4?'✅ 已达B级标准':'⚠️ 与B级有差距';
+    
+    const card = document.createElement('div');
+    card.className = 'result-card';
+    
+    // Gap items
+    const refs = std.refs ? (std.refs[dim.name] || []) : [];
+    const gapItems = score<4 ? refs.map(r=>`<li class="${score<=2?'urgent':'normal'}">🔸 ${r}</li>`).join('') : '<li style="color:var(--green)">✅ 该维度达标，继续保持</li>';
+    
+    card.innerHTML = `
+      <h3>${dim.icon} ${dim.name} <span class="score-circle ${barClass==='green'?'score-ok':(barClass==='amber'?'score-warn':'score-bad')}" style="font-size:11px;width:auto;height:auto;padding:2px 6px;border-radius:6px">${statusText}</span></h3>
+      <div class="score-bar">
+        <span class="bar"><span class="bar-fill ${barClass}" style="width:${pct}%"></span></span>
+        <span class="score-text">${score}/5</span>
+      </div>
+      <div class="desc" style="font-size:12px;color:var(--soft);margin-bottom:6px">${std.desc[dim.name] || ''}</div>
+      <ul class="gap-list">${gapItems}</ul>
+    `;
+    container.appendChild(card);
+  });
+}
+
+// ===================== 路线图 (Step 5) =====================
+function generateRoadmap(){
+  const scores = state.scores;
+  const container = document.getElementById('roadmapContainer');
+  container.innerHTML = '';
+  
+  // Build recommendations based on low scores
+  const recommendations = [
+    {dim:0, label:"有组织排放改造", priority:scores[0]<=2?"高":"中",
+     desc:"升级除尘/脱硫/脱硝设施，确保排放浓度达到B级限值",
+     cost:scores[0]<=2?"500万-2000万":"100万-500万",
+     timeline:scores[0]<=2?"6-12个月":"3-6个月",
+     responsible:"生产部+环保部"},
+    {dim:1, label:"无组织排放管控", priority:scores[1]<=2?"高":"中",
+     desc:"料场全封闭+密闭输送+产尘点收尘改造",
+     cost:scores[1]<=2?"300万-1000万":"50万-300万",
+     timeline:scores[1]<=2?"4-8个月":"2-4个月",
+     responsible:"生产部"},
+    {dim:2, label:"清洁运输提升", priority:scores[2]<=2?"高":"中",
+     desc:"更新运输车队（国五→国六/新能源），提升铁路/水路运力比例",
+     cost:scores[2]<=2?"200万-800万":"50万-200万",
+     timeline:scores[2]<=2?"6-12个月":"3-6个月",
+     responsible:"物流部+采购部"},
+    {dim:3, label:"监测监控完善", priority:scores[3]<=2?"高":"中",
+     desc:"安装/升级CEMS并联网，建设DCS系统，补齐自行监测",
+     cost:scores[3]<=2?"100万-400万":"30万-100万",
+     timeline:scores[3]<=2?"3-6个月":"2-4个月",
+     responsible:"环保部"},
+    {dim:4, label:"环境管理体系建设", priority:scores[4]<=2?"高":"中",
+     desc:"完善排污许可证执行、环保台账、管理团队配置",
+     cost:scores[4]<=2?"30万-80万":"10万-30万",
+     timeline:scores[4]<=2?"2-4个月":"1-2个月",
+     responsible:"环保部+办公室"},
+    {dim:5, label:"能效提升", priority:scores[5]<=2?"中":"低",
+     desc:"节能改造+余热回收+清洁能源替代",
+     cost:scores[5]<=2?"200万-800万":"50万-200万",
+     timeline:scores[5]<=2?"6-18个月":"3-6个月",
+     responsible:"生产部+技术部"}
+  ];
+
+  const sorted = recommendations
+    .map((r,i)=>({...r,score:scores[r.dim]}))
+    .sort((a,b)=>a.score - b.score);
+  
+  sorted.forEach(r=>{
+    const pClass = r.priority==="高"?"p-high":(r.priority==="中"?"p-mid":"p-low");
+    const item = document.createElement('div');
+    item.className = 'roadmap-item';
+    item.innerHTML = `
+      <div class="priority ${pClass}">${r.priority==="高"?"P1":(r.priority==="中"?"P2":"P3")}</div>
+      <div class="info">
+        <div class="title">${r.label}</div>
+        <div class="desc">${r.desc}</div>
+        <div class="meta">
+          <span>💰 ${r.cost}</span>
+          <span>⏱ ${r.timeline}</span>
+          <span>👤 ${r.responsible}</span>
+        </div>
+      </div>
+    `;
+    container.appendChild(item);
+  });
+}
+
+// ===================== 初判预览 + 留资解锁 =====================
+function generatePreview(){
+  const scores=state.scores;
+  const total=scores.reduce(function(a,b){return a+b;},0);
+  const bCount=scores.filter(function(s){return s>=4;}).length;
+  const gaps=scores.filter(function(s){return s<4;}).length;
+  let gradeText='';
+  if(total>=24&&bCount>=5){ gradeText='接近 B 级及以上水平'; }
+  else if(total>=20){ gradeText='B 级边缘，需整改 '+gaps+' 个维度'; }
+  else { gradeText='与 B 级差距较大，建议优先整改 '+gaps+' 个维度'; }
+  const weak=scores.map(function(s,i){return {s:s,i:i};}).sort(function(a,b){return a.s-b.s;}).slice(0,3);
+  const std=INDUSTRY_STANDARDS[state.industry]||INDUSTRY_STANDARDS['通用'];
+  let weakHtml='';
+  weak.forEach(function(w){
+    const dim=DIM_QUESTIONS[w.i];
+    const refs=(std.refs&&std.refs[dim.name])||[];
+    const first=refs[0]||'对照该行业 B 级标准逐项整改';
+    weakHtml+='<div style="font-size:12.5px;color:var(--soft);padding:6px 0;border-bottom:1px solid var(--line)"><b style="color:var(--ink)">'+dim.icon+' '+dim.name+'</b>（'+w.s+'/5）<br><span style="font-size:12px;color:var(--amber)">🔸 '+first+'</span></div>';
+  });
+  const unlocked=!!(leadInfo||getLead());
+  const gradeColor=total>=24?'var(--green)':'var(--amber)';
+  const area=document.getElementById('reportArea');
+  area.style.display='block';
+  area.innerHTML='<div style="background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;white-space:normal">'
+    +'<div style="font-size:15px;font-weight:700;color:var(--navy)">🔍 初判结果（免费）</div>'
+    +'<div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0">'
+    +'<div class="stat-card" style="flex:1;min-width:90px"><div class="num">'+total+'/30</div><div class="label">综合评分</div></div>'
+    +'<div class="stat-card" style="flex:1;min-width:90px"><div class="num">'+bCount+'/6</div><div class="label">达标维度</div></div>'
+    +'<div class="stat-card" style="flex:1;min-width:90px"><div class="num">'+gaps+'</div><div class="label">需整改项</div></div>'
+    +'</div>'
+    +'<div style="font-size:13px;color:var(--ink);margin-bottom:8px">初判：<b style="color:'+gradeColor+'">'+gradeText+'</b></div>'
+    +'<div style="font-size:13px;font-weight:600;color:var(--navy);margin:6px 0 2px">核心短板（Top3）</div>'
+    +weakHtml
+    +(unlocked?'':'<div style="margin-top:12px;padding:10px 12px;background:var(--amber-light);border-radius:8px;font-size:12.5px;color:var(--amber)">📋 完整报告包含：各维度差距明细、改造投入估算、申报材料清单与政策时间表。点击上方「🔓 解锁完整诊断报告」，留下联系方式即可免费领取。</div>')
+    +'</div>';
+}
+function leadReady(){ return !!(leadInfo||getLead()); }
+function checkLead(){
+  if(leadReady()){ generateReport(); return; }
+  openLeadModal();
+}
+function openLeadModal(){
+  const m=document.getElementById('leadModal'); if(!m) return;
+  const n=document.getElementById('companyName').value||'';
+  const p=document.getElementById('companyPhone').value||'';
+  document.getElementById('leadName').textContent=n||'（请先在上一步填写企业名称）';
+  document.getElementById('leadPhone').value=p;
+  m.style.display='block';
+}
+function closeLeadModal(){ const m=document.getElementById('leadModal'); if(m) m.style.display='none'; }
+function submitLeadInteractive(){
+  const phoneEl=document.getElementById('leadPhone');
+  const phone=((phoneEl&&phoneEl.value)||'').trim();
+  if(!/^1\d{10}$/.test(phone)){ alert('请填写正确的 11 位手机号'); if(phoneEl) phoneEl.focus(); return; }
+  const d=collectState();
+  if(!d.company.name){ alert('请先返回第②步填写企业名称'); return; }
+  const total=d.scores.reduce(function(a,b){return a+b;},0);
+  const bCount=d.scores.filter(function(s){return s>=4;}).length;
+  leadInfo={ ts:Date.now(), phone:phone, company:d.company, industry:d.industry, total:total, bCount:bCount };
+  try{ localStorage.setItem(LS_LEAD, JSON.stringify(leadInfo)); }catch(e){}
+  closeLeadModal();
+  submitLead(true);
+  generateReport();
+  showLeadSuccess();
+}
+function showLeadSuccess(){
+  const m=document.getElementById('leadSuccessModal'); if(!m) return;
+  const note='自诊线索：'+(leadInfo.company.name||'')+'｜'+leadInfo.industry+'｜'+leadInfo.phone+'｜综合'+leadInfo.total+'/30';
+  let wechatHtml='';
+  if(LEAD_WECHAT_QR){
+    wechatHtml='<div style="text-align:center;margin:10px 0"><img src="'+LEAD_WECHAT_QR+'" style="width:150px;height:150px;border-radius:8px;border:1px solid var(--line)" alt="微信二维码"><div style="font-size:12px;color:var(--gray)">长按识别二维码，添加专家微信领取报告文件</div></div>';
+  }else{
+    wechatHtml='<div style="text-align:center;margin:10px 0;padding:12px;background:var(--blue-light);border-radius:8px"><div style="font-size:13px;color:var(--navy)">添加微信领取报告文件：<b>'+LEAD_WECHAT+'</b></div></div>';
+  }
+  document.getElementById('leadNoteText').value=note;
+  document.getElementById('leadSuccessWechat').innerHTML=wechatHtml;
+  m.style.display='block';
+}
+function closeLeadSuccess(){ const m=document.getElementById('leadSuccessModal'); if(m) m.style.display='none'; }
+function copyLeadNote(){
+  const t=document.getElementById('leadNoteText');
+  if(!t) return;
+  t.select(); t.setSelectionRange(0,9999);
+  try{ document.execCommand('copy'); alert('已复制，加微信时粘贴即可'); }catch(e){ alert('请手动复制：'+t.value); }
+}
+
+// ===================== 报告生成 =====================
+function generateReport(){
+  const name = document.getElementById('companyName').value || 'XX企业';
+  const region = document.getElementById('companyRegion').value || '浙江省';
+  const industry = state.industry || '未选择';
+  const scores = state.scores;
+  const total = scores.reduce((a,b)=>a+b,0);
+  const date = new Date().toLocaleDateString('zh-CN');
+  
+  // Industry standard desc
+  const std = INDUSTRY_STANDARDS[industry] || INDUSTRY_STANDARDS['通用'];
+  
+  let report = `═══════════════════════════════════════════════════\n`;
+  report += `       浙江绩效创A提B减D · 差距诊断报告\n`;
+  report += `═══════════════════════════════════════════════════\n\n`;
+  report += `企业名称：${name}\n`;
+  report += `所在地区：${region}\n`;
+  report += `所属行业：${industry}\n`;
+  report += `编制日期：${date}\n`;
+  report += `诊断工具：浙江绩效创A提B减D·自诊助手 v2.0（依据浙环发〔2026〕33号）\n\n`;
+  report += `───────────────────────────────────────────────\n`;
+  report += `一、综合评估\n\n`;
+  report += `综合评分：${total}/30（满分30分，B级达标须24+）\n`;
+  report += `达标维度：${scores.filter(s=>s>=4).length}/6\n`;
+  report += `需整改项：${scores.filter(s=>s<4).length}个维度\n\n`;
+  
+  report += `───────────────────────────────────────────────\n`;
+  report += `二、各维度差距分析\n\n`;
+  DIM_QUESTIONS.forEach((dim,di)=>{
+    const s = scores[di];
+    const status = s>=4?'✅ 达标':'⚠️ 需整改';
+    report += `${dim.icon} ${dim.name}：${s}/5  ${status}\n`;
+    report += `   标准：${std.desc[dim.name] || ''}\n`;
+    if(s<4 && std.refs && std.refs[dim.name]){
+      report += `   差距项：\n`;
+      std.refs[dim.name].forEach(r=>{report += `   · ${r}\n`;});
+    }
+    report += `\n`;
+  });
+  
+  report += `───────────────────────────────────────────────\n`;
+  report += `三、优先整改行动\n\n`;
+  const ordered = scores.map((s,i)=>({s,i})).sort((a,b)=>a.s-b.s);
+  ordered.forEach((item,idx)=>{
+    if(item.s>=4) return;
+    const dim = DIM_QUESTIONS[item.i];
+    const cost = item.s<=2?'500万+/大额':'50-500万/中等';
+    report += `${idx+1}. [P${idx+1}] ${dim.icon} ${dim.name}\n`;
+    report += `   预计投入：${cost}  |  周期：${item.s<=2?'6-12个月':'3-6个月'}\n`;
+    report += `   建议：参照B级标准逐项整改\n\n`;
+  });
+  
+  report += `───────────────────────────────────────────────\n`;
+  report += `四、下一步建议\n\n`;
+  report += `· 1-2个月内完成现场全面排查（建议陪同专家进场）\n`;
+  report += `· 编制整改方案与资金预算，明确时间节点\n`;
+  report += `· 同步准备申报材料（绩效分级填报+支撑材料）\n`;
+  report += `· 与当地生态环境局对接窗口时间\n`;
+  report += `· 建议委托专业咨询团队全程辅导（绩效B级申报实战经验）\n\n`;
+  report += `═══════════════════════════════════════════════════\n`;
+  report += `本报告由"绩效创B·自诊助手"自动生成，仅供参考。\n`;
+  report += `正式申报前请专家复核确认。\n`;
+  
+  const reportArea = document.getElementById('reportArea');
+  reportArea.textContent = report;
+  reportArea.style.display = 'block';
+  reportArea.scrollIntoView({behavior:'smooth'});
+  if(!leadSubmitted){ leadSubmitted = true; submitLead(true); }
+}
+
+function printReport(){
+  if(!leadReady()){ alert('请先点击「解锁完整诊断报告」提交联系方式，即可打印/导出。'); return; }
+  const reportArea = document.getElementById('reportArea');
+  if(reportArea.style.display === 'none'){
+    generateReport();
+  }
+  // Small delay to ensure rendering
+  setTimeout(()=>{
+    const content = reportArea.textContent;
+    const win = window.open('','打印报告');
+    win.document.write('<html><head><meta charset="utf-8"><title>绩效创B诊断报告</title>');
+    win.document.write('<style>body{font-family:monospace;font-size:13px;line-height:1.6;padding:20px;white-space:pre-wrap}@media print{@page{size:A4;margin:15mm}}</style>');
+    win.document.write('</head><body><pre>'+content+'</pre></body></html>');
+    win.document.close();
+    win.print();
+  },300);
+}
+
+// ===================== Keyboard Shortcuts =====================
+document.addEventListener('keydown', e=>{
+  if(e.key==='Enter'){
+    const activePanel = document.querySelector('.panel.active');
+    if(!activePanel) return;
+    const nextBtn = activePanel.querySelector('.btn-primary:not([disabled])');
+    if(nextBtn && !e.shiftKey) nextBtn.click();
+  }
+});
+</script>
+
+<!-- 留资弹窗 -->
+<div id="leadModal" style="display:none;position:fixed;inset:0;background:rgba(22,40,74,.5);z-index:100;padding:20px;overflow:auto">
+  <div style="max-width:440px;margin:60px auto;background:var(--card);border-radius:var(--radius);padding:22px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <h2 style="color:var(--navy);font-size:16px">🔓 解锁完整诊断报告</h2>
+      <button class="btn btn-sm" onclick="closeLeadModal()">关闭</button>
+    </div>
+    <p style="font-size:12.5px;color:var(--gray);margin-bottom:14px">完整报告含：各维度差距明细、改造投入估算、申报材料清单、政策时间表。填写联系方式，专家 1 个工作日内发送报告并免费解答。</p>
+    <div style="font-size:13px;color:var(--ink);margin-bottom:8px">企业名称：<b id="leadName"></b></div>
+    <div class="form-group">
+      <label>联系电话 <span class="req">*</span></label>
+      <input type="tel" id="leadPhone" placeholder="11 位手机号" style="width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px">
+    </div>
+    <button class="btn btn-primary" onclick="submitLeadInteractive()" style="width:100%">提交并查看完整报告</button>
+  </div>
+</div>
+
+<!-- 解锁成功弹窗 -->
+<div id="leadSuccessModal" style="display:none;position:fixed;inset:0;background:rgba(22,40,74,.5);z-index:101;padding:20px;overflow:auto">
+  <div style="max-width:460px;margin:50px auto;background:var(--card);border-radius:var(--radius);padding:22px">
+    <div style="font-size:16px;font-weight:700;color:var(--green);text-align:center">✅ 报告已解锁</div>
+    <div style="font-size:13px;color:var(--soft);text-align:center;margin:6px 0 12px">完整诊断报告已在上方展示，可打印/导出 PDF。</div>
+    <div id="leadSuccessWechat"></div>
+    <div style="font-size:12px;color:var(--gray);margin:10px 0 6px">加微信时粘贴以下备注，方便专家快速找到你：</div>
+    <div style="display:flex;gap:6px;align-items:center">
+      <input type="text" id="leadNoteText" readonly style="flex:1;padding:7px 10px;border:1px solid var(--line);border-radius:8px;font-size:12px;background:var(--paper)">
+      <button class="btn btn-sm btn-outline" onclick="copyLeadNote()">复制</button>
+    </div>
+    <button class="btn btn-primary" onclick="closeLeadSuccess()" style="width:100%;margin-top:12px">知道了</button>
+  </div>
+</div>
+
+<!-- 诊断记录弹窗（本机） -->
+<div id="historyModal" style="display:none;position:fixed;inset:0;background:rgba(22,40,74,.5);z-index:99;padding:20px;overflow:auto">
+  <div style="max-width:560px;margin:40px auto;background:var(--card);border-radius:var(--radius);padding:20px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <h2 style="color:var(--navy);font-size:16px">我的诊断记录</h2>
+      <button class="btn btn-sm" onclick="toggleHistory()">关闭</button>
+    </div>
+    <div id="historyList"></div>
+  </div>
+</div>
+
+</body>
+</html>
