@@ -874,11 +874,11 @@ const LS_DRAFT = 'pjfz_draft_v1';
 const LS_HISTORY = 'pjfz_history_v1';
 // 回传后端地址（留资用）：留空时线索走"加微信 + 复制备注话术"兜底，照样能收到。
 // 免费方案：用 FormSubmit 收邮件 —— 填 https://formsubmit.co/ajax/你的邮箱 （首次需去邮箱点激活链接）
-const UPLOAD_URL = '';
-// 客户领取报告时展示的微信号（填了会在解锁后引导客户加这个微信领报告/咨询）
-const LEAD_WECHAT = '请填写你的微信号';
-// 微信二维码图片地址（可选，填了在解锁弹窗展示；留空则显示微信号文字）
-const LEAD_WECHAT_QR = '';
+const UPLOAD_URL = 'https://formsubmit.co/ajax/jinghao.song@gmail.com';
+// 客户领取报告时展示的联系方式文案（有二维码时作为辅助说明）
+const LEAD_WECHAT = '关注公众号领取报告';
+// 公众号二维码图片（随站点部署在 zj-selfcheck/ 目录，用相对路径）
+const LEAD_WECHAT_QR = 'gh-qr.jpg';
 // 留资本地标记
 const LS_LEAD = 'pjfz_lead_v1';
 
@@ -1389,7 +1389,7 @@ function showLeadSuccess(){
   const note='自诊线索：'+(leadInfo.company.name||'')+'｜'+leadInfo.industry+'｜'+leadInfo.phone+'｜综合'+leadInfo.total+'/30';
   let wechatHtml='';
   if(LEAD_WECHAT_QR){
-    wechatHtml='<div style="text-align:center;margin:10px 0"><img src="'+LEAD_WECHAT_QR+'" style="width:150px;height:150px;border-radius:8px;border:1px solid var(--line)" alt="微信二维码"><div style="font-size:12px;color:var(--gray)">长按识别二维码，添加专家微信领取报告文件</div></div>';
+    wechatHtml='<div style="text-align:center;margin:10px 0"><img src="'+LEAD_WECHAT_QR+'" style="width:150px;height:150px;border-radius:8px;border:1px solid var(--line)" alt="公众号二维码"><div style="font-size:12px;color:var(--gray)">长按识别二维码，关注公众号领取报告文件</div></div>';
   }else{
     wechatHtml='<div style="text-align:center;margin:10px 0;padding:12px;background:var(--blue-light);border-radius:8px"><div style="font-size:13px;color:var(--navy)">添加微信领取报告文件：<b>'+LEAD_WECHAT+'</b></div></div>';
   }
@@ -1511,7 +1511,7 @@ document.addEventListener('keydown', e=>{
       <h2 style="color:var(--navy);font-size:16px">🔓 解锁完整诊断报告</h2>
       <button class="btn btn-sm" onclick="closeLeadModal()">关闭</button>
     </div>
-    <p style="font-size:12.5px;color:var(--gray);margin-bottom:14px">完整报告含：各维度差距明细、改造投入估算、申报材料清单、政策时间表。填写联系方式，专家 1 个工作日内发送报告并免费解答。</p>
+    <p style="font-size:12.5px;color:var(--gray);margin-bottom:14px">完整报告含：各维度差距明细、改造投入估算、申报材料清单、政策时间表。填写联系方式后立即解锁，关注公众号可下载报告文件。</p>
     <div style="font-size:13px;color:var(--ink);margin-bottom:8px">企业名称：<b id="leadName"></b></div>
     <div class="form-group">
       <label>联系电话 <span class="req">*</span></label>
@@ -1527,7 +1527,7 @@ document.addEventListener('keydown', e=>{
     <div style="font-size:16px;font-weight:700;color:var(--green);text-align:center">✅ 报告已解锁</div>
     <div style="font-size:13px;color:var(--soft);text-align:center;margin:6px 0 12px">完整诊断报告已在上方展示，可打印/导出 PDF。</div>
     <div id="leadSuccessWechat"></div>
-    <div style="font-size:12px;color:var(--gray);margin:10px 0 6px">加微信时粘贴以下备注，方便专家快速找到你：</div>
+    <div style="font-size:12px;color:var(--gray);margin:10px 0 6px">您的报告编号（截图保存，关注公众号可咨询专家）：</div>
     <div style="display:flex;gap:6px;align-items:center">
       <input type="text" id="leadNoteText" readonly style="flex:1;padding:7px 10px;border:1px solid var(--line);border-radius:8px;font-size:12px;background:var(--paper)">
       <button class="btn btn-sm btn-outline" onclick="copyLeadNote()">复制</button>
