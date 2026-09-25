@@ -1067,6 +1067,12 @@
               <i data-lucide="fish-symbol"></i>
               <span>水生态物种库</span>
             </a>
+            <!-- Darwin Core 名录导出。术语用 Taxon 而非 Occurrence —— 这是分类单元名录，
+                 没有时间/地点/个体数。见 pages/dwc-export.js 的文件头。 -->
+            <button class="btn" type="button" id="dwcExportBtn" title="导出为 Darwin Core 分类单元名录（CSV，UTF-8 BOM，Excel 可直接打开）">
+              <i data-lucide="download"></i>
+              <span>导出名录</span>
+            </button>
             <button class="btn btn-primary" type="button" id="bioMethodBtn">
               <i data-lucide="info"></i>
               <span>数据口径</span>
@@ -1277,6 +1283,17 @@
     </div>
 
     <script src="biodiversity-data.js"></script>
+    <script src="dwc-export.js"></script>
+    <script>
+    /* Darwin Core 名录导出：导出**整份名录**，不跟随页面筛选。
+       名录的用途是「比对底本」，导出被筛过的子集容易让人误以为那是全量。 */
+    (function () {
+      if (!window.GL_DWC) return;
+      window.GL_DWC.bindExport('dwcExportBtn', function () {
+        return window.BIODIVERSITY_DATA || [];
+      }, 'biodiversity');
+    })();
+    </script>
     <script>
     /* 生物多样性卡片渲染：数据来自 biodiversity-data.js */
     (function () {
@@ -1433,6 +1450,13 @@
           + p('记录质量限定为 research grade —— 该等级要求观察对象<b>不是圈养 / 栽培个体</b>，且已获得社区鉴定确认。所以入库的是<b>野外（含逃逸归化）个体</b>的记录。')
           + p('除此之外还单独排除了家养动物（家猫、家犬、家禽、家畜等），避免把人工饲养计入野生多样性。')
           + p('需要留意：桑、桃、板栗等物种既有大量栽培个体也有野生种群，某条记录完全可能拍的是人工栽植的树。选种依据保持客观可复现，未对这类物种做人工取舍。')
+          + p('<b>采样偏差是结构性的，必须说清楚。</b>观测数反映的是「有多少人在拍」，<b>不等于「有多少个体存在」</b>。'
+            + '公民科学数据普遍偏向：城市近郊与交通可达区域被高估、易拍摄类群（鸟、蝶、大型真菌、显花植物）被高估，'
+            + '而土壤真菌、小型昆虫、夜行兽类、深水与高海拔类群被系统性低估。'
+            + '所以本库的排序反映的是<b>人类观测热度</b>，不是生态学意义上的丰度或重要性。')
+          + p('<b>因此本库的定位是「物种识别参考库 + 名录比对底本」，不是多样性调查结果。</b>'
+            + '不能用它计算多样性指数、做群落比较或评价保护成效 —— 那需要标准化的野外调查数据（固定样线 / 样方 / 样点，控制努力量）。'
+            + '本库是<b>单一数据源</b>，且未经野外核查。')
           + p('仅「种」级记录入库；中文名、分类阶元、保护等级均直接取自 iNaturalist 的分类与保护状态字段，不做二次推断。'));
       };
       var license = function () {

@@ -12,7 +12,7 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/carassius_auratus.jpg",
-  "photoCredit": "今日头条科普",
+  "photoCredit": "no rights reserved, uploaded by Henggang Cui",
   "distribution": [
    "黄河上中下游",
    "河口"
@@ -20,7 +20,9 @@ window.SPECIES_DATA = [
   "family": "Cyprinidae",
   "habitat": "广布",
   "sourceUrl": "https://www.biodiversity-science.net/CN/10.3724/SP.J.1003.2010.179",
-  "cnRedList": "LC"
+  "cnRedList": "LC",
+  "photoLicense": "CC0",
+  "photoSource": "https://www.inaturalist.org/observations/28901724"
  },
  {
   "cn": "麦穗鱼",
@@ -35,7 +37,7 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/pseudorasbora_parva.jpg",
-  "photoCredit": "快懂百科",
+  "photoCredit": "(c) Seotaro, some rights reserved (CC BY-SA)",
   "distribution": [
    "黄河上中下游",
    "河口"
@@ -43,7 +45,9 @@ window.SPECIES_DATA = [
   "family": "Gobionidae",
   "habitat": "广布",
   "sourceUrl": "https://www.biodiversity-science.net/CN/10.3724/SP.J.1003.2010.179",
-  "cnRedList": "LC"
+  "cnRedList": "LC",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "http://en.wikipedia.org/wiki/Stone_moroko"
  },
  {
   "cn": "马口鱼",
@@ -58,14 +62,16 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/opsariichthys_bidens.jpg",
-  "photoCredit": "环球百科",
+  "photoCredit": "(c) Murodjon Rakhmonov, some rights reserved (CC BY)",
   "distribution": [
    "黄河中游"
   ],
   "family": "Xenocyprididae",
   "habitat": "溪流",
   "sourceUrl": "https://www.biodiversity-science.net/CN/10.3724/SP.J.1003.2010.179",
-  "cnRedList": "LC"
+  "cnRedList": "LC",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/234096058"
  },
  {
   "cn": "鲤",
@@ -80,7 +86,7 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/cyprinus_carpio.jpg",
-  "photoCredit": "快懂百科",
+  "photoCredit": "(c) Юлия, some rights reserved (CC BY)",
   "distribution": [
    "黄河上中下游",
    "河口"
@@ -88,7 +94,9 @@ window.SPECIES_DATA = [
   "family": "Cyprinidae",
   "habitat": "河流湖泊广布",
   "sourceUrl": "https://www.biodiversity-science.net/CN/10.3724/SP.J.1003.2010.179",
-  "cnRedList": "LC"
+  "cnRedList": "LC",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/68448254"
  },
  {
   "cn": "光唇鱼",
@@ -103,9 +111,12 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/acrossocheilus_fasciatus.jpg",
-  "photoCredit": "快懂百科",
+  "photoCredit": "(c) Wang.QG, some rights reserved (CC BY)",
   "cnRedList": "LC",
-  "endemic": true
+  "endemic": true,
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/307513107",
+  "sourceUrl": "https://www.inaturalist.org/taxa/612481"
  },
  {
   "cn": "宽鳍鱲",
@@ -120,8 +131,11 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/zacco_platypus.jpg",
-  "photoCredit": "快懂百科",
-  "cnRedList": "LC"
+  "photoCredit": "no rights reserved, uploaded by khopkins63",
+  "cnRedList": "LC",
+  "photoLicense": "CC0",
+  "photoSource": "https://www.inaturalist.org/observations/256185671",
+  "sourceUrl": "https://www.inaturalist.org/taxa/128279"
  },
  {
   "cn": "黑鳍鳈",
@@ -153,7 +167,7 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/culter_alburnus.jpg",
-  "photoCredit": "今日头条科普",
+  "photoCredit": "no rights reserved, uploaded by ex16forlife",
   "distribution": [
    "黄河中游",
    "下游"
@@ -161,7 +175,9 @@ window.SPECIES_DATA = [
   "family": "Xenocyprididae",
   "habitat": "湖泊河流",
   "sourceUrl": "https://www.biodiversity-science.net/CN/10.3724/SP.J.1003.2010.179",
-  "cnRedList": "LC"
+  "cnRedList": "LC",
+  "photoLicense": "CC0",
+  "photoSource": "https://www.inaturalist.org/observations/347192295"
  },
  {
   "cn": "䱗",
@@ -176,14 +192,16 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/hemiculter_leucisculus.jpg",
-  "photoCredit": "快懂百科",
+  "photoCredit": "(c) zhangshen, some rights reserved (CC BY)",
   "distribution": [
    "黄河上中下游"
   ],
   "family": "Xenocyprididae",
   "habitat": "中上层",
   "sourceUrl": "https://www.biodiversity-science.net/CN/10.3724/SP.J.1003.2010.179",
-  "cnRedList": "LC"
+  "cnRedList": "LC",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/61397632"
  },
  {
   "cn": "似鳊",
@@ -223,9 +241,12 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/rhodeus_sinensis.jpg",
-  "photoCredit": "快懂百科",
+  "photoCredit": "(c) Zinogre, some rights reserved (CC BY-SA)",
   "cnRedList": "LC",
-  "endemic": true
+  "endemic": true,
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "https://www.inaturalist.org/observations/18529769",
+  "sourceUrl": "https://www.inaturalist.org/taxa/128296"
  },
  {
   "cn": "高体鳑鲏",
@@ -240,14 +261,16 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/rhodeus_ocellatus.jpg",
-  "photoCredit": "快懂百科",
+  "photoCredit": "(c) Zinogre, some rights reserved (CC BY-SA)",
   "distribution": [
    "黄河下游"
   ],
   "family": "Acheilognathidae",
   "habitat": "缓流",
   "sourceUrl": "https://www.biodiversity-science.net/CN/10.3724/SP.J.1003.2010.179",
-  "cnRedList": "LC"
+  "cnRedList": "LC",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "https://www.inaturalist.org/observations/317758577"
  },
  {
   "cn": "大鳍鱊",
@@ -284,7 +307,7 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/hypophthalmichthys_molitrix.jpg",
-  "photoCredit": "快懂百科",
+  "photoCredit": "(c) USFWS Mountain-Prairie, some rights reserved (CC BY)",
   "distribution": [
    "黄河上中下游",
    "河口"
@@ -292,7 +315,9 @@ window.SPECIES_DATA = [
   "family": "Xenocyprididae",
   "habitat": "河流湖泊",
   "sourceUrl": "https://www.biodiversity-science.net/CN/10.3724/SP.J.1003.2010.179",
-  "cnRedList": "LC"
+  "cnRedList": "LC",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://en.wikipedia.org/wiki/Silver_carp"
  },
  {
   "cn": "华鳈",
@@ -346,14 +371,16 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/abbottina_rivularis.jpg",
-  "photoCredit": "快懂百科",
+  "photoCredit": "(c) Zinogre, some rights reserved (CC BY-SA), uploaded by Zinogre",
   "distribution": [
    "黄河上中下游"
   ],
   "family": "Gobionidae",
   "habitat": "底栖",
   "sourceUrl": "https://www.biodiversity-science.net/CN/10.3724/SP.J.1003.2010.179",
-  "cnRedList": "LC"
+  "cnRedList": "LC",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "http://en.wikipedia.org/wiki/Abbottina_rivularis"
  },
  {
   "cn": "兴凯鱊",
@@ -368,13 +395,15 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/acheilognathus_chankaensis.jpg",
-  "photoCredit": "互动百科",
+  "photoCredit": "(c) Zinogre, some rights reserved (CC BY-SA)",
   "distribution": [
    "黄河下游"
   ],
   "family": "Acheilognathidae",
   "habitat": "缓流",
-  "sourceUrl": "https://www.biodiversity-science.net/CN/10.3724/SP.J.1003.2010.179"
+  "sourceUrl": "https://www.biodiversity-science.net/CN/10.3724/SP.J.1003.2010.179",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "https://www.inaturalist.org/observations/375828689"
  },
  {
   "cn": "青鱼",
@@ -433,14 +462,16 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/hypophthalmichthys_nobilis.jpg",
-  "photoCredit": "今日头条科普",
+  "photoCredit": "(c) Jeffrey Lee (he/him/his), some rights reserved (CC BY)",
   "distribution": [
    "黄河上中下游",
    "河口"
   ],
   "family": "Xenocyprididae",
   "habitat": "河流湖泊",
-  "sourceUrl": "https://www.biodiversity-science.net/CN/10.3724/SP.J.1003.2010.179"
+  "sourceUrl": "https://www.biodiversity-science.net/CN/10.3724/SP.J.1003.2010.179",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/9261095"
  },
  {
   "cn": "细鳞斜颌鲴",
@@ -493,8 +524,12 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/paramisgurnus_dabryanus.jpg",
-  "photoCredit": "快懂百科",
-  "cnRedList": "LC"
+  "photoCredit": "(c) Theo Busschau, some rights reserved (CC BY)",
+  "cnRedList": "LC",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/334951031",
+  "photoTaxon": "Misgurnus dabryanus",
+  "sourceUrl": "https://www.inaturalist.org/taxa/1316138"
  },
  {
   "cn": "黄颡鱼",
@@ -509,7 +544,7 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/tachysurus_fulvidraco.jpg",
-  "photoCredit": "快懂百科",
+  "photoCredit": "(c) Zinogre, some rights reserved (CC BY-SA)",
   "distribution": [
    "黄河中游",
    "下游",
@@ -517,7 +552,10 @@ window.SPECIES_DATA = [
   ],
   "family": "Bagridae",
   "habitat": "缓流",
-  "sourceUrl": "https://www.biodiversity-science.net/CN/10.3724/SP.J.1003.2010.179"
+  "sourceUrl": "https://www.biodiversity-science.net/CN/10.3724/SP.J.1003.2010.179",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "https://www.inaturalist.org/observations/206046261",
+  "photoTaxon": "Tachysurus sinensis"
  },
  {
   "cn": "黄鳝",
@@ -532,7 +570,7 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/monopterus_albus.jpg",
-  "photoCredit": "快懂百科",
+  "photoCredit": "(c) Kim, Hyun-tae, some rights reserved (CC BY), uploaded by Kim, Hyun-tae",
   "distribution": [
    "黄河中游",
    "下游"
@@ -540,7 +578,9 @@ window.SPECIES_DATA = [
   "family": "Synbranchidae",
   "habitat": "缓流浅滩",
   "sourceUrl": "https://www.biodiversity-science.net/CN/10.3724/SP.J.1003.2010.179",
-  "cnRedList": "LC"
+  "cnRedList": "LC",
+  "photoLicense": "CC-BY",
+  "photoSource": "http://en.wikipedia.org/wiki/Asian_swamp_eel"
  },
  {
   "cn": "乌鳢",
@@ -555,7 +595,7 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/channa_argus.jpg",
-  "photoCredit": "快懂百科",
+  "photoCredit": "(c) wren-falcon, some rights reserved (CC BY)",
   "distribution": [
    "黄河中游",
    "下游",
@@ -564,7 +604,9 @@ window.SPECIES_DATA = [
   "family": "Channidae",
   "habitat": "湖泊沼泽",
   "sourceUrl": "https://www.biodiversity-science.net/CN/10.3724/SP.J.1003.2010.179",
-  "cnRedList": "LC"
+  "cnRedList": "LC",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/248693426"
  },
  {
   "cn": "黄黝鱼",
@@ -579,7 +621,11 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/hypseleotris_swinhonis.jpg",
-  "photoCredit": "人文云"
+  "photoCredit": "(c) Zinogre, some rights reserved (CC BY-SA)",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "https://www.inaturalist.org/observations/18700862",
+  "photoTaxon": "Micropercops swinhonis",
+  "sourceUrl": "https://www.inaturalist.org/taxa/105807"
  },
  {
   "cn": "子陵吻鰕虎鱼",
@@ -594,7 +640,7 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/rhinogobius_giurinus.jpg",
-  "photoCredit": "快懂百科",
+  "photoCredit": "no rights reserved, uploaded by Agnes Trekker",
   "distribution": [
    "黄河下游",
    "河口"
@@ -602,7 +648,10 @@ window.SPECIES_DATA = [
   "family": "Rhyacichthyidae",
   "habitat": "底栖",
   "sourceUrl": "https://www.biodiversity-science.net/CN/10.3724/SP.J.1003.2010.179",
-  "cnRedList": "LC"
+  "cnRedList": "LC",
+  "photoLicense": "CC0",
+  "photoSource": "https://www.inaturalist.org/observations/90962811",
+  "photoTaxon": "Rhinogobius similis"
  },
  {
   "cn": "波氏吻鰕虎鱼",
@@ -617,9 +666,12 @@ window.SPECIES_DATA = [
    "本土种"
   ],
   "photo": "assets/species-photos/rhinogobius_cliffordpopei.jpg",
-  "photoCredit": "快懂百科",
+  "photoCredit": "(c) Zinogre, some rights reserved (CC BY-SA)",
   "cnRedList": "LC",
-  "endemic": true
+  "endemic": true,
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "https://www.inaturalist.org/observations/18529961",
+  "sourceUrl": "https://www.inaturalist.org/taxa/128379"
  },
  {
   "cn": "鲶",
@@ -822,7 +874,11 @@ window.SPECIES_DATA = [
    "指示种"
   ],
   "photo": "assets/species-photos/palaemonetes_sinensis.jpg",
-  "photoCredit": "搜狗百科"
+  "photoCredit": "(c) Zinogre, some rights reserved (CC BY-SA), uploaded by Zinogre",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "https://www.inaturalist.org/taxa/1072093",
+  "photoTaxon": "Palaemon sinensis",
+  "sourceUrl": "https://www.inaturalist.org/taxa/1072093"
  },
  {
   "cn": "中华锯齿米虾",
@@ -837,7 +893,11 @@ window.SPECIES_DATA = [
    "指示种"
   ],
   "photo": "assets/species-photos/caridina_denticulata.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) りなべる, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/332863261",
+  "photoTaxon": "Neocaridina denticulata",
+  "sourceUrl": "https://www.inaturalist.org/taxa/435179"
  },
  {
   "cn": "耳萝卜螺",
@@ -852,7 +912,10 @@ window.SPECIES_DATA = [
    "指示种"
   ],
   "photo": "assets/species-photos/radix_auricularia.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Matt Bowser, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/3672932",
+  "sourceUrl": "https://www.inaturalist.org/taxa/129204"
  },
  {
   "cn": "椭圆萝卜螺",
@@ -882,7 +945,11 @@ window.SPECIES_DATA = [
    "指示种"
   ],
   "photo": "assets/species-photos/viviparidae.jpg",
-  "photoCredit": "抖音百科"
+  "photoCredit": "(c) Allison Zon, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/112212739",
+  "photoTaxon": "Viviparidae",
+  "sourceUrl": "https://www.inaturalist.org/taxa/83797"
  },
  {
   "cn": "蚌",
@@ -897,7 +964,11 @@ window.SPECIES_DATA = [
    "指示种"
   ],
   "photo": "assets/species-photos/unionidae.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Evan M. Raskin, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/35641003",
+  "photoTaxon": "Unionidae",
+  "sourceUrl": "https://www.inaturalist.org/taxa/51903"
  },
  {
   "cn": "水丝蚓",
@@ -972,7 +1043,10 @@ window.SPECIES_DATA = [
    "指示种"
   ],
   "photo": "assets/species-photos/branchiura_sowerbyi.jpg",
-  "photoCredit": "百度百科"
+  "photoCredit": "(c) Andrea Chemello, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/227255731",
+  "sourceUrl": "https://www.inaturalist.org/taxa/215446"
  },
  {
   "cn": "裸泽蛭",
@@ -1002,7 +1076,11 @@ window.SPECIES_DATA = [
    "指示种"
   ],
   "photo": "assets/species-photos/scabies_longata.jpg",
-  "photoCredit": "淘宝标本"
+  "photoCredit": "(c) portioid, some rights reserved (CC BY), uploaded by portioid",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/taxa/112098",
+  "photoTaxon": "Scabies crispata",
+  "sourceUrl": "https://www.inaturalist.org/taxa/112098"
  },
  {
   "cn": "圆头楔蚌",
@@ -1032,7 +1110,11 @@ window.SPECIES_DATA = [
    "指示种"
   ],
   "photo": "assets/species-photos/bellamya_aeruginosa.jpg",
-  "photoCredit": "花瓣网"
+  "photoCredit": "(c) Tomás Carranza Perales, some rights reserved (CC BY), uploaded by Tomás Carranza Perales",
+  "photoLicense": "CC-BY",
+  "photoSource": "http://en.wikipedia.org/wiki/Sinotaia_quadrata",
+  "photoTaxon": "Sinotaia quadrata",
+  "sourceUrl": "https://www.inaturalist.org/taxa/151151"
  },
  {
   "cn": "福寿螺",
@@ -1047,7 +1129,10 @@ window.SPECIES_DATA = [
    "指示种"
   ],
   "photo": "assets/species-photos/pomacea_canaliculata.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Parsa Fard, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/59739608",
+  "sourceUrl": "https://www.inaturalist.org/taxa/122278"
  },
  {
   "cn": "大沼螺",
@@ -1107,7 +1192,11 @@ window.SPECIES_DATA = [
    "指示种"
   ],
   "photo": "assets/species-photos/caridina_nilotica_gracilipes.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Wang J.P., some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/294264169",
+  "photoTaxon": "Caridina gracilipes",
+  "sourceUrl": "https://www.inaturalist.org/taxa/434694"
  },
  {
   "cn": "中华齿米虾",
@@ -1137,7 +1226,11 @@ window.SPECIES_DATA = [
    "指示种"
   ],
   "photo": "assets/species-photos/exopalaemon_modestus.jpg",
-  "photoCredit": "泡泡水族"
+  "photoCredit": "(c) Lee Cain, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/319248816",
+  "photoTaxon": "Palaemon modestus",
+  "sourceUrl": "https://www.inaturalist.org/taxa/1072074"
  },
  {
   "cn": "日本沼虾",
@@ -1152,7 +1245,10 @@ window.SPECIES_DATA = [
    "指示种"
   ],
   "photo": "assets/species-photos/macrobrachium_nipponense.jpg",
-  "photoCredit": "河北常见节肢动物网"
+  "photoCredit": "(c) anonymous, some rights reserved (CC BY-SA)",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "http://en.wikipedia.org/wiki/Macrobrachium_nipponense",
+  "sourceUrl": "https://www.inaturalist.org/taxa/435085"
  },
  {
   "cn": "扇蟌",
@@ -1380,7 +1476,10 @@ window.SPECIES_DATA = [
    "浮游植物"
   ],
   "photo": "assets/species-photos/achnanthes.jpg",
-  "photoCredit": "Nikon Small World / 新浪图片"
+  "photoCredit": "(c) James K. Douch, some rights reserved (CC BY-SA)",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "https://www.inaturalist.org/observations/393982390",
+  "sourceUrl": "https://www.inaturalist.org/taxa/339308"
  },
  {
   "cn": "异极藻",
@@ -1464,7 +1563,10 @@ window.SPECIES_DATA = [
    "浮游植物"
   ],
   "photo": "assets/species-photos/amphora.jpg",
-  "photoCredit": "知识贝壳/海洋藻类图谱"
+  "photoCredit": "(c) Michael Brondino, some rights reserved (CC BY-SA)",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "https://www.inaturalist.org/observations/150679215",
+  "sourceUrl": "https://www.inaturalist.org/taxa/325558"
  },
  {
   "cn": "波纹藻",
@@ -1478,7 +1580,11 @@ window.SPECIES_DATA = [
    "浮游植物"
   ],
   "photo": "assets/species-photos/cymatopleura.jpg",
-  "photoCredit": "利洋水产论坛"
+  "photoCredit": "(c) Quinten Wiegersma, some rights reserved (CC BY), uploaded by Quinten Wiegersma",
+  "photoLicense": "CC-BY",
+  "photoSource": "http://en.wikipedia.org/wiki/Surirella",
+  "photoTaxon": "Surirella",
+  "sourceUrl": "https://www.inaturalist.org/taxa/203655"
  },
  {
   "cn": "衣藻",
@@ -1492,7 +1598,10 @@ window.SPECIES_DATA = [
    "浮游植物"
   ],
   "photo": "assets/species-photos/chlamydomonas.jpg",
-  "photoCredit": "Biology Notes Online"
+  "photoCredit": "(c) Kim, Hyun-tae, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/19191448",
+  "sourceUrl": "https://www.inaturalist.org/taxa/118482"
  },
  {
   "cn": "四球藻",
@@ -1506,7 +1615,10 @@ window.SPECIES_DATA = [
    "浮游植物"
   ],
   "photo": "assets/species-photos/tetrachlorella.jpg",
-  "photoCredit": "澳门自来水/澳门淡水藻类"
+  "photoCredit": "no rights reserved, uploaded by Luka S. (someplant)",
+  "photoLicense": "CC0",
+  "photoSource": "http://en.wikipedia.org/wiki/Tetrachlorella",
+  "sourceUrl": "https://www.inaturalist.org/taxa/602539"
  },
  {
   "cn": "栅藻",
@@ -1520,7 +1632,10 @@ window.SPECIES_DATA = [
    "浮游植物"
   ],
   "photo": "assets/species-photos/scenedesmus.jpg",
-  "photoCredit": "科普中国/水产图谱"
+  "photoCredit": "(c) zookanthos, some rights reserved (CC BY), uploaded by zookanthos",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://en.wikipedia.org/wiki/Scenedesmus",
+  "sourceUrl": "https://www.inaturalist.org/taxa/243768"
  },
  {
   "cn": "四尾栅藻",
@@ -1534,7 +1649,10 @@ window.SPECIES_DATA = [
    "浮游植物"
   ],
   "photo": "assets/species-photos/scenedesmus_quadricauda.jpg",
-  "photoCredit": "The Microscopic Life of Shetland Lochs"
+  "photoCredit": "(c) Brandon Corder, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/228061215",
+  "sourceUrl": "https://www.inaturalist.org/taxa/1267042"
  },
  {
   "cn": "新月藻",
@@ -1548,7 +1666,10 @@ window.SPECIES_DATA = [
    "浮游植物"
   ],
   "photo": "assets/species-photos/closterium.jpg",
-  "photoCredit": "织金洞世界地质公园"
+  "photoCredit": "(c) Igor Shelpiakov, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/325057565",
+  "sourceUrl": "https://www.inaturalist.org/taxa/123852"
  },
  {
   "cn": "纤细新月藻",
@@ -1562,7 +1683,10 @@ window.SPECIES_DATA = [
    "浮游植物"
   ],
   "photo": "assets/species-photos/closterium_gracile.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "no rights reserved, uploaded by onotole",
+  "photoLicense": "CC0",
+  "photoSource": "https://www.inaturalist.org/observations/320132860",
+  "sourceUrl": "https://www.inaturalist.org/taxa/491404"
  },
  {
   "cn": "小球藻",
@@ -1590,7 +1714,10 @@ window.SPECIES_DATA = [
    "浮游植物"
   ],
   "photo": "assets/species-photos/pediastrum.jpg",
-  "photoCredit": "Real Micro Life"
+  "photoCredit": "(c) Ivan Sinkov, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/53766545",
+  "sourceUrl": "https://www.inaturalist.org/taxa/123854"
  },
  {
   "cn": "新月鼓藻",
@@ -1604,7 +1731,10 @@ window.SPECIES_DATA = [
    "浮游植物"
   ],
   "photo": "assets/species-photos/closterium_lunula.jpg",
-  "photoCredit": "Botanical Realm"
+  "photoCredit": "(c) Óscar Sampedro, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/347262475",
+  "sourceUrl": "https://www.inaturalist.org/taxa/494791"
  },
  {
   "cn": "卵囊藻",
@@ -1632,7 +1762,10 @@ window.SPECIES_DATA = [
    "浮游植物"
   ],
   "photo": "assets/species-photos/pandorina.jpg",
-  "photoCredit": "protist images"
+  "photoCredit": "(c) James K. Douch, some rights reserved (CC BY-SA)",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "https://www.inaturalist.org/observations/288652062",
+  "sourceUrl": "https://www.inaturalist.org/taxa/430389"
  },
  {
   "cn": "空球藻",
@@ -1688,7 +1821,10 @@ window.SPECIES_DATA = [
    "浮游植物"
   ],
   "photo": "assets/species-photos/phacus.jpg",
-  "photoCredit": "显微摄影记录"
+  "photoCredit": "(c) crseaquist, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/64894319",
+  "sourceUrl": "https://www.inaturalist.org/taxa/200867"
  },
  {
   "cn": "尖尾裸藻",
@@ -1702,7 +1838,11 @@ window.SPECIES_DATA = [
    "浮游植物"
   ],
   "photo": "assets/species-photos/euglena_oxyuris.jpg",
-  "photoCredit": "microfloraenfauna.com"
+  "photoCredit": "(c) Igor Shelpiakov, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/144542688",
+  "photoTaxon": "Lepocinclis oxyuris",
+  "sourceUrl": "https://www.inaturalist.org/taxa/841610"
  },
  {
   "cn": "尾裸藻",
@@ -1716,7 +1856,11 @@ window.SPECIES_DATA = [
    "浮游植物"
   ],
   "photo": "assets/species-photos/euglena_caudata.jpg",
-  "photoCredit": "protist images"
+  "photoCredit": "no rights reserved, uploaded by David Bird",
+  "photoLicense": "CC0",
+  "photoSource": "https://www.inaturalist.org/observations/351480844",
+  "photoTaxon": "Euglenaria caudata",
+  "sourceUrl": "https://www.inaturalist.org/taxa/1679254"
  },
  {
   "cn": "梭形裸藻",
@@ -1730,7 +1874,11 @@ window.SPECIES_DATA = [
    "浮游植物"
   ],
   "photo": "assets/species-photos/euglena_acus.jpg",
-  "photoCredit": "okabolmedia.com"
+  "photoCredit": "(c) crseaquist, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/138132594",
+  "photoTaxon": "Lepocinclis acus",
+  "sourceUrl": "https://www.inaturalist.org/taxa/468244"
  },
  {
   "cn": "蓝隐藻",
@@ -1772,7 +1920,10 @@ window.SPECIES_DATA = [
    "浮游植物"
   ],
   "photo": "assets/species-photos/glenodinium.jpg",
-  "photoCredit": "水产养殖藻类图谱"
+  "photoCredit": "no rights reserved, uploaded by onotole",
+  "photoLicense": "CC0",
+  "photoSource": "https://en.wikipedia.org/wiki/Glenodinium",
+  "sourceUrl": "https://www.inaturalist.org/taxa/470230"
  },
  {
   "cn": "钟虫",
@@ -1786,7 +1937,10 @@ window.SPECIES_DATA = [
    "浮游动物"
   ],
   "photo": "assets/species-photos/vorticella.jpg",
-  "photoCredit": "Wikimedia Commons (DHZantette)"
+  "photoCredit": "(c) Don Loarie, some rights reserved (CC BY), uploaded by Don Loarie",
+  "photoLicense": "CC-BY",
+  "photoSource": "http://en.wikipedia.org/wiki/Vorticella",
+  "sourceUrl": "https://www.inaturalist.org/taxa/121590"
  },
  {
   "cn": "前管虫",
@@ -1842,7 +1996,10 @@ window.SPECIES_DATA = [
    "浮游动物"
   ],
   "photo": "assets/species-photos/epistylis.jpg",
-  "photoCredit": "Bilibili微生物镜检"
+  "photoCredit": "(c) Nathan T. Jones, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/70219236",
+  "sourceUrl": "https://www.inaturalist.org/taxa/335333"
  },
  {
   "cn": "杂葫芦虫",
@@ -1855,8 +2012,11 @@ window.SPECIES_DATA = [
   "tags": [
    "浮游动物"
   ],
-  "photo": "",
-  "photoCredit": ""
+  "photo": "assets/species-photos/cucurbitella.jpg",
+  "photoCredit": "(c) Tomás Carranza Perales, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/192008859",
+  "sourceUrl": "https://www.inaturalist.org/taxa/576094"
  },
  {
   "cn": "螺形龟甲轮虫",
@@ -1870,7 +2030,10 @@ window.SPECIES_DATA = [
    "浮游动物"
   ],
   "photo": "assets/species-photos/keratella_cochlearis.jpg",
-  "photoCredit": "今日头条·微观生命"
+  "photoCredit": "(c) crseaquist, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/99927905",
+  "sourceUrl": "https://www.inaturalist.org/taxa/203373"
  },
  {
   "cn": "曲腿龟甲轮虫",
@@ -1912,7 +2075,10 @@ window.SPECIES_DATA = [
    "浮游动物"
   ],
   "photo": "assets/species-photos/brachionus_angularis.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Вячеслав Юсупов, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/329894075",
+  "sourceUrl": "https://www.inaturalist.org/taxa/256160"
  },
  {
   "cn": "萼花臂尾轮虫",
@@ -1982,7 +2148,10 @@ window.SPECIES_DATA = [
    "浮游动物"
   ],
   "photo": "assets/species-photos/colurella.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "no rights reserved, uploaded by Kian Hayles-Cotton",
+  "photoLicense": "CC0",
+  "photoSource": "https://www.inaturalist.org/observations/356631942",
+  "sourceUrl": "https://www.inaturalist.org/taxa/247254"
  },
  {
   "cn": "鞍甲轮虫",
@@ -1996,7 +2165,10 @@ window.SPECIES_DATA = [
    "浮游动物"
   ],
   "photo": "assets/species-photos/lepadella.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Emmett Collins-Sussman, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/150081606",
+  "sourceUrl": "https://www.inaturalist.org/taxa/247255"
  },
  {
   "cn": "凸背巨头轮虫",
@@ -2010,7 +2182,10 @@ window.SPECIES_DATA = [
    "浮游动物"
   ],
   "photo": "assets/species-photos/cephalodella_gibba.jpg",
-  "photoCredit": "Animal Diversity Web"
+  "photoCredit": "no rights reserved, uploaded by onotole",
+  "photoLicense": "CC0",
+  "photoSource": "https://www.inaturalist.org/observations/367649356",
+  "sourceUrl": "https://www.inaturalist.org/taxa/256277"
  },
  {
   "cn": "小巨头轮虫",
@@ -2108,7 +2283,10 @@ window.SPECIES_DATA = [
    "浮游动物"
   ],
   "photo": "assets/species-photos/harpacticoida.jpg",
-  "photoCredit": "快懂百科（虎斑猛水蚤SEM）"
+  "photoCredit": "(c) Hannes Dahm, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/190408035",
+  "sourceUrl": "https://www.inaturalist.org/taxa/85521"
  },
  {
   "cn": "桡足类无节幼体",
@@ -2182,7 +2360,11 @@ window.SPECIES_DATA = [
    "指示种"
   ],
   "photo": "assets/species-photos/synedra_ulna.jpg",
-  "photoCredit": "Shetland Lochs Microscopy"
+  "photoCredit": "(c) Thomas Gyselinck, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/365153072",
+  "photoTaxon": "Ulnaria ulna",
+  "sourceUrl": "https://www.inaturalist.org/taxa/496856"
  },
  {
   "cn": "菱形藻",
@@ -2257,7 +2439,10 @@ window.SPECIES_DATA = [
    "指示种"
   ],
   "photo": "assets/species-photos/cymbella.jpg",
-  "photoCredit": "央广网生物显微摄影"
+  "photoCredit": "no rights reserved, uploaded by David Bird",
+  "photoLicense": "CC0",
+  "photoSource": "https://www.inaturalist.org/observations/330903884",
+  "sourceUrl": "https://www.inaturalist.org/taxa/123878"
  },
  {
   "cn": "舟形藻",
@@ -2272,7 +2457,10 @@ window.SPECIES_DATA = [
    "指示种"
   ],
   "photo": "assets/species-photos/navicula.jpg",
-  "photoCredit": "59百科"
+  "photoCredit": "no rights reserved, uploaded by David Bird",
+  "photoLicense": "CC0",
+  "photoSource": "https://www.inaturalist.org/observations/334358875",
+  "sourceUrl": "https://www.inaturalist.org/taxa/203808"
  },
  {
   "cn": "扁圆卵形藻",
@@ -2301,7 +2489,10 @@ window.SPECIES_DATA = [
    "鸟类"
   ],
   "photo": "assets/species-photos/egretta_garzetta.jpg",
-  "photoCredit": "B站野外实拍"
+  "photoCredit": "(c) Bengt Nyman, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "http://en.wikipedia.org/wiki/Little_egret",
+  "sourceUrl": "https://www.inaturalist.org/taxa/4943"
  },
  {
   "cn": "池鹭",
@@ -2315,7 +2506,10 @@ window.SPECIES_DATA = [
    "鸟类"
   ],
   "photo": "assets/species-photos/ardeola_bacchus.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Marco Chan, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/101600110",
+  "sourceUrl": "https://www.inaturalist.org/taxa/4990"
  },
  {
   "cn": "牛背鹭",
@@ -2343,7 +2537,10 @@ window.SPECIES_DATA = [
    "鸟类"
   ],
   "photo": "assets/species-photos/nycticorax_nycticorax.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "no rights reserved, uploaded by Kyle Nessen",
+  "photoLicense": "CC0",
+  "photoSource": "http://en.wikipedia.org/wiki/Black-crowned_night_heron",
+  "sourceUrl": "https://www.inaturalist.org/taxa/4981"
  },
  {
   "cn": "珠颈斑鸠",
@@ -2357,7 +2554,11 @@ window.SPECIES_DATA = [
    "鸟类"
   ],
   "photo": "assets/species-photos/streptopelia_chinensis.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Zinogre, some rights reserved (CC BY-SA), uploaded by Zinogre",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "https://en.wikipedia.org/wiki/Spotted_dove",
+  "photoTaxon": "Spilopelia chinensis",
+  "sourceUrl": "https://www.inaturalist.org/taxa/1455918"
  },
  {
   "cn": "小鸊鷉",
@@ -2371,7 +2572,10 @@ window.SPECIES_DATA = [
    "鸟类"
   ],
   "photo": "assets/species-photos/tachybaptus_ruficollis.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) rober025, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/65912619",
+  "sourceUrl": "https://www.inaturalist.org/taxa/4237"
  },
  {
   "cn": "黑水鸡",
@@ -2399,7 +2603,10 @@ window.SPECIES_DATA = [
    "鸟类"
   ],
   "photo": "assets/species-photos/amaurornis_phoenicurus.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Vihansith Kulatunga, some rights reserved (CC BY-SA)",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "https://www.inaturalist.org/observations/73287324",
+  "sourceUrl": "https://www.inaturalist.org/taxa/199"
  },
  {
   "cn": "棕背伯劳",
@@ -2413,7 +2620,10 @@ window.SPECIES_DATA = [
    "鸟类"
   ],
   "photo": "assets/species-photos/lanius_schach.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Andrew Bazdyrev, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/131584241",
+  "sourceUrl": "https://www.inaturalist.org/taxa/12035"
  },
  {
   "cn": "红尾伯劳",
@@ -2427,7 +2637,10 @@ window.SPECIES_DATA = [
    "鸟类"
   ],
   "photo": "assets/species-photos/lanius_cristatus.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) 尹若宇, some rights reserved (CC BY-SA)",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "https://www.inaturalist.org/observations/102098511",
+  "sourceUrl": "https://www.inaturalist.org/taxa/12021"
  },
  {
   "cn": "家燕",
@@ -2441,7 +2654,10 @@ window.SPECIES_DATA = [
    "鸟类"
   ],
   "photo": "assets/species-photos/hirundo_rustica.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Diego González Dopico, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/239048645",
+  "sourceUrl": "https://www.inaturalist.org/taxa/11901"
  },
  {
   "cn": "麻雀",
@@ -2455,7 +2671,10 @@ window.SPECIES_DATA = [
    "鸟类"
   ],
   "photo": "assets/species-photos/passer_montanus.jpg",
-  "photoCredit": "野外实拍"
+  "photoCredit": "(c) Radu Teodoreanu, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/334819518",
+  "sourceUrl": "https://www.inaturalist.org/taxa/13851"
  },
  {
   "cn": "白头鹎",
@@ -2469,7 +2688,10 @@ window.SPECIES_DATA = [
    "鸟类"
   ],
   "photo": "assets/species-photos/pycnonotus_sinensis.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "no rights reserved, uploaded by 葉子",
+  "photoLicense": "CC0",
+  "photoSource": "http://en.wikipedia.org/wiki/Light-vented_bulbul",
+  "sourceUrl": "https://www.inaturalist.org/taxa/14621"
  },
  {
   "cn": "喜鹊",
@@ -2483,7 +2705,10 @@ window.SPECIES_DATA = [
    "鸟类"
   ],
   "photo": "assets/species-photos/pica_serica.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "no rights reserved, uploaded by 葉子",
+  "photoLicense": "CC0",
+  "photoSource": "https://www.inaturalist.org/observations/205466820",
+  "sourceUrl": "https://www.inaturalist.org/taxa/827401"
  },
  {
   "cn": "八哥",
@@ -2497,7 +2722,10 @@ window.SPECIES_DATA = [
    "鸟类"
   ],
   "photo": "assets/species-photos/acridotheres_cristatellus.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Naelin, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/313429358",
+  "sourceUrl": "https://www.inaturalist.org/taxa/14872"
  },
  {
   "cn": "灰椋鸟",
@@ -2511,7 +2739,11 @@ window.SPECIES_DATA = [
    "鸟类"
   ],
   "photo": "assets/species-photos/sturnus_cineraceus.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Lawrence Hylton, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/153977732",
+  "photoTaxon": "Spodiopsar cineraceus",
+  "sourceUrl": "https://www.inaturalist.org/taxa/547179"
  },
  {
   "cn": "黑卷尾",
@@ -2525,7 +2757,10 @@ window.SPECIES_DATA = [
    "鸟类"
   ],
   "photo": "assets/species-photos/dicrurus_macrocercus.jpg",
-  "photoCredit": "动物大全"
+  "photoCredit": "(c) Chandu Bandi, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/332117332",
+  "sourceUrl": "https://www.inaturalist.org/taxa/8277"
  },
  {
   "cn": "鹊鸲",
@@ -2539,7 +2774,10 @@ window.SPECIES_DATA = [
    "鸟类"
   ],
   "photo": "assets/species-photos/copsychus_saularis.jpg",
-  "photoCredit": "野外实拍"
+  "photoCredit": "(c) carbenoid, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/49666787",
+  "sourceUrl": "https://www.inaturalist.org/taxa/204491"
  },
  {
   "cn": "灰头麦鸡",
@@ -2553,7 +2791,10 @@ window.SPECIES_DATA = [
    "鸟类"
   ],
   "photo": "assets/species-photos/vanellus_cinereus.jpg",
-  "photoCredit": "鸟人课堂"
+  "photoCredit": "(c) Rejoice Gassah, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/301158330",
+  "sourceUrl": "https://www.inaturalist.org/taxa/4875"
  },
  {
   "cn": "白鹡鸰",
@@ -2567,7 +2808,10 @@ window.SPECIES_DATA = [
    "鸟类"
   ],
   "photo": "assets/species-photos/motacilla_alba.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "no rights reserved, uploaded by jubileej",
+  "photoLicense": "CC0",
+  "photoSource": "https://www.inaturalist.org/observations/273408713",
+  "sourceUrl": "https://www.inaturalist.org/taxa/13695"
  },
  {
   "cn": "丝光椋鸟",
@@ -2581,7 +2825,11 @@ window.SPECIES_DATA = [
    "鸟类"
   ],
   "photo": "assets/species-photos/sturnus_sericeus.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Kim, Hyun-tae, some rights reserved (CC BY), uploaded by Kim, Hyun-tae",
+  "photoLicense": "CC-BY",
+  "photoSource": "http://en.wikipedia.org/wiki/Red-billed_starling",
+  "photoTaxon": "Spodiopsar sericeus",
+  "sourceUrl": "https://www.inaturalist.org/taxa/547178"
  },
  {
   "cn": "平胸龟",
@@ -2606,7 +2854,9 @@ window.SPECIES_DATA = [
   "cnRedList": "CR",
   "redListCriteria": "A1d+2bcd+3cd+4cd;C12a(i)",
   "photo": "assets/species-photos/platysternon-megacephalum.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Toby Y, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/122930444"
  },
  {
   "cn": "黑颈乌龟",
@@ -2653,7 +2903,9 @@ window.SPECIES_DATA = [
   "cnRedList": "EN",
   "redListCriteria": "A1cd+2bcde+3cd+4cd",
   "photo": "assets/species-photos/mauremys-reevesii.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Samuele Papeschi, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/145422325"
  },
  {
   "cn": "花龟",
@@ -2674,7 +2926,9 @@ window.SPECIES_DATA = [
   ],
   "addedAt": "2026-09-19",
   "photo": "assets/species-photos/mauremys-sinensis.jpg",
-  "photoCredit": "维基百科(Wikimedia Commons)"
+  "photoCredit": "(c) Sandy Wolkenberg, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/49172194"
  },
  {
   "cn": "黄喉拟水龟",
@@ -2697,7 +2951,9 @@ window.SPECIES_DATA = [
   "cnRedList": "EN",
   "redListCriteria": "A1cd+2bcde+3cde+4cd",
   "photo": "assets/species-photos/mauremys-mutica.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Toby Y, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/357419308"
  },
  {
   "cn": "闭壳龟属(所有种)",
@@ -2719,7 +2975,10 @@ window.SPECIES_DATA = [
   ],
   "addedAt": "2026-09-19",
   "photo": "assets/species-photos/cuora.jpg",
-  "photoCredit": "快懂百科(黄缘闭壳龟 Cuora flavomarginata 代表)"
+  "photoCredit": "(c) B. P. White, some rights reserved (CC BY-SA)",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "https://www.inaturalist.org/observations/60354437",
+  "photoTaxon": "Cuora"
  },
  {
   "cn": "眼斑水龟",
@@ -2743,7 +3002,9 @@ window.SPECIES_DATA = [
   "redListCriteria": "A1cd+2bcde+3cd+4cd",
   "endemic": true,
   "photo": "assets/species-photos/sacalia-bealei.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Lawrence Hylton, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/133318643"
  },
  {
   "cn": "四眼斑水龟",
@@ -2767,7 +3028,9 @@ window.SPECIES_DATA = [
   "cnRedList": "EN",
   "redListCriteria": "A1cd+2bcde+3cd+4cd; C1",
   "photo": "assets/species-photos/sacalia-quadriocellata.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Long Vu, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/62304103"
  },
  {
   "cn": "山瑞鳖",
@@ -2819,7 +3082,9 @@ window.SPECIES_DATA = [
   "redListCriteria": "A2bcd",
   "endemic": true,
   "photo": "assets/species-photos/andrias-davidianus.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Stefano Menchetti, some rights reserved (CC BY-SA)",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "https://www.inaturalist.org/observations/268505842"
  },
  {
   "cn": "虎纹蛙",
@@ -2936,7 +3201,10 @@ window.SPECIES_DATA = [
   "cnRedList": "EN",
   "redListCriteria": "A2bcde",
   "photo": "assets/species-photos/acipenser-baerii.jpg",
-  "photoCredit": "百科"
+  "photoCredit": "(c) gerardbertrand, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/230605214",
+  "photoTaxon": "Huso baerii"
  },
  {
   "cn": "裸腹鲟",
@@ -2982,7 +3250,10 @@ window.SPECIES_DATA = [
   "cnRedList": "CR",
   "redListCriteria": "A2cde",
   "photo": "assets/species-photos/acipenser-ruthenus.jpg",
-  "photoCredit": "水产科普"
+  "photoCredit": "(c) Павлик Лисицын, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/120762292",
+  "photoTaxon": "Huso ruthenus"
  },
  {
   "cn": "施氏鲟",
@@ -3084,7 +3355,9 @@ window.SPECIES_DATA = [
   "redListCriteria": "A2bce",
   "endemic": true,
   "photo": "assets/species-photos/tanichthys-albonubes.jpg",
-  "photoCredit": "百科"
+  "photoCredit": "(c) Zinogre, some rights reserved (CC BY-SA), uploaded by Zinogre",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "http://en.wikipedia.org/wiki/White_Cloud_Mountain_minnow"
  },
  {
   "cn": "稀有鮈鲫",
@@ -3559,7 +3832,9 @@ window.SPECIES_DATA = [
   "redListCriteria": "A2bce",
   "endemic": true,
   "photo": "assets/species-photos/leptobotia-elongata.jpg",
-  "photoCredit": "中国大百科全书(侯勉摄)"
+  "photoCredit": "(c) \nGuo D-M, Zhang E (2021) Re-description of the loach species Leptobotia citrauratea (Teleostei, Botiidae), with the description of L. brachycephala from southern Zhejiang Province, China. ZooKeys 1017: 89-109., some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://en.wikipedia.org/wiki/Leptobotia_elongata"
  },
  {
   "cn": "拟鲇高原鳅",
@@ -3633,7 +3908,10 @@ window.SPECIES_DATA = [
   ],
   "addedAt": "2026-09-19",
   "photo": "assets/species-photos/brachymystax.jpg",
-  "photoCredit": "百科"
+  "photoCredit": "(c) Aleksandr Novikov, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/309087202",
+  "photoTaxon": "Brachymystax"
  },
  {
   "cn": "哲罗鲑",
@@ -3685,7 +3963,9 @@ window.SPECIES_DATA = [
   "acc": "MG951572.1",
   "cnRedList": "LC",
   "photo": "assets/species-photos/salvelinus-malma.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Bering Land Bridge National Preserve, some rights reserved (CC BY-SA)",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "http://en.wikipedia.org/wiki/Dolly_Varden_trout"
  },
  {
   "cn": "北极茴鱼",
@@ -3709,7 +3989,9 @@ window.SPECIES_DATA = [
   "cnRedList": "VU",
   "redListCriteria": "A2cde",
   "photo": "assets/species-photos/thymallus-arcticus.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Jim Arrigoni, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/71671631"
  },
  {
   "cn": "下游黑龙江茴鱼",
@@ -3822,7 +4104,9 @@ window.SPECIES_DATA = [
   "acc": "PV813078.1",
   "cnRedList": "LC",
   "photo": "assets/species-photos/squaliobarbus-curriculus.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "no rights reserved, uploaded by ex16forlife",
+  "photoLicense": "CC0",
+  "photoSource": "https://www.inaturalist.org/observations/356857878"
  },
  {
   "cn": "瓦氏雅罗鱼",
@@ -3842,7 +4126,9 @@ window.SPECIES_DATA = [
   "addedAt": "2026-09-19",
   "acc": "MG806845.1",
   "photo": "assets/species-photos/leuciscus-waleckii.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Святослав Власенко, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/309924753"
  },
  {
   "cn": "黄河雅罗鱼",
@@ -3885,7 +4171,10 @@ window.SPECIES_DATA = [
   "acc": "MZ870770.1",
   "cnRedList": "LC",
   "photo": "assets/species-photos/hemiculter-bleekeri.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) 黄彦豪, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/148925081",
+  "photoTaxon": "Siniichthys bleekeri"
  },
  {
   "cn": "红鳍原鲌",
@@ -3907,7 +4196,9 @@ window.SPECIES_DATA = [
   "acc": "PV812620.1",
   "cnRedList": "LC",
   "photo": "assets/species-photos/chanodichthys-erythropterus.jpg",
-  "photoCredit": "百科"
+  "photoCredit": "(c) anonymous, some rights reserved (CC BY-SA)",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "http://en.wikipedia.org/wiki/Predatory_carp"
  },
  {
   "cn": "蒙古鲌",
@@ -3928,7 +4219,9 @@ window.SPECIES_DATA = [
   "acc": "MZ402902.1",
   "cnRedList": "LC",
   "photo": "assets/species-photos/chanodichthys-mongolicus.jpg",
-  "photoCredit": "微信公众号"
+  "photoCredit": "(c) alexey_tat, some rights reserved (CC BY-SA)",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "http://en.wikipedia.org/wiki/Mongolian_redfin"
  },
  {
   "cn": "鳊",
@@ -4170,7 +4463,9 @@ window.SPECIES_DATA = [
   "acc": "MN913477.1",
   "cnRedList": "LC",
   "photo": "assets/species-photos/cobitis-sinensis.jpg",
-  "photoCredit": "今日头条"
+  "photoCredit": "(c) Meng-Chi Hung, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/100571744"
  },
  {
   "cn": "北方泥鳅",
@@ -4235,7 +4530,10 @@ window.SPECIES_DATA = [
   "acc": "MF123391.1",
   "cnRedList": "LC",
   "photo": "assets/species-photos/triplophysa-stoliczkai.jpg",
-  "photoCredit": "eisk.cn"
+  "photoCredit": "(c) Kudaibergen Amirekul, some rights reserved (CC BY-SA), uploaded by Kudaibergen Amirekul",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "https://en.wikipedia.org/wiki/Triplophysa_brevicauda",
+  "photoTaxon": "Triplophysa brevicauda"
  },
  {
   "cn": "胡子鲇",
@@ -4256,7 +4554,9 @@ window.SPECIES_DATA = [
   "acc": "MT884512.1",
   "cnRedList": "LC",
   "photo": "assets/species-photos/clarias-fuscus.jpg",
-  "photoCredit": "今日头条"
+  "photoCredit": "no rights reserved, uploaded by observe-syz",
+  "photoLicense": "CC0",
+  "photoSource": "https://www.inaturalist.org/observations/361705370"
  },
  {
   "cn": "兰州鲇",
@@ -4319,7 +4619,9 @@ window.SPECIES_DATA = [
   "addedAt": "2026-09-19",
   "acc": "MZ871359.1",
   "photo": "assets/species-photos/tachysurus-vachellii.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) 黄彦豪, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/131555456"
  },
  {
   "cn": "盎堂拟鲿",
@@ -4360,7 +4662,9 @@ window.SPECIES_DATA = [
   "acc": "MT884589.1",
   "cnRedList": "LC",
   "photo": "assets/species-photos/hyporhamphus-intermedius.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Kim, Hyun-tae, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/2180630"
  },
  {
   "cn": "鳜",
@@ -4382,7 +4686,9 @@ window.SPECIES_DATA = [
   "acc": "MK843736.1",
   "cnRedList": "LC",
   "photo": "assets/species-photos/siniperca-chuatsi.jpg",
-  "photoCredit": "百科"
+  "photoCredit": "(c) Andshel, some rights reserved (CC BY-SA)",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "http://en.wikipedia.org/wiki/Siniperca_chuatsi"
  },
  {
   "cn": "日本鲈",
@@ -4402,7 +4708,9 @@ window.SPECIES_DATA = [
   "addedAt": "2026-09-19",
   "acc": "MT884597.1",
   "photo": "assets/species-photos/lateolabrax-japonicus.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Σ64, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "http://en.wikipedia.org/wiki/Japanese_sea_bass"
  },
  {
   "cn": "小黄黝鱼",
@@ -4425,7 +4733,9 @@ window.SPECIES_DATA = [
   "acc": "JX679042.1",
   "cnRedList": "LC",
   "photo": "assets/species-photos/micropercops-swinhonis.jpg",
-  "photoCredit": "快懂百科"
+  "photoCredit": "(c) Zinogre, some rights reserved (CC BY-SA)",
+  "photoLicense": "CC-BY-SA",
+  "photoSource": "https://www.inaturalist.org/observations/18700862"
  },
  {
   "cn": "黄鳍刺鰕虎鱼",
@@ -4466,6 +4776,9 @@ window.SPECIES_DATA = [
   "addedAt": "2026-09-19",
   "acc": "MW128592.1",
   "photo": "assets/species-photos/liza-haematocheilus.jpg",
-  "photoCredit": "钓鱼网站"
+  "photoCredit": "(c) Елена Смирнова, some rights reserved (CC BY)",
+  "photoLicense": "CC-BY",
+  "photoSource": "https://www.inaturalist.org/observations/189101078",
+  "photoTaxon": "Planiliza haematocheilus"
  }
 ];

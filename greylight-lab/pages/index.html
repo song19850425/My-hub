@@ -213,6 +213,36 @@
         width: 14px;
         height: 14px;
       }
+      /* 定位说明 —— 平台只做了 HJ 1295 四准则层里的「生物」层（权重 0.2），
+         不实现 RHI 综合赋分，也不覆盖「盆」「水」「社会服务功能」三层。
+         这句话必须放在首屏：界面上的指数与等级容易被当成完整健康评价结论。 */
+      .demo-scope {
+        max-width: 720px;
+        margin: var(--s-4) auto 0;
+        padding: var(--s-4) var(--s-5);
+        border: 1px solid color-mix(in srgb, var(--state-warning) 28%, transparent);
+        border-left: 3px solid var(--state-warning);
+        border-radius: var(--r-md);
+        background: var(--brand-card);
+        text-align: left;
+      }
+      .demo-scope p {
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.75;
+        color: var(--ink-2);
+      }
+      .demo-scope b {
+        color: var(--ink);
+        font-weight: 600;
+      }
+      .demo-scope a {
+        color: var(--brand-primary);
+        text-decoration: none;
+      }
+      .demo-scope a:hover {
+        text-decoration: underline;
+      }
       /* 介绍区的直达入口：一排细文字链接，与下方卡片互为「快 / 详」 */
       .demo-quick {
         margin-top: var(--s-4);
@@ -430,6 +460,15 @@
         <div class="demo-badge">
           <i data-lucide="wifi-off"></i>
           <span>离线模式已就绪 — 无需联网即可运行全部功能</span>
+        </div>
+        <!-- 定位说明：必须首屏可见，见 .demo-scope 注释 -->
+        <div class="demo-scope">
+          <p><b>平台定位：水生生物专项评价（演示）。</b>
+            对应 HJ 1295《河湖健康评价技术指南》四准则层中的<b>「生物」层</b>（权重 0.2）。
+            本平台<b>不实现 RHI 综合赋分</b>，也<b>不覆盖「盆」「水」「社会服务功能」三个准则层</b> ——
+            因此本站给出的生物指数与等级是<b>生物专项评价结果</b>，
+            <b>不能作为完整河湖健康评价结论使用</b>。
+            逐条对照见<a href="compliance-matrix.html">合规映射矩阵</a>。</p>
         </div>
         <!-- 演示页入口：直接放在介绍区，不用往下翻 -->
         <nav class="demo-quick" aria-label="演示页入口">
@@ -695,7 +734,7 @@
       <!-- Footer -->
       <footer class="demo-footer">
         <div class="demo-footer-row">
-          <span class="demo-footer-item"><i data-lucide="shield-check"></i> HJ 1295/1296 合规</span>
+          <span class="demo-footer-item"><i data-lucide="list-checks"></i> 参照 HJ 1295 生物准则层（部分实现）</span>
           <span class="demo-footer-item"><i data-lucide="wifi-off"></i> 离线运行</span>
           <span class="demo-footer-item"><i data-lucide="package"></i> Tailwind + Lucide + Chart.js 本地加载</span>
         </div>

@@ -1062,6 +1062,13 @@
               <i data-lucide="leaf"></i>
               <span>生物多样性库</span>
             </a>
+            <!-- Darwin Core 名录导出。术语用 Taxon 而非 Occurrence ——
+                 这是分类单元名录，没有时间/地点/个体数，用 Occurrence 术语会
+                 被下游当成出现记录。见 pages/dwc-export.js 的文件头。 -->
+            <button class="btn" type="button" id="dwcExportBtn" title="导出为 Darwin Core 分类单元名录（CSV，UTF-8 BOM，Excel 可直接打开）">
+              <i data-lucide="download"></i>
+              <span>导出名录</span>
+            </button>
             <button class="btn btn-primary" type="button" data-modal="importSeq">
               <i data-lucide="upload"></i>
               <span>导入参考序列</span>
@@ -1355,12 +1362,23 @@
 
         <!-- 3f. Footer -->
         <footer class="app-footer">
-          灰灯实验室 AI 鉴定台 v1.4 真实数据版 | HJ 1295/1296 合规 | 物种数据：CoSFISH + 北方某河（一）(2021) + 南方某河(2021) 调查名录 | 247 种 · 246 种配真实照片 | 点击照片弹出整张介绍卡
+          灰灯实验室 AI 鉴定台 v1.4 真实数据版 | 参照 HJ 1295 生物准则层（部分实现） | 物种数据：CoSFISH + 北方某河（一）(2021) + 南方某河(2021) 调查名录 | 247 种 · 246 种配真实照片 | 点击照片弹出整张介绍卡
         </footer>
       </main>
     </div>
 
     <script src="species-data.js"></script>
+    <script src="dwc-export.js"></script>
+    <script>
+    /* Darwin Core 名录导出：导出**整份名录**，不跟随页面筛选。
+       名录的用途是「比对底本」，导出被筛过的子集反而容易让人误以为那是全量。 */
+    (function () {
+      if (!window.GL_DWC) return;
+      window.GL_DWC.bindExport('dwcExportBtn', function () {
+        return window.SPECIES_DATA || [];
+      }, 'species');
+    })();
+    </script>
     <script>
     /* 真实物种卡片渲染：数据来自 species-data.js */
     (function () {

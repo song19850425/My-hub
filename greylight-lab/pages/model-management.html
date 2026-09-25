@@ -625,6 +625,52 @@
         flex-shrink: 0;
       }
 
+      /* === 示意数据标注 ===
+         本页所有模型性能数字（准确率 / 召回率 / mAP / 训练样本量）当前**没有独立评估集支撑**，
+         是演示数据。标注不能省 —— 无评估集的准确率被当作实测结果引用，属于学术不端。
+         用描边 + 状态色文字，不做饱和色块，与站内「色只用在徽章上」的纪律一致。 */
+      .demo-tag {
+        display: inline-block;
+        margin-left: 6px;
+        padding: 1px 6px;
+        border: 1px solid color-mix(in srgb, var(--state-warning) 45%, transparent);
+        border-radius: var(--r-xs);
+        color: var(--state-warning);
+        font-size: 11px;
+        font-weight: 500;
+        line-height: 1.5;
+        white-space: nowrap;
+        vertical-align: middle;
+      }
+      .demo-note {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--s-3);
+        margin-bottom: var(--s-5);
+        padding: var(--s-4) var(--s-5);
+        border: 1px solid color-mix(in srgb, var(--state-warning) 28%, transparent);
+        border-left: 3px solid var(--state-warning);
+        border-radius: var(--r-md);
+        background: var(--brand-card);
+      }
+      .demo-note i {
+        width: 16px;
+        height: 16px;
+        color: var(--state-warning);
+        flex-shrink: 0;
+        margin-top: 3px;
+      }
+      .demo-note p {
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.75;
+        color: var(--ink-2);
+      }
+      .demo-note b {
+        color: var(--ink);
+        font-weight: 500;
+      }
+
       /* === Chart Container === */
       .chart-container {
         position: relative;
@@ -1039,11 +1085,24 @@
               <i data-lucide="calendar"></i>
               <span>2026-09-08</span>
             </div>
+            <button class="btn" type="button" id="modelCaliberBtn">
+              <i data-lucide="info"></i>
+              <span>数据口径</span>
+            </button>
             <button class="btn btn-primary" type="button" data-modal="finetune">
               <i data-lucide="sliders-horizontal"></i>
               <span>微调模型</span>
             </button>
           </div>
+        </div>
+
+        <!-- 3a-2. 示意数据声明 —— 不能省，见 .demo-tag 注释 -->
+        <div class="demo-note">
+          <i data-lucide="triangle-alert"></i>
+          <p><b>本页全部模型性能数字为示意数据。</b>准确率、召回率、mAP、训练样本量与性能趋势曲线
+            均<b>没有独立评估集支撑</b>，不构成实测结果，请勿引用。
+            真实上线前需先建立与训练集<b>同源隔离</b>的验证集（留出法，≥300 张独立样本）并重跑评估。
+            页面中所有此类数字均带「示意」标记。</p>
         </div>
 
         <!-- 3b. KPI Stats Row -->
@@ -1056,7 +1115,7 @@
             </div>
           </div>
           <div class="kpi-item">
-            <div class="kpi-label">鉴定准确率</div>
+            <div class="kpi-label">鉴定准确率<span class="demo-tag">示意</span></div>
             <div class="kpi-value">89.2%</div>
             <div class="kpi-trend up">
               <i data-lucide="trending-up"></i>
@@ -1095,7 +1154,7 @@
           </div>
           <div class="model-body">
             <div class="model-metric">
-              <div class="model-metric-label">准确率</div>
+              <div class="model-metric-label">准确率<span class="demo-tag">示意</span></div>
               <div class="model-metric-value">91.2%</div>
               <div class="model-metric-trend">+1.5%</div>
             </div>
@@ -1116,7 +1175,7 @@
             </div>
           </div>
           <div class="model-footer">
-            <span>训练样本: 12,400张</span>
+            <span>训练样本: 12,400张<span class="demo-tag">示意</span></span>
             <span>最后更新: 2026-09-08 10:00</span>
           </div>
         </div>
@@ -1134,7 +1193,7 @@
           </div>
           <div class="model-body">
             <div class="model-metric">
-              <div class="model-metric-label">准确率</div>
+              <div class="model-metric-label">准确率<span class="demo-tag">示意</span></div>
               <div class="model-metric-value">94.8%</div>
               <div class="model-metric-trend">+3.2%</div>
             </div>
@@ -1155,7 +1214,7 @@
             </div>
           </div>
           <div class="model-footer">
-            <span>训练样本: 18,600张</span>
+            <span>训练样本: 18,600张<span class="demo-tag">示意</span></span>
             <span>最后更新: 2026-09-06</span>
           </div>
         </div>
@@ -1173,7 +1232,7 @@
           </div>
           <div class="model-body">
             <div class="model-metric">
-              <div class="model-metric-label">准确率</div>
+              <div class="model-metric-label">准确率<span class="demo-tag">示意</span></div>
               <div class="model-metric-value">86.3%</div>
               <div class="model-metric-trend">+1.8%</div>
             </div>
@@ -1194,7 +1253,7 @@
             </div>
           </div>
           <div class="model-footer">
-            <span>训练样本: 8,200条序列</span>
+            <span>训练样本: 8,200条序列<span class="demo-tag">示意</span></span>
             <span>最后更新: 2026-09-08</span>
           </div>
         </div>
@@ -1210,7 +1269,7 @@
                   <i data-lucide="bar-chart-3"></i>
                   <span>模型性能趋势</span>
                 </div>
-                <span style="font-size:12px;color:var(--ink-3);">准确率 · 近6个月</span>
+                <span style="font-size:12px;color:var(--ink-3);">准确率 · 近6个月<span class="demo-tag">示意</span></span>
               </div>
               <div class="card-body">
                 <div class="chart-container">
@@ -1236,7 +1295,7 @@
                     <tr>
                       <th>版本</th>
                       <th>模型</th>
-                      <th>准确率</th>
+                      <th>准确率<span class="demo-tag">示意</span></th>
                       <th>状态</th>
                       <th>发布日期</th>
                     </tr>
@@ -1336,7 +1395,7 @@
 
         <!-- 3e. Footer -->
         <footer class="app-footer">
-          灰灯实验室 AI 鉴定台 v1.1 | HJ 1295/1296 合规 | 数据更新于 2026-09-08
+          灰灯实验室 AI 鉴定台 v1.1 | 参照 HJ 1295 生物准则层（部分实现） | 数据更新于 2026-09-08
         </footer>
       </main>
     </div>
@@ -1382,6 +1441,37 @@
       });
     </script>
     <script src="../shared-app.js"></script>
+    <script>
+    /* 数据口径弹层 —— 说明本页性能数字为何是「示意」。
+       正文写在 JS 里（与生物多样性库同款写法），新增文案需补进 i18n-dict.js。 */
+    (function () {
+      var btn = document.getElementById('modelCaliberBtn');
+      if (!btn) return;
+      var p = function (t) {
+        return '<p style="font-size:13px;line-height:1.8;color:var(--ink-2);margin:0 0 10px;">' + t + '</p>';
+      };
+      btn.addEventListener('click', function () {
+        if (!window.GL || !window.GL.modal) return;
+        window.GL.modal({
+          title: '数据口径', icon: 'info',
+          body:
+            p('<b>本页所有模型性能数字均为示意数据，不构成实测结果。</b>')
+          + p('受影响的范围：三张模型卡片的准确率 / 召回率 / mAP@0.5、顶部 KPI 的鉴定准确率、'
+            + '「模型性能趋势」曲线的全部数据点、版本历史表的准确率列，以及各卡片的训练样本量。'
+            + '这些数字<b>没有独立评估集支撑</b> —— 没有留出验证集，也没有第三方复现，'
+            + '所以它们只是界面演示值，不能用于任何比较、验收或对外引用。')
+          + p('要变成真数字，需要补三步：<b>①</b> 建立与训练集<b>同源隔离</b>的验证集'
+            + '（留出法，≥300 张独立样本，不得与训练样本同图或同批次）；'
+            + '<b>②</b> 在验证集上重跑评估，报告准确率、召回率、mAP 与<b>置信区间</b>；'
+            + '<b>③</b> 公布样本划分方式与评估脚本，使结果可复现。')
+          + p('页面上真实的部分：模型<b>架构与版本号</b>、eDNA 分析流程'
+            + '（FastQC / cutadapt / Trimmomatic / MIDORI2 / BLAST 阈值）'
+            + '均为可核对的真实方法学描述；两个参考库的物种数据来自可溯源的公开数据源。'
+            + '本页仅性能指标为示意。')
+        });
+      });
+    })();
+    </script>
     <script>lucide.createIcons();</script>
 <!-- gl-i18n:begin -->
 <script src="../i18n-dict.js"></script>
