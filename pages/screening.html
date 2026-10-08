@@ -28,6 +28,8 @@ border-radius:var(--brand-radius-md);cursor:pointer;font-size:14px;transition:al
 .radio-pill input{display:none;}
 .radio-pill.on{border-color:var(--brand-primary);background:var(--brand-primary-light);color:var(--brand-primary-dark);font-weight:600;}
 #result{display:none;}
+#result.show{display:block;animation:resPop .4s ease;}
+@keyframes resPop{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
 .risk-item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--brand-border);font-size:13px;line-height:1.7;}
 .risk-item:last-child{border-bottom:none;}
 </style>
@@ -122,7 +124,7 @@ style="background:var(--brand-primary);color:var(--brand-primary-foreground);">
 
 <!-- 结果 -->
 <section id="result" class="mb-6">
-<div id="verdict" class="rounded-lg p-5 border mb-5"></div>
+<div class="flex items-center gap-4 mb-5"><div class="flex-1" style="height:2px;background:var(--brand-primary);opacity:.25;border-radius:2px;"></div><span class="text-base font-bold px-1" style="color:var(--brand-primary-dark);">测算结果</span><div class="flex-1" style="height:2px;background:var(--brand-primary);opacity:.25;border-radius:2px;"></div></div><div id="verdict" class="rounded-lg p-6 border mb-5" style="box-shadow:0 4px 16px rgba(15,23,42,.08);"></div>
 
 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
 <div class="rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);">
@@ -269,8 +271,11 @@ else { vColor = '#991B1B'; vBg = '#FEE2E2'; vBorder = '#FCA5A5';}
 
 var box = document.getElementById('verdict');
 box.style.background = vBg; box.style.borderColor = vBorder;
-box.innerHTML = '<h3 class="text-base font-bold mb-1" style="color:' + vColor + ';">' + vTitle + '</h3>'
-+ '<p class="text-sm leading-relaxed" style="color:' + vColor + ';">' + vDesc + '</p>';
+var vIcon = level === 'ok' ? 'check-circle' : level === 'warn' ? 'alert-triangle' : level === 'wait' ? 'clock' : 'x-circle';
+box.innerHTML = '<div class="flex items-center gap-4">'
++ '<i data-lucide="' + vIcon + '" class="flex-shrink-0" style="width:44px;height:44px;color:' + vColor + ';"></i>'
++ '<div><h3 class="text-xl font-bold mb-1" style="color:' + vColor + ';">' + vTitle + '</h3>'
++ '<p class="text-sm leading-relaxed" style="color:' + vColor + ';">' + vDesc + '</p></div></div>';
 
 // 测算
 var vol = (level === 'no' || level === 'wait')? 0: area * rate;
@@ -321,7 +326,7 @@ var body = encodeURIComponent(
 document.getElementById('ctaMail').href = 'mailto:jinghao.song@gmail.com?subject=' + subject + '&body=' + body;
 
 var res = document.getElementById('result');
-res.style.display = 'block';
+res.classList.add('show');
 lucide.createIcons();
 res.scrollIntoView({ behavior:'smooth', block:'start'});
 });
