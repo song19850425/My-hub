@@ -340,49 +340,9 @@ body {
                 <section id="recent-transactions" class="rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);">
                     <div class="flex items-center justify-between mb-4">
                         <h2 class="text-sm font-semibold" style="color:var(--brand-foreground);">近期动态</h2>
-                        <a href="#" class="text-xs font-medium transition-colors hover:underline" style="color:var(--brand-primary);">查看全部</a>
+                        <a href="https://www.ccer.com.cn/wcm/ccer/html/2408scdt1/index.html" target="_blank" rel="noopener" class="text-xs font-medium transition-colors hover:underline" style="color:var(--brand-primary);">查看全部</a>
                     </div>
-                    <div class="space-y-0">
-                        <div class="flex items-center gap-4 py-3 border-b" style="border-color:var(--brand-border);">
-                            <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--brand-primary-light);">
-                                <i data-lucide="file-check" class="w-4 h-4" style="color:var(--brand-primary);"></i>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium truncate" style="color:var(--brand-foreground);">福建武夷山造林碳汇项目完成登记</p>
-                                <p class="text-xs" style="color:var(--brand-muted-foreground);">签发碳汇量 32.6 万吨 | 2025-08-15</p>
-                            </div>
-                            <span class="text-xs px-2 py-0.5 rounded-full flex-shrink-0" style="background:var(--brand-primary-light);color:var(--brand-primary);">新登记</span>
-                        </div>
-                        <div class="flex items-center gap-4 py-3 border-b" style="border-color:var(--brand-border);">
-                            <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--brand-muted);">
-                                <i data-lucide="trending-up" class="w-4 h-4" style="color:var(--brand-muted-foreground);"></i>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium truncate" style="color:var(--brand-foreground);">深圳碳市场CCER大宗交易成交 18.5 万吨</p>
-                                <p class="text-xs" style="color:var(--brand-muted-foreground);">成交均价 71.2 元/吨 | 2025-08-14</p>
-                            </div>
-                            <span class="text-xs px-2 py-0.5 rounded-full flex-shrink-0" style="background:var(--brand-muted);color:var(--brand-muted-foreground);">交易</span>
-                        </div>
-                        <div class="flex items-center gap-4 py-3 border-b" style="border-color:var(--brand-border);">
-                            <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--brand-muted);">
-                                <i data-lucide="clipboard-edit" class="w-4 h-4" style="color:var(--brand-muted-foreground);"></i>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium truncate" style="color:var(--brand-foreground);">CCER-14-001-V01 造林碳汇方法学修订征求意见</p>
-                                <p class="text-xs" style="color:var(--brand-muted-foreground);">新增竹林碳汇测算方法 | 2025-08-12</p>
-                            </div>
-                            <span class="text-xs px-2 py-0.5 rounded-full flex-shrink-0" style="background:var(--brand-muted);color:var(--brand-muted-foreground);">方法学</span>
-                        </div>
-                        <div class="flex items-center gap-4 py-3">
-                            <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--brand-primary-light);">
-                                <i data-lucide="badge-check" class="w-4 h-4" style="color:var(--brand-primary);"></i>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium truncate" style="color:var(--brand-foreground);">云南西双版纳森林经营碳汇项目通过审定</p>
-                                <p class="text-xs" style="color:var(--brand-muted-foreground);">预计年减排量 15.8 万吨 | 2025-08-10</p>
-                            </div>
-                            <span class="text-xs px-2 py-0.5 rounded-full flex-shrink-0" style="background:var(--brand-primary-light);color:var(--brand-primary);">审定通过</span>
-                        </div>
+                    <div class="space-y-0" id="recentActivity">
                     </div>
                 </section>
 
@@ -599,6 +559,49 @@ body {
             fetch(CARBON_JSON).then(function(r){ return r.json(); }).then(renderMarketCards)
                 .catch(function(){ renderPriceChart(['06','07','08','09'], [85, 85, 85, 85]); });
         } catch (e) { renderPriceChart(['06','07','08','09'], [85, 85, 85, 85]); }
+
+        // 近期动态（实时：CCER 官方市场动态+平台公告，点击跳转官方原文）
+        var NEWS_JSON = 'https://song19850425.github.io/envlab-lab/EnvLab-%E4%BA%A4%E4%BA%92%E5%AE%9E%E9%AA%8C%E9%9B%86/11-%E7%A2%B3%E4%B8%8E%E7%A2%B3%E5%B8%82%E5%9C%BA/ccer-news.json';
+        function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+        function tagFor(title){
+            if (/登记/.test(title)) return { t:'新登记', icon:'file-check', hot:true };
+            if (/审定/.test(title)) return { t:'审定通过', icon:'badge-check', hot:true };
+            if (/交易/.test(title)) return { t:'交易', icon:'trending-up', hot:false };
+            if (/方法学/.test(title)) return { t:'方法学', icon:'clipboard-edit', hot:false };
+            if (/核查/.test(title)) return { t:'核查', icon:'clipboard-check', hot:false };
+            return { t:'资讯', icon:'info', hot:false };
+        }
+        function renderNews(items){
+            var box = document.getElementById('recentActivity');
+            if (!box) return;
+            var list = items.slice(0, 6), html = '';
+            list.forEach(function(it, i){
+                var g = tagFor(it.title);
+                var bg = g.hot ? 'var(--brand-primary-light)' : 'var(--brand-muted)';
+                var fg = g.hot ? 'var(--brand-primary)' : 'var(--brand-muted-foreground)';
+                var border = i < list.length - 1 ? ' border-b' : '';
+                html += '<a href="' + esc(it.url) + '" target="_blank" rel="noopener"'
+                    + ' class="flex items-center gap-4 py-3' + border + ' hover:opacity-80 transition-opacity"'
+                    + ' style="border-color:var(--brand-border);">'
+                    + '<div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:' + bg + ';">'
+                    + '<i data-lucide="' + g.icon + '" class="w-4 h-4" style="color:' + fg + ';"></i></div>'
+                    + '<div class="flex-1 min-w-0">'
+                    + '<p class="text-sm font-medium truncate" style="color:var(--brand-foreground);">' + esc(it.title) + '</p>'
+                    + '<p class="text-xs" style="color:var(--brand-muted-foreground);">' + esc(it.category) + ' | ' + esc(it.date) + '</p>'
+                    + '</div>'
+                    + '<span class="text-xs px-2 py-0.5 rounded-full flex-shrink-0" style="background:' + bg + ';color:' + fg + ';">' + g.t + '</span>'
+                    + '</a>';
+            });
+            box.innerHTML = html;
+            if (window.lucide) lucide.createIcons();
+        }
+        try {
+            fetch(NEWS_JSON).then(function(r){ return r.json(); }).then(function(d){ renderNews(d.items || []); })
+                .catch(function(){
+                    var box = document.getElementById('recentActivity');
+                    if (box) box.innerHTML = '<p class="text-xs py-4" style="color:var(--brand-muted-foreground);">资讯加载失败，请稍后刷新重试</p>';
+                });
+        } catch (e) {}
     })();
     </script>
 
