@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CCER 项目可行性初筛 - AI智能碳汇管理平台</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+<script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+<style>
+:root{
+--brand-background:#F8FAFC; --brand-foreground:#1E293B; --brand-card:#FFFFFF;
+--brand-muted:#F1F5F9; --brand-muted-foreground:#64748B;
+--brand-primary:#0D9488; --brand-primary-foreground:#FFFFFF;
+--brand-primary-light:#E6FFFA; --brand-primary-dark:#0F766E;
+--brand-border:#E2E8F0; --brand-radius-lg:16px; --brand-radius-md:8px;
+}
+body{background:var(--brand-background);color:var(--brand-foreground);font-family:'Inter','PingFang SC','Microsoft YaHei',system-ui,sans-serif;}
+.field label{display:block;font-size:13px;font-weight:600;margin-bottom:8px;}
+.field input[type=number],.field input[type=date],.field select{
+width:100%;padding:11px 14px;border:1px solid var(--brand-border);border-radius:var(--brand-radius-md);
+font-size:14px;background:#fff;color:var(--brand-foreground);outline:none;
+}
+.field input:focus,.field select:focus{border-color:var(--brand-primary);box-shadow:0 0 0 3px rgba(13,148,136,.12);}
+.field.hint{font-size:12px;color:var(--brand-muted-foreground);margin-top:6px;line-height:1.6;}
+.radio-row{display:flex;gap:12px;}
+.radio-pill{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border:1.5px solid var(--brand-border);
+border-radius:var(--brand-radius-md);cursor:pointer;font-size:14px;transition:all.15s;background:#fff;}
+.radio-pill input{display:none;}
+.radio-pill.on{border-color:var(--brand-primary);background:var(--brand-primary-light);color:var(--brand-primary-dark);font-weight:600;}
+#result{display:none;}
+.risk-item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--brand-border);font-size:13px;line-height:1.7;}
+.risk-item:last-child{border-bottom:none;}
+</style>
+</head>
+<body>
+
+<!-- 顶栏 -->
+<header class="border-b" style="background:var(--brand-card);border-color:var(--brand-border);">
+<div class="max-w-3xl mx-auto px-5 py-4 flex items-center justify-between">
+<a href="dashboard.html" class="text-sm font-medium inline-flex items-center gap-2" style="color:var(--brand-primary);">
+<i data-lucide="arrow-left" class="w-4 h-4"></i> 返回平台首页
+</a>
+<span class="text-xs px-2.5 py-1 rounded-full font-medium" style="background:var(--brand-primary-light);color:var(--brand-primary);">免费初筛工具</span>
+</div>
+</header>
+
+<main class="max-w-3xl mx-auto px-5 py-8">
+
+<!-- 标题 -->
+<div class="mb-8">
+<h1 class="text-2xl font-bold mb-2">CCER 项目可行性初筛</h1>
+<p class="text-sm leading-relaxed" style="color:var(--brand-muted-foreground);">
+3 分钟，输入林地基本条件，自动匹配适用方法学，并按<strong style="color:var(--brand-primary-dark);">实时 CCER 市场价格</strong>匡算预期收益。
+结果仅供初步参考，正式开发需经审定机构核实。
+</p>
+</div>
+
+<!-- 表单 -->
+<section class="rounded-lg p-6 border mb-6" style="background:var(--brand-card);border-color:var(--brand-border);">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+<div class="field">
+<label>项目类型</label>
+<select id="fType">
+<option value="afforest">人工造林</option>
+<option value="bamboo">竹林开发</option>
+<option value="mangrove">红树林营造</option>
+<option value="forest-mgmt">森林经营</option>
+</select>
+<p class="hint">森林经营碳汇方法学尚未发布，选择后将给出储备建议。</p>
+</div>
+
+<div class="field">
+<label>所在区域</label>
+<select id="fRegion">
+<option value="south">南方</option>
+<option value="north">北方</option>
+</select>
+<p class="hint">南北林木生长速度差异显著，影响增汇系数默认值。</p>
+</div>
+
+<div class="field">
+<label>面积（亩）</label>
+<input type="number" id="fArea" min="1" placeholder="例如 5000">
+<p class="hint">面积偏小（&lt;1000 亩）时单位开发成本偏高，会在结论中提示。</p>
+</div>
+
+<div class="field">
+<label>增汇系数（吨/亩/年）</label>
+<input type="number" id="fRate" step="0.1" min="0.1" value="1.0">
+<p class="hint">参考值：南方人工林约 1.0，北方约 0.8（行业交流数据，可自行调整）。</p>
+</div>
+
+<div class="field">
+<label>土地权属是否清晰</label>
+<div class="radio-row" id="fTitle">
+<label class="radio-pill on"><input type="radio" name="title" value="yes" checked> 清晰</label>
+<label class="radio-pill"><input type="radio" name="title" value="no"> 不清晰 / 有争议</label>
+</div>
+<p class="hint">林权不清是项目驳回的高频原因，务必如实选择。</p>
+</div>
+
+<div class="field">
+<label>造林 / 开工时间</label>
+<input type="date" id="fDate" value="2023-01-01">
+<p class="hint">CCER 要求减排量产生于 2020-09-22 之后。</p>
+</div>
+
+</div>
+
+<div class="field mt-5">
+<label>CCER 单价（元/吨）</label>
+<input type="number" id="fPrice" step="0.01" placeholder="加载实时行情…">
+<p class="hint" id="priceHint">正在获取 CCER 官方最新成交均价…</p>
+</div>
+
+<button id="btnGo" class="w-full mt-6 py-3.5 rounded-lg text-base font-bold transition-opacity hover:opacity-90"
+style="background:var(--brand-primary);color:var(--brand-primary-foreground);">
+开始测算
+</button>
+</section>
+
+<!-- 结果 -->
+<section id="result" class="mb-6">
+<div id="verdict" class="rounded-lg p-5 border mb-5"></div>
+
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+<div class="rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);">
+<p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">预计年碳汇量</p>
+<p class="text-2xl font-bold" style="color:var(--brand-primary-dark);"><span id="rVol">--</span><span class="text-sm font-normal ml-1" style="color:var(--brand-muted-foreground);">吨/年</span></p>
+</div>
+<div class="rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);">
+<p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">CCER 单价</p>
+<p class="text-2xl font-bold" style="color:var(--brand-primary-dark);"><span id="rPrice">--</span><span class="text-sm font-normal ml-1" style="color:var(--brand-muted-foreground);">元/吨</span></p>
+</div>
+<div class="rounded-lg p-5 border" style="background:var(--brand-card);border-color:var(--brand-border);">
+<p class="text-xs mb-1" style="color:var(--brand-muted-foreground);">预计年收益</p>
+<p class="text-2xl font-bold" style="color:var(--brand-primary-dark);"><span id="rRev">--</span><span class="text-sm font-normal ml-1" style="color:var(--brand-muted-foreground);">万元/年</span></p>
+</div>
+</div>
+
+<div class="rounded-lg p-5 border mb-5" style="background:var(--brand-card);border-color:var(--brand-border);">
+<h3 class="text-sm font-bold mb-3">适用方法学</h3>
+<div id="rMethod" class="text-sm leading-relaxed"></div>
+</div>
+
+<div class="rounded-lg p-5 border mb-5" style="background:var(--brand-card);border-color:var(--brand-border);">
+<h3 class="text-sm font-bold mb-2">风险与注意事项</h3>
+<div id="rRisks"></div>
+</div>
+
+<div class="rounded-lg p-6 border text-center" style="background:linear-gradient(120deg,#FFFBEB,#FEF3C7);border-color:#FCD34D;">
+<h3 class="text-base font-bold mb-2" style="color:#92400E;">想要一份正式的可行性评估？</h3>
+<p class="text-sm mb-4" style="color:#B45309;">把你的测算结果发给我们，48 小时内给你一对一的详细评估与开发路径建议。</p>
+<a id="ctaMail" href="#" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-bold"
+style="background:#D97706;color:#fff;">
+<i data-lucide="mail" class="w-4 h-4"></i> 发送测算结果，获取详细评估
+</a>
+<p class="text-xs mt-3" style="color:#B45309;">jinghao.song@gmail.com</p>
+</div>
+</section>
+
+<!-- 方法学与口径说明 -->
+<section class="rounded-lg p-5 border text-xs leading-loose" style="background:var(--brand-card);border-color:var(--brand-border);color:var(--brand-muted-foreground);">
+<h3 class="text-sm font-bold mb-2" style="color:var(--brand-foreground);">口径说明</h3>
+<p>1. 方法学依据生态环境部公开发布：CCER-14-001-V01 造林碳汇（含竹林，修订中）、CCER-14-002-V01 红树林营造；森林经营碳汇方法学尚未出台。</p>
+<p>2. 增汇系数默认值为行业交流参考值（南方人工林约 1.0、北方约 0.8 吨/亩/年），可在上方自行调整；实际碳汇量以审定机构核定为准。</p>
+<p>3. CCER 单价默认取全国温室气体自愿减排交易市场官方最新成交均价（每日更新），可在上方自行修改。</p>
+<p>4. 本工具为初步匡算，不构成项目开发承诺；正式开发需完成基线调查、项目设计文件（PDD）编制及第三方审定，周期约 12–18 个月。</p>
+</section>
+
+<footer class="text-center py-6">
+<p class="text-xs" style="color:var(--brand-muted-foreground);">AI智能碳汇管理平台 · 测算数据来源：中国自愿减排交易信息平台（CCER 官方）</p>
+</footer>
+</main>
+
+<script>
+(function(){
+var CARBON_JSON = 'https://song19850425.github.io/envlab-lab/EnvLab-%E4%BA%A4%E4%BA%92%E5%AE%9E%E9%AA%8C%E9%9B%86/11-%E7%A2%B3%E4%B8%8E%E7%A2%B3%E5%B8%82%E5%9C%BA/carbon-data.json';
+var livePrice = null, liveDate = '';
+
+// 实时 CCER 均价
+fetch(CARBON_JSON).then(function(r){ return r.json();}).then(function(d){
+var nz = d.ccer.filter(function(x){ return x.avg > 0;});
+if (nz.length){
+livePrice = nz[nz.length-1].avg;
+liveDate = nz[nz.length-1].date;
+document.getElementById('fPrice').value = livePrice.toFixed(2);
+document.getElementById('priceHint').textContent = '已填入官方最新成交均价（' + liveDate + '），可自行修改。';
+}
+}).catch(function(){
+document.getElementById('priceHint').textContent = '实时行情获取失败，请手动填写单价（近期约 90–97 元/吨）。';
+});
+
+// 区域切换时调整默认系数
+var typeSel = document.getElementById('fType'),
+regionSel = document.getElementById('fRegion'),
+rateInput = document.getElementById('fRate');
+function defaultRate(){
+if (typeSel.value === 'mangrove') return 1.0;
+return regionSel.value === 'south'? 1.0: 0.8;
+}
+regionSel.addEventListener('change', function(){ rateInput.value = defaultRate().toFixed(1);});
+typeSel.addEventListener('change', function(){ rateInput.value = defaultRate().toFixed(1);});
+
+// 权属单选样式
+document.querySelectorAll('#fTitle.radio-pill').forEach(function(p){
+p.addEventListener('click', function(){
+document.querySelectorAll('#fTitle.radio-pill').forEach(function(x){ x.classList.remove('on');});
+p.classList.add('on');
+});
+});
+
+var METHODS = {
+afforest: { code:'CCER-14-001-V01', name:'造林碳汇', status:'已发布', ok:true},
+bamboo: { code:'CCER-14-001-V01', name:'造林碳汇（含竹林）', status:'修订中（新增竹林测算方法）', ok:true},
+mangrove: { code:'CCER-14-002-V01', name:'红树林营造', status:'已发布', ok:true},
+'forest-mgmt': { code:'—', name:'森林经营碳汇', status:'方法学尚未出台', ok:false}
+};
+var TYPE_LABEL = { afforest:'人工造林', bamboo:'竹林开发', mangrove:'红树林营造', 'forest-mgmt':'森林经营'};
+
+document.getElementById('btnGo').addEventListener('click', function(){
+var type = typeSel.value,
+region = regionSel.value,
+area = parseFloat(document.getElementById('fArea').value),
+rate = parseFloat(rateInput.value),
+titleOk = document.querySelector('input[name=title]:checked').value === 'yes',
+dateStr = document.getElementById('fDate').value,
+price = parseFloat(document.getElementById('fPrice').value);
+
+if (!area || area <= 0){ alert('请填写有效的面积（亩）。'); return;}
+if (!rate || rate <= 0){ alert('请填写有效的增汇系数。'); return;}
+if (!price || price <= 0){ alert('请填写有效的 CCER 单价。'); return;}
+if (!dateStr){ alert('请选择造林 / 开工时间。'); return;}
+
+var m = METHODS[type], risks = [], level, vTitle, vDesc, vColor, vBg, vBorder;
+
+// 结论判定
+if (!m.ok){
+level = 'wait';
+vTitle = '方法学尚未出台，建议先做资源储备';
+vDesc = '森林经营碳汇方法学目前尚未发布，暂无法申请 CCER 项目登记。建议先完成林地资源清查与权属确权，方法学发布后第一时间启动。';
+} else if (type === 'mangrove' && region === 'north'){
+level = 'no';
+vTitle = '暂不建议：红树林不适宜北方';
+vDesc = '红树林仅分布于南方沿海，北方区域不具备红树林营造的自然条件。';
+} else if (!titleOk){
+level = 'no';
+vTitle = '暂不建议：请先解决土地权属';
+vDesc = '林权不清、有争议是 CCER 项目驳回的高频原因。建议先完成确权或争议调处，再启动项目开发。';
+} else if (dateStr < '2020-09-22'){
+level = 'no';
+vTitle = '暂不符合：减排量时间窗口';
+vDesc = 'CCER 要求申请登记的减排量产生于 2020-09-22 之后，该项目时间早于窗口，不符合条件。';
+} else if (area < 1000){
+level = 'warn';
+vTitle = '有条件可行：规模偏小';
+vDesc = '面积小于 1000 亩时，审定、核查等固定开发成本分摊偏高。建议联合周边地块打包开发，或先做详细成本测算。';
+} else {
+level = 'ok';
+vTitle = '初步可行：建议进入基线调查';
+vDesc = '基本条件符合 CCER 项目开发要求，下一步建议开展基线调查并编制项目设计文件（PDD）。';
+}
+
+if (level === 'ok'){ vColor = '#065F46'; vBg = '#D1FAE5'; vBorder = '#6EE7B7';}
+else if (level === 'warn'){ vColor = '#92400E'; vBg = '#FEF3C7'; vBorder = '#FCD34D';}
+else if (level === 'wait'){ vColor = '#1E40AF'; vBg = '#DBEAFE'; vBorder = '#93C5FD';}
+else { vColor = '#991B1B'; vBg = '#FEE2E2'; vBorder = '#FCA5A5';}
+
+var box = document.getElementById('verdict');
+box.style.background = vBg; box.style.borderColor = vBorder;
+box.innerHTML = '<h3 class="text-base font-bold mb-1" style="color:' + vColor + ';">' + vTitle + '</h3>'
++ '<p class="text-sm leading-relaxed" style="color:' + vColor + ';">' + vDesc + '</p>';
+
+// 测算
+var vol = (level === 'no' || level === 'wait')? 0: area * rate;
+var rev = vol * price / 10000;
+document.getElementById('rVol').textContent = vol? vol.toLocaleString('zh-CN', {maximumFractionDigits:0}): '—';
+document.getElementById('rPrice').textContent = price.toFixed(2);
+document.getElementById('rRev').textContent = vol? rev.toFixed(1): '—';
+
+// 方法学
+document.getElementById('rMethod').innerHTML =
+'<p><strong>' + m.code + ' ' + m.name + '</strong> <span class="text-xs px-2 py-0.5 rounded-full ml-1" style="background:var(--brand-primary-light);color:var(--brand-primary-dark);">' + m.status + '</span></p>'
++ '<p class="mt-2" style="color:var(--brand-muted-foreground);">项目类型：' + TYPE_LABEL[type] + ' · 区域：' + (region === 'south'? '南方': '北方') + ' · 面积：' + area.toLocaleString() + ' 亩</p>';
+
+// 风险
+if (!m.ok) risks.push(['info', '方法学缺口：森林经营碳汇方法学出台前，存量林只能做资源储备，无法产生可登记的减排量。']);
+if (type === 'mangrove' && region === 'south') risks.push(['info', '红树林项目需符合海洋生态保护相关规划，用海、用林审批是前置条件。']);
+if (level!== 'no' && level!== 'wait'){
+risks.push(['warn', '额外性论证：需证明项目活动在没有 CCER 收益的情况下不会发生，这是审定环节的核心。']);
+risks.push(['warn', '开发周期：从基线调查到首期减排量签发约 12–18 个月，需预留第三方审定、核查费用预算。']);
+risks.push(['info', '价格波动：CCER 价格受供需与政策影响，' + (liveDate? '当前官方均价 ' + livePrice.toFixed(2) + ' 元/吨（' + liveDate + '）': '请以上方填写的单价') + '，签约时建议关注锁价机制。']);
+}
+if (!risks.length) risks.push(['info', '暂无额外提示。']);
+var rh = '';
+risks.forEach(function(r){
+var c = r[0] === 'warn'? '#D97706': '#0D9488';
+var icon = r[0] === 'warn'? 'alert-triangle': 'info';
+rh += '<div class="risk-item"><i data-lucide="' + icon + '" class="w-4 h-4 flex-shrink-0 mt-1" style="color:' + c + ';"></i><span>' + r[1] + '</span></div>';
+});
+document.getElementById('rRisks').innerHTML = rh;
+
+// 邮件 CTA（带上测算结果）
+var subject = encodeURIComponent('CCER项目可行性评估咨询-' + TYPE_LABEL[type] + area + '亩');
+var body = encodeURIComponent(
+'\n' +
+'项目类型：' + TYPE_LABEL[type] + '\n' +
+'区域：' + (region === 'south'? '南方': '北方') + '\n' +
+'面积：' + area + ' 亩\n' +
+'增汇系数：' + rate + ' 吨/亩/年\n' +
+'土地权属：' + (titleOk? '清晰': '不清晰') + '\n' +
+'造林/开工时间：' + dateStr + '\n' +
+'CCER单价：' + price.toFixed(2) + ' 元/吨\n' +
+'预计年碳汇量：' + (vol? vol.toFixed(0): '—') + ' 吨\n' +
+'预计年收益：' + (vol? rev.toFixed(1): '—') + ' 万元\n' +
+'初筛结论：' + vTitle + '\n\n' +
+'请帮我做一份详细的可行性评估。\n' +
+'我的联系方式（电话/微信）：'
+);
+document.getElementById('ctaMail').href = 'mailto:jinghao.song@gmail.com?subject=' + subject + '&body=' + body;
+
+var res = document.getElementById('result');
+res.style.display = 'block';
+lucide.createIcons();
+res.scrollIntoView({ behavior:'smooth', block:'start'});
+});
+
+lucide.createIcons();
+})();
+</script>
+</body>
+</html>
