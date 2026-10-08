@@ -318,14 +318,15 @@ body {
                             <div class="grid grid-cols-2 gap-3">
                                 <div class="rounded-md p-3" style="background:var(--brand-muted);">
                                     <p class="text-xs mb-0.5" style="color:var(--brand-muted-foreground);">CCER均价</p>
-                                    <p class="text-lg font-bold" style="color:var(--brand-primary);">70<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">元/吨</span></p>
+                                    <p id="ccerAvgVal" class="text-lg font-bold" style="color:var(--brand-primary);">70<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">元/吨</span></p>
                                 </div>
                                 <div class="rounded-md p-3" style="background:var(--brand-muted);">
-                                    <p class="text-xs mb-0.5" style="color:var(--brand-muted-foreground);">成交量</p>
-                                    <p class="text-lg font-bold" style="color:var(--brand-primary);">921.94<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">万吨</span></p>
+                                    <p class="text-xs mb-0.5" style="color:var(--brand-muted-foreground);">累计成交量</p>
+                                    <p id="ccerCumVolVal" class="text-lg font-bold" style="color:var(--brand-primary);">921.94<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">万吨</span></p>
                                 </div>
                             </div>
-                            <div class="rounded-md p-3 border" style="border-color:var(--brand-primary-light);background:var(--brand-primary-light);">
+                            <p id="ccerDataDate" class="text-xs mb-3" style="color:var(--brand-muted-foreground);">行情数据加载中…</p>
+<div class="rounded-md p-3 border" style="border-color:var(--brand-primary-light);background:var(--brand-primary-light);">
                                 <div class="flex items-start gap-2">
                                     <i data-lucide="info" class="w-4 h-4 flex-shrink-0 mt-0.5" style="color:var(--brand-primary);"></i>
                                     <p class="text-xs leading-relaxed" style="color:var(--brand-primary-dark);">CCER-14-001-V01 造林碳汇方法学正在修订中，预计将扩大适用林地类型。</p>
@@ -539,21 +540,24 @@ body {
             });
         }
 
-        // Price Trend Chart
+        // Price Trend Chart（实时：CCER 近60个有成交日均价，每日自动更新）
         var priceCtx = document.getElementById('priceChart');
-        if (priceCtx) {
-            var priceLabels = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
-            var priceData = [65, 67, 66, 68, 70, 69, 72, 71, 73, 70, 72, 70];
+        var CARBON_JSON = 'https://song19850425.github.io/envlab-lab/EnvLab-%E4%BA%A4%E4%BA%92%E5%AE%9E%E9%AA%8C%E9%9B%86/11-%E7%A2%B3%E4%B8%8E%E7%A2%B3%E5%B8%82%E5%9C%BA/carbon-data.json';
+        function renderPriceChart(labels, data) {
+            if (!priceCtx || typeof Chart === 'undefined') return;
             var gradient = priceCtx.getContext('2d').createLinearGradient(0, 0, 0, 120);
             gradient.addColorStop(0, 'rgba(13,148,136,0.2)');
             gradient.addColorStop(1, 'rgba(13,148,136,0.0)');
+            var vals = data.filter(function(v){ return v > 0; });
+            var lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals);
+            var pad = Math.max((hi - lo) * 0.2, 1);
             new Chart(priceCtx, {
                 type: 'line',
                 data: {
-                    labels: priceLabels,
+                    labels: labels,
                     datasets: [{
                         label: 'CCER均价',
-                        data: priceData,
+                        data: data,
                         borderColor: '#0D9488',
                         backgroundColor: gradient,
                         borderWidth: 2,
@@ -561,7 +565,8 @@ body {
                         pointHoverRadius: 4,
                         pointHoverBackgroundColor: '#0D9488',
                         tension: 0.35,
-                        fill: true
+                        fill: true,
+                        spanGaps: true
                     }]
                 },
                 options: {
@@ -570,11 +575,30 @@ body {
                     plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx) { return '均价: ' + ctx.parsed.y + ' 元/吨'; } } } },
                     scales: {
                         x: { display: false },
-                        y: { display: false, min: 60, max: 76 }
+                        y: { display: false, min: Math.floor(lo - pad), max: Math.ceil(hi + pad) }
                     }
                 }
             });
         }
+        function renderMarketCards(d) {
+            var nz = d.ccer.filter(function(x){ return x.avg > 0; });
+            if (!nz.length) return;
+            var last = nz[nz.length - 1];
+            var unit = '<span class="text-xs font-normal ml-0.5" style="color:var(--brand-muted-foreground);">';
+            var avgEl = document.getElementById('ccerAvgVal');
+            if (avgEl) avgEl.innerHTML = last.avg.toFixed(2) + unit + '元/吨</span>';
+            var raw = d.ccer[d.ccer.length - 1];
+            var cumEl = document.getElementById('ccerCumVolVal');
+            if (cumEl && raw.cum_vol) cumEl.innerHTML = (raw.cum_vol / 10000).toFixed(2) + unit + '万吨</span>';
+            var dateEl = document.getElementById('ccerDataDate');
+            if (dateEl) dateEl.textContent = '数据截至 ' + d.updated + ' · 每日收盘后自动更新';
+            var tail = nz.slice(-60);
+            renderPriceChart(tail.map(function(x){ return x.date.slice(5); }), tail.map(function(x){ return x.avg; }));
+        }
+        try {
+            fetch(CARBON_JSON).then(function(r){ return r.json(); }).then(renderMarketCards)
+                .catch(function(){ renderPriceChart(['06','07','08','09'], [85, 85, 85, 85]); });
+        } catch (e) { renderPriceChart(['06','07','08','09'], [85, 85, 85, 85]); }
     })();
     </script>
 
