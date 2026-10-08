@@ -251,6 +251,35 @@ body {
 
             <!-- Scrollable Content -->
             <div class="flex-1 overflow-y-auto p-6 space-y-6" data-scroll-region="primary">
+                <!-- 全国碳市场概况（实时） -->
+                <section id="national-overview" class="rounded-lg p-6 border relative overflow-hidden" style="background:linear-gradient(135deg,#0F766E 0%,#0D9488 55%,#14B8A6 100%);border-color:transparent;">
+                    <div class="flex items-center justify-between mb-5 flex-wrap gap-2">
+                        <div>
+                            <h2 class="text-base font-bold" style="color:#ffffff;">全国碳市场概况</h2>
+                            <p class="text-xs mt-1" style="color:rgba(255,255,255,.75);" id="nationalDate">数据加载中…</p>
+                        </div>
+                        <span class="text-xs px-2.5 py-1 rounded-full" style="background:rgba(255,255,255,.18);color:#ffffff;">&#9679; 实时更新</span>
+                    </div>
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
+                        <div>
+                            <p class="text-xs mb-1" style="color:rgba(255,255,255,.7);">CEA 最新价</p>
+                            <p class="text-2xl font-bold" style="color:#ffffff;"><span id="natCeaPrice">--</span><span class="text-sm font-normal ml-1" style="color:rgba(255,255,255,.7);">元/吨</span></p>
+                        </div>
+                        <div>
+                            <p class="text-xs mb-1" style="color:rgba(255,255,255,.7);">CCER 均价</p>
+                            <p class="text-2xl font-bold" style="color:#ffffff;"><span id="natCcerAvg">--</span><span class="text-sm font-normal ml-1" style="color:rgba(255,255,255,.7);">元/吨</span></p>
+                        </div>
+                        <div>
+                            <p class="text-xs mb-1" style="color:rgba(255,255,255,.7);">CCER 累计成交量</p>
+                            <p class="text-2xl font-bold" style="color:#ffffff;"><span id="natCcerVol">--</span><span class="text-sm font-normal ml-1" style="color:rgba(255,255,255,.7);">万吨</span></p>
+                        </div>
+                        <div>
+                            <p class="text-xs mb-1" style="color:rgba(255,255,255,.7);">CCER 累计成交额</p>
+                            <p class="text-2xl font-bold" style="color:#ffffff;"><span id="natCcerAmt">--</span><span class="text-sm font-normal ml-1" style="color:rgba(255,255,255,.7);">亿元</span></p>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- KPI Cards Row -->
                 <section id="kpi-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div class="rounded-lg p-5 border transition-shadow hover:shadow-sm" style="background:var(--brand-card);border-color:var(--brand-border);">
@@ -294,6 +323,24 @@ body {
                         <p class="text-xs mt-1" style="color:var(--brand-muted-foreground);">碳汇交易累计金额</p>
                     </div>
                 </section>
+
+                <!-- 区域分析报告入口 -->
+                <a href="province-hub.html" class="block rounded-lg p-6 border hover:shadow-md transition-shadow" style="background:linear-gradient(120deg,#FFFBEB 0%,#FEF3C7 55%,#FDE68A 100%);border-color:#FCD34D;">
+                    <div class="flex items-center justify-between gap-4 flex-wrap">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#D97706;">
+                                <i data-lucide="map" class="w-6 h-6" style="color:#ffffff;"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-base font-bold" style="color:#92400E;">区域碳汇分析报告</h2>
+                                <p class="text-xs mt-1" style="color:#B45309;">9 省深度解读 &middot; 河南 / 云南 / 福建 / 广西 / 四川 / 湖南 / 贵州 / 浙江 / 江西</p>
+                            </div>
+                        </div>
+                        <span class="text-sm font-semibold px-5 py-2.5 rounded-lg inline-flex items-center gap-2" style="background:#D97706;color:#ffffff;">
+                            进入分析 <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </span>
+                    </div>
+                </a>
 
                 <!-- Charts Row -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -540,6 +587,17 @@ body {
                 }
             });
         }
+        function renderNational(d){
+            function set(id, v){ var el = document.getElementById(id); if (el) el.textContent = v; }
+            var cea = d.cea, ccer = d.ccer;
+            if (cea && cea.length) set('natCeaPrice', cea[cea.length-1].close.toFixed(2));
+            var nz = ccer.filter(function(x){ return x.avg > 0; });
+            if (nz.length) set('natCcerAvg', nz[nz.length-1].avg.toFixed(2));
+            var raw = ccer[ccer.length-1];
+            if (raw.cum_vol) set('natCcerVol', (raw.cum_vol/10000).toFixed(2));
+            if (raw.cum_amt) set('natCcerAmt', (raw.cum_amt/1e8).toFixed(2));
+            set('nationalDate', '数据截至 ' + d.updated + ' · 每日收盘后自动更新');
+        }
         function renderMarketCards(d) {
             var nz = d.ccer.filter(function(x){ return x.avg > 0; });
             if (!nz.length) return;
@@ -556,7 +614,7 @@ body {
             renderPriceChart(tail.map(function(x){ return x.date.slice(5); }), tail.map(function(x){ return x.avg; }));
         }
         try {
-            fetch(CARBON_JSON).then(function(r){ return r.json(); }).then(renderMarketCards)
+            fetch(CARBON_JSON).then(function(r){ return r.json(); }).then(function(d){ renderMarketCards(d); renderNational(d); })
                 .catch(function(){ renderPriceChart(['06','07','08','09'], [85, 85, 85, 85]); });
         } catch (e) { renderPriceChart(['06','07','08','09'], [85, 85, 85, 85]); }
 
